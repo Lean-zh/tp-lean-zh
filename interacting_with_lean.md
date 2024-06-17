@@ -325,7 +325,7 @@ The following example defines the prefix relation on lists,
 proves that this relation is reflexive, and assigns the ``[simp]`` attribute to that theorem.
 -->
 
-Lean的主要功能是把用户的输入翻译成形式化的表达式，由内核检查其正确性，然后存储在环境中供以后使用。但是有些命令对环境有其他的影响，或者给环境中的对象分配属性，定义符号，或者声明类型族的实例，如[类型族](./type_classes.md)一章所述。这些命令大多具有全局效应，也就是说，它们不仅在当前文件中保持有效，而且在任何导入它的文件中也保持有效。然而，这类命令通常支持``local``修饰符，这表明它们只在当前``section``或``namespace``关闭前或当前文件结束前有效。
+Lean的主要功能是把用户的输入翻译成形式化的表达式，由内核检查其正确性，然后存储在环境中供以后使用。但是有些命令对环境有其他的影响，或者给环境中的对象分配属性，定义符号，或者声明类型类的实例，如[类型类](./type_classes.md)一章所述。这些命令大多具有全局效应，也就是说，它们不仅在当前文件中保持有效，而且在任何导入它的文件中也保持有效。然而，这类命令通常支持``local``修饰符，这表明它们只在当前``section``或``namespace``关闭前或当前文件结束前有效。
 
 在[简化](./tactics.md#简化)一节中，我们看到可以用`[simp]`属性来注释定理，这使它们可以被简化器使用。下面的例子定义了列表的前缀关系，证明了这种关系是自反的，并为该定理分配了`[simp]`属性。
 
@@ -394,7 +394,7 @@ be explained in [Chapter Type Classes](./type_classes.md), works by
 assigning an ``[instance]`` attribute to the associated definition.
 -->
 
-另一个例子，我们可以使用`instance`命令来给`isPrefix`关系分配符号`≤`。该命令将在[类型族](./type_classes.md)中解释，它的工作原理是给相关定义分配一个`[instance]`属性。
+另一个例子，我们可以使用`instance`命令来给`isPrefix`关系分配符号`≤`。该命令将在[类型类](./type_classes.md)中解释，它的工作原理是给相关定义分配一个`[instance]`属性。
 
 ```lean
 def isPrefix (l₁ : List α) (l₂ : List α) : Prop :=
@@ -577,7 +577,7 @@ brackets, ``[`` and ``]``. These are used for type classes, as
 explained in [Chapter Type Classes](./type_classes.md).
 -->
 
-还有第三种隐式参数，用方括号表示，``[``和``]``。这些是用于类型族的，在[类型族](./type_classes.md)中解释。
+还有第三种隐式参数，用方括号表示，``[``和``]``。这些是用于类型类的，在[类型类](./type_classes.md)中解释。
 
 <!--
 Notation
