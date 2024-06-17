@@ -1,15 +1,21 @@
 [book]
 authors = ["Jeremy Avigad", "Leonardo de Moura", "Soonho Kong", "Sebastian Ullrich"]
-language = "en"
-multilingual = false
+translators = ["subfish-zhou", "Oling Cat"]
+language = "zh-CN"
+multilingual = true
 src = "."
-title = "Theorem Proving in Lean 4"
+title = "Lean 4 定理证明"
 
 [build]
 build-dir = "out"
 
 [output.html]
-git-repository-url = "https://github.com/leanprover/theorem_proving_in_lean4"
+# additional-css = ["custom.css", "pygments.css"]
+# additional-js = ["custom.js"]
+mathjax-support = true
+site-url = "/tp-lean-zh/"
+git-repository-url = "https://github.com/Lean-zh/tp-lean-zh"
+edit-url-template = "https://github.com/Lean-zh/tp-lean-zh/edit/master/{path}"
 
 [output.html.playground.boring-prefixes]
 lean = "# "
