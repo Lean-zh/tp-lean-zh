@@ -1,14 +1,42 @@
 "use strict";
 
-// set the following window properties to modify the default behavior
-// window.clip_buttons = true       - get copy to clipboard buttons
-// window.tryit_buttons = true      - get try-it buttons that call docView.postMessage.
-// window.default_theme = "dark"    - to override user choice on themes (for hosting inside something like vscode that has it's own themes)
-// window.side_bar = true           - add the side bar.
+// set the following properties to modify the default behavior
+// clip_buttons = true       - get copy to clipboard buttons
+// tryit_buttons = true      - get try-it buttons that call docView.postMessage.
+// default_theme = 'coal'    - to override user choice on themes (for hosting inside something like vscode that has it's own themes)
+// side_bar = true           - add the side bar.
 
 var docView = null;
 if (typeof acquireVsCodeApi !== 'undefined')
     docView = acquireVsCodeApi();
+
+function clip_buttons_enabled() {
+    if (typeof clip_buttons !== 'undefined'){
+        return clip_buttons;
+    }
+    return true;
+}
+
+function tryit_buttons_enabled() {
+    if (typeof tryit_buttons !== 'undefined'){
+        return tryit_buttons;
+    }
+    return false;
+}
+
+function sidebar_enabled() {
+    if (typeof side_bar !== 'undefined'){
+        return side_bar;
+    }
+    return true;
+}
+
+function get_default_theme() {
+    if (typeof default_theme !== 'undefined'){
+        return default_theme;
+    }
+    return 'navy';
+}
 
 // Fix back button cache problem
 window.onunload = function () { };
@@ -25,7 +53,7 @@ function playground_text(playground) {
     }
 }
 
-function setupPlaygrounds() {
+(function setupPlaygrounds() {
     var playgrounds = Array.from(document.querySelectorAll(".playground"));
     if (playgrounds.length > 0) {
         fetch_with_timeout("https://play.rust-lang.org/meta/crates", {
@@ -118,9 +146,12 @@ function setupPlaygrounds() {
 
         let text = playground_text(code_block);
         let classes = code_block.querySelector('code').classList;
-        let has_2018 = classes.contains("edition2018");
-        let edition = has_2018 ? "2018" : "2015";
-
+        let edition = "2015";
+        if(classes.contains("edition2018")) {
+            edition = "2018";
+        } else if(classes.contains("edition2021")) {
+            edition = "2021";
+        }
         var params = {
             version: "stable",
             optimize: "0",
@@ -143,12 +174,20 @@ function setupPlaygrounds() {
             body: JSON.stringify(params)
         })
         .then(response => response.json())
-        .then(response => result_block.innerText = response.result)
+        .then(response => {
+            if (response.result.trim() === '') {
+                result_block.innerText = "No output";
+                result_block.classList.add("result-no-output");
+            } else {
+                result_block.innerText = response.result;
+                result_block.classList.remove("result-no-output");
+            }
+        })
         .catch(error => result_block.innerText = "Playground Communication: " + error.message);
     }
-}
+})();
 
-function setupSyntaxHighlighting() {
+(function setupSyntaxHighlighting() {
 
     if (typeof hljs === 'undefined') return;
 
@@ -166,12 +205,13 @@ function setupSyntaxHighlighting() {
     if (window.ace) {
         // language-rust class needs to be removed for editable
         // blocks or highlightjs will capture events
-        Array
-            .from(document.querySelectorAll('code.editable'))
+        code_nodes
+            .filter(function (node) {return node.classList.contains("editable"); })
             .forEach(function (block) { block.classList.remove('language-rust'); });
 
         Array
-            .from(document.querySelectorAll('code:not(.editable)'))
+        code_nodes
+            .filter(function (node) {return !node.classList.contains("editable"); })
             .forEach(function (block) { hljs.highlightBlock(block); });
     } else {
         code_nodes.forEach(function (block) { hljs.highlightBlock(block); });
@@ -214,9 +254,9 @@ function setupSyntaxHighlighting() {
             }
         });
     });
-}
+})();
 
-function setupCodeSnippets() {
+(function setupCodeSnippets() {
     if (window.playground_copyable) {
         Array.from(document.querySelectorAll('pre code')).forEach(function (block) {
             var pre_block = block.parentNode;
@@ -228,7 +268,7 @@ function setupCodeSnippets() {
                     pre_block.insertBefore(buttons, pre_block.firstChild);
                 }
 
-                if (window.clip_buttons) {
+                if (clip_buttons_enabled()) {
                     var clipButton = document.createElement('button');
                     clipButton.className = 'fa fa-copy clip-button';
                     clipButton.title = 'Copy to clipboard';
@@ -236,7 +276,7 @@ function setupCodeSnippets() {
                     clipButton.innerHTML = '<i class=\"tooltiptext\"></i>';
                     buttons.insertBefore(clipButton, buttons.firstChild);
                 }
-                if (window.tryit_buttons){
+                if (tryit_buttons_enabled()){
                     var tryItButton = document.createElement('button');
                     tryItButton.className = 'fa fa-copy tryit-button';
                     tryItButton.innerHTML = '<i class="tooltiptext"></i>';
@@ -270,7 +310,7 @@ function setupCodeSnippets() {
         });
 
         if (window.playground_copyable) {
-            if (window.clip_buttons) {
+            if (clip_buttons_enabled()) {
                 var copyCodeClipboardButton = document.createElement('button');
                 copyCodeClipboardButton.className = 'fa fa-copy clip-button';
                 copyCodeClipboardButton.innerHTML = '<i class="tooltiptext"></i>';
@@ -279,7 +319,7 @@ function setupCodeSnippets() {
                 buttons.insertBefore(copyCodeClipboardButton, buttons.firstChild);
             }
 
-            if (window.tryit_buttons){
+            if (tryit_buttons_enabled()){
                 var tryItButton = document.createElement('button');
                 tryItButton.className = 'fa fa-copy tryit-button';
                 tryItButton.innerHTML = '<i class="tooltiptext"></i>';
@@ -305,13 +345,13 @@ function setupCodeSnippets() {
             });
         }
     });
-}
+})();
 
 function get_theme() {
     var theme;
     try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
     if (theme === null || theme === undefined) {
-        return default_theme;
+        return get_default_theme();
     } else {
         return theme;
     }
@@ -363,7 +403,7 @@ function set_theme(theme, store = true) {
     if (theme) html.classList.add(theme);
 }
 
-function setupThemes() {
+(function setupThemes() {
     var html = document.querySelector('html');
     var themeToggleButton = document.getElementById('theme-toggle');
     var themePopup = document.getElementById('theme-list');
@@ -382,11 +422,7 @@ function setupThemes() {
 
     // Set theme
     var theme = get_theme();
-    if (typeof window.default_theme !== 'undefined') {
-        set_theme(window.default_theme, false);
-    } else {
-        set_theme(theme, false);
-    }
+    set_theme(theme, false);
 
     themeToggleButton.addEventListener('click', function () {
         if (themePopup.style.display === 'block') {
@@ -397,7 +433,14 @@ function setupThemes() {
     });
 
     themePopup.addEventListener('click', function (e) {
-        var theme = e.target.id || e.target.parentElement.id;
+        var theme;
+        if (e.target.className === "theme") {
+            theme = e.target.id;
+        } else if (e.target.parentElement.className === "theme") {
+            theme = e.target.parentElement.id;
+        } else {
+            return;
+        }
         set_theme(theme);
     });
 
@@ -448,9 +491,9 @@ function setupThemes() {
                 break;
         }
     });
-};
+})();
 
-function setupSidebar() {
+(function setupSidebar() {
     var html = document.querySelector("html");
     var sidebar = document.getElementById("sidebar");
     var sidebarLinks = document.querySelectorAll('#sidebar a');
@@ -568,9 +611,14 @@ function setupSidebar() {
         // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
         activeSection.scrollIntoView({ block: 'center' });
     }
-}
 
-function setupChapterNavigation() {
+    if (!sidebar_enabled()){
+        hideSidebar();
+    }
+
+})();
+
+(function setupChapterNavigation() {
     document.addEventListener('keydown', function (e) {
         if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
         if (window.search && window.search.hasFocus()) { return; }
@@ -592,9 +640,9 @@ function setupChapterNavigation() {
                 break;
         }
     });
-};
+})();
 
-function setupClipboardButtons() {
+(function setupClipboardButtons() {
     var clipButtons = document.querySelectorAll('.clip-button');
 
     function hideTooltip(elem) {
@@ -629,9 +677,9 @@ function setupClipboardButtons() {
     clipboardSnippets.on('error', function (e) {
         showTooltip(e.trigger, "Clipboard error!");
     });
-}
+})();
 
-function setupTryItButtons() {
+(function setupTryItButtons() {
     if (!docView) return;
 
     var clipButtons = document.querySelectorAll('.tryit-button');
@@ -655,8 +703,7 @@ function setupTryItButtons() {
             docView.postMessage({name, contents});
         })
     });
-
-};
+})();
 
 (function scrollToTop () {
     var menuTitle = document.querySelector('.menu-title');
@@ -666,10 +713,10 @@ function setupTryItButtons() {
     });
 })();
 
-(function controllMenu() {
+(function controlMenu() {
     var menu = document.getElementById('menu-bar');
 
-    (function controllPosition() {
+    (function controlPosition() {
         var scrollTop = document.scrollingElement.scrollTop;
         var prevScrollTop = scrollTop;
         var minMenuY = -menu.clientHeight - 50;
@@ -712,7 +759,7 @@ function setupTryItButtons() {
             prevScrollTop = scrollTop;
         }, { passive: true });
     })();
-    (function controllBorder() {
+    (function controlBorder() {
         menu.classList.remove('bordered');
         document.addEventListener('scroll', function () {
             if (menu.offsetTop === 0) {
@@ -723,34 +770,3 @@ function setupTryItButtons() {
         }, { passive: true });
     })();
 })();
-
-var loaded = false;
-
-setupSyntaxHighlighting();
-setupThemes();
-
-// We lazily setup these things to make it easier to re-host this stuff in a different
-// environment like vscode.
-window.addEventListener('load', () => {
-    setupPlaygrounds();
-    setupCodeSnippets();
-    setupClipboardButtons();
-    setupTryItButtons();
-    setupChapterNavigation();
-    if (window.side_bar){
-        setupSidebar();
-    }
-    loaded = true;
-    document.scrollingElement.scrollTo({ top: 0 });
-});
-
-function receiveMessage(e){
-    const message = e.data;
-    if (message.theme){
-        if (loaded) {
-            set_theme(message.theme, false);
-        }
-    }
-}
-
-window.addEventListener('message', e => receiveMessage(e));

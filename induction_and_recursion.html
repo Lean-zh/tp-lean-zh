@@ -4,50 +4,29 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>归纳与递归 - Lean 4 定理证明</title>
-        
-        
-
-
         <!-- Custom HTML head -->
-        
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
-
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
-
-        
         <!-- MathJax -->
         <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -98,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Lean 4 定理证明</li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html" class="active"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title_page.html">Lean 4 定理证明</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html" class="active"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -106,7 +85,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -123,33 +101,29 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Lean 4 定理证明</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/Lean-zh/tp-lean-zh" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+                        <a href="https://github.com/Lean-zh/tp-lean-zh/edit/master/./induction_and_recursion.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -157,8 +131,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -170,7 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#induction-and-recursion" id="induction-and-recursion">Induction and Recursion</a></h1>
+                        <h1 id="induction-and-recursion"><a class="header" href="#induction-and-recursion">Induction and Recursion</a></h1>
 <p>In the previous chapter, we saw that inductive definitions provide a
 powerful means of introducing new types in Lean. Moreover, the
 constructors and the recursors provide the only means of defining
@@ -185,7 +157,7 @@ cases that can arise. Behind the scenes, these descriptions are
 refer to as the &quot;equation compiler.&quot; The equation compiler is not part
 of the trusted code base; its output consists of terms that are
 checked independently by the kernel.</p>
-<h2><a class="header" href="#pattern-matching" id="pattern-matching">Pattern Matching</a></h2>
+<h2 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern Matching</a></h2>
 <p>The interpretation of schematic patterns is the first step of the
 compilation process. We have seen that the <code>casesOn</code> recursor can
 be used to define functions and prove theorems by cases, according to
@@ -380,7 +352,7 @@ not participate in a case split.</p>
 arguments to dependent types pose additional constraints on the
 various cases. Such examples of <em>dependent pattern matching</em> are
 considered in the <a href="#dependent-pattern-matching">Section Dependent Pattern Matching</a>.</p>
-<h2><a class="header" href="#wildcards-and-overlapping-patterns" id="wildcards-and-overlapping-patterns">Wildcards and Overlapping Patterns</a></h2>
+<h2 id="wildcards-and-overlapping-patterns"><a class="header" href="#wildcards-and-overlapping-patterns">Wildcards and Overlapping Patterns</a></h2>
 <p>Consider one of the examples from the last section:</p>
 <pre><code class="language-lean">def foo : Nat → Nat → Nat
   | 0,   n   =&gt; 0
@@ -469,7 +441,7 @@ not been covered.</p>
 
 #print foo.match_1
 </code></pre>
-<h2><a class="header" href="#structural-recursion-and-induction" id="structural-recursion-and-induction">Structural Recursion and Induction</a></h2>
+<h2 id="structural-recursion-and-induction"><a class="header" href="#structural-recursion-and-induction">Structural Recursion and Induction</a></h2>
 <p>What makes the equation compiler powerful is that it also supports
 recursive definitions. In the next three sections, we will describe,
 respectively:</p>
@@ -647,7 +619,7 @@ example : append [1, 2, 3] [4, 5] = [1, 2, 3, 4, 5] := rfl
 -- [5, 7, 9]
 </code></pre>
 <p>You are encouraged to experiment with similar examples in the exercises below.</p>
-<h2><a class="header" href="#local-recursive-declarations" id="local-recursive-declarations">Local recursive declarations</a></h2>
+<h2 id="local-recursive-declarations"><a class="header" href="#local-recursive-declarations">Local recursive declarations</a></h2>
 <p>You can define local recursive declarations using the <code>let rec</code> keyword.</p>
 <pre><code class="language-lean">def replicate (n : Nat) (a : α) : List α :=
   let rec loop : Nat → List α → List α
@@ -695,7 +667,7 @@ where
     | 0   =&gt; simp [replicate.loop]
     | n+1 =&gt; simp [replicate.loop, aux n, Nat.add_succ, Nat.succ_add]
 </code></pre>
-<h2><a class="header" href="#well-founded-recursion-and-induction" id="well-founded-recursion-and-induction">Well-Founded Recursion and Induction</a></h2>
+<h2 id="well-founded-recursion-and-induction"><a class="header" href="#well-founded-recursion-and-induction">Well-Founded Recursion and Induction</a></h2>
 <p>When structural recursion cannot be used, we can prove termination using well-founded recursion.
 We need a well-founded relation and a proof that each recursive application is decreasing with respect to
 this relation. Dependent type theory is powerful enough to encode and justify
@@ -910,7 +882,7 @@ decreasing_by sorry
 <p>By default, the tactic <code>decreasing_tactic</code> is used to show that recursive applications are smaller with respect to the selected well-founded relation. If <code>decreasing_tactic</code> fails, the error message includes the remaining goal <code>... |- G</code>. Note that, the <code>decreasing_tactic</code> uses <code>assumption</code>. So, you can include a <code>have</code>-expression to prove goal <code>G</code>. You can also provide your own tactic using <code>decreasing_by</code>.</p>
 </li>
 </ul>
-<h2><a class="header" href="#mutual-recursion" id="mutual-recursion">Mutual Recursion</a></h2>
+<h2 id="mutual-recursion"><a class="header" href="#mutual-recursion">Mutual Recursion</a></h2>
 <p>Lean also supports mutual recursive definitions. The syntax is similar to that for mutual inductive types. Here is an example:</p>
 <pre><code class="language-lean">mutual
   def even : Nat → Bool
@@ -1029,7 +1001,7 @@ mutual
             numConsts_replaceConstLst a b cs]
 end
 </code></pre>
-<h2><a class="header" href="#dependent-pattern-matching" id="dependent-pattern-matching">Dependent Pattern Matching</a></h2>
+<h2 id="dependent-pattern-matching"><a class="header" href="#dependent-pattern-matching">Dependent Pattern Matching</a></h2>
 <p>All the examples of pattern matching we considered in
 <a href="#pattern-matching">Section Pattern Matching</a> can easily be written using <code>casesOn</code>
 and <code>recOn</code>. However, this is often not the case with indexed
@@ -1131,7 +1103,7 @@ families are far from straightforward. For example:</p>
 <p>The <code>map</code> function is even more tedious to define by hand than the
 <code>tail</code> function. We encourage you to try it, using <code>recOn</code>,
 <code>casesOn</code> and <code>noConfusion</code>.</p>
-<h2><a class="header" href="#inaccessible-patterns" id="inaccessible-patterns">Inaccessible Patterns</a></h2>
+<h2 id="inaccessible-patterns"><a class="header" href="#inaccessible-patterns">Inaccessible Patterns</a></h2>
 <p>Sometimes an argument in a dependent matching pattern is not essential
 to the definition, but nonetheless has to be included to specialize
 the type of the expression appropriately. Lean allows users to mark
@@ -1270,7 +1242,7 @@ def zip : Vector α n → Vector β n → Vector (α × β) n
   | cons a as, cons b bs =&gt; cons (a, b) (zip as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<h2><a class="header" href="#match-expressions" id="match-expressions">Match Expressions</a></h2>
+<h2 id="match-expressions"><a class="header" href="#match-expressions">Match Expressions</a></h2>
 <p>Lean also provides a compiler for <em>match-with</em> expressions found in
 many functional languages.</p>
 <pre><code class="language-lean">def isNotZero (m : Nat) : Bool :=
@@ -1342,7 +1314,7 @@ example (h₀ : ∃ x, p x) (h₁ : ∃ y, q y)
   let ⟨y, qy⟩ := h₁
   ⟨x, y, px, qy⟩
 </code></pre>
-<h2><a class="header" href="#local-recursive-declarations-1" id="local-recursive-declarations-1">Local Recursive Declarations</a></h2>
+<h2 id="local-recursive-declarations-1"><a class="header" href="#local-recursive-declarations-1">Local Recursive Declarations</a></h2>
 <p>You can define local recursive declarations using the <code>let rec</code> keyword.</p>
 <pre><code class="language-lean">def replicate (n : Nat) (a : α) : List α :=
   let rec loop : Nat → List α → List α
@@ -1390,7 +1362,7 @@ where
     | 0   =&gt; simp [replicate.loop]
     | n+1 =&gt; simp [replicate.loop, aux n, Nat.add_succ, Nat.succ_add]
 </code></pre>
-<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<h2 id="exercises"><a class="header" href="#exercises">Exercises</a></h2>
 <ol>
 <li>
 <p>Open a namespace <code>Hidden</code> to avoid naming conflicts, and use the
@@ -1495,72 +1467,39 @@ theorem fuse_eq (v : Nat → Nat)
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="inductive_types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
-
-                        
                             <a rel="next" href="structures_and_records.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="inductive_types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
-
-                
                     <a rel="next" href="structures_and_records.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
-
-        
-
-        
-
-        
         <script type="text/javascript">
             window.playground_copyable = true;
-            window.clip_buttons = true;
-            window.tryit_buttons = false;
-            window.side_bar = true;
         </script>
-        
-
-        
-
-        
         <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
         <script type="text/javascript" src="custom.js"></script>
-        
-
-        
-
     </body>
 </html>
