@@ -1,0 +1,7 @@
+*.olean
+/_target
+/leanpkg.path
+out/
+.vs/
+.vscode/
+/src_zh

@@ -1,0 +1,1546 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>类型类 - Lean 4 定理证明</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme && theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar && sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Lean 4 定理证明</li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html" class="active"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Lean 4 定理证明</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/Lean-zh/tp-lean-zh" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+# Type Classes
+-->
+<h1><a class="header" href="#类型类" id="类型类">类型类</a></h1>
+<!--
+Type classes were introduced as a principled way of enabling
+ad-hoc polymorphism in functional programming languages. We first observe that it
+would be easy to implement an ad-hoc polymorphic function (such as addition) if the
+function simply took the type-specific implementation of addition as an argument
+and then called that implementation on the remaining arguments. For example,
+suppose we declare a structure in Lean to hold implementations of addition.
+-->
+<p>将 <strong>类型类（Type Class）</strong> 作为一种原则性方法引入，
+是为了在函数式编程语言中支持 <strong>特设多态（Ad-hoc Polymorphism）</strong>。
+我们首先观察到，如果函数简单地接受特定类型的实现作为参数，
+然后在其余参数上调用该实现，则很容易实现特设多态函数（如加法）。
+例如，假设我们在 Lean 中声明一个结构体来保存加法的实现：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>structure Add (a : Type) where
+  add : a → a → a
+
+#check @Add.add
+-- Add.add : {a : Type} → Add a → a → a → a
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+In the above Lean code, the field `add` has type
+`Add.add : {a : Type} → Add a → a → a → a`
+where the curly braces around the type `a` mean that it is an implicit argument.
+We could implement `double` by:
+-->
+<p>在上面 Lean 代码中，字段 <code>add</code> 的类型为 <code>Add.add : {a : Type} → Add a → a → a → a</code>
+其中类型 <code>a</code> 周围的大括号表示它是一个隐式参数。我们可以通过以下方式实现 <code>double</code>：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">structure Add (a : Type) where
+</span><span class="boring"> add : a → a → a
+</span>def double (s : Add a) (x : a) : a :=
+  s.add x x
+
+#eval double { add := Nat.add } 10
+-- 20
+
+#eval double { add := Nat.mul } 10
+-- 100
+
+#eval double { add := Int.add } 10
+-- 20
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+Note that you can double a natural number `n` by `double { add := Nat.add } n`.
+Of course, it would be highly cumbersome for users to manually pass the
+implementations around in this way.
+Indeed, it would defeat most of the potential benefits of ad-hoc
+polymorphism.
+-->
+<p>注意，你可以用 <code>double { add := Nat.add } n</code> 使一个自然数 <code>n</code> 翻倍。
+当然，以这种方式让用户手动四处传递实现会非常繁琐。
+实际上，这会消除掉特设多态的大部分潜在好处。</p>
+<!--
+The main idea behind type classes is to make arguments such as `Add a` implicit,
+and to use a database of user-defined instances to synthesize the desired instances
+automatically through a process known as typeclass resolution. In Lean, by changing
+`structure` to `class` in the example above, the type of `Add.add` becomes:
+-->
+<p>类型类的主要思想是使诸如 <code>Add a</code> 之类的参数变为隐含的，
+并使用用户定义实例的数据库通过称为类型类求解的过程自动合成所需的实例。
+在 Lean 中，通过在以上示例中将 <code>structure</code> 更改为 <code>class</code>，<code>Add.add</code> 的类型会变为：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class Add (a : Type) where
+  add : a → a → a
+
+#check @Add.add
+-- Add.add : {a : Type} → [self : Add a] → a → a → a
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+where the square brackets indicate that the argument of type `Add a` is *instance implicit*,
+i.e. that it should be synthesized using typeclass resolution. This version of
+`add` is the Lean analogue of the Haskell term `add :: Add a => a -> a -> a`.
+Similarly, we can register instances by:
+-->
+<p>其中方括号表示类型为 <code>Add a</code> 的参数是 <strong>实例隐式的</strong>，
+即，它应该使用类型类求解合成。这个版本的 <code>add</code> 是 Haskell 项
+<code>add :: Add a =&gt; a -&gt; a -&gt; a</code> 的 Lean 类比。
+同样，我们可以通过以下方式注册实例：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">class Add (a : Type) where
+</span><span class="boring"> add : a → a → a
+</span>instance : Add Nat where
+  add := Nat.add
+
+instance : Add Int where
+  add := Int.add
+
+instance : Add Float where
+  add := Float.add
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+Then for `n : Nat` and `m : Nat`, the term `Add.add n m` triggers typeclass resolution with
+the goal of `Add Nat`, and typeclass resolution will synthesize the instance for `Nat` above.
+We can now reimplement `double` using an instance implicit by:
+-->
+<p>接着对于 <code>n : Nat</code> 和 <code>m : Nat</code>，项 <code>Add.add n m</code> 触发了类型类求解，
+目标为 <code>Add Nat</code>，且类型类求解将综合上面 <code>Nat</code> 的实例。
+现在，我们可以通过隐式的实例重新实现 <code>double</code> 了：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">class Add (a : Type) where
+</span><span class="boring">  add : a → a → a
+</span><span class="boring">instance : Add Nat where
+</span><span class="boring"> add := Nat.add
+</span><span class="boring">instance : Add Int where
+</span><span class="boring"> add := Int.add
+</span><span class="boring">instance : Add Float where
+</span><span class="boring"> add := Float.add
+</span>def double [Add a] (x : a) : a :=
+  Add.add x x
+
+#check @double
+-- @double : {a : Type} → [inst : Add a] → a → a
+
+#eval double 10
+-- 20
+
+#eval double (10 : Int)
+-- 100
+
+#eval double (7 : Float)
+-- 14.000000
+
+#eval double (239.0 + 2)
+-- 482.000000
+
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+In general, instances may depend on other instances in complicated ways. For example,
+you can declare an (anonymous) instance stating that if `a` has addition, then `Array a`
+has addition:
+-->
+<p>一般情况下，实例可能以复杂的方式依赖于其他实例。例如，你可以声明一个（匿名）实例，
+说明如果 <code>a</code> 存在加法，那么 <code>Array a</code> 也存在加法：</p>
+<pre><code class="language-lean">instance [Add a] : Add (Array a) where
+  add x y := Array.zipWith x y (· + ·)
+
+#eval Add.add #[1, 2] #[3, 4]
+-- #[4, 6]
+
+#eval #[1, 2] + #[3, 4]
+-- #[4, 6]
+</code></pre>
+<!--
+Note that `(· + ·)` is notation for `fun x y => x + y` in Lean.
+-->
+<p>请注意，<code>(· + ·)</code> 是 Lean 中 <code>fun x y =&gt; x + y</code> 的记法。</p>
+<!--
+The example above demonstrates how type classes are used to overload notation.
+Now, we explore another application. We often need an arbitrary element of a given type.
+Recall that types may not have any elements in Lean.
+It often happens that we would like a definition to return an arbitrary element in a "corner case."
+For example, we may like the expression ``head xs`` to be of type ``a`` when ``xs`` is of type ``List a``.
+Similarly, many theorems hold under the additional assumption that a type is not empty.
+For example, if ``a`` is a type, ``exists x : a, x = x`` is true only if ``a`` is not empty.
+The standard library defines a type class ``Inhabited`` to enable type class inference to infer a
+"default" element of an inhabited type.
+Let us start with the first step of the program above, declaring an appropriate class:
+-->
+<p>上述示例演示了类型类如何用于重载符号。现在，我们探索另一个应用程序。
+我们经常需要给定类型的任意元素。回想一下类型在 Lean 中可能没有任何元素。
+我们经常希望在一个「边界情况」下定义返回一个任意元素。
+例如，我们可能希望当 <code>xs</code> 为 <code>List a</code> 类型时 <code>head xs</code> 表达式的类型为 <code>a</code>。
+类似地，许多定理在类型不为空的附加假设下成立。例如，如果 <code>a</code> 是一个类型，
+则 <code>exists x : a, x = x</code> 仅在 <code>a</code> 不为空时为真。标准库定义了一个类型类
+<code>Inhabited</code>，它能够让类型类推理来推断**可居（Inhabited）**类型类的「默认」元素。
+让我们从上述程序的第一步开始，声明一个适当的类：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class Inhabited (a : Type u) where
+  default : a
+
+#check @Inhabited.default
+-- Inhabited.default : {a : Type u} → [self : Inhabited a] → a
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+Note `Inhabited.default` doesn't have any explicit arguments.
+-->
+<p>注意 <code>Inhabited.default</code> 没有任何显式参数。</p>
+<!--
+An element of the class ``Inhabited a`` is simply an expression of the form ``Inhabited.mk x``, for some element ``x : a``.
+The projection ``Inhabited.default`` will allow us to "extract" such an element of ``a`` from an element of ``Inhabited a``.
+Now we populate the class with some instances:
+-->
+<p>类 <code>Inhabited a</code> 的某个元素只是形式为 <code>Inhabited.mk x</code> 的表达式，
+其中 <code>x : a</code> 为某个元素。投影 <code>Inhabited.default</code> 可让我们从 <code>Inhabited a</code>
+的某个元素中「提取」出 <code>a</code> 的某个元素。现在我们用一些实例填充该类：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">class Inhabited (a : Type _) where
+</span><span class="boring"> default : a
+</span>instance : Inhabited Bool where
+  default := true
+
+instance : Inhabited Nat where
+  default := 0
+
+instance : Inhabited Unit where
+  default := ()
+
+instance : Inhabited Prop where
+  default := True
+
+#eval (Inhabited.default : Nat)
+-- 0
+
+#eval (Inhabited.default : Bool)
+-- true
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+You can use the command `export` to create the alias `default` for `Inhabited.default`
+-->
+<p>你可以用 <code>export</code> 命令来为 <code>Inhabited.default</code> 创建别名 <code>default</code></p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">class Inhabited (a : Type _) where
+</span><span class="boring"> default : a
+</span><span class="boring">instance : Inhabited Bool where
+</span><span class="boring"> default := true
+</span><span class="boring">instance : Inhabited Nat where
+</span><span class="boring"> default := 0
+</span><span class="boring">instance : Inhabited Unit where
+</span><span class="boring"> default := ()
+</span><span class="boring">instance : Inhabited Prop where
+</span><span class="boring"> default := True
+</span>export Inhabited (default)
+
+#eval (default : Nat)
+-- 0
+
+#eval (default : Bool)
+-- true
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+## Chaining Instances
+-->
+<h2><a class="header" href="#链接实例" id="链接实例">链接实例</a></h2>
+<!--
+If that were the extent of type class inference, it would not be all that impressive;
+it would be simply a mechanism of storing a list of instances for the elaborator to find in a lookup table.
+What makes type class inference powerful is that one can *chain* instances. That is,
+an instance declaration can in turn depend on an implicit instance of a type class.
+This causes class inference to chain through instances recursively, backtracking when necessary, in a Prolog-like search.
+-->
+<p>以类型类推断的层面来看，它并不那么令人印象深刻；
+它不过是一种为精细器存储实例列表的机制，用于在查询表中查找。
+类型类推断变得强大的原因在于，它能够「链接（Chain）」实例。也就是说，
+实例声明本身可以依赖类型类的隐式实例。
+这导致类推断递归地通过实例进行链接，并在必要时回溯，就像 Prolog 中的搜索一样。</p>
+<!--
+For example, the following definition shows that if two types ``a`` and ``b`` are inhabited, then so is their product:
+-->
+<p>--&gt;</p>
+<p>例如，以下定义展示了若两个类型 <code>a</code> 和 <code>b</code> 包含元素，则二者的积也包含元素：</p>
+<pre><code class="language-lean">instance [Inhabited a] [Inhabited b] : Inhabited (a × b) where
+  default := (default, default)
+</code></pre>
+<!--
+With this added to the earlier instance declarations, type class instance can infer, for example, a default element of ``Nat × Bool``:
+-->
+<p>将它添加到先前的实例声明后，类型类实例就能推导了，例如 <code>Nat × Bool</code> 的默认元素为：</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span><span class="boring">class Inhabited (a : Type u) where
+</span><span class="boring"> default : a
+</span><span class="boring">instance : Inhabited Bool where
+</span><span class="boring"> default := true
+</span><span class="boring">instance : Inhabited Nat where
+</span><span class="boring"> default := 0
+</span><span class="boring">opaque default [Inhabited a] : a :=
+</span><span class="boring"> Inhabited.default
+</span>instance [Inhabited a] [Inhabited b] : Inhabited (a × b) where
+  default := (default, default)
+
+#eval (default : Nat × Bool)
+-- (0, true)
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+Similarly, we can inhabit type function with suitable constant functions:
+-->
+<p>与此类似，我们可以使用合适的常量函数使其居留到类型函数中：</p>
+<pre><code class="language-lean">instance [Inhabited b] : Inhabited (a → b) where
+  default := fun _ =&gt; default
+</code></pre>
+<!--
+As an exercise, try defining default instances for other types, such as `List` and `Sum` types.
+-->
+<p>作为练习，请尝试为其他类型定义默认实例，例如 <code>List</code> 和 <code>Sum</code> 类型。</p>
+<!--
+The Lean standard library contains the definition `inferInstance`. It has type `{α : Sort u} → [i : α] → α`,
+and is useful for triggering the type class resolution procedure when the expected type is an instance.
+-->
+<p>Lean 标准库包含了定义 <code>inferInstance</code>，它的类型为 <code>{α : Sort u} → [i : α] → α</code>，
+它在期望的类型是一个实例时触发类型类求解过程十分有用。</p>
+<pre><code class="language-lean">#check (inferInstance : Inhabited Nat) -- Inhabited Nat
+
+def foo : Inhabited (Nat × Nat) :=
+  inferInstance
+
+theorem ex : foo.default = (default, default) :=
+  rfl
+</code></pre>
+<!--
+You can use the command `#print` to inspect how simple `inferInstance` is.
+-->
+<!--
+You can use the command `#print` to inspect how simple `inferInstance` is.
+-->
+<p>你可以使用命令 <code>#print</code> 来检查 <code>inferInstance</code> 有多简单。</p>
+<pre><code class="language-lean">#print inferInstance
+</code></pre>
+<!--
+## ToString
+-->
+<h2><a class="header" href="#tostring-方法" id="tostring-方法">ToString 方法</a></h2>
+<!--
+The polymorphic method `toString` has type `{α : Type u} → [ToString α] → α → String`. You implement the instance
+for your own types and use chaining to convert complex values into strings. Lean comes with `ToString` instances
+for most builtin types.
+-->
+<p>多态方法 <code>toString</code> 类型为 <code>{α : Type u} → [ToString α] → α → String</code>。
+你可以为自己的类型实现实例并使用链接将复杂的值转换为字符串。
+Lean 为大多数内置类型都提供了 <code>ToString</code> 实例。</p>
+<pre><code class="language-lean">structure Person where
+  name : String
+  age  : Nat
+
+instance : ToString Person where
+  toString p := p.name ++ &quot;@&quot; ++ toString p.age
+
+#eval toString { name := &quot;Leo&quot;, age := 542 : Person }
+#eval toString ({ name := &quot;Daniel&quot;, age := 18 : Person }, &quot;hello&quot;)
+</code></pre>
+<!--
+## Numerals
+-->
+<h2><a class="header" href="#数值" id="数值">数值</a></h2>
+<!--
+Numerals are polymorphic in Lean. You can use a numeral (e.g., `2`) to denote an element of any type that implements
+the type class `OfNat`.
+-->
+<p>数值在 Lean 中是多态的。你可以用一个数值（例如 <code>2</code>）来表示任何实现了类型类
+<code>OfNat</code> 的类型中的一个元素。</p>
+<pre><code class="language-lean">structure Rational where
+  num : Int
+  den : Nat
+  inv : den ≠ 0
+
+instance : OfNat Rational n where
+  ofNat := { num := n, den := 1, inv := by decide }
+
+instance : ToString Rational where
+  toString r := s!&quot;{r.num}/{r.den}&quot;
+
+#eval (2 : Rational) -- 2/1
+
+#check (2 : Rational) -- Rational
+#check (2 : Nat)      -- Nat
+</code></pre>
+<!--
+Lean elaborates the terms `(2 : Nat)` and `(2 : Rational)` as
+`OfNat.ofNat Nat 2 (instOfNatNat 2)` and
+`OfNat.ofNat Rational 2 (instOfNatRational 2)` respectively.
+We say the numerals `2` occurring in the elaborated terms are *raw* natural numbers.
+You can input the raw natural number `2` using the macro `nat_lit 2`.
+-->
+<!--
+Lean elaborates the terms `(2 : Nat)` and `(2 : Rational)` as
+`OfNat.ofNat Nat 2 (instOfNatNat 2)` and
+`OfNat.ofNat Rational 2 (instOfNatRational 2)` respectively.
+We say the numerals `2` occurring in the elaborated terms are *raw* natural numbers.
+You can input the raw natural number `2` using the macro `nat_lit 2`.
+-->
+<p>Lean 会将项 <code>(2 : Nat)</code> 和 <code>(2 : Rational)</code> 分别繁饰（Elaborate）为：
+<code>OfNat.ofNat Nat 2 (instOfNatNat 2)</code> 和
+<code>OfNat.ofNat Rational 2 (instOfNatRational 2)</code>。
+我们将繁饰的项中出现的数字 <code>2</code> 称为 <strong>原始</strong> 自然数。
+你可以使用宏 <code>nat_lit 2</code> 来输入原始自然数 <code>2</code>。</p>
+<pre><code class="language-lean">#check nat_lit 2  -- Nat
+</code></pre>
+<!--
+Raw natural numbers are *not* polymorphic.
+-->
+<p>原始自然数 <strong>不是</strong> 多态的。</p>
+<!--
+The `OfNat` instance is parametric on the numeral. So, you can define instances for particular numerals.
+The second argument is often a variable as in the example above, or a *raw* natural number.
+-->
+<p><code>OfNat</code> 实例对数值进行了参数化，因此你可以定义特定数字的实例。
+第二个参数通常是变量，如上例所示，或者是一个 <strong>原始</strong> 自然数。</p>
+<pre><code class="language-lean">class Monoid (α : Type u) where
+  unit : α
+  op   : α → α → α
+
+instance [s : Monoid α] : OfNat α (nat_lit 1) where
+  ofNat := s.unit
+
+def getUnit [Monoid α] : α :=
+  1
+</code></pre>
+<!--
+## Output Parameters
+-->
+<h2><a class="header" href="#输出参数" id="输出参数">输出参数</a></h2>
+<!--
+By default, Lean only tries to synthesize an instance `Inhabited T` when the term `T` is known and does not
+contain missing parts. The following command produces the error
+"typeclass instance problem is stuck, it is often due to metavariables `?m.7`" because the type has a missing part (i.e., the `_`).
+-->
+<p>默认情况下，Lean 仅当项 <code>T</code> 已知时且不包含缺失部分时，会尝试合成实例 <code>Inhabited T</code>。
+以下命令会产生错「typeclass instance problem is stuck, it is often due to metavariables <code>?m.7</code>
+（类型类实例问题卡住了，通常是由于元变量 <code>?m.7</code> 引起的）」因为该类型有缺失的部分（即 <code>_</code>）。</p>
+<pre><code class="language-lean">#check_failure (inferInstance : Inhabited (Nat × _))
+</code></pre>
+<!--
+You can view the parameter of the type class `Inhabited` as an *input* value for the type class synthesizer.
+When a type class has multiple parameters, you can mark some of them as output parameters.
+Lean will start type class synthesizer even when these parameters have missing parts.
+In the following example, we use output parameters to define a *heterogeneous* polymorphic
+multiplication.
+-->
+<p>你可以将类型类 <code>Inhabited</code> 的参数视为类型类合成器的 <strong>输入</strong> 值。
+当类型类有多个参数时，可以将其中一些标记为输出参数。
+即使这些参数有缺失部分，Lean 也会开始类型类合成。
+在下面的示例中，我们使用输出参数定义一个 <strong>异质（Heterogeneous）</strong> 的多态乘法。</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
+  hMul : α → β → γ
+
+export HMul (hMul)
+
+instance : HMul Nat Nat Nat where
+  hMul := Nat.mul
+
+instance : HMul Nat (Array Nat) (Array Nat) where
+  hMul a bs := bs.map (fun b =&gt; hMul a b)
+
+#eval hMul 4 3           -- 12
+#eval hMul 4 #[2, 3, 4]  -- #[8, 12, 16]
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+The parameters `α` and `β` are considered input parameters and `γ` an output one.
+Given an application `hMul a b`, after the types of `a` and `b` are known, the type class
+synthesizer is invoked, and the resulting type is obtained from the output parameter `γ`.
+In the example above, we defined two instances. The first one is the homogeneous
+multiplication for natural numbers. The second is the scalar multiplication for arrays.
+Note that you chain instances and generalize the second instance.
+-->
+<p>参数 <code>α</code> 和 <code>β</code> 会被视为输入参数，<code>γ</code> 被视为输出参数。
+如果给定一个应用 <code>hMul a b</code>，那么在知道 <code>a</code> 和 <code>b</code> 的类型后，
+将调用类型类合成器，并且可以从输出参数 <code>γ</code> 中获得最终的类型。
+在上文中的示例中，我们定义了两个实例。第一个实例是针对自然数的同质乘法。
+第二个实例是针对数组的标量乘法。请注意，你可以链接实例，并推广第二个实例。</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
+  hMul : α → β → γ
+
+export HMul (hMul)
+
+instance : HMul Nat Nat Nat where
+  hMul := Nat.mul
+
+instance : HMul Int Int Int where
+  hMul := Int.mul
+
+instance [HMul α β γ] : HMul α (Array β) (Array γ) where
+  hMul a bs := bs.map (fun b =&gt; hMul a b)
+
+#eval hMul 4 3                    -- 12
+#eval hMul 4 #[2, 3, 4]           -- #[8, 12, 16]
+#eval hMul (-2) #[3, -1, 4]       -- #[-6, 2, -8]
+#eval hMul 2 #[#[2, 3], #[0, 4]]  -- #[#[4, 6], #[0, 8]]
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+You can use our new scalar array multiplication instance on arrays of type `Array β`
+with a scalar of type `α` whenever you have an instance `HMul α β γ`.
+In the last `#eval`, note that the instance was used twice on an array of arrays.
+-->
+<p>当你拥有 <code>HMul α β γ</code> 的实例时，可以在类型为 <code>Array β</code> 的数组上将其使用标量类型
+<code>α</code> 的新标量数组乘法实例。在最后的 <code>#eval</code> 中，请注意该实例曾在数组数组中使用了两次。</p>
+<!--
+## Default Instances
+-->
+<h2><a class="header" href="#default-instances" id="default-instances">Default Instances</a></h2>
+<!--
+In the class `HMul`, the parameters `α` and `β` are treated as input values.
+Thus, type class synthesis only starts after these two types are known. This may often
+be too restrictive.
+-->
+<p>在类 <code>HMul</code> 中，参数 <code>α</code> 和 <code>β</code> 被当做输入值。
+因此，类型类合成仅在已知这两种类型时才开始。这通常可能过于严格。</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
+  hMul : α → β → γ
+
+export HMul (hMul)
+
+instance : HMul Int Int Int where
+  hMul := Int.mul
+
+def xs : List Int := [1, 2, 3]
+
+-- Error &quot;typeclass instance problem is stuck, it is often due to metavariables HMul ?m.89 ?m.90 ?m.91&quot;
+#check_failure fun y =&gt; xs.map (fun x =&gt; hMul x y)
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+The instance `HMul` is not synthesized by Lean because the type of `y` has not been provided.
+However, it is natural to assume that the type of `y` and `x` should be the same in
+this kind of situation. We can achieve exactly that using *default instances*.
+-->
+<p>实例 <code>HMul</code> 没有被 Lean 合成，因为没有提供 <code>y</code> 的类型。
+然而，在这种情况下，自然应该认为 <code>y</code> 和 <code>x</code> 的类型应该相同。
+我们可以使用 <strong>默认实例</strong> 来实现这一点。</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
+  hMul : α → β → γ
+
+export HMul (hMul)
+
+@[default_instance]
+instance : HMul Int Int Int where
+  hMul := Int.mul
+
+def xs : List Int := [1, 2, 3]
+
+#check fun y =&gt; xs.map (fun x =&gt; hMul x y)  -- Int → List Int
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+By tagging the instance above with the attribute `default_instance`, we are instructing Lean
+to use this instance on pending type class synthesis problems.
+The actual Lean implementation defines homogeneous and heterogeneous classes for arithmetical operators.
+Moreover, `a+b`, `a*b`, `a-b`, `a/b`, and `a%b` are notations for the heterogeneous versions.
+The instance `OfNat Nat n` is the default instance (with priority 100) for the `OfNat` class. This is why the numeral
+`2` has type `Nat` when the expected type is not known. You can define default instances with higher
+priority to override the builtin ones.
+-->
+<p>通过给上述实例添加 <code>default_instance</code> 属性，我们指示 Lean 在挂起的类型类合成问题中使用此实例。
+实际的 Lean 实现为算术运算符定义了同质和异质类。此外，<code>a+b</code>、<code>a*b</code>、<code>a-b</code>、<code>a/b</code> 和 <code>a%b</code>
+是异质版本的记法。实例 <code>OfNat Nat n</code> 是 <code>OfNat</code> 类的默认实例（优先级 100）。
+这就是当预期类型未知时，数字 <code>2</code> 具有类型 <code>Nat</code> 的原因。
+你可以定义具有更高优先级的默认实例来覆盖内置实例。</p>
+<pre><code class="language-lean">structure Rational where
+  num : Int
+  den : Nat
+  inv : den ≠ 0
+
+@[default_instance 200]
+instance : OfNat Rational n where
+  ofNat := { num := n, den := 1, inv := by decide }
+
+instance : ToString Rational where
+  toString r := s!&quot;{r.num}/{r.den}&quot;
+
+#check 2 -- Rational
+</code></pre>
+<!--
+Priorities are also useful to control the interaction between different default instances.
+For example, suppose `xs` has type `List α`. When elaborating `xs.map (fun x => 2 * x)`, we want the homogeneous instance for multiplication
+to have higher priority than the default instance for `OfNat`. This is particularly important when we have implemented only the instance
+`HMul α α α`, and did not implement `HMul Nat α α`.
+Now, we reveal how the notation `a*b` is defined in Lean.
+-->
+<p>优先级也适用于控制不同默认实例之间的交互。例如，假设 <code>xs</code> 有类型 <code>List α</code>。
+在繁饰 <code>xs.map (fun x =&gt; 2 * x)</code> 时，我们希望乘法的同质实例比 <code>OfNat</code>
+的默认实例具有更高的优先级。当我们仅实现了实例 <code>HMul α α α</code>，而未实现 <code>HMul Nat α α</code> 时，
+这一点尤为重要。现在，我们展示了 <code>a*b</code> 记法在 Lean 中是如何定义的。</p>
+<pre><code class="language-lean"><span class="boring">namespace Ex
+</span>class OfNat (α : Type u) (n : Nat) where
+  ofNat : α
+
+@[default_instance]
+instance (n : Nat) : OfNat Nat n where
+  ofNat := n
+
+class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
+  hMul : α → β → γ
+
+class Mul (α : Type u) where
+  mul : α → α → α
+
+@[default_instance 10]
+instance [Mul α] : HMul α α α where
+  hMul a b := Mul.mul a b
+
+infixl:70 &quot; * &quot; =&gt; HMul.hMul
+<span class="boring">end Ex
+</span></code></pre>
+<!--
+The `Mul` class is convenient for types that only implement the homogeneous multiplication.
+-->
+<p><code>Mul</code> 类是仅实现了同质乘法的类型的简便记法。</p>
+<!--
+## Local Instances
+-->
+<h2><a class="header" href="#局部实例" id="局部实例">局部实例</a></h2>
+<!--
+Type classes are implemented using attributes in Lean. Thus, you can
+use the `local` modifier to indicate that they only have effect until
+the current ``section`` or ``namespace`` is closed, or until the end
+of the current file.
+-->
+<p>类型类是使用 Lean 中的属性（Attribute）来实现的。因此，你可以使用 <code>local</code>
+修饰符表明它们只对当前 <code>section</code> 或 <code>namespace</code> 关闭之前或当前文件结束之前有效。</p>
+<pre><code class="language-lean">structure Point where
+  x : Nat
+  y : Nat
+
+section
+
+local instance : Add Point where
+  add a b := { x := a.x + b.x, y := a.y + b.y }
+
+def double (p : Point) :=
+  p + p
+
+end -- instance `Add Point` is not active anymore
+
+-- def triple (p : Point) :=
+--  p + p + p  -- Error: failed to synthesize instance
+</code></pre>
+<!--
+You can also temporarily disable an instance using the `attribute` command
+until the current ``section`` or ``namespace`` is closed, or until the end
+of the current file.
+-->
+<p>你也可使用 <code>attribute</code> 命令暂时禁用一个实例，直至当前的 <code>section</code> 或
+<code>namespace</code> 关闭，或直到当前文件的结尾。</p>
+<pre><code class="language-lean">structure Point where
+  x : Nat
+  y : Nat
+
+instance addPoint : Add Point where
+  add a b := { x := a.x + b.x, y := a.y + b.y }
+
+def double (p : Point) :=
+  p + p
+
+attribute [-instance] addPoint
+
+-- def triple (p : Point) :=
+--  p + p + p  -- Error: failed to synthesize instance
+</code></pre>
+<!--
+We recommend you only use this command to diagnose problems.
+-->
+<p>我们建议你只使用此命令来诊断问题。</p>
+<!--
+## Scoped Instances
+-->
+<h2><a class="header" href="#作用于实例" id="作用于实例">作用于实例</a></h2>
+<!--
+You can also declare scoped instances in namespaces. This kind of instance is
+only active when you are inside of the namespace or open the namespace.
+-->
+<!--
+You can also declare scoped instances in namespaces. This kind of instance is
+only active when you are inside of the namespace or open the namespace.
+-->
+<p>你可以在命名空间中声明作用域实例。这种类型的实例只在你进入命名空间或打开命名空间时激活。</p>
+<pre><code class="language-lean">structure Point where
+  x : Nat
+  y : Nat
+
+namespace Point
+
+scoped instance : Add Point where
+  add a b := { x := a.x + b.x, y := a.y + b.y }
+
+def double (p : Point) :=
+  p + p
+
+end Point
+-- instance `Add Point` is not active anymore
+
+-- #check fun (p : Point) =&gt; p + p + p  -- Error
+
+namespace Point
+-- instance `Add Point` is active again
+#check fun (p : Point) =&gt; p + p + p
+
+end Point
+
+open Point -- activates instance `Add Point`
+#check fun (p : Point) =&gt; p + p + p
+</code></pre>
+<!--
+You can use the command `open scoped <namespace>` to activate scoped attributes but will
+not "open" the names from the namespace.
+-->
+<!--
+You can use the command `open scoped <namespace>` to activate scoped attributes but will
+not "open" the names from the namespace.
+-->
+<p>你可以使用 <code>open scoped &lt;namespace&gt;</code> 命令来激活作用于内的属性，但不会「打开」名称空间中的名称。</p>
+<pre><code class="language-lean">structure Point where
+  x : Nat
+  y : Nat
+
+namespace Point
+
+scoped instance : Add Point where
+  add a b := { x := a.x + b.x, y := a.y + b.y }
+
+def double (p : Point) :=
+  p + p
+
+end Point
+
+open scoped Point -- activates instance `Add Point`
+#check fun (p : Point) =&gt; p + p + p
+
+-- #check fun (p : Point) =&gt; double p -- Error: unknown identifier 'double'
+</code></pre>
+<!--
+## Decidable Propositions
+-->
+<h2><a class="header" href="#可判定的命题" id="可判定的命题">可判定的命题</a></h2>
+<!--
+Let us consider another example of a type class defined in the
+standard library, namely the type class of ``Decidable``
+propositions. Roughly speaking, an element of ``Prop`` is said to be
+decidable if we can decide whether it is true or false. The
+distinction is only useful in constructive mathematics; classically,
+every proposition is decidable. But if we use the classical principle,
+say, to define a function by cases, that function will not be
+computable. Algorithmically speaking, the ``Decidable`` type class can
+be used to infer a procedure that effectively determines whether or
+not the proposition is true. As a result, the type class supports such
+computational definitions when they are possible while at the same
+time allowing a smooth transition to the use of classical definitions
+and classical reasoning.
+-->
+<p>让我们考虑标准库中定义的另一个类型类，名为 <code>Decidable</code> 类型类。
+粗略地讲，对于 <code>Prop</code> 的一个元素，如果我们可以判定它是真或假，它就被称为可判定的。
+这种区别只有在构造性数学中才有用；在经典数学中，每个命题都是可判定的。
+但如果我们使用经典原则，比如通过情况来定义一个函数，那么这个函数将不可计算。
+从算法上来讲，<code>Decidable</code> 类型类可以用来推导出一个过程，它能有效判定命题是否为真。
+因此，该类型类支持这样的计算性定义（如果它们是可能的），
+同时还允许平滑地过渡到经典定义和经典推理的使用。</p>
+<!--
+In the standard library, ``Decidable`` is defined formally as follows:
+-->
+<p>在标准库中，<code>Decidable</code> 的形式化定义如下：</p>
+<pre><code class="language-lean"><span class="boring">namespace Hidden
+</span>class inductive Decidable (p : Prop) where
+  | isFalse (h : ¬p) : Decidable p
+  | isTrue  (h : p)  : Decidable p
+<span class="boring">end Hidden
+</span></code></pre>
+<!--
+Logically speaking, having an element ``t : Decidable p`` is stronger
+than having an element ``t : p ∨ ¬p``; it enables us to define values
+of an arbitrary type depending on the truth value of ``p``. For
+example, for the expression ``if p then a else b`` to make sense, we
+need to know that ``p`` is decidable. That expression is syntactic
+sugar for ``ite p a b``, where ``ite`` is defined as follows:
+-->
+<p>从逻辑上讲，拥有一个元素 <code>t : Decidable p</code> 比拥有一个元素 <code>t : p ∨ ¬p</code> 更强；
+它允许我们定义一个任意类型的的值，这些值取决于 <code>p</code> 的真值。
+例如，为了使表达式 <code>if p then a else b</code> 有意义，我们需要知道 <code>p</code>
+是可判定的。该表达式是 <code>ite p a b</code> 的语法糖，其中 <code>ite</code> 的定义如下：</p>
+<pre><code class="language-lean"><span class="boring">namespace Hidden
+</span>def ite {α : Sort u} (c : Prop) [h : Decidable c] (t e : α) : α :=
+  Decidable.casesOn (motive := fun _ =&gt; α) h (fun _ =&gt; e) (fun _ =&gt; t)
+<span class="boring">end Hidden
+</span></code></pre>
+<!--
+The standard library also contains a variant of ``ite`` called
+``dite``, the dependent if-then-else expression. It is defined as
+follows:
+-->
+<!--
+The standard library also contains a variant of ``ite`` called
+``dite``, the dependent if-then-else expression. It is defined as
+follows:
+-->
+<p>标准库中还包含 <code>ite</code> 的一种变体，称为 <code>dite</code>，
+即依赖 if-then-else 表达式。它的定义如下：</p>
+<pre><code class="language-lean"><span class="boring">namespace Hidden
+</span>def dite {α : Sort u} (c : Prop) [h : Decidable c] (t : c → α) (e : Not c → α) : α :=
+  Decidable.casesOn (motive := fun _ =&gt; α) h e t
+<span class="boring">end Hidden
+</span></code></pre>
+<!--
+That is, in ``dite c t e``, we can assume ``hc : c`` in the "then"
+branch, and ``hnc : ¬ c`` in the "else" branch. To make ``dite`` more
+convenient to use, Lean allows us to write ``if h : c then t else e``
+instead of ``dite c (λ h : c => t) (λ h : ¬ c => e)``.
+-->
+<p>即在 <code>dite c t e</code> 表达式中，我们可以在 <code>then</code> 分支假定
+<code>hc : c</code>，在 <code>else</code> 分支假定 <code>hnc : ¬ c</code>。为了方便 <code>dite</code> 的使用，
+Lean 允许我们将 <code>if h : c then t else e</code> 写作 <code>dite c (λ h : c =&gt; t) (λ h : ¬ c =&gt; e)</code>。</p>
+<!--
+Without classical logic, we cannot prove that every proposition is
+decidable. But we can prove that *certain* propositions are
+decidable. For example, we can prove the decidability of basic
+operations like equality and comparisons on the natural numbers and
+the integers. Moreover, decidability is preserved under propositional
+connectives:
+-->
+<p>如果没有经典逻辑，我们就不能证明每个命题都是可判定的。
+但我们可以证明<strong>某些</strong>命题是可判定的。
+例如，我们可以证明基本运算（比如自然数和整数上的等式和比较）的可判定性。
+此外，命题连词下的可判定性被保留了下来：</p>
+<pre><code class="language-lean">#check @instDecidableAnd
+  -- {p q : Prop} → [Decidable p] → [Decidable q] → Decidable (And p q)
+
+#check @instDecidableOr
+#check @instDecidableNot
+</code></pre>
+<!--
+Thus we can carry out definitions by cases on decidable predicates on
+the natural numbers:
+-->
+<p>因此我们可以按照自然数上的可判定谓词的情况给出定义：</p>
+<pre><code class="language-lean">def step (a b x : Nat) : Nat :=
+  if x &lt; a ∨ x &gt; b then 0 else 1
+
+set_option pp.explicit true
+#print step
+</code></pre>
+<!--
+Turning on implicit arguments shows that the elaborator has inferred
+the decidability of the proposition ``x < a ∨ x > b``, simply by
+applying appropriate instances.
+-->
+<p>打开隐式参数显示，繁饰器已经推断出了命题 <code>x &lt; a ∨ x &gt; b</code> 的可判定性，
+只需应用适当的实例即可。</p>
+<!--
+With the classical axioms, we can prove that every proposition is
+decidable. You can import the classical axioms and make the generic
+instance of decidability available by opening the `Classical` namespace.
+-->
+<p>使用经典公理，我们可以证明每个命题都是可判定的。
+你可以导入经典公理，并通过打开 <code>Classical</code> 命名空间来提供可判定的通用实例。</p>
+<pre><code class="language-lean">open Classical
+</code></pre>
+<!--
+Thereafter ``Decidable p`` has an instance for every ``p``.
+Thus all theorems in the library
+that rely on decidability assumptions are freely available when you
+want to reason classically. In [Chapter Axioms and Computation](./axioms_and_computation.md),
+we will see that using the law of the
+excluded middle to define functions can prevent them from being used
+computationally. Thus, the standard library assigns a low priority to
+the `propDecidable` instance.
+-->
+<p>之后 <code>Decidable p</code> 就会拥有任何 <code>p</code> 的实例。
+因此，当你想进行经典推理时，库中的所有依赖于可判定假设的定理都会免费提供。
+在<a href="./axioms_and_computation.html">公理和计算</a>一章中，
+我们将看到，使用排中律来定义函数会阻止它们被计算性地使用。
+因此，标准库将 <code>propDecidable</code> 实例的优先级设为低。</p>
+<pre><code class="language-lean"><span class="boring">namespace Hidden
+</span>open Classical
+noncomputable scoped
+instance (priority := low) propDecidable (a : Prop) : Decidable a :=
+  choice &lt;| match em a with
+    | Or.inl h =&gt; ⟨isTrue h⟩
+    | Or.inr h =&gt; ⟨isFalse h⟩
+<span class="boring">end Hidden
+</span></code></pre>
+<!--
+This guarantees that Lean will favor other instances and fall back on
+``propDecidable`` only after other attempts to infer decidability have
+failed.
+-->
+<p>这能保证 Lean 会优先采用其他实例，只有在推断可判定性失败后才退回到 <code>propDecidable</code>。</p>
+<!--
+The ``Decidable`` type class also provides a bit of small-scale
+automation for proving theorems. The standard library introduces the
+tactic `decide` that uses the `Decidable` instance to solve simple goals.
+-->
+<p><code>Decidable</code> 类型类还为定理证明提供了一点小规模的自动化。
+标准库引入了使用 <code>Decidable</code> 实例解决简单目标的策略 <code>decide</code>。</p>
+<pre><code class="language-lean">example : 10 &lt; 5 ∨ 1 &gt; 0 := by
+  decide
+
+example : ¬ (True ∧ False) := by
+  decide
+
+example : 10 * 20 = 200 := by
+  decide
+
+theorem ex : True ∧ 2 = 1+1 := by
+  decide
+
+#print ex
+-- theorem ex : True ∧ 2 = 1 + 1 :=
+-- of_decide_eq_true (Eq.refl true)
+
+#check @of_decide_eq_true
+-- ∀ {p : Prop} [Decidable p], decide p = true → p
+
+#check @decide
+-- (p : Prop) → [Decidable p] → Bool
+</code></pre>
+<!--
+They work as follows. The expression ``decide p`` tries to infer a
+decision procedure for ``p``, and, if it is successful, evaluates to
+either ``true`` or ``false``. In particular, if ``p`` is a true closed
+expression, ``decide p`` will reduce definitionally to the Boolean ``true``.
+On the assumption that ``decide p = true`` holds, ``of_decide_eq_true``
+produces a proof of ``p``. The tactic ``decide`` puts it all together to
+prove a target ``p``. By the previous observations,
+``decide`` will succeed any time the inferred decision procedure
+ for ``c`` has enough information to evaluate, definitionally, to the ``isTrue`` case.
+-->
+<p>它们的工作方式如下：表达式 <code>decide p</code> 尝试推断 <code>p</code> 的决策过程，如果成功，
+则会求值为 <code>true</code> 或 <code>false</code>。特别是，如果 <code>p</code> 是一个为真的封闭表达式，
+<code>decide p</code> 将根据定义化简未为布尔值 <code>true</code>。在假设 <code>decide p = true</code>
+成立的情况下，<code>of_decide_eq_true</code> 会生成 <code>p</code> 的证明。
+策略 <code>decide</code> 将所有这些组合在一起以证明目标 <code>p</code>。根据前面的观察，
+只要推断出的决策过程拥有足够的信息，可以根据定义将 <code>c</code>求值为 <code>isTrue</code> 的情况，
+那么 <code>decide</code> 就会成功。</p>
+<!--
+## Managing Type Class Inference
+-->
+<h2><a class="header" href="#类型类推断的管理" id="类型类推断的管理">类型类推断的管理</a></h2>
+<!--
+If you are ever in a situation where you need to supply an expression
+that Lean can infer by type class inference, you can ask Lean to carry
+out the inference using `inferInstance`:
+-->
+<p>如果你需要使用类型类推断来提供一个 Lean 可以推断的表达式，
+那么你可以使用 <code>inferInstance</code> 让 Lean 执行推断：</p>
+<pre><code class="language-lean">def foo : Add Nat := inferInstance
+def bar : Inhabited (Nat → Nat) := inferInstance
+
+#check @inferInstance
+-- {α : Sort u} → [α] → α
+</code></pre>
+<!--
+In fact, you can use Lean's ``(t : T)`` notation to specify the class whose instance you are looking for,
+in a concise manner:
+-->
+<p>你可以使用 Lean 中的 <code>(t : T)</code> 语法指定你正在寻找的类的实例，
+这是一种很简洁的方式：</p>
+<pre><code class="language-lean">#check (inferInstance : Add Nat)
+</code></pre>
+<!--
+You can also use the auxiliary definition `inferInstanceAs`:
+-->
+<p>你也可以使用辅助定义 <code>inferInstanceAs</code>：</p>
+<pre><code class="language-lean">#check inferInstanceAs (Add Nat)
+
+#check @inferInstanceAs
+-- (α : Sort u) → [α] → α
+</code></pre>
+<!--
+Sometimes Lean can't find an instance because the class is buried
+under a definition. For example, Lean cannot
+find an instance of ``Inhabited (Set α)``. We can declare one
+explicitly:
+-->
+<p>有时 Lean 会找不到一个实例，因为该类被定义所掩盖。例如，Lean 无法
+找到 <code>Inhabited (Set α)</code> 的一个实例。我们可以显式地声明一个：</p>
+<pre><code class="language-lean">def Set (α : Type u) := α → Prop
+
+-- fails
+-- example : Inhabited (Set α) :=
+--  inferInstance
+
+instance : Inhabited (Set α) :=
+  inferInstanceAs (Inhabited (α → Prop))
+</code></pre>
+<!--
+At times, you may find that the type class inference fails to find an
+expected instance, or, worse, falls into an infinite loop and times
+out. To help debug in these situations, Lean enables you to request a
+trace of the search:
+-->
+<p>有时，你可能会发现类型类推断未找到预期的实例，或者更糟的是，陷入无限循环并超时。
+为了在这些情况下帮助调试，Lean 可以让你请求搜索的跟踪：</p>
+<pre><code class="language-lean">set_option trace.Meta.synthInstance true
+</code></pre>
+<!--
+If you are using VS Code, you can read the results by hovering over
+the relevant theorem or definition, or opening the messages window
+with ``Ctrl-Shift-Enter``. In Emacs, you can use ``C-c C-x`` to run an
+independent Lean process on your file, and the output buffer will show
+a trace every time the type class resolution procedure is subsequently
+triggered.
+-->
+<p>如果你使用的是 VS Code，可以通过将鼠标悬停在相关的定理或定义上，
+或按 <code>Ctrl-Shift-Enter</code> 打开消息窗口来阅读结果。在 Emacs 中，
+你可以使用 <code>C-c C-x</code> 在你的文件中运行一个独立的 Lean 进程，
+并且在每次触发类型类求解过程时，输出缓冲区都会显示一个跟踪。</p>
+<!--
+You can also limit the search using the following options:
+-->
+<p>使用以下选项，你还可以限制搜索：</p>
+<pre><code class="language-lean">set_option synthInstance.maxHeartbeats 10000
+set_option synthInstance.maxSize 400
+</code></pre>
+<!--
+Option `synthInstance.maxHeartbeats` specifies the maximum amount of
+heartbeats per typeclass resolution problem. A heartbeat is the number of
+(small) memory allocations (in thousands), 0 means there is no limit.
+Option `synthInstance.maxSize` is the maximum number of instances used
+to construct a solution in the type class instance synthesis procedure.
+-->
+<p>选项 <code>synthInstance.maxHeartbeats</code> 指定每个类型类求解问题可能出现的心跳（Heartbeat）次数上限。
+心跳是（小）内存分配的次数（以千为单位），0 表示没有上限。
+选项 <code>synthInstance.maxSize</code> 是用于构建类型类实例合成过程中解的实例个数。</p>
+<!--
+Remember also that in both the VS Code and Emacs editor modes, tab
+completion works in ``set_option``, to help you find suitable options.
+-->
+<p>另外请记住，在 VS Code 和 Emacs 编辑器模式中，制表符补全也可用于
+<code>set_option</code>，它可以帮助你查找合适的选项。</p>
+<!--
+As noted above, the type class instances in a given context represent
+a Prolog-like program, which gives rise to a backtracking search. Both
+the efficiency of the program and the solutions that are found can
+depend on the order in which the system tries the instance. Instances
+which are declared last are tried first. Moreover, if instances are
+declared in other modules, the order in which they are tried depends
+on the order in which namespaces are opened. Instances declared in
+namespaces which are opened later are tried earlier.
+-->
+<p>如上所述，给定语境中的类型类实例代表一个类似 Prolog 的程序，它会进行回溯搜索。
+同时程序的效率和找到的解都取决于系统尝试实例的顺序。最后声明的实例首先尝试。
+此外，如果在其它模块中声明了实例，它们尝试的顺序取决于打开名称空间的顺序。
+在后面打开的名称空间中声明的实例，会更早尝试。</p>
+<!--
+You can change the order that type class instances are tried by
+assigning them a *priority*. When an instance is declared, it is
+assigned a default priority value. You can assign other priorities
+when defining an instance. The following example illustrates how this
+is done:
+-->
+<p>你可以按对类型类实例进行尝试的顺序来更改这些实例，
+方法是为它们分配一个<strong>优先级</strong>。在声明实例时，
+它将被分配一个默认优先级值。在定义实例时，你可以分配其他的优先级。
+以下示例说明了如何执行此操作：</p>
+<pre><code class="language-lean">class Foo where
+  a : Nat
+  b : Nat
+
+instance (priority := default+1) i1 : Foo where
+  a := 1
+  b := 1
+
+instance i2 : Foo where
+  a := 2
+  b := 2
+
+example : Foo.a = 1 :=
+  rfl
+
+instance (priority := default+2) i3 : Foo where
+  a := 3
+  b := 3
+
+example : Foo.a = 3 :=
+  rfl
+</code></pre>
+<!--
+## Coercions using Type Classes
+-->
+<h2><a class="header" href="#使用类型泛型进行强制转换" id="使用类型泛型进行强制转换">使用类型泛型进行强制转换</a></h2>
+<!--
+The most basic type of coercion maps elements of one type to another. For example, a coercion from ``Nat`` to ``Int`` allows us to view any element ``n : Nat`` as an element of ``Int``. But some coercions depend on parameters; for example, for any type ``α``, we can view any element ``as : List α`` as an element of ``Set α``, namely, the set of elements occurring in the list. The corresponding coercion is defined on the "family" of types ``List α``, parameterized by ``α``.
+-->
+<p>最基本的强制转换将一种类型的元素映射到另一种类型。
+例如，从<code>Nat</code>到<code>Int</code>的强制转换允许我们将任何元素 <code>n : Nat</code> 视作元素 <code>Int</code>。
+但一些强制转换依赖于参数；例如，对于任何类型 <code>α</code>，我们可以将任何元素
+<code>as : List α</code> 视为 <code>Set α</code> 的元素，即，列表中出现的元素组成的集合。
+相应的强制转换被定义在 <code>List α</code> 的「类型族（Type Family）」上，由 <code>α</code> 参数化。</p>
+<!--
+Lean allows us to declare three kinds of coercions:
+
+- from a family of types to another family of types
+- from a family of types to the class of sorts
+- from a family of types to the class of function types
+-->
+<p>Lean 允许我们声明三类强制转换：</p>
+<ul>
+<li>从一个类型族到另一个类型族</li>
+<li>从一个类型族到种类（Sort）的类</li>
+<li>从一个类型族到函数类型的类</li>
+</ul>
+<!--
+The first kind of coercion allows us to view any element of a member of the source family as an element of a corresponding member of the target family. The second kind of coercion allows us to view any element of a member of the source family as a type. The third kind of coercion allows us to view any element of the source family as a function. Let us consider each of these in turn.
+-->
+<p>第一种强制转换允许我们将源类型族任何成员的元素视为目标类型族中对应成员的元素。
+第二种强制转换允许我们将源类型族任何成员的元素视为类型。
+第三种强制转换允许我们将源类型族任何成员的元素视为函数。
+让我们逐一考虑这些。</p>
+<!--
+In Lean, coercions are implemented on top of the type class resolution framework. We define a coercion from ``α`` to ``β`` by declaring an instance of ``Coe α β``. For example, we can define a coercion from ``Bool`` to ``Prop`` as follows:
+-->
+<p>在 Lean 中，强制转换在类型类求解框架的基础上实现。我们通过声明 <code>Coe α β</code> 的实例，
+定义从 <code>α</code> 到 <code>β</code> 的强制转换。例如，以下内容可以定义从 <code>Bool</code> 到 <code>Prop</code> 的强制转换：</p>
+<pre><code class="language-lean">instance : Coe Bool Prop where
+  coe b := b = true
+</code></pre>
+<!--
+This enables us to use boolean terms in if-then-else expressions:
+-->
+<p>这使得我们可以在 if-then-else 表达式中使用布尔项：</p>
+<pre><code class="language-lean">#eval if true then 5 else 3
+#eval if false then 5 else 3
+</code></pre>
+<!--
+We can define a coercion from ``List α`` to ``Set α`` as follows:
+-->
+<p>我们可以定义一个从 <code>List α</code> 到 <code>Set α</code> 的强制转换，如下所示：</p>
+<pre><code class="language-lean"><span class="boring">def Set (α : Type u) := α → Prop
+</span><span class="boring">def Set.empty {α : Type u} : Set α := fun _ =&gt; False
+</span><span class="boring">def Set.mem (a : α) (s : Set α) : Prop := s a
+</span><span class="boring">def Set.singleton (a : α) : Set α := fun x =&gt; x = a
+</span><span class="boring">def Set.union (a b : Set α) : Set α := fun x =&gt; a x ∨ b x
+</span><span class="boring">notation &quot;{ &quot; a &quot; }&quot; =&gt; Set.singleton a
+</span><span class="boring">infix:55 &quot; ∪ &quot; =&gt; Set.union
+</span>def List.toSet : List α → Set α
+  | []    =&gt; Set.empty
+  | a::as =&gt; {a} ∪ as.toSet
+
+instance : Coe (List α) (Set α) where
+  coe a := a.toSet
+
+def s : Set Nat := {1}
+#check s ∪ [2, 3]
+-- s ∪ List.toSet [2, 3] : Set Nat
+</code></pre>
+<!--
+We can use the notation ``↑`` to force a coercion to be introduced in a particular place. It is also helpful to make our intent clear, and work around limitations of the coercion resolution system.
+-->
+<p>我们可以使用符号 <code>↑</code> 在特定位置强制引入强制转换。
+这也有助于明确我们的意图，并解决强制转换求解系统中的限制。</p>
+<pre><code class="language-lean"><span class="boring">def Set (α : Type u) := α → Prop
+</span><span class="boring">def Set.empty {α : Type u} : Set α := fun _ =&gt; False
+</span><span class="boring">def Set.mem (a : α) (s : Set α) : Prop := s a
+</span><span class="boring">def Set.singleton (a : α) : Set α := fun x =&gt; x = a
+</span><span class="boring">def Set.union (a b : Set α) : Set α := fun x =&gt; a x ∨ b x
+</span><span class="boring">notation &quot;{ &quot; a &quot; }&quot; =&gt; Set.singleton a
+</span><span class="boring">infix:55 &quot; ∪ &quot; =&gt; Set.union
+</span><span class="boring">def List.toSet : List α → Set α
+</span><span class="boring">  | []    =&gt; Set.empty
+</span><span class="boring">  | a::as =&gt; {a} ∪ as.toSet
+</span><span class="boring">instance : Coe (List α) (Set α) where
+</span><span class="boring">  coe a := a.toSet
+</span>def s : Set Nat := {1}
+
+#check let x := ↑[2, 3]; s ∪ x
+-- let x := List.toSet [2, 3]; s ∪ x : Set Nat
+#check let x := [2, 3]; s ∪ x
+-- let x := [2, 3]; s ∪ List.toSet x : Set Nat
+</code></pre>
+<!--
+Lean also supports dependent coercions using the type class `CoeDep`. For example, we cannot coerce arbitrary propositions to `Bool`, only the ones that implement the `Decidable` typeclass.
+-->
+<p>Lean 还使用类型类 <code>CoeDep</code> 支持依值类型强制转换。
+例如，我们无法将任意命题强制转换到 <code>Bool</code>，只能转换实现了 <code>Decidable</code> 类型类的命题。</p>
+<pre><code class="language-lean">instance (p : Prop) [Decidable p] : CoeDep Prop p Bool where
+  coe := decide p
+</code></pre>
+<!--
+Lean will also chain (non-dependent) coercions as necessary. Actually, the type class ``CoeT`` is the transitive closure of ``Coe``.
+-->
+<p>Lean 也会在有需要的时候构造链式（非依赖的）强制转换。事实上，类型类 <code>CoeT</code> 是 <code>Coe</code> 的传递闭包。</p>
+<!--
+Let us now consider the second kind of coercion. By the *class of sorts*, we mean the collection of universes ``Type u``. A coercion of the second kind is of the form:
+-->
+<p>现在我们来考查第二种强制转换。**种类类（Class of Sort）**是指宇宙 <code>Type u</code> 的集合。
+第二种强制转换的形式如下：</p>
+<pre><code>    c : (x1 : A1) → ... → (xn : An) → F x1 ... xn → Type u
+</code></pre>
+<!--
+where ``F`` is a family of types as above. This allows us to write ``s : t`` whenever ``t`` is of type ``F a1 ... an``. In other words, the coercion allows us to view the elements of ``F a1 ... an`` as types. This is very useful when defining algebraic structures in which one component, the carrier of the structure, is a ``Type``. For example, we can define a semigroup as follows:
+-->
+<p>其中 <code>F</code> 是如上所示的一族类型。这允许我们当 <code>t</code> 的类型为 <code>F a1 ... an</code> 时编写 <code>s : t</code> 。
+换言之，类型转换允许我们将 <code>F a1 ... an</code> 的元素视为类型。
+这在定义代数结构时非常有用，其中一个组成部分（即结构的载体）为 <code>Type</code>。
+例如，我们可以按以下方式定义一个半群：</p>
+<pre><code class="language-lean">structure Semigroup where
+  carrier : Type u
+  mul : carrier → carrier → carrier
+  mul_assoc (a b c : carrier) : mul (mul a b) c = mul a (mul b c)
+
+instance (S : Semigroup) : Mul S.carrier where
+  mul a b := S.mul a b
+</code></pre>
+<!--
+In other words, a semigroup consists of a type, ``carrier``, and a multiplication, ``mul``, with the property that the multiplication is associative. The ``instance`` command allows us to write ``a * b`` instead of ``Semigroup.mul S a b`` whenever we have ``a b : S.carrier``; notice that Lean can infer the argument ``S`` from the types of ``a`` and ``b``. The function ``Semigroup.carrier`` maps the class ``Semigroup`` to the sort ``Type u``:
+-->
+<p>换句话说，一个半群包括一个类型「载体（<code>carrier</code>）」和一个乘法 <code>mul</code>，乘法满足结合性。
+<code>instance</code> 命令允许我们用 <code>a * b</code> 代替 <code>Semigroup.mul S a b</code> 只要我们有 <code>a b : S.carrier</code>；
+注意，Lean 可以根据 <code>a</code> 和 <code>b</code> 的类型推断出参数 <code>S</code>。函数 <code>Semigroup.carrier</code>
+将类 <code>Semigroup</code> 映射到种类 <code>Type u</code>：</p>
+<pre><code class="language-lean"><span class="boring">structure Semigroup where
+</span><span class="boring">  carrier : Type u
+</span><span class="boring">  mul : carrier → carrier → carrier
+</span><span class="boring">  mul_assoc (a b c : carrier) : mul (mul a b) c = mul a (mul b c)
+</span><span class="boring">instance (S : Semigroup) : Mul S.carrier where
+</span><span class="boring">  mul a b := S.mul a b
+</span>#check Semigroup.carrier
+</code></pre>
+<!--
+If we declare this function to be a coercion, then whenever we have a semigroup ``S : Semigroup``, we can write ``a : S`` instead of ``a : S.carrier``:
+-->
+<p>如果我们声明该函数是一个强制转换函数，那么无论何时我们都有半群 <code>S : Semigroup</code>,
+我们可以写 <code>a : S</code> 而非 <code>a : S.carrier</code>：</p>
+<pre><code class="language-lean"><span class="boring">structure Semigroup where
+</span><span class="boring">  carrier : Type u
+</span><span class="boring">  mul : carrier → carrier → carrier
+</span><span class="boring">  mul_assoc (a b c : carrier) : mul (mul a b) c = mul a (mul b c)
+</span><span class="boring">instance (S : Semigroup) : Mul S.carrier where
+</span><span class="boring">  mul a b := S.mul a b
+</span>instance : CoeSort Semigroup (Type u) where
+  coe s := s.carrier
+
+example (S : Semigroup) (a b c : S) : (a * b) * c = a * (b * c) :=
+  Semigroup.mul_assoc _ a b c
+</code></pre>
+<!--
+It is the coercion that makes it possible to write ``(a b c : S)``. Note that, we define an instance of ``CoeSort Semigroup (Type u)`` instead of ``Coe Semigroup (Type u)``.
+-->
+<p>由于强制转换，我们可以写 <code>(a b c : S)</code>。
+注意，我们定义了一个 <code>CoeSort Semigroup (Type u)</code> 的实例，
+而非 <code>Coe Semigroup (Type u)</code>。</p>
+<!--
+By the *class of function types*, we mean the collection of Pi types ``(z : B) → C``. The third kind of coercion has the form:
+-->
+<p><strong>函数类型的类</strong>，是指 Π 类型集合 <code>(z : B) → C</code>。第三种强制转换形式为：</p>
+<pre><code>    c : (x1 : A1) → ... → (xn : An) → (y : F x1 ... xn) → (z : B) → C
+</code></pre>
+<!--
+where ``F`` is again a family of types and ``B`` and ``C`` can depend on ``x1, ..., xn, y``. This makes it possible to write ``t s`` whenever ``t`` is an element of ``F a1 ... an``. In other words, the coercion enables us to view elements of ``F a1 ... an`` as functions. Continuing the example above, we can define the notion of a morphism between semigroups ``S1`` and ``S2``. That is, a function from the carrier of ``S1`` to the carrier of ``S2`` (note the implicit coercion) that respects the multiplication. The projection ``morphism.mor`` takes a morphism to the underlying function:
+-->
+<p>其中 <code>F</code> 仍然是一个类型族，而 <code>B</code> 和 <code>C</code> 可以取决于 <code>x1, ..., xn, y</code>。
+这使得可以写 <code>t s</code>，只要 <code>t</code> 是 <code>F a1 ... an</code> 的元素。
+换句话说，转换使我们可以将 <code>F a1 ... an</code> 的元素视为函数。
+继续上面的示例，我们可以定义半群 <code>S1</code> 和 <code>S2</code> 之间的态射的概念。
+即，从 <code>S1</code> 的载体到 <code>S2</code> 的载体（注意隐式转换）关于乘法的一个函数。
+投影 <code>morphism.mor</code> 将一个态射转化为底层函数。</p>
+<pre><code class="language-lean"><span class="boring">structure Semigroup where
+</span><span class="boring">  carrier : Type u
+</span><span class="boring">  mul : carrier → carrier → carrier
+</span><span class="boring">  mul_assoc (a b c : carrier) : mul (mul a b) c = mul a (mul b c)
+</span><span class="boring">instance (S : Semigroup) : Mul S.carrier where
+</span><span class="boring">  mul a b := S.mul a b
+</span><span class="boring">instance : CoeSort Semigroup (Type u) where
+</span><span class="boring">  coe s := s.carrier
+</span>structure Morphism (S1 S2 : Semigroup) where
+  mor : S1 → S2
+  resp_mul : ∀ a b : S1, mor (a * b) = (mor a) * (mor b)
+
+#check @Morphism.mor
+</code></pre>
+<!--
+As a result, it is a prime candidate for the third type of coercion.
+-->
+<p>因此，它成为第三种强制转换的主要候选。</p>
+<pre><code class="language-lean"><span class="boring">structure Semigroup where
+</span><span class="boring">  carrier : Type u
+</span><span class="boring">  mul : carrier → carrier → carrier
+</span><span class="boring">  mul_assoc (a b c : carrier) : mul (mul a b) c = mul a (mul b c)
+</span><span class="boring">instance (S : Semigroup) : Mul S.carrier where
+</span><span class="boring">  mul a b := S.mul a b
+</span><span class="boring">instance : CoeSort Semigroup (Type u) where
+</span><span class="boring">  coe s := s.carrier
+</span><span class="boring">structure Morphism (S1 S2 : Semigroup) where
+</span><span class="boring">  mor : S1 → S2
+</span><span class="boring">  resp_mul : ∀ a b : S1, mor (a * b) = (mor a) * (mor b)
+</span>instance (S1 S2 : Semigroup) : CoeFun (Morphism S1 S2) (fun _ =&gt; S1 → S2) where
+  coe m := m.mor
+
+theorem resp_mul {S1 S2 : Semigroup} (f : Morphism S1 S2) (a b : S1)
+        : f (a * b) = f a * f b :=
+  f.resp_mul a b
+
+example (S1 S2 : Semigroup) (f : Morphism S1 S2) (a : S1) :
+      f (a * a * a) = f a * f a * f a :=
+  calc f (a * a * a)
+    _ = f (a * a) * f a := by rw [resp_mul f]
+    _ = f a * f a * f a := by rw [resp_mul f]
+</code></pre>
+<!--
+With the coercion in place, we can write ``f (a * a * a)`` instead of ``f.mor (a * a * a)``. When the ``Morphism``, ``f``, is used where a function is expected, Lean inserts the coercion. Similar to ``CoeSort``, we have yet another class ``CoeFun`` for this class of coercions. The field ``F`` is used to specify the function type we are coercing to. This type may depend on the type we are coercing from.
+-->
+<p>有了强制类型转换，我们可以直接写 <code>f (a * a * a)</code> 而不必写 <code>f.mor (a * a * a)</code>。
+当 <code>Morphism</code>（态射）<code>f</code> 被用于原本期望函数的位置时，
+Lean 会自动插入强制转换。类似于 <code>CoeSort</code>，我们还有另一个类 <code>CoeFun</code>
+用于这一类的强制转换。域 <code>F</code> 用于指定我们强制类型转换的目标函数类型。
+此类型可能依赖于我们强制转换的原类型。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="structures_and_records.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="conv.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="structures_and_records.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="conv.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+            window.clip_buttons = true;
+            window.tryit_buttons = false;
+            window.side_bar = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        <script type="text/javascript" src="custom.js"></script>
+        
+
+        
+
+    </body>
+</html>
