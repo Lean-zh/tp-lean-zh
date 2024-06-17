@@ -22,7 +22,7 @@
 
 [Lean 4 定理证明](./title_page.md)
 
-- [介绍](./introduction.md)
+- [简介](./introduction.md)
 - [依值类型论](./dependent_type_theory.md)
 - [命题与证明](./propositions_and_proofs.md)
 - [量词与等价](./quantifiers_and_equality.md)
