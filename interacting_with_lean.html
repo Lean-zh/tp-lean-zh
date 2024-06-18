@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title_page.html">Lean 4 定理证明</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html" class="active"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title_page.html">Lean 4 定理证明</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html" class="active"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -395,7 +395,7 @@ which makes them available for use by the simplifier.
 The following example defines the prefix relation on lists,
 proves that this relation is reflexive, and assigns the ``[simp]`` attribute to that theorem.
 -->
-<p>Lean的主要功能是把用户的输入翻译成形式化的表达式，由内核检查其正确性，然后存储在环境中供以后使用。但是有些命令对环境有其他的影响，或者给环境中的对象分配属性，定义符号，或者声明类型族的实例，如<a href="./type_classes.html">类型族</a>一章所述。这些命令大多具有全局效应，也就是说，它们不仅在当前文件中保持有效，而且在任何导入它的文件中也保持有效。然而，这类命令通常支持 <code>local</code> 修饰符，这表明它们只在当前 <code>section</code> 或 <code>namespace</code> 关闭前或当前文件结束前有效。</p>
+<p>Lean 的主要功能是把用户的输入翻译成形式化的表达式，由内核检查其正确性，然后存储在环境中供以后使用。但是有些命令对环境有其他的影响，或者给环境中的对象分配属性，定义符号，或者声明类型类的实例，如<a href="./type_classes.html">类型类</a>一章所述。这些命令大多具有全局效应，也就是说，它们不仅在当前文件中保持有效，而且在任何导入它的文件中也保持有效。然而，这类命令通常支持 <code>local</code> 修饰符，这表明它们只在当前 <code>section</code> 或 <code>namespace</code> 关闭前或当前文件结束前有效。</p>
 <p>在<a href="./tactics.html#%E7%AE%80%E5%8C%96">简化</a>一节中，我们看到可以用<code>[simp]</code>属性来注释定理，这使它们可以被简化器使用。下面的例子定义了列表的前缀关系，证明了这种关系是自反的，并为该定理分配了<code>[simp]</code>属性。</p>
 <pre><code class="language-lean">def isPrefix (l₁ : List α) (l₂ : List α) : Prop :=
   ∃ t, l₁ ++ t = l₂
@@ -450,7 +450,7 @@ notation ``≤`` to the `isPrefix` relation. That command, which will
 be explained in [Chapter Type Classes](./type_classes.md), works by
 assigning an ``[instance]`` attribute to the associated definition.
 -->
-<p>另一个例子，我们可以使用 <code>instance</code> 命令来给 <code>isPrefix</code> 关系分配符号<code>≤</code>。该命令将在<a href="./type_classes.html">类型族</a>中解释，它的工作原理是给相关定义分配一个<code>[instance]</code>属性。</p>
+<p>另一个例子，我们可以使用 <code>instance</code> 命令来给 <code>isPrefix</code> 关系分配符号<code>≤</code>。该命令将在<a href="./type_classes.html">类型类</a>中解释，它的工作原理是给相关定义分配一个<code>[instance]</code>属性。</p>
 <pre><code class="language-lean">def isPrefix (l₁ : List α) (l₂ : List α) : Prop :=
   ∃ t, l₁ ++ t = l₂
 
@@ -610,7 +610,7 @@ There is a third kind of implicit argument that is denoted with square
 brackets, ``[`` and ``]``. These are used for type classes, as
 explained in [Chapter Type Classes](./type_classes.md).
 -->
-<p>还有第三种隐式参数，用方括号表示，<code>[</code> 和 <code>]</code>。这些是用于类型族的，在<a href="./type_classes.html">类型族</a>中解释。</p>
+<p>还有第三种隐式参数，用方括号表示，<code>[</code> 和 <code>]</code>。这些是用于类型类的，在<a href="./type_classes.html">类型类</a>中解释。</p>
 <!--
 Notation
 --------

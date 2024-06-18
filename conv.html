@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title_page.html">Lean 4 定理证明</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 介绍</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html" class="active"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title_page.html">Lean 4 定理证明</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> 简介</a></li><li class="chapter-item expanded "><a href="dependent_type_theory.html"><strong aria-hidden="true">2.</strong> 依值类型论</a></li><li class="chapter-item expanded "><a href="propositions_and_proofs.html"><strong aria-hidden="true">3.</strong> 命题与证明</a></li><li class="chapter-item expanded "><a href="quantifiers_and_equality.html"><strong aria-hidden="true">4.</strong> 量词与等价</a></li><li class="chapter-item expanded "><a href="tactics.html"><strong aria-hidden="true">5.</strong> 证明策略</a></li><li class="chapter-item expanded "><a href="interacting_with_lean.html"><strong aria-hidden="true">6.</strong> 与 Lean 交互</a></li><li class="chapter-item expanded "><a href="inductive_types.html"><strong aria-hidden="true">7.</strong> 归纳类型</a></li><li class="chapter-item expanded "><a href="induction_and_recursion.html"><strong aria-hidden="true">8.</strong> 归纳与递归</a></li><li class="chapter-item expanded "><a href="structures_and_records.html"><strong aria-hidden="true">9.</strong> 结构体与记录</a></li><li class="chapter-item expanded "><a href="type_classes.html"><strong aria-hidden="true">10.</strong> 类型类</a></li><li class="chapter-item expanded "><a href="conv.html" class="active"><strong aria-hidden="true">11.</strong> 转换策略模式</a></li><li class="chapter-item expanded "><a href="axioms_and_computation.html"><strong aria-hidden="true">12.</strong> 公理与计算</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,22 +142,40 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-conversion-tactic-mode"><a class="header" href="#the-conversion-tactic-mode">The Conversion Tactic Mode</a></h1>
-<p>Inside a tactic block, one can use the keyword <code>conv</code> to enter
+                        <!--
+The Conversion Tactic Mode
+=========================
+-->
+<h1 id="转换策略模式"><a class="header" href="#转换策略模式">转换策略模式</a></h1>
+<!--
+Inside a tactic block, one can use the keyword `conv` to enter
 conversion mode. This mode allows to travel inside assumptions and
 goals, even inside function abstractions and dependent arrows, to apply rewriting or
-simplifying steps.</p>
-<h2 id="basic-navigation-and-rewriting"><a class="header" href="#basic-navigation-and-rewriting">Basic navigation and rewriting</a></h2>
-<p>As a first example, let us prove example
-<code>(a b c : Nat) : a * (b * c) = a * (c * b)</code>
+simplifying steps.
+-->
+<p>在策略块中，可以使用关键字<code>conv</code>进入转换模式(conversion mode)。这种模式允许在假设和目标内部，甚至在函数抽象和依赖箭头内部移动，以应用重写或简化步骤。</p>
+<!--
+Basic navigation and rewriting
+-------
+-->
+<h2 id="基本导航和重写"><a class="header" href="#基本导航和重写">基本导航和重写</a></h2>
+<!--
+As a first example, let us prove example
+`(a b c : Nat) : a * (b * c) = a * (c * b)`
 (examples in this file are somewhat artificial since
 other tactics could finish them immediately). The naive
-first attempt is to enter tactic mode and try <code>rw [Nat.mul_comm]</code>. But this
-transforms the goal into <code>b * c * a = a * (c * b)</code>, after commuting the
+first attempt is to enter tactic mode and try `rw [Nat.mul_comm]`. But this
+transforms the goal into `b * c * a = a * (c * b)`, after commuting the
 very first multiplication appearing in the term. There are several
 ways to fix this issue, and one way is to use a more precise tool:
 the conversion mode. The following code block shows the current target
-after each line.</p>
+after each line.
+-->
+<p>作为第一个例子，让我们证明<code>(a b c : Nat) : a * (b * c) = a * (c * b)</code>（本段中的例子有些刻意设计，因为其他策略可以立即完成它们）。首次简单的尝试是尝试<code>rw [Nat.mul_comm]</code>，但这将目标转化为<code>b * c * a = a * (c * b)</code>，因为它作用于项中出现的第一个乘法。有几种方法可以解决这个问题，其中一个方法是</p>
+<pre><code class="language-lean">example (a b c : Nat) : a * (b * c) = a * (c * b) := by
+    rw [Nat.mul_comm b c]
+</code></pre>
+<p>不过本节介绍一个更精确的工具：转换模式。下面的代码块显示了每行之后的当前目标。</p>
 <pre><code class="language-lean">example (a b c : Nat) : a * (b * c) = a * (c * b) := by
   conv =&gt;
     -- ⊢ a * (b * c) = a * (c * b)
@@ -169,59 +187,103 @@ after each line.</p>
     -- ⊢ b * c
     rw [Nat.mul_comm]
 </code></pre>
-<p>The above snippet shows three navigation commands:</p>
-<ul>
-<li><code>lhs</code> navigates to the left hand side of a relation (here equality), there is also a <code>rhs</code> navigating to the right hand side.</li>
-<li><code>congr</code> creates as many targets as there are (nondependent and explicit) arguments to the current head function
-(here the head function is multiplication).</li>
-<li><code>rfl</code> closes target using reflexivity.</li>
-</ul>
-<p>Once arrived at the relevant target, we can use <code>rw</code> as in normal
-tactic mode.</p>
-<p>The second main reason to use conversion mode is to rewrite under
+<!--
+The above snippet shows three navigation commands:
+
+- `lhs` navigates to the left hand side of a relation (here equality), there is also a `rhs` navigating to the right hand side.
+- `congr` creates as many targets as there are (nondependent and explicit) arguments to the current head function
+  (here the head function is multiplication).
+- `rfl` closes target using reflexivity.
+
+Once arrived at the relevant target, we can use `rw` as in normal
+tactic mode.
+
+The second main reason to use conversion mode is to rewrite under
 binders. Suppose we want to prove example
-<code>(fun x : Nat =&gt; 0 + x) = (fun x =&gt; x)</code>.
+`(fun x : Nat => 0 + x) = (fun x => x)`.
 The naive first attempt is to enter tactic mode and try
-<code>rw [Nat.zero_add]</code>. But this fails with a frustrating</p>
+`rw [Nat.zero_add]`. But this fails with a frustrating
+-->
+<p>上面这段涉及三个导航指令：</p>
+<ul>
+<li><code>lhs</code>（left hand side）导航到关系（此处是等式）左边。同理<code>rhs</code>导航到右边。</li>
+<li><code>congr</code>创建与当前头函数的(非依赖的和显式的)参数数量一样多的目标（此处的头函数是乘法）。</li>
+<li><code>skip</code>走到下一个目标。</li>
+</ul>
+<p>一旦到达相关目标，我们就可以像在普通策略模式中一样使用<code>rw</code>。</p>
+<p>使用转换模式的第二个主要原因是在约束器下重写。假设我们想证明<code>(fun x : Nat =&gt; 0 + x) = (fun x =&gt; x)</code>。首次简单的尝试<code>rw [zero_add]</code>是失败的。报错：</p>
 <pre><code>error: tactic 'rewrite' failed, did not find instance of the pattern
        in the target expression
   0 + ?n
 ⊢ (fun x =&gt; 0 + x) = fun x =&gt; x
 </code></pre>
-<p>The solution is:</p>
+<p>（错误：'rewrite'策略失败了，没有找到目标表达式中的模式0 + ?n）</p>
+<!--
+The solution is:
+-->
+<p>解决方案为：</p>
 <pre><code class="language-lean">example : (fun x : Nat =&gt; 0 + x) = (fun x =&gt; x) := by
   conv =&gt;
     lhs
     intro x
     rw [Nat.zero_add]
 </code></pre>
-<p>where <code>intro x</code> is the navigation command entering inside the <code>fun</code> binder.
-Note that this example is somewhat artificial, one could also do:</p>
+<!--
+where `intro x` is the navigation command entering inside the `fun` binder.
+Note that this example is somewhat artificial, one could also do:
+-->
+<p>其中<code>intro x</code>是导航命令，它进入了<code>fun</code>约束器。这个例子有点刻意，你也可以这样做：</p>
 <pre><code class="language-lean">example : (fun x : Nat =&gt; 0 + x) = (fun x =&gt; x) := by
   funext x; rw [Nat.zero_add]
 </code></pre>
-<p>or just</p>
+<!--
+or just
+-->
+<p>或者这样：</p>
 <pre><code class="language-lean">example : (fun x : Nat =&gt; 0 + x) = (fun x =&gt; x) := by
   simp
 </code></pre>
-<p><code>conv</code> can also rewrite a hypothesis <code>h</code> from the local context, using <code>conv at h</code>.</p>
-<h2 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h2>
-<p>Navigation using the above commands can be tedious. One can shortcut it using pattern matching as follows:</p>
+<!--
+`conv` can also rewrite a hypothesis `h` from the local context, using `conv at h`.
+-->
+<p>所有这些也可以用<code>conv at h</code>从局部上下文重写一个假设<code>h</code>。</p>
+<!--
+Pattern matching
+-------
+-->
+<h2 id="模式匹配"><a class="header" href="#模式匹配">模式匹配</a></h2>
+<!--
+Navigation using the above commands can be tedious. One can shortcut it using pattern matching as follows:
+-->
+<p>使用上面的命令进行导航可能很无聊。使用下面的模式匹配来简化它：</p>
 <pre><code class="language-lean">example (a b c : Nat) : a * (b * c) = a * (c * b) := by
   conv in b * c =&gt; rw [Nat.mul_comm]
 </code></pre>
-<p>which is just syntax sugar for</p>
+<!--
+which is just syntax sugar for
+-->
+<p>这是下面代码的语法糖：</p>
 <pre><code class="language-lean">example (a b c : Nat) : a * (b * c) = a * (c * b) := by
   conv =&gt;
     pattern b * c
     rw [Nat.mul_comm]
 </code></pre>
-<p>Of course, wildcards are allowed:</p>
+<!--
+Of course, wildcards are allowed:
+-->
+<p>当然也可以用通配符：</p>
 <pre><code class="language-lean">example (a b c : Nat) : a * (b * c) = a * (c * b) := by
   conv in _ * c =&gt; rw [Nat.mul_comm]
 </code></pre>
-<h2 id="structuring-conversion-tactics"><a class="header" href="#structuring-conversion-tactics">Structuring conversion tactics</a></h2>
-<p>Curly brackets and <code>.</code> can also be used in <code>conv</code> mode to structure tactics.</p>
+<!--
+Structuring conversion tactics
+-------
+-->
+<h2 id="结构化转换策略"><a class="header" href="#结构化转换策略">结构化转换策略</a></h2>
+<!--
+Curly brackets and `.` can also be used in `conv` mode to structure tactics.
+-->
+<p>大括号和<code>.</code>也可以在<code>conv</code>模式下用于结构化策略。</p>
 <pre><code class="language-lean">example (a b c : Nat) : (0 + a) * (b * c) = a * (c * b) := by
   conv =&gt;
     lhs
@@ -229,9 +291,16 @@ Note that this example is somewhat artificial, one could also do:</p>
     . rw [Nat.zero_add]
     . rw [Nat.mul_comm]
 </code></pre>
-<h2 id="other-tactics-inside-conversion-mode"><a class="header" href="#other-tactics-inside-conversion-mode">Other tactics inside conversion mode</a></h2>
+<!--
+Other tactics inside conversion mode
+----------
+-->
+<h2 id="转换模式中的其他策略"><a class="header" href="#转换模式中的其他策略">转换模式中的其他策略</a></h2>
+<!--
+- `arg i` enter the `i`-th nondependent explicit argument of an application.
+-->
 <ul>
-<li><code>arg i</code> enter the <code>i</code>-th nondependent explicit argument of an application.</li>
+<li><code>arg i</code>进入一个应用的第<code>i</code>个非独立显式参数。</li>
 </ul>
 <pre><code class="language-lean">example (a b c : Nat) : a * (b * c) = a * (c * b) := by
   conv =&gt;
@@ -242,12 +311,17 @@ Note that this example is somewhat artificial, one could also do:</p>
     -- ⊢ b * c
     rw [Nat.mul_comm]
 </code></pre>
+<!--
+- `args` alternative name for `congr`.
+
+- `simp` applies the simplifier to the current goal. It supports the same options available in regular tactic mode.
+-->
 <ul>
 <li>
-<p><code>args</code> alternative name for <code>congr</code>.</p>
+<p><code>args</code>是<code>congr</code>的替代品。</p>
 </li>
 <li>
-<p><code>simp</code> applies the simplifier to the current goal. It supports the same options available in regular tactic mode.</p>
+<p><code>simp</code>将简化器应用于当前目标。它支持常规策略模式中的相同选项。</p>
 </li>
 </ul>
 <pre><code class="language-lean">def f (x : Nat) :=
@@ -259,8 +333,11 @@ example (g : Nat → Nat) (h₁ : g x = x + 1) (h₂ : x &gt; 0) : g x = f x := 
     simp [f, h₂]
   exact h₁
 </code></pre>
+<!--
+- `enter [1, x, 2, y]` iterate `arg` and `intro` with the given arguments. It is just the macro:
+-->
 <ul>
-<li><code>enter [1, x, 2, y]</code> iterate <code>arg</code> and <code>intro</code> with the given arguments. It is just the macro:</li>
+<li><code>enter [1, x, 2, y]</code>是<code>arg</code>和<code>intro</code>使用给定参数的宏。</li>
 </ul>
 <pre><code>syntax enterArg := ident &lt;|&gt; group(&quot;@&quot;? num)
 syntax &quot;enter &quot; &quot;[&quot; (colGt enterArg),+ &quot;]&quot;: conv
@@ -270,20 +347,29 @@ macro_rules
   | `(conv| enter [$id:ident]) =&gt; `(conv| ext $id)
   | `(conv| enter [$arg:enterArg, $args,*]) =&gt; `(conv| (enter [$arg]; enter [$args,*]))
 </code></pre>
+<!--
+- `done` fail if there are unsolved goals.
+
+- `trace_state` display the current tactic state.
+
+- `whnf` put term in weak head normal form.
+
+- `tactic => <tactic sequence>` go back to regular tactic mode. This
+  is useful for discharging goals not supported by `conv` mode, and
+  applying custom congruence and extensionality lemmas.
+-->
 <ul>
 <li>
-<p><code>done</code> fail if there are unsolved goals.</p>
+<p><code>done</code>会失败如果有未解决的目标。</p>
 </li>
 <li>
-<p><code>trace_state</code> display the current tactic state.</p>
+<p><code>traceState</code>显示当前策略状态。</p>
 </li>
 <li>
 <p><code>whnf</code> put term in weak head normal form.</p>
 </li>
 <li>
-<p><code>tactic =&gt; &lt;tactic sequence&gt;</code> go back to regular tactic mode. This
-is useful for discharging goals not supported by <code>conv</code> mode, and
-applying custom congruence and extensionality lemmas.</p>
+<p><code>tactic =&gt; &lt;tactic sequence&gt;</code>回到常规策略模式。这对于退出<code>conv</code>模式不支持的目标，以及应用自定义的一致性和扩展性引理很有用。</p>
 </li>
 </ul>
 <pre><code class="language-lean">example (g : Nat → Nat → Nat)
@@ -300,8 +386,11 @@ applying custom congruence and extensionality lemmas.</p>
     . skip
     . tactic =&gt; exact h₂
 </code></pre>
+<!--
+- `apply <term>` is syntax sugar for `tactic => apply <term>`
+-->
 <ul>
-<li><code>apply &lt;term&gt;</code> is syntax sugar for <code>tactic =&gt; apply &lt;term&gt;</code></li>
+<li><code>apply &lt;term&gt;</code>是<code>tactic =&gt; apply &lt;term&gt;</code>的语法糖。</li>
 </ul>
 <pre><code class="language-lean">example (g : Nat → Nat → Nat)
         (h₁ : ∀ x, x ≠ 0 → g x x = 1)
