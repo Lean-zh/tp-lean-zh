@@ -74,7 +74,7 @@ aspects of Lean are described in the free online book, [Functional Programming i
 aspects of the system will make an appearance here.
 -->
 
-Lean的底层逻辑有一个计算的解释，与此同时Lean可以被视为一种编程语言。更重要的是，它可以被看作是一个编写具有精确语义的程序的系统，以及对程序所表示的计算功能进行推理。Lean中也有机制使它能够作为它自己的**元编程语言**，这意味着你可以使用Lean本身实现自动化和扩展Lean的功能。Lean的这些方面将在本教程的配套教程[Lean 4函数式编程](https://www.leanprover.cn/fp-lean-zh/)中进行探讨，本书只介绍计算方面。
+Lean的底层逻辑有一个计算的解释，与此同时 Lean 可以被视为一种编程语言。更重要的是，它可以被看作是一个编写具有精确语义的程序的系统，以及对程序所表示的计算功能进行推理。Lean中也有机制使它能够作为它自己的**元编程语言**，这意味着你可以使用 Lean 本身实现自动化和扩展 Lean 的功能。Lean的这些方面将在本教程的配套教程[Lean 4函数式编程](https://www.leanprover.cn/fp-lean-zh/)中进行探讨，本书只介绍计算方面。
 
 <!--
 About Lean
@@ -90,7 +90,7 @@ effort, and much of the potential for automation will be realized only gradually
 mathematical libraries freely.
 -->
 
-*Lean* 项目由微软Redmond研究院的Leonardo de Moura在2013年发起，这是个长期项目，自动化方法的潜力会在未来逐步被挖掘。Lean是在[Apache 2.0 license](LICENSE)下发布的，这是一个允许他人自由使用和扩展代码和数学库的许可性开源许可证。
+*Lean* 项目由微软 Redmond 研究院的Leonardo de Moura在2013年发起，这是个长期项目，自动化方法的潜力会在未来逐步被挖掘。Lean是在[Apache 2.0 license](LICENSE)下发布的，这是一个允许他人自由使用和扩展代码和数学库的许可性开源许可证。
 
 
 <!--
@@ -101,11 +101,11 @@ To install Lean in your computer consider using the [Quickstart](https://github.
 This tutorial describes the current version of Lean, known as Lean 4.
 -->
 
-通常有两种办法来运行Lean。第一个是[网页版本](https://live.lean-lang.org/)：由Javascript编写，包含标准定义和定理库，编辑器会下载到你的浏览器上运行。这是个方便快捷的办法。
+通常有两种办法来运行Lean。第一个是[网页版本](https://live.lean-lang.org/)：由 Javascript 编写，包含标准定义和定理库，编辑器会下载到你的浏览器上运行。这是个方便快捷的办法。
 
-第二种是本地版本：本地版本远快于网页版本，并且非常灵活。Visual Studio Code和Emacs扩展模块给编写和调试证明提供了有力支撑，因此更适合正式使用。源代码和安装方法见[https://github.com/leanprover/lean4/](https://github.com/leanprover/lean4/).
+第二种是本地版本：本地版本远快于网页版本，并且非常灵活。Visual Studio Code和 Emacs 扩展模块给编写和调试证明提供了有力支撑，因此更适合正式使用。源代码和安装方法见[https://github.com/leanprover/lean4/](https://github.com/leanprover/lean4/).
 
-本教程介绍的是Lean的当前版本：Lean 4。
+本教程介绍的是 Lean 的当前版本：Lean 4。
 
 <!--
 About this Book
@@ -124,7 +124,7 @@ mathematical assertions in dependent type theory, but it also can be used as a l
 -->
 
 
-本书的目的是教你在Lean中编写和验证证明，并且不太需要针对Lean的基础知识。首先，你将学习Lean所基于的逻辑系统，它是**依值类型论**（Dependent type theory）的一个版本，足以证明几乎所有传统的数学定理，并且有足够的表达能力自然地表示数学定理。更具体地说，Lean是基于具有归纳类型（Inductive type）的构造演算（Calculus of Construction）系统的类型论版本。Lean不仅可以定义数学对象和表达依值类型论的数学断言，而且还可以作为一种语言来编写证明。
+本书的目的是教你在 Lean 中编写和验证证明，并且不太需要针对 Lean 的基础知识。首先，你将学习 Lean 所基于的逻辑系统，它是**依值类型论**（Dependent type theory）的一个版本，足以证明几乎所有传统的数学定理，并且有足够的表达能力自然地表示数学定理。更具体地说，Lean是基于具有归纳类型（Inductive type）的构造演算（Calculus of Construction）系统的类型论版本。Lean不仅可以定义数学对象和表达依值类型论的数学断言，而且还可以作为一种语言来编写证明。
 
 <!--
 Because fully detailed axiomatic proofs are so complicated, the challenge of theorem proving is to have the computer
@@ -134,7 +134,7 @@ expressions automatically. Similarly, methods of *elaboration* and *type inferen
 flexible forms of algebraic reasoning.
 -->
 
-由于完全深入细节的公理证明十分复杂，定理证明的难点在于让计算机尽可能多地填补证明细节。你将通过[依值类型论](dependent_type_theory.md)语言来学习各种方法实现自动证明，例如项重写，以及Lean中的项和表达式的自动简化方法。同样，**繁饰**（Elaboration）和**类型推断**（Type inference）的方法，可以用来支持灵活的代数推理。
+由于完全深入细节的公理证明十分复杂，定理证明的难点在于让计算机尽可能多地填补证明细节。你将通过[依值类型论](dependent_type_theory.md)语言来学习各种方法实现自动证明，例如项重写，以及 Lean 中的项和表达式的自动简化方法。同样，**繁饰**（Elaboration）和**类型推断**（Type inference）的方法，可以用来支持灵活的代数推理。
 
 
 <!--
@@ -144,7 +144,7 @@ with the system, and the mechanisms Lean offers for managing complex theories an
 Throughout the text you will find examples of Lean code like the one below:
 -->
 
-最后，你会学到Lean的一些特性，包括与系统交流的语言，和Lean提供的对复杂理论和数据的管理机制。
+最后，你会学到 Lean 的一些特性，包括与系统交流的语言，和 Lean 提供的对复杂理论和数据的管理机制。
 
 在本书中你会见到类似下面这样的代码：
 
@@ -164,7 +164,7 @@ that follow. You can open this book on VS Code by using the command "Lean 4: Ope
 
 -->
 
-如果你在[VS Code](https://code.visualstudio.com/)中阅读本书，你会看到一个按钮，上面写着“try it!”按下按钮将示例复制到编辑器中，并带有足够的周围上下文，以使代码正确编译。您可以在编辑器中输入内容并修改示例，Lean将在您输入时检查结果并不断提供反馈。我们建议您在阅读后面的章节时，自己运行示例并试验代码。你可以通过使用“Lean 4: Open Documentation View”命令在VS Code中打开本书。
+如果你在[VS Code](https://code.visualstudio.com/)中阅读本书，你会看到一个按钮，上面写着「try it!」按下按钮将示例复制到编辑器中，并带有足够的周围上下文，以使代码正确编译。您可以在编辑器中输入内容并修改示例，Lean将在您输入时检查结果并不断提供反馈。我们建议您在阅读后面的章节时，自己运行示例并试验代码。你可以通过使用「Lean 4: Open Documentation View」命令在VS Code中打开本书。
 
 致谢
 ---------------

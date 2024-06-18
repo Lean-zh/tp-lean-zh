@@ -15,7 +15,6 @@
 - [Type Classes](./type_classes.md)
 - [The Conversion Tactic Mode](./conv.md)
 - [Axioms and Computation](./axioms_and_computation.md)
-
 -->
 
 # Lean 4 定理证明
