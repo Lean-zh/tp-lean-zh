@@ -207,26 +207,26 @@ depend on ``x``.
 
 Here is an example of how the propositions-as-types correspondence gets put into practice.
 -->
-<p>如果<code>α</code>是任何类型，我们可以将<code>α</code>上的一元谓词<code>p</code>作为<code>α → Prop</code>类型的对象。在这种情况下，给定<code>x : α</code>， <code>p x</code>表示断言<code>p</code>在<code>x</code>上成立。类似地，一个对象<code>r : α → α → Prop</code>表示<code>α</code>上的二元关系：给定<code>x y : α</code>，<code>r x y</code>表示断言<code>x</code>与<code>y</code>相关。</p>
-<p>全称量词<code>∀ x : α, p x</code>表示，对于每一个<code>x : α</code>，<code>p x</code>成立。与命题连接词一样，在自然演绎系统中，“forall”有引入和消去规则。非正式地，引入规则是：</p>
+<p>如果 <code>α</code> 是任何类型，我们可以将 <code>α</code> 上的一元谓词 <code>p</code> 作为 <code>α → Prop</code> 类型的对象。在这种情况下，给定 <code>x : α</code>， <code>p x</code> 表示断言 <code>p</code> 在 <code>x</code> 上成立。类似地，一个对象 <code>r : α → α → Prop</code> 表示 <code>α</code> 上的二元关系：给定 <code>x y : α</code>，<code>r x y</code> 表示断言 <code>x</code> 与 <code>y</code> 相关。</p>
+<p>全称量词 <code>∀ x : α, p x</code> 表示，对于每一个 <code>x : α</code>，<code>p x</code> 成立。与命题连接词一样，在自然演绎系统中，「forall」有引入和消去规则。非正式地，引入规则是：</p>
 <blockquote>
-<p>给定<code>p x</code>的证明，在<code>x : α</code>是任意的情况下，我们得到<code>∀ x : α, p x</code>的证明。</p>
+<p>给定 <code>p x</code> 的证明，在 <code>x : α</code> 是任意的情况下，我们得到 <code>∀ x : α, p x</code> 的证明。</p>
 </blockquote>
 <p>消去规则是：</p>
 <blockquote>
-<p>给定<code>∀ x : α, p x</code>的证明和任何项<code>t : α</code>，我们得到<code>p t</code>的证明。</p>
+<p>给定 <code>∀ x : α, p x</code> 的证明和任何项 <code>t : α</code>，我们得到 <code>p t</code> 的证明。</p>
 </blockquote>
 <p>与蕴含的情况一样，命题即类型。回想依值箭头类型的引入规则:</p>
 <blockquote>
-<p>给定类型为<code>β x</code>的项<code>t</code>，在<code>x : α</code>是任意的情况下，我们有<code>(fun x : α =&gt; t) : (x : α) → β x</code>。</p>
+<p>给定类型为 <code>β x</code> 的项 <code>t</code>，在 <code>x : α</code> 是任意的情况下，我们有 <code>(fun x : α =&gt; t) : (x : α) → β x</code>。</p>
 </blockquote>
 <p>消去规则：</p>
 <blockquote>
-<p>给定项<code>s : (x : α) → β x</code>和任何项<code>t : α</code>，我们有<code>s t : β t</code>。</p>
+<p>给定项 <code>s : (x : α) → β x</code> 和任何项 <code>t : α</code>，我们有 <code>s t : β t</code>。</p>
 </blockquote>
-<p>在<code>p x</code>具有<code>Prop</code>类型的情况下，如果我们用<code>∀ x : α, p x</code>替换<code>(x : α) → β x</code>，就得到构建涉及全称量词的证明的规则。</p>
-<p>因此，构造演算用全称表达式来识别依值箭头类型。如果<code>p</code>是任何表达式，<code>∀ x : α, p</code>不过是<code>(x : α) → p</code>的替代符号，在<code>p</code>是命题的情况下，前者比后者更自然。通常，表达式<code>p</code>取决于<code>x : α</code>。回想一下，在普通函数空间中，我们可以将<code>α → β</code>解释为<code>(x : α) → β</code>的特殊情况，其中<code>β</code>不依赖于<code>x</code>。类似地，我们可以把命题之间的蕴涵<code>p → q</code>看作是<code>∀ x : p, q</code>的特殊情况，其中<code>q</code>不依赖于<code>x</code>。</p>
-<p>下面是一个例子，说明了如何运用命题即类型对应规则。<code>∀</code>可以用<code>\forall</code>输入，也可以用前两个字母简写<code>\fo</code>。</p>
+<p>在 <code>p x</code> 具有 <code>Prop</code> 类型的情况下，如果我们用 <code>∀ x : α, p x</code> 替换 <code>(x : α) → β x</code>，就得到构建涉及全称量词的证明的规则。</p>
+<p>因此，构造演算用全称表达式来识别依值箭头类型。如果 <code>p</code> 是任何表达式，<code>∀ x : α, p</code> 不过是 <code>(x : α) → p</code> 的替代符号，在 <code>p</code> 是命题的情况下，前者比后者更自然。通常，表达式 <code>p</code> 取决于 <code>x : α</code>。回想一下，在普通函数空间中，我们可以将 <code>α → β</code> 解释为 <code>(x : α) → β</code> 的特殊情况，其中 <code>β</code> 不依赖于 <code>x</code>。类似地，我们可以把命题之间的蕴涵 <code>p → q</code> 看作是 <code>∀ x : p, q</code> 的特殊情况，其中 <code>q</code> 不依赖于 <code>x</code>。</p>
+<p>下面是一个例子，说明了如何运用命题即类型对应规则。<code>∀</code> 可以用 <code>\forall</code> 输入，也可以用前两个字母简写 <code>\fo</code>。</p>
 <pre><code class="language-lean">example (α : Type) (p q : α → Prop) : (∀ x : α, p x ∧ q x) → ∀ y : α, p y :=
   fun h : ∀ x : α, p x ∧ q x =&gt;
   fun y : α =&gt;
@@ -248,8 +248,8 @@ have used the same variable, ``x``, in both the hypothesis and
 conclusion, and instantiated it by a different variable, ``z``, in the
 proof:
 -->
-<p>作为一种符号约定，我们给予全称量词尽可能最宽的优先级范围，因此上面例子中的假设中，需要用括号将<code>x</code>上的量词限制起来。证明<code>∀ y : α, p y</code>的标准方法是取任意的<code>y</code>，然后证明<code>p y</code>。这是引入规则。现在，给定<code>h</code>有类型<code>∀ x : α, p x ∧ q x</code>，表达式<code>h y</code>有类型<code>p y ∧ q y</code>。这是消去规则。取合取的左侧得到想要的结论<code>p y</code>。</p>
-<p>只有约束变量名称不同的表达式被认为是等价的。因此，例如，我们可以在假设和结论中使用相同的变量<code>x</code>，并在证明中用不同的变量<code>z</code>实例化它:</p>
+<p>作为一种符号约定，我们给予全称量词尽可能最宽的优先级范围，因此上面例子中的假设中，需要用括号将 <code>x</code> 上的量词限制起来。证明 <code>∀ y : α, p y</code> 的标准方法是取任意的 <code>y</code>，然后证明 <code>p y</code>。这是引入规则。现在，给定 <code>h</code> 有类型 <code>∀ x : α, p x ∧ q x</code>，表达式 <code>h y</code> 有类型 <code>p y ∧ q y</code>。这是消去规则。取合取的左侧得到想要的结论 <code>p y</code>。</p>
+<p>只有约束变量名称不同的表达式被认为是等价的。因此，例如，我们可以在假设和结论中使用相同的变量 <code>x</code>，并在证明中用不同的变量 <code>z</code> 实例化它:</p>
 <pre><code class="language-lean">example (α : Type) (p q : α → Prop) : (∀ x : α, p x ∧ q x) → ∀ x : α, p x :=
   fun h : ∀ x : α, p x ∧ q x =&gt;
   fun z : α =&gt;
@@ -258,7 +258,7 @@ proof:
 <!--
 As another example, here is how we can express the fact that a relation, ``r``, is transitive:
 -->
-<p>再举一个例子，下面是关系<code>r</code>的传递性：</p>
+<p>再举一个例子，下面是关系 <code>r</code> 的传递性：</p>
 <pre><code class="language-lean">variable (α : Type) (r : α → α → Prop)
 variable (trans_r : ∀ x y z, r x y → r y z → r x z)
 
@@ -282,7 +282,7 @@ In situations like this, it can be tedious to supply the arguments
 ``a b c``, when they can be inferred from ``hab hbc``. For that reason, it
 is common to make these arguments implicit:
 -->
-<p>当我们在值<code>a b c</code>上实例化<code>trans_r</code>时，我们最终得到<code>r a b → r b c → r a c</code>的证明。将此应用于“假设”<code>hab : r a b</code>，我们得到了<code>r b c → r a c</code>的一个证明。最后将它应用到假设<code>hbc</code>中，得到结论<code>r a c</code>的证明。</p>
+<p>当我们在值 <code>a b c</code> 上实例化 <code>trans_r</code> 时，我们最终得到 <code>r a b → r b c → r a c</code> 的证明。将此应用于「假设」<code>hab : r a b</code>，我们得到了 <code>r b c → r a c</code> 的一个证明。最后将它应用到假设 <code>hbc</code> 中，得到结论 <code>r a c</code> 的证明。</p>
 <pre><code class="language-lean">variable (α : Type) (r : α → α → Prop)
 variable (trans_r : ∀ {x y z}, r x y → r y z → r x z)
 
@@ -303,7 +303,7 @@ that the implicit arguments are unspecified in this case.
 
 Here is an example of how we can carry out elementary reasoning with an equivalence relation:
 -->
-<p>优点是我们可以简单地写<code>trans_r hab hbc</code>作为<code>r a c</code>的证明。一个缺点是Lean没有足够的信息来推断表达式<code>trans_r</code>和<code>trans_r hab</code>中的参数类型。第一个<code>#check</code>命令的输出是<code>r ?m.1 ?m.2 → r ?m.2 ?m.3 → r ?m.1 ?m.3</code>，表示在本例中隐式参数未指定。</p>
+<p>优点是我们可以简单地写 <code>trans_r hab hbc</code> 作为 <code>r a c</code> 的证明。一个缺点是 Lean 没有足够的信息来推断表达式 <code>trans_r</code> 和 <code>trans_r hab</code> 中的参数类型。第一个 <code>#check</code> 命令的输出是 <code>r ?m.1 ?m.2 → r ?m.2 ?m.3 → r ?m.1 ?m.3</code>，表示在本例中隐式参数未指定。</p>
 <p>下面是一个用等价关系进行基本推理的例子:</p>
 <pre><code class="language-lean">variable (α : Type) (r : α → α → Prop)
 
@@ -350,9 +350,9 @@ on ``α``, which is exactly the type of circularity that was once
 considered problematic.
 -->
 <p>为了习惯使用全称量词，你应该尝试本节末尾的一些练习。</p>
-<p>依值箭头类型的类型规则，特别是全称量词，体现了<code>Prop</code>命题类型与其他对象的类型的不同。假设我们有<code>α : Sort i</code>和<code>β : Sort j</code>，其中表达式<code>β</code>可能依赖于变量<code>x : α</code>。那么<code>(x : α) → β</code>是<code>Sort (imax i j)</code>的一个元素，其中<code>imax i j</code>是<code>i</code>和<code>j</code>在<code>j</code>不为0时的最大值，否则为0。</p>
-<p>其想法如下。如果<code>j</code>不是<code>0</code>，然后<code>(x : α) → β</code>是<code>Sort (max i j)</code>类型的一个元素。换句话说，从<code>α</code>到<code>β</code>的一类依值函数存在于指数为<code>i</code>和<code>j</code>最大值的宇宙中。然而，假设<code>β</code>属于<code>Sort 0</code>，即<code>Prop</code>的一个元素。在这种情况下，<code>(x : α) → β</code>也是<code>Sort 0</code>的一个元素，无论<code>α</code>生活在哪种类型的宇宙中。换句话说，如果<code>β</code>是一个依赖于<code>α</code>的命题，那么<code>∀ x : α, β</code>又是一个命题。这反映出<code>Prop</code>作为一种命题类型而不是数据类型，这也使得<code>Prop</code>具有“非直谓性”（impredicative）。</p>
-<p>“直谓性”一词起源于20世纪初的数学基础发展，当时逻辑学家如庞加莱和罗素将集合论的悖论归咎于“恶性循环”：当我们通过量化一个集合来定义一个属性时，这个集合包含了被定义的属性。注意，如果<code>α</code>是任何类型，我们可以在<code>α</code>上形成所有谓词的类型<code>α → Prop</code>(<code>α</code>的“幂”类型)。Prop的非直谓性意味着我们可以通过<code>α → Prop</code>形成量化命题。特别是，我们可以通过量化所有关于<code>α</code>的谓词来定义<code>α</code>上的谓词，这正是曾经被认为有问题的循环类型。</p>
+<p>依值箭头类型的类型规则，特别是全称量词，体现了 <code>Prop</code> 命题类型与其他对象的类型的不同。假设我们有 <code>α : Sort i</code> 和 <code>β : Sort j</code>，其中表达式 <code>β</code> 可能依赖于变量 <code>x : α</code>。那么 <code>(x : α) → β</code> 是 <code>Sort (imax i j)</code> 的一个元素，其中 <code>imax i j</code> 是 <code>i</code> 和 <code>j</code> 在 <code>j</code> 不为0时的最大值，否则为0。</p>
+<p>其想法如下。如果 <code>j</code> 不是 <code>0</code>，然后 <code>(x : α) → β</code> 是 <code>Sort (max i j)</code> 类型的一个元素。换句话说，从 <code>α</code> 到 <code>β</code> 的一类依值函数存在于指数为 <code>i</code> 和 <code>j</code> 最大值的宇宙中。然而，假设 <code>β</code> 属于 <code>Sort 0</code>，即 <code>Prop</code> 的一个元素。在这种情况下，<code>(x : α) → β</code> 也是 <code>Sort 0</code> 的一个元素，无论 <code>α</code> 生活在哪种类型的宇宙中。换句话说，如果 <code>β</code> 是一个依赖于 <code>α</code> 的命题，那么 <code>∀ x : α, β</code> 又是一个命题。这反映出 <code>Prop</code> 作为一种命题类型而不是数据类型，这也使得 <code>Prop</code> 具有「非直谓性」（impredicative）。</p>
+<p>「直谓性」一词起源于20世纪初的数学基础发展，当时逻辑学家如庞加莱和罗素将集合论的悖论归咎于「恶性循环」：当我们通过量化一个集合来定义一个属性时，这个集合包含了被定义的属性。注意，如果 <code>α</code> 是任何类型，我们可以在 <code>α</code> 上形成所有谓词的类型 <code>α → Prop</code>(<code>α</code> 的「幂」类型)。Prop的非直谓性意味着我们可以通过 <code>α → Prop</code> 形成量化命题。特别是，我们可以通过量化所有关于 <code>α</code> 的谓词来定义 <code>α</code> 上的谓词，这正是曾经被认为有问题的循环类型。</p>
 <!--
 Equality
 --------
@@ -366,7 +366,7 @@ In the meanwhile, here we explain how to use it.
 
 Of course, a fundamental property of equality is that it is an equivalence relation:
 -->
-<p>现在让我们来看看在Lean库中定义的最基本的关系之一，即等价关系。在<a href="inductive_types.html">归纳类型</a>一章中，我们将解释如何从Lean的逻辑框架中定义等价。在这里我们解释如何使用它。</p>
+<p>现在让我们来看看在 Lean 库中定义的最基本的关系之一，即等价关系。在<a href="inductive_types.html">归纳类型</a>一章中，我们将解释如何从 Lean 的逻辑框架中定义等价。在这里我们解释如何使用它。</p>
 <p>等价关系的基本性质：反身性、对称性、传递性。</p>
 <pre><code class="language-lean">#check Eq.refl    -- Eq.refl.{u_1} {α : Sort u_1} (a : α) : a = a
 #check Eq.symm    -- Eq.symm.{u} {α : Sort u} {a b : α} (h : a = b) : b = a
@@ -376,7 +376,7 @@ Of course, a fundamental property of equality is that it is an equivalence relat
 We can make the output easier to read by telling Lean not to insert
 the implicit arguments (which are displayed here as metavariables).
 -->
-<p>通过告诉Lean不要插入隐参数(在这里显示为元变量)可以使输出更容易阅读。</p>
+<p>通过告诉 Lean 不要插入隐参数(在这里显示为元变量)可以使输出更容易阅读。</p>
 <pre><code class="language-lean">universe u
 
 #check @Eq.refl.{u}   -- @Eq.refl : ∀ {α : Sort u} (a : α), a = a
@@ -388,7 +388,7 @@ The inscription ``.{u}`` tells Lean to instantiate the constants at the universe
 
 Thus, for example, we can specialize the example from the previous section to the equality relation:
 -->
-<p><code>.{u}</code>告诉Lean实例化宇宙<code>u</code>上的常量。</p>
+<p><code>.{u}</code> 告诉 Lean 实例化宇宙 <code>u</code> 上的常量。</p>
 <p>因此，我们可以将上一节中的示例具体化为等价关系:</p>
 <pre><code class="language-lean">variable (α : Type) (a b c d : α)
 variable (hab : a = b) (hcb : c = b) (hcd : c = d)
@@ -421,7 +421,7 @@ example : 2 + 3 = 5 := Eq.refl _
 <!--
 This feature of the framework is so important that the library defines a notation ``rfl`` for ``Eq.refl _``:
 -->
-<p>这个特性非常重要，以至于库中为<code>Eq.refl _</code>专门定义了一个符号<code>rfl</code>：</p>
+<p>这个特性非常重要，以至于库中为 <code>Eq.refl _</code> 专门定义了一个符号 <code>rfl</code>：</p>
 <pre><code class="language-lean"><span class="boring">variable (α β : Type)
 </span>example (f : α → β) (a : α) : (fun x =&gt; f x) a = f a := rfl
 example (a : α) (b : β) : (a, b).1 = a := rfl
@@ -435,7 +435,7 @@ the truth value. That is, given ``h1 : a = b`` and ``h2 : p a``, we
 can construct a proof for ``p b`` using substitution:
 ``Eq.subst h1 h2``.
 -->
-<p>然而，等价不仅仅是一种关系。它有一个重要的性质，即每个断言都遵从等价性，即我们可以在不改变真值的情况下对表达式做等价代换。也就是说，给定<code>h1 : a = b</code>和<code>h2 : p a</code>，我们可以构造一个证明<code>p b</code>，只需要使用代换<code>Eq.subst h1 h2</code>。</p>
+<p>然而，等价不仅仅是一种关系。它有一个重要的性质，即每个断言都遵从等价性，即我们可以在不改变真值的情况下对表达式做等价代换。也就是说，给定 <code>h1 : a = b</code> 和 <code>h2 : p a</code>，我们可以构造一个证明 <code>p b</code>，只需要使用代换 <code>Eq.subst h1 h2</code>。</p>
 <pre><code class="language-lean">example (α : Type) (a b : α) (p : α → Prop)
         (h1 : a = b) (h2 : p a) : p b :=
   Eq.subst h1 h2
@@ -455,8 +455,8 @@ with applicative terms, that is, terms of form ``s t``. Specifically,
 used to replace the term that is being applied, and ``congr`` can be
 used to replace both at once.
 -->
-<p>第二个例子中的三角形是建立在<code>Eq.subst</code>和<code>Eq.symm</code>之上的宏，它可以通过<code>\t</code>来输入。</p>
-<p>规则<code>Eq.subst</code>定义了一些辅助规则，用来执行更显式的替换。它们是为处理应用型项，即形式为<code>s t</code>的项而设计的。这些辅助规则是，使用<code>congrArg</code>来替换参数，使用<code>congrFun</code>来替换正在应用的项，并且可以同时使用<code>congr</code>来替换两者。</p>
+<p>第二个例子中的三角形是建立在 <code>Eq.subst</code> 和 <code>Eq.symm</code> 之上的宏，它可以通过 <code>\t</code> 来输入。</p>
+<p>规则 <code>Eq.subst</code> 定义了一些辅助规则，用来执行更显式的替换。它们是为处理应用型项，即形式为 <code>s t</code> 的项而设计的。这些辅助规则是，使用 <code>congrArg</code> 来替换参数，使用 <code>congrFun</code> 来替换正在应用的项，并且可以同时使用 <code>congr</code> 来替换两者。</p>
 <pre><code class="language-lean">variable (α : Type)
 variable (a b : α)
 variable (f g : α → Nat)
@@ -494,7 +494,7 @@ properties above are stated for the natural numbers (type ``Nat``).
 Here is an example of a calculation in the natural numbers that uses
 substitution combined with associativity and distributivity.
 -->
-<p><code>Nat.mul_add</code>和<code>Nat.add_mul</code>是<code>Nat.left_distrib</code>和<code>Nat.right_distrib</code>的代称。上面的属性是为自然数类型<code>Nat</code>声明的。</p>
+<p><code>Nat.mul_add</code> 和 <code>Nat.add_mul</code> 是 <code>Nat.left_distrib</code> 和 <code>Nat.right_distrib</code> 的代称。上面的属性是为自然数类型 <code>Nat</code> 声明的。</p>
 <p>这是一个使用代换以及结合律、交换律和分配律的自然数计算的例子。</p>
 <pre><code class="language-lean">example (x y : Nat) : (x + y) * (x + y) = x * x + y * x + x * y + y * y :=
   have h1 : (x + y) * (x + y) = (x + y) * x + (x + y) * y :=
@@ -524,7 +524,7 @@ kinds of automation. The term rewriter and simplifier are described
 briefly in the next section, and then in greater detail in the next
 chapter.
 -->
-<p>注意，<code>Eq.subst</code>的第二个隐式参数提供了将要发生代换的表达式上下文，其类型为<code>α → Prop</code>。因此，推断这个谓词需要一个<em>高阶合一</em>（higher-order unification）的实例。一般来说，确定高阶合一器是否存在的问题是无法确定的，而Lean充其量只能提供不完美的和近似的解决方案。因此，<code>Eq.subst</code>并不总是做你想要它做的事。宏<code>h ▸ e</code>使用了更有效的启发式方法来计算这个隐参数，并且在不能应用<code>Eq.subst</code>的情况下通常会成功。</p>
+<p>注意，<code>Eq.subst</code> 的第二个隐式参数提供了将要发生代换的表达式上下文，其类型为 <code>α → Prop</code>。因此，推断这个谓词需要一个<em>高阶合一</em>（higher-order unification）的实例。一般来说，确定高阶合一器是否存在的问题是无法确定的，而 Lean 充其量只能提供不完美的和近似的解决方案。因此，<code>Eq.subst</code> 并不总是做你想要它做的事。宏 <code>h ▸ e</code> 使用了更有效的启发式方法来计算这个隐参数，并且在不能应用 <code>Eq.subst</code> 的情况下通常会成功。</p>
 <p>因为等式推理是如此普遍和重要，Lean提供了许多机制来更有效地执行它。下一节将提供允许你以更自然和清晰的方式编写计算式证明的语法。但更重要的是，等式推理是由项重写器、简化器和其他种类的自动化方法支持的。术语重写器和简化器将在下一节中简要描述，然后在下一章中更详细地描述。</p>
 <!--
 Calculational Proofs
@@ -537,7 +537,7 @@ meant to be composed by basic principles such as the transitivity of
 equality. In Lean, a calculational proof starts with the keyword
 ``calc``, and has the following syntax:
 -->
-<p>一个计算式证明是指一串使用诸如等式的传递性等基本规则得到的中间结果。在Lean中，计算式证明从关键字<code>calc</code>开始，语法如下：</p>
+<p>一个计算式证明是指一串使用诸如等式的传递性等基本规则得到的中间结果。在 Lean 中，计算式证明从关键字 <code>calc</code> 开始，语法如下：</p>
 <pre><code>calc
   &lt;expr&gt;_0  'op_1'  &lt;expr&gt;_1  ':='  &lt;proof&gt;_1
   '_'       'op_2'  &lt;expr&gt;_2  ':='  &lt;proof&gt;_2
@@ -551,9 +551,9 @@ Note that the `calc` relations all have the same indentation. Each
 We can also use `_` in the first relation (right after ``<expr>_0``)
 which is useful to align the sequence of relation/proof pairs:
 -->
-<p><code>calc</code>下的每一行使用相同的缩进。每个<code>&lt;proof&gt;_i</code>是<code>&lt;expr&gt;_{i-1} op_i &lt;expr&gt;_i</code>的证明。</p>
-<p>我们也可以在第一个关系中使用<code>_</code>(就在<code>&lt;expr&gt;_0</code>之后)，这对于对齐关系/证明对的序列很有用:</p>
-<pre><code>calc &lt;expr&gt;_0 
+<p><code>calc</code> 下的每一行使用相同的缩进。每个 <code>&lt;proof&gt;_i</code> 是 <code>&lt;expr&gt;_{i-1} op_i &lt;expr&gt;_i</code> 的证明。</p>
+<p>我们也可以在第一个关系中使用 <code>_</code>(就在 <code>&lt;expr&gt;_0</code> 之后)，这对于对齐关系/证明对的序列很有用:</p>
+<pre><code>calc &lt;expr&gt;_0
     '_' 'op_1' &lt;expr&gt;_1 ':=' &lt;proof&gt;_1
     '_' 'op_2' &lt;expr&gt;_2 ':=' &lt;proof&gt;_2
     ...
@@ -584,7 +584,7 @@ discussed in greater detail in the next chapter. For example, using
 the abbreviation ``rw`` for rewrite, the proof above could be written
 as follows:
 -->
-<p>这种写证明的风格在与<code>simp</code>和<code>rewrite</code>策略（Tactic）结合使用时最为有效，这些策略将在下一章详细讨论。例如，用缩写<code>rw</code>表示重写，上面的证明可以写成如下。</p>
+<p>这种写证明的风格在与 <code>simp</code> 和 <code>rewrite</code> 策略（Tactic）结合使用时最为有效，这些策略将在下一章详细讨论。例如，用缩写 <code>rw</code> 表示重写，上面的证明可以写成如下。</p>
 <pre><code class="language-lean"><span class="boring">variable (a b c d e : Nat)
 </span><span class="boring">variable (h1 : a = b)
 </span><span class="boring">variable (h2 : b = c + 1)
@@ -607,7 +607,7 @@ tactic applies reflexivity to prove it.
 Rewrites can be applied sequentially, so that the proof above can be
 shortened to this:
 -->
-<p>本质上，<code>rw</code>策略使用一个给定的等式(它可以是一个假设、一个定理名称或一个复杂的项)来“重写”目标。如果这样做将目标简化为一种等式<code>t = t</code>，那么该策略将使用反身性来证明这一点。</p>
+<p>本质上，<code>rw</code> 策略使用一个给定的等式(它可以是一个假设、一个定理名称或一个复杂的项)来「重写」目标。如果这样做将目标简化为一种等式 <code>t = t</code>，那么该策略将使用反身性来证明这一点。</p>
 <p>重写可以一次应用一系列，因此上面的证明可以缩写为：</p>
 <pre><code class="language-lean"><span class="boring">variable (a b c d e : Nat)
 </span><span class="boring">variable (h1 : a = b)
@@ -639,7 +639,7 @@ term. It also uses other rules that have been previously declared to
 the system, and applies commutativity wisely to avoid looping. As a
 result, we can also prove the theorem as follows:
 -->
-<p>相反，<code>simp</code>策略通过在项中以任意顺序在任何适用的地方重复应用给定的等式来重写目标。它还使用了之前声明给系统的其他规则，并明智地应用交换性以避免循环。因此，我们也可以如下证明定理:</p>
+<p>相反，<code>simp</code> 策略通过在项中以任意顺序在任何适用的地方重复应用给定的等式来重写目标。它还使用了之前声明给系统的其他规则，并明智地应用交换性以避免循环。因此，我们也可以如下证明定理:</p>
 <pre><code class="language-lean"><span class="boring">variable (a b c d e : Nat)
 </span><span class="boring">variable (h1 : a = b)
 </span><span class="boring">variable (h2 : b = c + 1)
@@ -654,8 +654,8 @@ We will discuss variations of ``rw`` and ``simp`` in the next chapter.
 The ``calc`` command can be configured for any relation that supports
 some form of transitivity. It can even combine different relations.
 -->
-<p>我们将在下一章讨论<code>rw</code>和<code>simp</code>的变体。</p>
-<p><code>calc</code>命令可以配置为任何支持某种形式的传递性的关系式。它甚至可以结合不同的关系式。</p>
+<p>我们将在下一章讨论 <code>rw</code> 和 <code>simp</code> 的变体。</p>
+<p><code>calc</code> 命令可以配置为任何支持某种形式的传递性的关系式。它甚至可以结合不同的关系式。</p>
 <pre><code class="language-lean">example (a b c d : Nat) (h1 : a = b) (h2 : b ≤ c) (h3 : c + 1 &lt; d) : a &lt; d :=
   calc
     a = b     := h1
@@ -668,7 +668,7 @@ You can "teach" `calc` new transitivity theorems by adding new instances
 of the `Trans` type class. Type classes are introduced later, but the following
 small example demonstrates how to extend the `calc` notation using new `Trans` instances.
 -->
-<p>你可以通过添加<code>Trans</code>类型族（Type class）的新实例来“教给”<code>calc</code>新的传递性定理。稍后将介绍类型族，但下面的小示例将演示如何使用新的<code>Trans</code>实例扩展<code>calc</code>表示法。</p>
+<p>你可以通过添加 <code>Trans</code> 类型族（Type class）的新实例来「教给」<code>calc</code> 新的传递性定理。稍后将介绍类型族，但下面的小示例将演示如何使用新的 <code>Trans</code> 实例扩展 <code>calc</code> 表示法。</p>
 <pre><code class="language-lean">def divides (x y : Nat) : Prop :=
   ∃ k, k*x = y
 
@@ -704,12 +704,12 @@ the vertical bar `∣` in the example above is the unicode one. We use
 unicode to make sure we do not overload the ASCII `|` used in the
 `match .. with` expression.
 -->
-<p>上面的例子也清楚地表明，即使关系式没有中缀符号，也可以使用<code>calc</code>。最后，我们注意到上面例子中的竖线<code>∣</code>是unicode。我们使用unicode来确保我们不会重载在<code>match .. with</code>表达式中使用的ASCII<code>|</code>。</p>
+<p>上面的例子也清楚地表明，即使关系式没有中缀符号，也可以使用 <code>calc</code>。最后，我们注意到上面例子中的竖线<code>∣</code>是unicode。我们使用 unicode 来确保我们不会重载在<code>match .. with</code>表达式中使用的ASCII<code>|</code>。</p>
 <!--
 With ``calc``, we can write the proof in the last section in a more
 natural and perspicuous way.
 -->
-<p>使用<code>calc</code>，我们可以以一种更自然、更清晰的方式写出上一节的证明。</p>
+<p>使用 <code>calc</code>，我们可以以一种更自然、更清晰的方式写出上一节的证明。</p>
 <pre><code class="language-lean">example (x y : Nat) : (x + y) * (x + y) = x * x + y * x + x * y + y * y :=
   calc
     (x + y) * (x + y) = (x + y) * x + (x + y) * y  := by rw [Nat.mul_add]
@@ -722,7 +722,7 @@ The alternative `calc` notation is worth considering here. When the
 first expression is taking this much space, using `_` in the first
 relation naturally aligns all relations:
 -->
-<p>这里值得考虑另一种<code>calc</code>表示法。当第一个表达式占用这么多空间时，在第一个关系中使用<code>_</code>自然会对齐所有关系式:</p>
+<p>这里值得考虑另一种 <code>calc</code> 表示法。当第一个表达式占用这么多空间时，在第一个关系中使用 <code>_</code> 自然会对齐所有关系式:</p>
 <pre><code class="language-lean">example (x y : Nat) : (x + y) * (x + y) = x * x + y * x + x * y + y * y :=
   calc (x + y) * (x + y)
     _ = (x + y) * x + (x + y) * y       := by rw [Nat.mul_add]
@@ -736,7 +736,7 @@ identity in the opposite direction. (You can enter it with ``\l`` or
 use the ascii equivalent, ``<-``.) If brevity is what we are after,
 both ``rw`` and ``simp`` can do the job on their own:
 -->
-<p><code>Nat.add_assoc</code>之前的左箭头指挥重写以相反的方向使用等式。(你可以输入<code>\l</code>或ascii码<code>&lt;-</code>。)如果追求简洁，<code>rw</code>和<code>simp</code>可以一次性完成这项工作:</p>
+<p><code>Nat.add_assoc</code> 之前的左箭头指挥重写以相反的方向使用等式。(你可以输入 <code>\l</code> 或 ascii 码 <code>&lt;-</code>。)如果追求简洁，<code>rw</code> 和 <code>simp</code> 可以一次性完成这项工作:</p>
 <pre><code class="language-lean">example (x y : Nat) : (x + y) * (x + y) = x * x + y * x + x * y + y * y :=
   by rw [Nat.mul_add, Nat.add_mul, Nat.add_mul, ←Nat.add_assoc]
 
@@ -759,8 +759,8 @@ rule and an elimination rule. The introduction rule is
 straightforward: to prove ``∃ x : α, p x``, it suffices to provide a
 suitable term ``t`` and a proof of ``p t``. Here are some examples:
 -->
-<p>存在量词可以写成<code>exists x : α, p x</code>或<code>∃ x : α, p x</code>。这两个写法实际上在Lean的库中的定义为一个更冗长的表达式，<code>Exists (fun x : α =&gt; p x)</code>。</p>
-<p>存在量词也有一个引入规则和一个消去规则。引入规则很简单：要证明<code>∃ x : α, p x</code>，只需提供一个合适的项<code>t</code>和对<code>p t</code>的证明即可。<code>∃</code>用<code>\exists</code>或简写<code>\ex</code>输入，下面是一些例子:</p>
+<p>存在量词可以写成 <code>exists x : α, p x</code> 或 <code>∃ x : α, p x</code>。这两个写法实际上在 Lean 的库中的定义为一个更冗长的表达式，<code>Exists (fun x : α =&gt; p x)</code>。</p>
+<p>存在量词也有一个引入规则和一个消去规则。引入规则很简单：要证明 <code>∃ x : α, p x</code>，只需提供一个合适的项 <code>t</code> 和对 <code>p t</code> 的证明即可。<code>∃</code> 用 <code>\exists</code> 或简写 <code>\ex</code> 输入，下面是一些例子:</p>
 <pre><code class="language-lean">example : ∃ x : Nat, x &gt; 0 :=
   have h : 1 &gt; 0 := Nat.zero_lt_succ 0
   Exists.intro 1 h
@@ -777,7 +777,7 @@ example (x y z : Nat) (hxy : x &lt; y) (hyz : y &lt; z) : ∃ w, x &lt; w ∧ w 
 We can use the anonymous constructor notation ``⟨t, h⟩`` for
 ``Exists.intro t h``, when the type is clear from the context.
 -->
-<p>当类型可从上下文中推断时，我们可以使用匿名构造器表示法<code>⟨t, h⟩</code>替换<code>Exists.intro t h</code>。</p>
+<p>当类型可从上下文中推断时，我们可以使用匿名构造器表示法 <code>⟨t, h⟩</code> 替换 <code>Exists.intro t h</code>。</p>
 <pre><code class="language-lean">example : ∃ x : Nat, x &gt; 0 :=
   have h : 1 &gt; 0 := Nat.zero_lt_succ 0
   ⟨1, h⟩
@@ -799,7 +799,7 @@ context to infer which one is appropriate. This is illustrated in the
 following example, in which we set the option ``pp.explicit`` to true
 to ask Lean's pretty-printer to show the implicit arguments.
 -->
-<p>注意<code>Exists.intro</code>有隐参数：Lean必须在结论<code>∃ x, p x</code>中推断谓词<code>p : α → Prop</code>。这不是一件小事。例如，如果我们有<code>hg : g 0 0 = 0</code>和<code>Exists.intro 0 hg</code>，有许多可能的值的谓词<code>p</code>，对应定理<code>∃ x, g x x = x</code>，<code>∃ x, g x x = 0</code>，<code>∃ x, g x 0 = x</code>，等等。Lean使用上下文来推断哪个是合适的。下面的例子说明了这一点，在这个例子中，我们设置了选项<code>pp.explicit</code>为true，要求Lean打印隐参数。</p>
+<p>注意 <code>Exists.intro</code> 有隐参数：Lean必须在结论 <code>∃ x, p x</code> 中推断谓词 <code>p : α → Prop</code>。这不是一件小事。例如，如果我们有 <code>hg : g 0 0 = 0</code> 和 <code>Exists.intro 0 hg</code>，有许多可能的值的谓词 <code>p</code>，对应定理 <code>∃ x, g x x = x</code>，<code>∃ x, g x x = 0</code>，<code>∃ x, g x 0 = x</code>，等等。Lean使用上下文来推断哪个是合适的。下面的例子说明了这一点，在这个例子中，我们设置了选项 <code>pp.explicit</code> 为true，要求 Lean 打印隐参数。</p>
 <!--
 ```lean
 variable (g : Nat → Nat → Nat)
@@ -843,7 +843,7 @@ showing that ``q`` follows from ``p w`` for an arbitrary value
 showing that ``q`` follows from the existence of any such ``x``. Here
 is an example:
 -->
-<p>我们可以将<code>Exists.intro</code>视为信息隐藏操作，因为它将断言的具体实例隐藏起来变成了存在量词。存在消去规则<code>Exists.elim</code>执行相反的操作。它允许我们从<code>∃ x : α, p x</code>证明一个命题<code>q</code>，通过证明对于任意值<code>w</code>时<code>p w</code>都能推出<code>q</code>。粗略地说，既然我们知道有一个<code>x</code>满足<code>p x</code>，我们可以给它起个名字，比如<code>w</code>。如果<code>q</code>没有提到<code>w</code>，那么表明<code>p w</code>能推出<code>q</code>就等同于表明<code>q</code>从任何这样的<code>x</code>的存在而推得。下面是一个例子:</p>
+<p>我们可以将 <code>Exists.intro</code> 视为信息隐藏操作，因为它将断言的具体实例隐藏起来变成了存在量词。存在消去规则 <code>Exists.elim</code> 执行相反的操作。它允许我们从 <code>∃ x : α, p x</code> 证明一个命题 <code>q</code>，通过证明对于任意值 <code>w</code> 时 <code>p w</code> 都能推出 <code>q</code>。粗略地说，既然我们知道有一个 <code>x</code> 满足 <code>p x</code>，我们可以给它起个名字，比如 <code>w</code>。如果 <code>q</code> 没有提到 <code>w</code>，那么表明 <code>p w</code> 能推出 <code>q</code> 就等同于表明 <code>q</code> 从任何这样的 <code>x</code> 的存在而推得。下面是一个例子:</p>
 <pre><code class="language-lean">variable (α : Type) (p q : α → Prop)
 
 example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
@@ -870,9 +870,9 @@ instance of the Curry-Howard isomorphism.
 Lean provides a more convenient way to eliminate from an existential
 quantifier with the ``match`` expression:
 -->
-<p>把存在消去规则和析取消去规则作个比较可能会带来一些启发。命题<code>∃ x : α, p x</code>可以看成一个对所有<code>α</code>中的元素<code>a</code>所组成的命题<code>p a</code>的大型析取。注意到匿名构造器<code>⟨w, hw.right, hw.left⟩</code>是嵌套的构造器<code>⟨w, ⟨hw.right, hw.left⟩⟩</code>的缩写。</p>
-<p>存在式命题类型很像依值类型一节所述的sigma类型。给定<code>a : α</code>和<code>h : p a</code>时，项<code>Exists.intro a h</code>具有类型<code>(∃ x : α, p x) : Prop</code>，而<code>Sigma.mk a h</code>具有类型<code>(Σ x : α, p x) : Type</code>。<code>∃</code>和<code>Σ</code>之间的相似性是Curry-Howard同构的另一例子。</p>
-<p>Lean提供一个更加方便的消去存在量词的途径，那就是通过<code>match</code>表达式。</p>
+<p>把存在消去规则和析取消去规则作个比较可能会带来一些启发。命题 <code>∃ x : α, p x</code> 可以看成一个对所有 <code>α</code> 中的元素 <code>a</code> 所组成的命题 <code>p a</code> 的大型析取。注意到匿名构造器 <code>⟨w, hw.right, hw.left⟩</code> 是嵌套的构造器 <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> 的缩写。</p>
+<p>存在式命题类型很像依值类型一节所述的 sigma 类型。给定 <code>a : α</code> 和 <code>h : p a</code> 时，项 <code>Exists.intro a h</code> 具有类型 <code>(∃ x : α, p x) : Prop</code>，而 <code>Sigma.mk a h</code> 具有类型 <code>(Σ x : α, p x) : Type</code>。<code>∃</code> 和 <code>Σ</code> 之间的相似性是Curry-Howard同构的另一例子。</p>
+<p>Lean提供一个更加方便的消去存在量词的途径，那就是通过 <code>match</code> 表达式。</p>
 <pre><code class="language-lean">variable (α : Type) (p q : α → Prop)
 
 example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
@@ -889,7 +889,7 @@ statement "destructs" the existential assertion into the components
 to prove the proposition. We can annotate the types used in the match
 for greater clarity:
 -->
-<p><code>match</code>表达式是Lean功能定义系统的一部分，它提供了复杂功能的方便且丰富的表达方式。再一次，正是Curry-Howard同构让我们能够采用这种机制来编写证明。<code>match</code>语句将存在断言“析构”到组件<code>w</code>和<code>hw</code>中，然后可以在语句体中使用它们来证明命题。我们可以对match中使用的类型进行注释，以提高清晰度：</p>
+<p><code>match</code> 表达式是 Lean 功能定义系统的一部分，它提供了复杂功能的方便且丰富的表达方式。再一次，正是Curry-Howard同构让我们能够采用这种机制来编写证明。<code>match</code> 语句将存在断言「析构」到组件 <code>w</code> 和 <code>hw</code> 中，然后可以在语句体中使用它们来证明命题。我们可以对 match 中使用的类型进行注释，以提高清晰度：</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   match h with
@@ -898,7 +898,7 @@ for greater clarity:
 <!--
 We can even use the match statement to decompose the conjunction at the same time:
 -->
-<p>我们甚至可以同时使用match语句来分解合取：</p>
+<p>我们甚至可以同时使用 match 语句来分解合取：</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   match h with
@@ -907,7 +907,7 @@ We can even use the match statement to decompose the conjunction at the same tim
 <!--
 Lean also provides a pattern-matching ``let`` expression:
 -->
-<p>Lean还提供了一个模式匹配的<code>let</code>表达式：</p>
+<p>Lean还提供了一个模式匹配的 <code>let</code> 表达式：</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   let ⟨w, hpw, hqw⟩ := h
@@ -918,7 +918,7 @@ This is essentially just alternative notation for the ``match``
 construct above. Lean will even allow us to use an implicit ``match``
 in the ``fun`` expression:
 -->
-<p>这实际上是上面的<code>match</code>结构的替代表示法。Lean甚至允许我们在<code>fun</code>表达式中使用隐含的<code>match</code>：</p>
+<p>这实际上是上面的 <code>match</code> 结构的替代表示法。Lean甚至允许我们在 <code>fun</code> 表达式中使用隐含的 <code>match</code>：</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x :=
   fun ⟨w, hpw, hqw⟩ =&gt; ⟨w, hqw, hpw⟩
@@ -931,7 +931,7 @@ In the following example, we define ``is_even a`` as ``∃ b, a = 2 * b``,
 and then we show that the sum of two even numbers is an even number.
 -->
 <p>我们将在<a href="./induction_and_recursion.html">归纳和递归</a>一章看到所有这些变体都是更一般的模式匹配构造的实例。</p>
-<p>在下面的例子中，我们将<code>even a</code>定义为<code>∃ b, a = 2 * b</code>，然后我们证明两个偶数的和是偶数。</p>
+<p>在下面的例子中，我们将 <code>even a</code> 定义为 <code>∃ b, a = 2 * b</code>，然后我们证明两个偶数的和是偶数。</p>
 <pre><code class="language-lean">def is_even (a : Nat) := ∃ b, a = 2 * b
 
 theorem even_plus_even (h1 : is_even a) (h2 : is_even b) : is_even (a + b) :=
@@ -947,7 +947,7 @@ Using the various gadgets described in this chapter --- the match
 statement, anonymous constructors, and the ``rewrite`` tactic, we can
 write this proof concisely as follows:
 -->
-<p>使用本章描述的各种小工具——<code>match</code>语句、匿名构造器和<code>rewrite</code>策略，我们可以简洁地写出如下证明：</p>
+<p>使用本章描述的各种小工具——<code>match</code> 语句、匿名构造器和 <code>rewrite</code> 策略，我们可以简洁地写出如下证明：</p>
 <pre><code class="language-lean"><span class="boring">def is_even (a : Nat) := ∃ b, a = 2 * b
 </span>theorem even_plus_even (h1 : is_even a) (h2 : is_even b) : is_even (a + b) :=
   match h1, h2 with
@@ -961,7 +961,7 @@ reasoning because, from a constructive standpoint, knowing that it is
 not the case that every ``x`` satisfies ``¬ p`` is not the same as
 having a particular ``x`` that satisfies ``p``.
 -->
-<p>就像构造主义的“或”比古典的“或”强，同样，构造的“存在”也比古典的“存在”强。例如，下面的推论需要经典推理，因为从构造的角度来看，知道并不是每一个<code>x</code>都满足<code>¬ p</code>，并不等于有一个特定的<code>x</code>满足<code>p</code>。</p>
+<p>就像构造主义的「或」比古典的「或」强，同样，构造的「存在」也比古典的「存在」强。例如，下面的推论需要经典推理，因为从构造的角度来看，知道并不是每一个 <code>x</code> 都满足 <code>¬ p</code>，并不等于有一个特定的 <code>x</code> 满足 <code>p</code>。</p>
 <pre><code class="language-lean">open Classical
 variable (p : α → Prop)
 
@@ -1007,7 +1007,7 @@ assumption that there is at least one element ``a`` of type ``α``.
 
 Here are solutions to two of the more difficult ones:
 -->
-<p>注意，第二个例子和最后两个例子要求假设至少有一个类型为<code>α</code>的元素<code>a</code>。</p>
+<p>注意，第二个例子和最后两个例子要求假设至少有一个类型为 <code>α</code> 的元素 <code>a</code>。</p>
 <p>以下是两个比较困难的问题的解：</p>
 <pre><code class="language-lean">open Classical
 
@@ -1061,8 +1061,8 @@ To start with, we can use anonymous "have" expressions to introduce an
 auxiliary goal without having to label it. We can refer to the last
 expression introduced in this way using the keyword ``this``:
 -->
-<p>我们已经看到像<code>fun</code>、<code>have</code>和<code>show</code>这样的关键字使得写出反映非正式数学证明结构的正式证明项成为可能。在本节中，我们将讨论证明语言的一些通常很方便的附加特性。</p>
-<p>首先，我们可以使用匿名的<code>have</code>表达式来引入一个辅助目标，而不需要标注它。我们可以使用关键字<code>this</code>'来引用最后一个以这种方式引入的表达式:</p>
+<p>我们已经看到像 <code>fun</code>、<code>have</code> 和 <code>show</code> 这样的关键字使得写出反映非正式数学证明结构的正式证明项成为可能。在本节中，我们将讨论证明语言的一些通常很方便的附加特性。</p>
+<p>首先，我们可以使用匿名的 <code>have</code> 表达式来引入一个辅助目标，而不需要标注它。我们可以使用关键字 <code>this</code>'来引用最后一个以这种方式引入的表达式:</p>
 <pre><code class="language-lean">variable (f : Nat → Nat)
 variable (h : ∀ x : Nat, f x ≤ f (x + 1))
 
@@ -1079,7 +1079,7 @@ When the goal can be inferred, we can also ask Lean instead to fill in
 the proof by writing ``by assumption``:
 -->
 <p>通常证明从一个事实转移到另一个事实，所以这可以有效地消除杂乱的大量标签。</p>
-<p>当目标可以推断出来时，我们也可以让Lean写<code>by assumption</code>来填写证明：</p>
+<p>当目标可以推断出来时，我们也可以让 Lean 写 <code>by assumption</code> 来填写证明：</p>
 <pre><code class="language-lean"><span class="boring">variable (f : Nat → Nat)
 </span><span class="boring">variable (h : ∀ x : Nat, f x ≤ f (x + 1))
 </span>example : f 0 ≤ f 3 :=
@@ -1100,8 +1100,8 @@ respectively. The letter "f" is for "French," since the unicode
 symbols can also be used as French quotation marks. In fact, the
 notation is defined in Lean as follows:
 -->
-<p>这告诉Lean使用<code>assumption</code>策略，反过来，通过在局部上下文中找到合适的假设来证明目标。我们将在下一章学习更多关于<code>assumption</code>策略的内容。</p>
-<p>我们也可以通过写<code>‹p›</code>的形式要求Lean填写证明，其中<code>p</code>是我们希望Lean在上下文中找到的证明命题。你可以分别使用<code>\f&lt;</code>和<code>\f&gt;</code>输入这些角引号。字母“f”表示“French”，因为unicode符号也可以用作法语引号。事实上，这个符号在Lean中定义如下:</p>
+<p>这告诉 Lean 使用 <code>assumption</code> 策略，反过来，通过在局部上下文中找到合适的假设来证明目标。我们将在下一章学习更多关于 <code>assumption</code> 策略的内容。</p>
+<p>我们也可以通过写 <code>‹p›</code> 的形式要求 Lean 填写证明，其中 <code>p</code> 是我们希望 Lean 在上下文中找到的证明命题。你可以分别使用 <code>\f&lt;</code> 和 <code>\f&gt;</code> 输入这些角引号。字母「f」表示「French」，因为 unicode 符号也可以用作法语引号。事实上，这个符号在 Lean 中定义如下:</p>
 <pre><code class="language-lean">notation &quot;‹&quot; p &quot;›&quot; =&gt; show p by assumption
 </code></pre>
 <!--
@@ -1110,7 +1110,7 @@ type of the assumption that needs to be inferred is given
 explicitly. It also makes proofs more readable. Here is a more
 elaborate example:
 -->
-<p>这种方法比使用<code>by assumption</code>更稳健，因为需要推断的假设类型是显式给出的。它还使证明更具可读性。这里有一个更详细的例子:</p>
+<p>这种方法比使用 <code>by assumption</code> 更稳健，因为需要推断的假设类型是显式给出的。它还使证明更具可读性。这里有一个更详细的例子:</p>
 <pre><code class="language-lean">variable (f : Nat → Nat)
 variable (h : ∀ x : Nat, f x ≤ f (x + 1))
 
@@ -1127,13 +1127,13 @@ to refer to *anything* in the context, not just things that were
 introduced anonymously. Its use is also not limited to propositions,
 though using it for data is somewhat odd:
 -->
-<p>你可以这样使用法语引号来指代上下文中的“任何东西”，而不仅仅是匿名引入的东西。它的使用也不局限于命题，尽管将它用于数据有点奇怪：</p>
+<p>你可以这样使用法语引号来指代上下文中的「任何东西」，而不仅仅是匿名引入的东西。它的使用也不局限于命题，尽管将它用于数据有点奇怪：</p>
 <pre><code class="language-lean">example (n : Nat) : Nat := ‹Nat›
 </code></pre>
 <!--
 Later, we show how you can extend the proof language using the Lean macro system.
 -->
-<p>稍后，我们将展示如何使用Lean中的宏系统扩展证明语言。</p>
+<p>稍后，我们将展示如何使用 Lean 中的宏系统扩展证明语言。</p>
 <!--
 Exercises
 ---------
@@ -1177,7 +1177,7 @@ example : (∀ x, r → p x) ↔ (r → ∀ x, p x) := sorry
    do not shave themselves. Prove that this is a contradiction:
 -->
 <ol start="3">
-<li>考虑“理发师悖论”：在一个小镇里，这里有一个（男性）理发师给所有不为自己刮胡子的人刮胡子。证明这里存在矛盾：</li>
+<li>考虑「理发师悖论」：在一个小镇里，这里有一个（男性）理发师给所有不为自己刮胡子的人刮胡子。证明这里存在矛盾：</li>
 </ol>
 <pre><code class="language-lean">variable (men : Type) (barber : men)
 variable (shaves : men → men → Prop)
@@ -1196,7 +1196,7 @@ example (h : ∀ x : men, shaves barber x ↔ ¬ shaves x x) : False := sorry
    other statements, if necessary.
 -->
 <ol start="4">
-<li>如果没有任何参数，类型<code>Prop</code>的表达式只是一个断言。填入下面<code>prime</code>和<code>Fermat_prime</code>的定义，并构造每个给定的断言。例如，通过断言每个自然数<code>n</code>都有一个大于<code>n</code>的质数，你可以说有无限多个质数。哥德巴赫弱猜想指出，每一个大于5的奇数都是三个素数的和。如果有必要，请查阅费马素数的定义或其他任何资料。</li>
+<li>如果没有任何参数，类型 <code>Prop</code> 的表达式只是一个断言。填入下面 <code>prime</code> 和 <code>Fermat_prime</code> 的定义，并构造每个给定的断言。例如，通过断言每个自然数 <code>n</code> 都有一个大于 <code>n</code> 的质数，你可以说有无限多个质数。哥德巴赫弱猜想指出，每一个大于5的奇数都是三个素数的和。如果有必要，请查阅费马素数的定义或其他任何资料。</li>
 </ol>
 <pre><code class="language-lean">def even (n : Nat) : Prop := sorry
 

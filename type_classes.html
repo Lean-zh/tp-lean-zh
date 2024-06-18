@@ -1067,7 +1067,7 @@ prove a target ``p``. By the previous observations,
 <code>decide p</code> 将根据定义化简未为布尔值 <code>true</code>。在假设 <code>decide p = true</code>
 成立的情况下，<code>of_decide_eq_true</code> 会生成 <code>p</code> 的证明。
 策略 <code>decide</code> 将所有这些组合在一起以证明目标 <code>p</code>。根据前面的观察，
-只要推断出的决策过程拥有足够的信息，可以根据定义将 <code>c</code>求值为 <code>isTrue</code> 的情况，
+只要推断出的决策过程拥有足够的信息，可以根据定义将 <code>c</code> 求值为 <code>isTrue</code> 的情况，
 那么 <code>decide</code> 就会成功。</p>
 <!--
 ## Managing Type Class Inference
@@ -1220,7 +1220,7 @@ example : Foo.a = 3 :=
 The most basic type of coercion maps elements of one type to another. For example, a coercion from ``Nat`` to ``Int`` allows us to view any element ``n : Nat`` as an element of ``Int``. But some coercions depend on parameters; for example, for any type ``α``, we can view any element ``as : List α`` as an element of ``Set α``, namely, the set of elements occurring in the list. The corresponding coercion is defined on the "family" of types ``List α``, parameterized by ``α``.
 -->
 <p>最基本的强制转换将一种类型的元素映射到另一种类型。
-例如，从<code>Nat</code>到<code>Int</code>的强制转换允许我们将任何元素 <code>n : Nat</code> 视作元素 <code>Int</code>。
+例如，从 <code>Nat</code> 到 <code>Int</code> 的强制转换允许我们将任何元素 <code>n : Nat</code> 视作元素 <code>Int</code>。
 但一些强制转换依赖于参数；例如，对于任何类型 <code>α</code>，我们可以将任何元素
 <code>as : List α</code> 视为 <code>Set α</code> 的元素，即，列表中出现的元素组成的集合。
 相应的强制转换被定义在 <code>List α</code> 的「类型族（Type Family）」上，由 <code>α</code> 参数化。</p>
