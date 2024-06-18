@@ -1120,7 +1120,7 @@ prove a target ``p``. By the previous observations,
 ``decide p`` 将根据定义化简未为布尔值 ``true``。在假设 ``decide p = true``
 成立的情况下，``of_decide_eq_true`` 会生成 ``p`` 的证明。
 策略 ``decide`` 将所有这些组合在一起以证明目标 ``p``。根据前面的观察，
-只要推断出的决策过程拥有足够的信息，可以根据定义将 ``c``求值为 ``isTrue`` 的情况，
+只要推断出的决策过程拥有足够的信息，可以根据定义将 ``c`` 求值为 ``isTrue`` 的情况，
 那么 ``decide`` 就会成功。
 
 <!--
@@ -1315,7 +1315,7 @@ The most basic type of coercion maps elements of one type to another. For exampl
 -->
 
 最基本的强制转换将一种类型的元素映射到另一种类型。
-例如，从``Nat``到``Int``的强制转换允许我们将任何元素 ``n : Nat`` 视作元素 ``Int``。
+例如，从 ``Nat`` 到 ``Int`` 的强制转换允许我们将任何元素 ``n : Nat`` 视作元素 ``Int``。
 但一些强制转换依赖于参数；例如，对于任何类型 ``α``，我们可以将任何元素
 ``as : List α`` 视为 ``Set α`` 的元素，即，列表中出现的元素组成的集合。
 相应的强制转换被定义在 ``List α`` 的「类型族（Type Family）」上，由 ``α`` 参数化。
