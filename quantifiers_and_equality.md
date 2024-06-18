@@ -650,7 +650,7 @@ of the `Trans` type class. Type classes are introduced later, but the following
 small example demonstrates how to extend the `calc` notation using new `Trans` instances.
 -->
 
-你可以通过添加 `Trans` 类型族（Type class）的新实例来「教给」`calc` 新的传递性定理。稍后将介绍类型族，但下面的小示例将演示如何使用新的 `Trans` 实例扩展 `calc` 表示法。
+你可以通过添加 `Trans` 类型类（Type class）的新实例来「教给」`calc` 新的传递性定理。稍后将介绍类型类，但下面的小示例将演示如何使用新的 `Trans` 实例扩展 `calc` 表示法。
 
 ```lean
 def divides (x y : Nat) : Prop :=
