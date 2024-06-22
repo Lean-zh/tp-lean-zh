@@ -175,7 +175,7 @@ previously defined ones. Moreover, Lean provides convenient notation
 for defining instances of a given structure.
 -->
 <p>我们已经看到Lean的基本系统包括归纳类型。此外，显然仅基于类型宇宙、依赖箭头类型和归纳类型，就有可能构建一个坚实的数学大厦；其他的一切都是由此而来。Lean标准库包含许多归纳类型的实例(例如，<code>Nat</code>，<code>Prod</code>，<code>List</code>)，甚至逻辑连接词也是使用归纳类型定义的。</p>
-<p>回忆一下，只包含一个构造器的非递归归纳类型被称为<strong>结构体</strong>（structure）或<strong>记录</strong>（record）。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体<code>S</code>时，我们通常定义<em>投影</em>（projection）函数来“析构”（destruct）<code>S</code>的每个实例并检索存储在其字段中的值。<code>prod.pr1</code>和<code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
+<p>回忆一下，只包含一个构造器的非递归归纳类型被称为<strong>结构体</strong>（structure）或<strong>记录</strong>（record）。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体<code>S</code>时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code>的每个实例并检索存储在其字段中的值。<code>prod.pr1</code>和<code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
 <p>在编写程序或形式化数学时，定义包含许多字段的结构体是很常见的。Lean中可用<code>structure</code>命令实现此过程。当我们使用这个命令定义一个结构体时，Lean会自动生成所有的投影函数。<code>structure</code>命令还允许我们根据以前定义的结构体定义新的结构体。此外，Lean为定义给定结构体的实例提供了方便的符号。</p>
 <!--
 Declaring Structures
@@ -187,7 +187,7 @@ The structure command is essentially a "front end" for defining
 inductive data types. Every ``structure`` declaration introduces a
 namespace with the same name. The general form is as follows:
 -->
-<p>结构体命令本质上是定义归纳数据类型的“前端”。每个<code>structure</code>声明都会引入一个同名的命名空间。一般形式如下:</p>
+<p>结构体命令本质上是定义归纳数据类型的「前端」。每个<code>structure</code>声明都会引入一个同名的命名空间。一般形式如下:</p>
 <pre><code>    structure &lt;name&gt; &lt;parameters&gt; &lt;parent-structures&gt; where
       &lt;constructor&gt; :: &lt;fields&gt;
 </code></pre>
@@ -206,7 +206,7 @@ The structure command also generates useful recursors and
 theorems. Here are some of the constructions generated for the
 declaration above.
 -->
-<p>类型<code>Point</code>的值是使用<code>Point.mk a b</code>创建的，并且点<code>p</code>的字段可以使用<code>Point.x p</code>和<code>Point.y p</code>。结构体命令还生成有用的递归子和定理。下面是为上述声明生成的一些结构体方法。</p>
+<p>类型<code>Point</code>的值是使用<code>Point.mk a b</code>创建的，并且点<code>p</code>的字段可以使用<code>Point.x p</code>和<code>Point.y p</code>。结构体命令还生成有用的递归器和定理。下面是为上述声明生成的一些结构体方法。</p>
 <!--
 ```lean
 # structure Point (α : Type u) where
@@ -363,7 +363,7 @@ use this notation to define "points." The order that the fields are
 specified does not matter, so all the expressions below define the
 same point.
 -->
-<p>只要可以从期望的类型推断出结构体的名称，后缀<code>: structure-type</code>就可以省略。例如，我们使用这种表示法来定义“Point”。字段的指定顺序无关紧要，因此下面的所有表达式定义相同的Point。</p>
+<p>只要可以从期望的类型推断出结构体的名称，后缀<code>: structure-type</code>就可以省略。例如，我们使用这种表示法来定义「Point」。字段的指定顺序无关紧要，因此下面的所有表达式定义相同的Point。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α

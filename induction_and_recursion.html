@@ -142,34 +142,52 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="induction-and-recursion"><a class="header" href="#induction-and-recursion">Induction and Recursion</a></h1>
-<p>In the previous chapter, we saw that inductive definitions provide a
+                        <!--
+Induction and Recursion
+=======================
+-->
+<h1 id="归纳和递归"><a class="header" href="#归纳和递归">归纳和递归</a></h1>
+<!--
+In the previous chapter, we saw that inductive definitions provide a
 powerful means of introducing new types in Lean. Moreover, the
 constructors and the recursors provide the only means of defining
 functions on these types. By the propositions-as-types correspondence,
-this means that induction is the fundamental method of proof.</p>
-<p>Lean provides natural ways of defining recursive functions, performing
+this means that induction is the fundamental method of proof.
+
+Lean provides natural ways of defining recursive functions, performing
 pattern matching, and writing inductive proofs. It allows you to
 define a function by specifying equations that it should satisfy, and
 it allows you to prove a theorem by specifying how to handle various
 cases that can arise. Behind the scenes, these descriptions are
-&quot;compiled&quot; down to primitive recursors, using a procedure that we
-refer to as the &quot;equation compiler.&quot; The equation compiler is not part
+"compiled" down to primitive recursors, using a procedure that we
+refer to as the "equation compiler." The equation compiler is not part
 of the trusted code base; its output consists of terms that are
-checked independently by the kernel.</p>
-<h2 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern Matching</a></h2>
-<p>The interpretation of schematic patterns is the first step of the
-compilation process. We have seen that the <code>casesOn</code> recursor can
+checked independently by the kernel.
+-->
+<p>在上一章中，我们看到归纳定义提供了在 Lean 中引入新类型的强大手段。此外，构造器和递归器提供了在这些类型上定义函数的唯一手段。命题即类型的对应关系，意味着归纳法是证明的基本方法。</p>
+<p>Lean 提供了定义递归函数、执行模式匹配和编写归纳证明的自然方法。它允许你通过指定它应该满足的方程来定义一个函数，它允许你通过指定如何处理可能出现的各种情况来证明一个定理。在它内部，这些描述被「方程编译器」程序「编译」成原始递归器。方程编译器不是可信代码库的一部分；它的输出包括由内核独立检查的项。</p>
+<!--
+Pattern Matching
+----------------
+-->
+<h2 id="模式匹配"><a class="header" href="#模式匹配">模式匹配</a></h2>
+<!--
+The interpretation of schematic patterns is the first step of the
+compilation process. We have seen that the ``casesOn`` recursor can
 be used to define functions and prove theorems by cases, according to
 the constructors involved in an inductively defined type. But
-complicated definitions may use several nested <code>casesOn</code>
+complicated definitions may use several nested ``casesOn``
 applications, and may be hard to read and understand. Pattern matching
 provides an approach that is more convenient, and familiar to users of
-functional programming languages.</p>
-<p>Consider the inductively defined type of natural numbers. Every
-natural number is either <code>zero</code> or <code>succ x</code>, and so you can define
+functional programming languages.
+
+Consider the inductively defined type of natural numbers. Every
+natural number is either ``zero`` or ``succ x``, and so you can define
 a function from the natural numbers to an arbitrary type by specifying
-a value in each of those cases:</p>
+a value in each of those cases:
+-->
+<p>对示意图模式的解释是编译过程的第一步。我们已经看到，<code>casesOn</code> 递归器可以通过分情况讨论来定义函数和证明定理，根据归纳定义类型所涉及的构造器。但是复杂的定义可能会使用几个嵌套的 <code>casesOn</code> 应用，而且可能很难阅读和理解。模式匹配提供了一种更方便的方法，并且为函数式编程语言的用户所熟悉。</p>
+<p>考虑一下自然数的归纳定义类型。每个自然数要么是 <code>zero</code>，要么是 <code>succ x</code>，因此你可以通过在每个情况下指定一个值来定义一个从自然数到任意类型的函数：</p>
 <pre><code class="language-lean">open Nat
 
 def sub1 : Nat → Nat
@@ -180,7 +198,10 @@ def isZero : Nat → Bool
   | zero   =&gt; true
   | succ x =&gt; false
 </code></pre>
-<p>The equations used to define these functions hold definitionally:</p>
+<!--
+The equations used to define these functions hold definitionally:
+-->
+<p>用来定义这些函数的方程在定义上是成立的：</p>
 <pre><code class="language-lean"><span class="boring">open Nat
 </span><span class="boring">def sub1 : Nat → Nat
 </span><span class="boring">  | zero   =&gt; zero
@@ -197,7 +218,10 @@ example (x : Nat) : isZero (succ x) = false := rfl
 example : sub1 7 = 6 := rfl
 example (x : Nat) : isZero (x + 3) = false := rfl
 </code></pre>
-<p>Instead of <code>zero</code> and <code>succ</code>, we can use more familiar notation:</p>
+<!--
+Instead of ``zero`` and ``succ``, we can use more familiar notation:
+-->
+<p>我们可以用一些更耳熟能详的符号，而不是 <code>zero</code> 和 <code>succ</code>：</p>
 <pre><code class="language-lean">def sub1 : Nat → Nat
   | 0   =&gt; 0
   | x+1 =&gt; x
@@ -206,11 +230,16 @@ def isZero : Nat → Bool
   | 0   =&gt; true
   | x+1 =&gt; false
 </code></pre>
-<p>Because addition and the zero notation have been assigned the
-<code>[match_pattern]</code> attribute, they can be used in pattern matching. Lean
-simply normalizes these expressions until the constructors <code>zero</code>
-and <code>succ</code> are exposed.</p>
-<p>Pattern matching works with any inductive type, such as products and option types:</p>
+<!--
+Because addition and the zero notation have been assigned the
+``[match_pattern]`` attribute, they can be used in pattern matching. Lean
+simply normalizes these expressions until the constructors ``zero``
+and ``succ`` are exposed.
+
+Pattern matching works with any inductive type, such as products and option types:
+-->
+<p>因为加法和零符号已经被赋予 <code>[matchPattern]</code> 属性，它们可以被用于模式匹配。Lean 简单地将这些表达式规范化，直到显示构造器 <code>zero</code> 和 <code>succ</code>。</p>
+<p>模式匹配适用于任何归纳类型，如乘积和 Option 类型：</p>
 <pre><code class="language-lean">def swap : α × β → β × α
   | (a, b) =&gt; (b, a)
 
@@ -221,8 +250,11 @@ def bar : Option Nat → Nat
   | some n =&gt; n + 1
   | none   =&gt; 0
 </code></pre>
-<p>Here we use it not only to define a function, but also to carry out a
-proof by cases:</p>
+<!--
+Here we use it not only to define a function, but also to carry out a
+proof by cases:
+-->
+<p>在这里，我们不仅用它来定义一个函数，而且还用它来进行逐情况证明：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>def not : Bool → Bool
   | true  =&gt; false
@@ -233,7 +265,10 @@ theorem not_not : ∀ (b : Bool), not (not b) = b
   | false =&gt; rfl  -- proof that not (not false) = false
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Pattern matching can also be used to destruct inductively defined propositions:</p>
+<!--
+Pattern matching can also be used to destruct inductively defined propositions:
+-->
+<p>模式匹配也可以用来解构归纳定义的命题：</p>
 <pre><code class="language-lean">example (p q : Prop) : p ∧ q → q ∧ p
   | And.intro h₁ h₂ =&gt; And.intro h₂ h₁
 
@@ -241,22 +276,30 @@ example (p q : Prop) : p ∨ q → q ∨ p
   | Or.inl hp =&gt; Or.inr hp
   | Or.inr hq =&gt; Or.inl hq
 </code></pre>
-<p>This provides a compact way of unpacking hypotheses that make use of logical connectives.</p>
-<p>In all these examples, pattern matching was used to carry out a single
+<!--
+This provides a compact way of unpacking hypotheses that make use of logical connectives.
+
+In all these examples, pattern matching was used to carry out a single
 case distinction. More interestingly, patterns can involve nested
-constructors, as in the following examples.</p>
+constructors, as in the following examples.
+-->
+<p>这样解决带逻辑连接词的命题就很紧凑。</p>
+<p>在所有这些例子中，模式匹配被用来进行单一情况的区分。更有趣的是，模式可以涉及嵌套的构造器，如下面的例子。</p>
 <pre><code class="language-lean">def sub2 : Nat → Nat
   | 0   =&gt; 0
   | 1   =&gt; 0
   | x+2 =&gt; x
 </code></pre>
-<p>The equation compiler first splits on cases as to whether the input is
-<code>zero</code> or of the form <code>succ x</code>.  It then does a case split on
-whether <code>x</code> is of the form <code>zero</code> or <code>succ x</code>.  It determines
+<!--
+The equation compiler first splits on cases as to whether the input is
+``zero`` or of the form ``succ x``.  It then does a case split on
+whether ``x`` is of the form ``zero`` or ``succ x``.  It determines
 the necessary case splits from the patterns that are presented to it,
 and raises an error if the patterns fail to exhaust the cases. Once
 again, we can use arithmetic notation, as in the version below. In
-either case, the defining equations hold definitionally.</p>
+either case, the defining equations hold definitionally.
+-->
+<p>方程编译器首先对输入是 <code>zero</code> 还是 <code>succ x</code> 的形式进行分类讨论，然后对 <code>x</code> 是 <code>zero</code> 还是 <code>succ x</code> 的形式进行分类讨论。它从提交给它的模式中确定必要的情况拆分，如果模式不能穷尽情况，则会引发错误。同时，我们可以使用算术符号，如下面的版本。在任何一种情况下，定义方程都是成立的。</p>
 <pre><code class="language-lean"><span class="boring">def sub2 : Nat → Nat
 </span><span class="boring">  | 0   =&gt; 0
 </span><span class="boring">  | 1   =&gt; 0
@@ -267,11 +310,14 @@ example : sub2 (x+2) = x := rfl
 
 example : sub2 5 = 3 := rfl
 </code></pre>
-<p>You can write <code>#print sub2</code> to see how the function was compiled to
-recursors. (Lean will tell you that <code>sub2</code> has been defined in terms
-of an internal auxiliary function, <code>sub2.match_1</code>, but you can print
-that out too.) Lean uses these auxiliary functions to compile <code>match</code> expressions.
-Actually, the definition above is expanded to</p>
+<!--
+You can write ``#print sub2`` to see how the function was compiled to
+recursors. (Lean will tell you that ``sub2`` has been defined in terms
+of an internal auxiliary function, ``sub2.match_1``, but you can print
+that out too.) Lean uses these auxiliary functions to compile `match` expressions.
+Actually, the definition above is expanded to
+-->
+<p>你可以写 <code>#print sub2</code> 来看看这个函数是如何被编译成递归器的。（Lean 会告诉你 <code>sub2</code> 已经被定义为内部辅助函数 <code>sub2.match_1</code>，但你也可以把它打印出来）。Lean 使用这些辅助函数来编译 <code>match</code> 表达式。实际上，上面的定义被扩展为</p>
 <pre><code class="language-lean">def sub2 : Nat → Nat :=
   fun x =&gt;
     match x with
@@ -279,7 +325,10 @@ Actually, the definition above is expanded to</p>
     | 1   =&gt; 0
     | x+2 =&gt; x
 </code></pre>
-<p>Here are some more examples of nested pattern matching:</p>
+<!--
+Here are some more examples of nested pattern matching:
+-->
+<p>下面是一些嵌套模式匹配的例子：</p>
 <pre><code class="language-lean">example (p q : α → Prop)
         : (∃ x, p x ∨ q x) → (∃ x, p x) ∨ (∃ x, q x)
   | Exists.intro x (Or.inl px) =&gt; Or.inl (Exists.intro x px)
@@ -290,25 +339,36 @@ def foo : Nat × Nat → Nat
   | (m+1, 0)   =&gt; 1
   | (m+1, n+1) =&gt; 2
 </code></pre>
-<p>The equation compiler can process multiple arguments sequentially. For
+<!--
+The equation compiler can process multiple arguments sequentially. For
 example, it would be more natural to define the previous example as a
-function of two arguments:</p>
+function of two arguments:
+-->
+<p>方程编译器可以按顺序处理多个参数。例如，将前面的例子定义为两个参数的函数会更自然：</p>
 <pre><code class="language-lean">def foo : Nat → Nat → Nat
   | 0,   n   =&gt; 0
   | m+1, 0   =&gt; 1
   | m+1, n+1 =&gt; 2
 </code></pre>
-<p>Here is another example:</p>
+<!--
+Here is another example:
+-->
+<p>另一例：</p>
 <pre><code class="language-lean">def bar : List Nat → List Nat → Nat
   | [],      []      =&gt; 0
   | a :: as, []      =&gt; a
   | [],      b :: bs =&gt; b
   | a :: as, b :: bs =&gt; a + b
 </code></pre>
-<p>Note that the patterns are separated by commas.</p>
-<p>In each of the following examples, splitting occurs on only the first
+<!--
+Note that the patterns are separated by commas.
+
+In each of the following examples, splitting occurs on only the first
 argument, even though the others are included among the list of
-patterns.</p>
+patterns.
+-->
+<p>这些模式是由逗号分隔的。</p>
+<p>在下面的每个例子中，尽管其他参数包括在模式列表中，但只对第一个参数进行了分割。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>def and : Bool → Bool → Bool
   | true,  a =&gt; a
@@ -323,20 +383,25 @@ def cond : Bool → α → α → α
   | false, x, y =&gt; y
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Notice also that, when the value of an argument is not needed in the
+<!--
+Notice also that, when the value of an argument is not needed in the
 definition, you can use an underscore instead. This underscore is
-known as a <em>wildcard pattern</em>, or an <em>anonymous variable</em>. In contrast
-to usage outside the equation compiler, here the underscore does <em>not</em>
+known as a *wildcard pattern*, or an *anonymous variable*. In contrast
+to usage outside the equation compiler, here the underscore does *not*
 indicate an implicit argument. The use of underscores for wildcards is
 common in functional programming languages, and so Lean adopts that
-notation. <a href="#wildcards-and-overlapping-patterns">Section Wildcards and Overlapping Patterns</a>
-expands on the notion of a wildcard, and <a href="#inaccessible-patterns">Section Inaccessible Patterns</a> explains how
-you can use implicit arguments in patterns as well.</p>
-<p>As described in <a href="./inductive_types.html">Chapter Inductive Types</a>,
+notation. [Section Wildcards and Overlapping Patterns](#wildcards-and-overlapping-patterns)
+expands on the notion of a wildcard, and [Section Inaccessible Patterns](#inaccessible-patterns) explains how
+you can use implicit arguments in patterns as well.
+
+As described in [Chapter Inductive Types](./inductive_types.md),
 inductive data types can depend on parameters. The following example defines
-the <code>tail</code> function using pattern matching. The argument <code>α : Type u</code>
+the ``tail`` function using pattern matching. The argument ``α : Type u``
 is a parameter and occurs before the colon to indicate it does not participate in the pattern matching.
-Lean also allows parameters to occur after <code>:</code>, but it cannot pattern match on them.</p>
+Lean also allows parameters to occur after ``:``, but it cannot pattern match on them.
+-->
+<p>还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为<strong>通配符模式</strong>，或<strong>匿名变量</strong>。与方程编译器之外的用法不同，这里的下划线并<strong>不</strong>表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。<a href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E9%87%8D%E5%8F%A0%E6%A8%A1%E5%BC%8F">通配符和重叠模式</a>一节阐述了通配符的概念，而<a href="#%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F">不可访问模式</a>一节解释了你如何在模式中使用隐参数。</p>
+<p>正如<a href="./inductive_types.html">归纳类型</a>一章中所描述的，归纳数据类型可以依赖于参数。下面的例子使用模式匹配定义了 <code>tail</code> 函数。参数 <code>α : Type</code> 是一个参数，出现在冒号之前，表示它不参与模式匹配。Lean 也允许参数出现在 <code>:</code> 之后，但它不能对其进行模式匹配。</p>
 <pre><code class="language-lean">def tail1 {α : Type u} : List α → List α
   | []      =&gt; []
   | a :: as =&gt; as
@@ -345,31 +410,50 @@ def tail2 : {α : Type u} → List α → List α
   | α, []      =&gt; []
   | α, a :: as =&gt; as
 </code></pre>
-<p>Despite the different placement of the parameter <code>α</code> in these two
+<!--
+Despite the different placement of the parameter ``α`` in these two
 examples, in both cases it is treated in the same way, in that it does
-not participate in a case split.</p>
-<p>Lean can also handle more complex forms of pattern matching, in which
+not participate in a case split.
+
+Lean can also handle more complex forms of pattern matching, in which
 arguments to dependent types pose additional constraints on the
-various cases. Such examples of <em>dependent pattern matching</em> are
-considered in the <a href="#dependent-pattern-matching">Section Dependent Pattern Matching</a>.</p>
-<h2 id="wildcards-and-overlapping-patterns"><a class="header" href="#wildcards-and-overlapping-patterns">Wildcards and Overlapping Patterns</a></h2>
-<p>Consider one of the examples from the last section:</p>
+various cases. Such examples of *dependent pattern matching* are
+considered in the [Section Dependent Pattern Matching](#dependent-pattern-matching).
+
+-->
+<p>尽管参数 <code>α</code> 在这两个例子中的位置不同，但在这两种情况下，它的处理方式是一样的，即它不参与情况分割。</p>
+<p>Lean也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种<strong>依值模式匹配</strong>的例子在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中考虑。</p>
+<!--
+Wildcards and Overlapping Patterns
+----------------------------------
+-->
+<h2 id="通配符和重叠模式"><a class="header" href="#通配符和重叠模式">通配符和重叠模式</a></h2>
+<!--
+Consider one of the examples from the last section:
+-->
+<p>考虑上节的一个例子：</p>
 <pre><code class="language-lean">def foo : Nat → Nat → Nat
   | 0,   n   =&gt; 0
   | m+1, 0   =&gt; 1
   | m+1, n+1 =&gt; 2
 </code></pre>
-<p>An alternative presentation is:</p>
+<!--
+An alternative presentation is:
+-->
+<p>也可以表述成</p>
 <pre><code class="language-lean">def foo : Nat → Nat → Nat
   | 0, n =&gt; 0
   | m, 0 =&gt; 1
   | m, n =&gt; 2
 </code></pre>
-<p>In the second presentation, the patterns overlap; for example, the
-pair of arguments <code>0 0</code> matches all three cases. But Lean handles
+<!--
+In the second presentation, the patterns overlap; for example, the
+pair of arguments ``0 0`` matches all three cases. But Lean handles
 the ambiguity by using the first applicable equation, so in this example
 the net result is the same. In particular, the following equations hold
-definitionally:</p>
+definitionally:
+-->
+<p>在第二种表述中，模式是重叠的；例如，一对参数 <code>0 0</code> 符合所有三种情况。但是Lean通过使用第一个适用的方程来处理这种模糊性，所以在这个例子中，最终结果是一样的。特别是，以下方程在定义上是成立的：</p>
 <pre><code class="language-lean"><span class="boring">def foo : Nat → Nat → Nat
 </span><span class="boring">  | 0, n =&gt; 0
 </span><span class="boring">  | m, 0 =&gt; 1
@@ -379,33 +463,66 @@ example : foo 0     (n+1) = 0 := rfl
 example : foo (m+1) 0     = 1 := rfl
 example : foo (m+1) (n+1) = 2 := rfl
 </code></pre>
-<p>Since the values of <code>m</code> and <code>n</code> are not needed, we can just as well use wildcard patterns instead.</p>
+<!--
+Since the values of ``m`` and ``n`` are not needed, we can just as well use wildcard patterns instead.
+-->
+<p>由于不需要<code>m</code>和<code>n</code>的值，我们也可以用通配符模式代替。</p>
 <pre><code class="language-lean">def foo : Nat → Nat → Nat
   | 0, _ =&gt; 0
   | _, 0 =&gt; 1
   | _, _ =&gt; 2
 </code></pre>
-<p>You can check that this definition of <code>foo</code> satisfies the same
-definitional identities as before.</p>
-<p>Some functional programming languages support <em>incomplete
-patterns</em>. In these languages, the interpreter produces an exception
+<!--
+You can check that this definition of ``foo`` satisfies the same
+definitional identities as before.
+
+Some functional programming languages support *incomplete
+patterns*. In these languages, the interpreter produces an exception
 or returns an arbitrary value for incomplete cases. We can simulate
-the arbitrary value approach using the <code>Inhabited</code> type
-class. Roughly, an element of <code>Inhabited α</code> is a witness to the fact
-that there is an element of <code>α</code>; in the <a href="./type_classes.html">Chapter Type Classes</a>
+the arbitrary value approach using the ``Inhabited`` type
+class. Roughly, an element of ``Inhabited α`` is a witness to the fact
+that there is an element of ``α``; in the [Chapter Type Classes](./type_classes.md)
 we will see that Lean can be instructed that suitable
 base types are inhabited, and can automatically infer that other
 constructed types are inhabited. On this basis, the
-standard library provides a default element, <code>default</code>, of
-any inhabited type.</p>
-<p>We can also use the type <code>Option α</code> to simulate incomplete patterns.
-The idea is to return <code>some a</code> for the provided patterns, and use
-<code>none</code> for the incomplete cases. The following example demonstrates
-both approaches.</p>
+standard library provides a default element, ``default``, of
+any inhabited type.
+
+We can also use the type ``Option α`` to simulate incomplete patterns.
+The idea is to return ``some a`` for the provided patterns, and use
+``none`` for the incomplete cases. The following example demonstrates
+both approaches.
+-->
+<p>你可以检查这个 <code>foo</code> 的定义是否满足与之前相同的定义特性。</p>
+<p>一些函数式编程语言支持<strong>不完整的模式</strong>。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 <code>Inhabited</code> （含元素的）类型类来模拟任意值的方法。粗略的说，<code>Inhabited α</code> 的一个元素是对 <code>α</code> 拥有一个元素的见证；在<a href="./type_classes.html">类型类</a>中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素<code>arbitrary</code>，任何含元素的类型。</p>
+<p>我们还可以使用类型<code>Option α</code>来模拟不完整的模式。我们的想法是对所提供的模式返回<code>some a</code>，而对不完整的情况使用<code>none</code>。下面的例子演示了这两种方法。</p>
+<!--
+```lean
+def f1 : Nat → Nat → Nat
+  | 0, _  => 1
+  | _, 0  => 2
+  | _, _  => default  -- the "incomplete" case
+
+example : f1 0     0     = 1       := rfl
+example : f1 0     (a+1) = 1       := rfl
+example : f1 (a+1) 0     = 2       := rfl
+example : f1 (a+1) (b+1) = default := rfl
+
+def f2 : Nat → Nat → Option Nat
+  | 0, _  => some 1
+  | _, 0  => some 2
+  | _, _  => none     -- the "incomplete" case
+
+example : f2 0     0     = some 1 := rfl
+example : f2 0     (a+1) = some 1 := rfl
+example : f2 (a+1) 0     = some 2 := rfl
+example : f2 (a+1) (b+1) = none   := rfl
+```
+-->
 <pre><code class="language-lean">def f1 : Nat → Nat → Nat
   | 0, _  =&gt; 1
   | _, 0  =&gt; 2
-  | _, _  =&gt; default  -- the &quot;incomplete&quot; case
+  | _, _  =&gt; default  -- 不完整的模式
 
 example : f1 0     0     = 1       := rfl
 example : f1 0     (a+1) = 1       := rfl
@@ -415,16 +532,19 @@ example : f1 (a+1) (b+1) = default := rfl
 def f2 : Nat → Nat → Option Nat
   | 0, _  =&gt; some 1
   | _, 0  =&gt; some 2
-  | _, _  =&gt; none     -- the &quot;incomplete&quot; case
+  | _, _  =&gt; none     -- 不完整的模式
 
 example : f2 0     0     = some 1 := rfl
 example : f2 0     (a+1) = some 1 := rfl
 example : f2 (a+1) 0     = some 2 := rfl
 example : f2 (a+1) (b+1) = none   := rfl
 </code></pre>
-<p>The equation compiler is clever. If you leave out any of the cases in
+<!--
+The equation compiler is clever. If you leave out any of the cases in
 the following definition, the error message will let you know what has
-not been covered.</p>
+not been covered.
+-->
+<p>方程编译器是很智能的。如果你遗漏了以下定义中的任何一种情况，错误信息会告诉你遗漏了哪个。</p>
 <pre><code class="language-lean">def bar : Nat → List Nat → Bool → Nat
   | 0,   _,      false =&gt; 0
   | 0,   b :: _, _     =&gt; b
@@ -433,7 +553,10 @@ not been covered.</p>
   | a+1, [],     true  =&gt; a + 1
   | a+1, b :: _, _     =&gt; a + b
 </code></pre>
-<p>It will also use an &quot;if ... then ... else&quot; instead of a <code>casesOn</code> in appropriate situations.</p>
+<!--
+It will also use an "if ... then ... else" instead of a ``casesOn`` in appropriate situations.
+-->
+<p>某些情况也可以用「if ... then ... else」代替 <code>casesOn</code>。</p>
 <pre><code class="language-lean">def foo : Char → Nat
   | 'A' =&gt; 1
   | 'B' =&gt; 2
@@ -441,47 +564,66 @@ not been covered.</p>
 
 #print foo.match_1
 </code></pre>
-<h2 id="structural-recursion-and-induction"><a class="header" href="#structural-recursion-and-induction">Structural Recursion and Induction</a></h2>
-<p>What makes the equation compiler powerful is that it also supports
+<!--
+Structural Recursion and Induction
+----------------------------------
+-->
+<h2 id="结构化递归和归纳"><a class="header" href="#结构化递归和归纳">结构化递归和归纳</a></h2>
+<!--
+What makes the equation compiler powerful is that it also supports
 recursive definitions. In the next three sections, we will describe,
-respectively:</p>
+respectively:
+
+- structurally recursive definitions
+- well-founded recursive definitions
+- mutually recursive definitions
+
+Generally speaking, the equation compiler processes input of the following form:
+
+-->
+<p>方程编译器的强大之处在于，它还支持递归定义。在接下来的三节中，我们将分别介绍。</p>
 <ul>
-<li>structurally recursive definitions</li>
-<li>well-founded recursive definitions</li>
-<li>mutually recursive definitions</li>
+<li>结构性递归定义</li>
+<li>良基的递归定义</li>
+<li>相互递归的定义</li>
 </ul>
-<p>Generally speaking, the equation compiler processes input of the following form:</p>
+<p>一般来说，方程编译器处理以下形式的输入。</p>
 <pre><code>def foo (a : α) : (b : β) → γ
   | [patterns₁] =&gt; t₁
   ...
   | [patternsₙ] =&gt; tₙ
 </code></pre>
-<p>Here <code>(a : α)</code> is a sequence of parameters, <code>(b : β)</code> is the
-sequence of arguments on which pattern matching takes place, and <code>γ</code>
-is any type, which can depend on <code>a</code> and <code>b</code>. Each line should
-contain the same number of patterns, one for each element of <code>β</code>. As we
+<!--
+Here ``(a : α)`` is a sequence of parameters, ``(b : β)`` is the
+sequence of arguments on which pattern matching takes place, and ``γ``
+is any type, which can depend on ``a`` and ``b``. Each line should
+contain the same number of patterns, one for each element of ``β``. As we
 have seen, a pattern is either a variable, a constructor applied to
 other patterns, or an expression that normalizes to something of that
-form (where the non-constructors are marked with the <code>[match_pattern]</code>
+form (where the non-constructors are marked with the ``[match_pattern]``
 attribute). The appearances of constructors prompt case splits, with
 the arguments to the constructors represented by the given
-variables. In <a href="#dependent-pattern-matching">Section Dependent Pattern Matching</a>,
+variables. In [Section Dependent Pattern Matching](#dependent-pattern-matching),
 we will see that it is sometimes necessary to include explicit terms in patterns that
 are needed to make an expression type check, though they do not play a
-role in pattern matching. These are called &quot;inaccessible patterns&quot; for
+role in pattern matching. These are called "inaccessible patterns" for
 that reason. But we will not need to use such inaccessible patterns
-before <a href="#dependent-pattern-matching">Section Dependent Pattern Matching</a>.</p>
-<p>As we saw in the last section, the terms <code>t₁, ..., tₙ</code> can make use
-of any of the parameters <code>a</code>, as well as any of the variables that
+before [Section Dependent Pattern Matching](#dependent-pattern-matching).
+
+As we saw in the last section, the terms ``t₁, ..., tₙ`` can make use
+of any of the parameters ``a``, as well as any of the variables that
 are introduced in the corresponding patterns. What makes recursion and
 induction possible is that they can also involve recursive calls to
-<code>foo</code>. In this section, we will deal with <em>structural recursion</em>, in
-which the arguments to <code>foo</code> occurring on the right-hand side of the
-<code>=&gt;</code> are subterms of the patterns on the left-hand side. The idea is
+``foo``. In this section, we will deal with *structural recursion*, in
+which the arguments to ``foo`` occurring on the right-hand side of the
+``=>`` are subterms of the patterns on the left-hand side. The idea is
 that they are structurally smaller, and hence appear in the inductive
 type at an earlier stage. Here are some examples of structural
 recursion from the last chapter, now defined using the equation
-compiler:</p>
+compiler:
+-->
+<p>这里 <code>(a : α)</code> 是一个参数序列，<code>(b : β)</code> 是进行模式匹配的参数序列，<code>γ</code> 是任何类型，它可以取决于 <code>a</code> 和 <code>b </code>。每一行应该包含相同数量的模式，对应于 <code>β</code> 的每个元素。正如我们所看到的，模式要么是一个变量，要么是应用于其他模式的构造器，要么是一个正规化为该形式的表达式（其中非构造器用 <code>[matchPattern]</code> 属性标记）。构造器的出现会提示情况拆分，构造器的参数由给定的变量表示。在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中，我们将看到有时有必要在模式中包含明确的项，这些项需要进行表达式类型检查，尽管它们在模式匹配中没有起到作用。由于这个原因，这些被称为「不可访问的模式」。但是在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节之前，我们将不需要使用这种不可访问的模式。</p>
+<p>正如我们在上一节所看到的，项 <code>t₁,...,tₙ</code> 可以利用任何一个参数 <code>a</code>，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 <code>foo</code> 的递归调用。在本节中，我们将处理<strong>结构性递归</strong>，其中 <code>foo</code> 的参数出现在 <code>:=</code> 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。</p>
 <pre><code class="language-lean">open Nat
 def add : Nat → Nat → Nat
   | m, zero   =&gt; m
@@ -498,18 +640,24 @@ def mul : Nat → Nat → Nat
   | n, zero   =&gt; zero
   | n, succ m =&gt; add (mul n m) n
 </code></pre>
-<p>The proof of <code>zero_add</code> makes it clear that proof by induction is
-really a form of recursion in Lean.</p>
-<p>The example above shows that the defining equations for <code>add</code> hold
-definitionally, and the same is true of <code>mul</code>. The equation compiler
+<!--
+
+The proof of ``zero_add`` makes it clear that proof by induction is
+really a form of recursion in Lean.
+
+The example above shows that the defining equations for ``add`` hold
+definitionally, and the same is true of ``mul``. The equation compiler
 tries to ensure that this holds whenever possible, as is the case with
 straightforward structural induction. In other situations, however,
-reductions hold only <em>propositionally</em>, which is to say, they are
+reductions hold only *propositionally*, which is to say, they are
 equational theorems that must be applied explicitly. The equation
 compiler generates such theorems internally. They are not meant to be
-used directly by the user; rather, the <code>simp</code> tactic
+used directly by the user; rather, the `simp` tactic
 is configured to use them when necessary. Thus both of the following
-proofs of <code>zero_add</code> work:</p>
+proofs of `zero_add` work:
+-->
+<p><code>zero_add</code> 的证明清楚地表明，归纳证明实际上是 Lean 中的一种递归形式。</p>
+<p>上面的例子表明，<code>add</code>的定义方程具有定义意义，<code> mul</code>也是如此。方程编译器试图确保在任何可能的情况下都是这样，就像直接的结构归纳法一样。然而，在其他情况下，约简只在命题上成立，也就是说，它们是必须明确应用的方程定理。方程编译器在内部生成这样的定理。用户不能直接使用它们;相反，<code>simp</code>策略被配置为在必要时使用它们。因此，对<code>zero_add</code>的以下两种证明都成立：</p>
 <pre><code class="language-lean">open Nat
 <span class="boring">def add : Nat → Nat → Nat
 </span><span class="boring">  | m, zero   =&gt; m
@@ -518,24 +666,33 @@ proofs of <code>zero_add</code> work:</p>
   | zero   =&gt; by simp [add]
   | succ n =&gt; by simp [add, zero_add]
 </code></pre>
-<p>As with definition by pattern matching, parameters to a structural
+<!--
+As with definition by pattern matching, parameters to a structural
 recursion or induction may appear before the colon. Such parameters
 are simply added to the local context before the definition is
 processed. For example, the definition of addition may also be written
-as follows:</p>
+as follows:
+-->
+<p>与模式匹配定义一样，结构递归或归纳的参数可能出现在冒号之前。在处理定义之前，简单地将这些参数添加到本地上下文中。例如，加法的定义也可以写成这样:</p>
 <pre><code class="language-lean">open Nat
 def add (m : Nat) : Nat → Nat
   | zero   =&gt; m
   | succ n =&gt; succ (add m n)
 </code></pre>
-<p>You can also write the example above using <code>match</code>.</p>
+<!--
+You can also write the example above using `match`.
+-->
+<p>你也可以用 <code>match</code> 来写上面的例子。</p>
 <pre><code class="language-lean">open Nat
 def add (m n : Nat) : Nat :=
   match n with
   | zero   =&gt; m
   | succ n =&gt; succ (add m n)
 </code></pre>
-<p>A more interesting example of structural recursion is given by the Fibonacci function <code>fib</code>.</p>
+<!--
+A more interesting example of structural recursion is given by the Fibonacci function ``fib``.
+-->
+<p>一个更有趣的结构递归的例子是斐波那契函数 <code>fib</code>。</p>
 <pre><code class="language-lean">def fib : Nat → Nat
   | 0   =&gt; 1
   | 1   =&gt; 1
@@ -547,12 +704,15 @@ example : fib (n + 2) = fib (n + 1) + fib n := rfl
 
 example : fib 7 = 21 := rfl
 </code></pre>
-<p>Here, the value of the <code>fib</code> function at <code>n + 2</code> (which is
-definitionally equal to <code>succ (succ n)</code>) is defined in terms of the
-values at <code>n + 1</code> (which is definitionally equivalent to <code>succ n</code>)
-and the value at <code>n</code>. This is a notoriously inefficient way of
+<!--
+Here, the value of the ``fib`` function at ``n + 2`` (which is
+definitionally equal to ``succ (succ n)``) is defined in terms of the
+values at ``n + 1`` (which is definitionally equivalent to ``succ n``)
+and the value at ``n``. This is a notoriously inefficient way of
 computing the Fibonacci function, however, with an execution time that
-is exponential in <code>n</code>. Here is a better way:</p>
+is exponential in ``n``. Here is a better way:
+-->
+<p>这里，<code>fib</code> 函数在 <code>n + 2</code> （定义上等于 <code>succ (succ n)</code> ）处的值是根据 <code>n + 1</code> （定义上等价于 <code>succ n</code> ）和 <code>n</code> 处的值定义的。然而，这是一种众所周知的计算斐波那契函数的低效方法，其执行时间是 <code>n</code> 的指数级。这里有一个更好的方法:</p>
 <pre><code class="language-lean">def fibFast (n : Nat) : Nat :=
   (loop n).2
 where
@@ -562,19 +722,27 @@ where
 
 #eval fibFast 100
 </code></pre>
-<p>Here is the same definition using a <code>let rec</code> instead of a <code>where</code>.</p>
+<!--
+Here is the same definition using a `let rec` instead of a `where`.
+-->
+<p>下面是相同的定义，使用 <code>let rec</code> 代替 <code>where</code>。</p>
 <pre><code class="language-lean">def fibFast (n : Nat) : Nat :=
   let rec loop : Nat → Nat × Nat
     | 0   =&gt; (0, 1)
     | n+1 =&gt; let p := loop n; (p.2, p.1 + p.2)
   (loop n).2
 </code></pre>
-<p>In both cases, Lean generates the auxiliary function <code>fibFast.loop</code>.</p>
-<p>To handle structural recursion, the equation compiler uses
-<em>course-of-values</em> recursion, using constants <code>below</code> and <code>brecOn</code>
+<!--
+In both cases, Lean generates the auxiliary function `fibFast.loop`.
+
+To handle structural recursion, the equation compiler uses
+*course-of-values* recursion, using constants ``below`` and ``brecOn``
 that are automatically generated with each inductively defined
 type. You can get a sense of how it works by looking at the types of
-<code>Nat.below</code> and <code>Nat.brecOn</code>:</p>
+``Nat.below`` and ``Nat.brecOn``:
+-->
+<p>在这两种情况下，Lean都会生成辅助函数 <code>fibFast.loop</code>。</p>
+<p>为了处理结构递归，方程编译器使用<strong>值过程</strong>（course-of-values）递归，使用由每个归纳定义类型自动生成的常量 <code>below</code> 和 <code>brecOn</code>。你可以通过查看 <code>Nat.below</code> 和 <code>Nat.brecOn</code> 的类型来了解它是如何工作的。</p>
 <pre><code class="language-lean">variable (C : Nat → Type u)
 
 #check (@Nat.below C : Nat → Type u)
@@ -583,33 +751,57 @@ type. You can get a sense of how it works by looking at the types of
 
 #check (@Nat.brecOn C : (n : Nat) → ((n : Nat) → @Nat.below C n → C n) → C n)
 </code></pre>
-<p>The type <code>@Nat.below C (3 : nat)</code> is a data structure that stores elements of <code>C 0</code>, <code>C 1</code>, and <code>C 2</code>.
-The course-of-values recursion is implemented by <code>Nat.brecOn</code>. It enables us to define the value of a dependent
-function of type <code>(n : Nat) → C n</code> at a particular input <code>n</code> in terms of all the previous values of the function,
-presented as an element of <code>@Nat.below C n</code>.</p>
-<p>The use of course-of-values recursion is one of the techniques the equation compiler uses to justify to
+<!--
+The type ``@Nat.below C (3 : nat)`` is a data structure that stores elements of ``C 0``, ``C 1``, and ``C 2``.
+The course-of-values recursion is implemented by ``Nat.brecOn``. It enables us to define the value of a dependent
+function of type ``(n : Nat) → C n`` at a particular input ``n`` in terms of all the previous values of the function,
+presented as an element of ``@Nat.below C n``.
+
+The use of course-of-values recursion is one of the techniques the equation compiler uses to justify to
 the Lean kernel that a function terminates. It does not affect the code generator which compiles recursive
-functions as other functional programming language compilers. Recall that <code>#eval fib &lt;n&gt;</code> is exponential on <code>&lt;n&gt;</code>.
-On the other hand, <code>#reduce fib &lt;n&gt;</code> is efficient because it uses the definition sent to the kernel that
-is based on the <code>brecOn</code> construction.</p>
-<pre><code class="language-lean">def fib : Nat → Nat
-  | 0   =&gt; 1
-  | 1   =&gt; 1
-  | n+2 =&gt; fib (n+1) + fib n
+functions as other functional programming language compilers. Recall that `#eval fib <n>` is exponential on `<n>`.
+On the other hand, `#reduce fib <n>` is efficient because it uses the definition sent to the kernel that
+is based on the `brecOn` construction.
+-->
+<p>类型 <code>@Nat.below C (3 : nat)</code> 是一个存储着 <code>C 0</code>，<code>C 1</code>，和 <code>C 2</code> 中元素的数据结构。值过程递归由 <code>Nat.brecOn</code> 实现。它根据该函数之前的所有值，定义类型为 <code>(n : Nat) → C n</code> 的依值函数在特定输入 <code>n</code> 时的值，表示为 <code>@Nat.below C n</code> 的一个元素。</p>
+<p>值过程递归是方程编译器用来向 Lean 内核证明函数终止的技术之一。它不会像其他函数式编程语言编译器一样影响编译递归函数的代码生成器。回想一下，<code>#eval fib &lt;n&gt;</code> 是 <code>&lt;n&gt;</code> 的指数。另一方面，<code>#reduce fib &lt;n&gt;</code> 是有效的，因为它使用了发送到内核的基于 <code>brecOn</code> 结构的定义。</p>
+<!--
+```lean
+def fib : Nat → Nat
+  | 0   => 1
+  | 1   => 1
+  | n+2 => fib (n+1) + fib n
 
 -- #eval fib 50 -- slow
 #reduce fib 50  -- fast
 
 #print fib
+```
+-->
+<pre><code class="language-lean">def fib : Nat → Nat
+  | 0   =&gt; 1
+  | 1   =&gt; 1
+  | n+2 =&gt; fib (n+1) + fib n
+
+-- #eval fib 50 -- 这个很慢
+#reduce fib 50  -- 用这个，这个快
+
+#print fib
 </code></pre>
-<p>Another good example of a recursive definition is the list <code>append</code> function.</p>
+<!--
+Another good example of a recursive definition is the list ``append`` function.
+-->
+<p>另一个递归定义的好例子是列表的 <code>append</code> 函数。</p>
 <pre><code class="language-lean">def append : List α → List α → List α
   | [],    bs =&gt; bs
   | a::as, bs =&gt; a :: append as bs
 
 example : append [1, 2, 3] [4, 5] = [1, 2, 3, 4, 5] := rfl
 </code></pre>
-<p>Here is another: it adds elements of the first list to elements of the second list, until one of the two lists runs out.</p>
+<!--
+Here is another: it adds elements of the first list to elements of the second list, until one of the two lists runs out.
+-->
+<p>这里是另一个：它将第一个列表中的元素和第二个列表中的元素分别相加，直到两个列表中的一个用尽。</p>
 <pre><code class="language-lean">def listAdd [Add α] : List α → List α → List α
   | [],      _       =&gt; []
   | _,       []      =&gt; []
@@ -618,9 +810,19 @@ example : append [1, 2, 3] [4, 5] = [1, 2, 3, 4, 5] := rfl
 #eval listAdd [1, 2, 3] [4, 5, 6, 6, 9, 10]
 -- [5, 7, 9]
 </code></pre>
-<p>You are encouraged to experiment with similar examples in the exercises below.</p>
-<h2 id="local-recursive-declarations"><a class="header" href="#local-recursive-declarations">Local recursive declarations</a></h2>
-<p>You can define local recursive declarations using the <code>let rec</code> keyword.</p>
+<!--
+You are encouraged to experiment with similar examples in the exercises below.
+-->
+<p>你可以在章末练习中尝试类似的例子。</p>
+<!--
+Local recursive declarations
+---------
+-->
+<h2 id="局域递归声明"><a class="header" href="#局域递归声明">局域递归声明</a></h2>
+<!--
+You can define local recursive declarations using the `let rec` keyword.
+-->
+<p>可以使用<code>let rec</code>关键字定义局域递归声明。</p>
 <pre><code class="language-lean">def replicate (n : Nat) (a : α) : List α :=
   let rec loop : Nat → List α → List α
     | 0,   as =&gt; as
@@ -630,12 +832,17 @@ example : append [1, 2, 3] [4, 5] = [1, 2, 3, 4, 5] := rfl
 #check @replicate.loop
 -- {α : Type} → α → Nat → List α → List α
 </code></pre>
-<p>Lean creates an auxiliary declaration for each <code>let rec</code>. In the example above,
-it created the declaration <code>replicate.loop</code> for the <code>let rec loop</code> occurring at <code>replicate</code>.
-Note that, Lean &quot;closes&quot; the declaration by adding any local variable occurring in the
-<code>let rec</code> declaration as additional parameters. For example, the local variable <code>a</code> occurs
-at <code>let rec loop</code>.</p>
-<p>You can also use <code>let rec</code> in tactic mode and for creating proofs by induction.</p>
+<!--
+Lean creates an auxiliary declaration for each `let rec`. In the example above,
+it created the declaration `replicate.loop` for the `let rec loop` occurring at `replicate`.
+Note that, Lean "closes" the declaration by adding any local variable occurring in the
+`let rec` declaration as additional parameters. For example, the local variable `a` occurs
+at `let rec loop`.
+
+You can also use `let rec` in tactic mode and for creating proofs by induction.
+-->
+<p>Lean为每个 <code>let rec</code> 创建一个辅助声明。在上面的例子中，它对于出现在 <code>replicate</code> 的 <code>let rec loop</code> 创建了声明 <code>replication.loop</code>。请注意，Lean 通过添加 <code>let rec</code> 声明中出现的任何局部变量作为附加参数来「关闭」声明。例如，局部变量 <code>a</code> 出现在 <code>let rec</code> 循环中。</p>
+<p>你也可以在策略证明模式中使用 <code>let rec</code>，并通过归纳来创建证明。</p>
 <pre><code class="language-lean"><span class="boring">def replicate (n : Nat) (a : α) : List α :=
 </span><span class="boring"> let rec loop : Nat → List α → List α
 </span><span class="boring">   | 0,   as =&gt; as
@@ -649,8 +856,11 @@ at <code>let rec loop</code>.</p>
     | n+1 =&gt; simp [replicate.loop, aux n, Nat.add_succ, Nat.succ_add]
   exact aux n []
 </code></pre>
-<p>You can also introduce auxiliary recursive declarations using <code>where</code> clause after your definition.
-Lean converts them into a <code>let rec</code>.</p>
+<!--
+You can also introduce auxiliary recursive declarations using `where` clause after your definition.
+Lean converts them into a `let rec`.
+-->
+<p>还可以在定义后使用 <code>where</code> 子句引入辅助递归声明。Lean将它们转换为 <code>let rec</code>。</p>
 <pre><code class="language-lean">def replicate (n : Nat) (a : α) : List α :=
   loop n []
 where
@@ -667,36 +877,52 @@ where
     | 0   =&gt; simp [replicate.loop]
     | n+1 =&gt; simp [replicate.loop, aux n, Nat.add_succ, Nat.succ_add]
 </code></pre>
-<h2 id="well-founded-recursion-and-induction"><a class="header" href="#well-founded-recursion-and-induction">Well-Founded Recursion and Induction</a></h2>
-<p>When structural recursion cannot be used, we can prove termination using well-founded recursion.
+<!--
+Well-Founded Recursion and Induction
+------------------------------------
+-->
+<h2 id="良基递归和归纳"><a class="header" href="#良基递归和归纳">良基递归和归纳</a></h2>
+<!--
+When structural recursion cannot be used, we can prove termination using well-founded recursion.
 We need a well-founded relation and a proof that each recursive application is decreasing with respect to
 this relation. Dependent type theory is powerful enough to encode and justify
 well-founded recursion. Let us start with the logical background that
-is needed to understand how it works.</p>
-<p>Lean's standard library defines two predicates, <code>Acc r a</code> and
-<code>WellFounded r</code>, where <code>r</code> is a binary relation on a type <code>α</code>,
-and <code>a</code> is an element of type <code>α</code>.</p>
+is needed to understand how it works.
+
+Lean's standard library defines two predicates, ``Acc r a`` and
+``WellFounded r``, where ``r`` is a binary relation on a type ``α``,
+and ``a`` is an element of type ``α``.
+-->
+<p>当不能使用结构递归时，我们可以使用良基递归（well-founded recursion）来证明终止性。我们需要一个良基关系和一个证明每个递归调用相对于该关系都是递减的证明。依值类型理论具有足够的表达能力来编码和证明良基递归。让我们从理解其工作原理所需的逻辑背景开始。</p>
+<p>Lean 的标准库定义了两个谓词，<code>Acc r a</code> 和 <code>WellFounded r</code>，其中 <code>r</code> 是一个在类型 <code>α</code> 上的二元关系，而 <code>a</code> 是类型 <code>α</code> 的一个元素。</p>
 <pre><code class="language-lean">variable (α : Sort u)
 variable (r : α → α → Prop)
 
 #check (Acc r : α → Prop)
 #check (WellFounded r : Prop)
 </code></pre>
-<p>The first, <code>Acc</code>, is an inductively defined predicate. According to
-its definition, <code>Acc r x</code> is equivalent to
-<code>∀ y, r y x → Acc r y</code>. If you think of <code>r y x</code> as denoting a kind of order relation
-<code>y ≺ x</code>, then <code>Acc r x</code> says that <code>x</code> is accessible from below,
+<!--
+The first, ``Acc``, is an inductively defined predicate. According to
+its definition, ``Acc r x`` is equivalent to
+``∀ y, r y x → Acc r y``. If you think of ``r y x`` as denoting a kind of order relation
+``y ≺ x``, then ``Acc r x`` says that ``x`` is accessible from below,
 in the sense that all its predecessors are accessible. In particular,
-if <code>x</code> has no predecessors, it is accessible. Given any type <code>α</code>,
+if ``x`` has no predecessors, it is accessible. Given any type ``α``,
 we should be able to assign a value to each accessible element of
-<code>α</code>, recursively, by assigning values to all its predecessors first.</p>
-<p>The statement that <code>r</code> is well founded, denoted <code>WellFounded r</code>,
+``α``, recursively, by assigning values to all its predecessors first.
+
+The statement that ``r`` is well founded, denoted ``WellFounded r``,
 is exactly the statement that every element of the type is
-accessible. By the above considerations, if <code>r</code> is a well-founded
-relation on a type <code>α</code>, we should have a principle of well-founded
-recursion on <code>α</code>, with respect to the relation <code>r</code>. And, indeed,
-we do: the standard library defines <code>WellFounded.fix</code>, which serves
-exactly that purpose.</p>
+accessible. By the above considerations, if ``r`` is a well-founded
+relation on a type ``α``, we should have a principle of well-founded
+recursion on ``α``, with respect to the relation ``r``. And, indeed,
+we do: the standard library defines ``WellFounded.fix``, which serves
+exactly that purpose.
+-->
+<p>首先 <code>Acc</code> 是一个归纳定义的谓词。根据定义，<code>Acc r x</code> 等价于
+<code>∀ y, r y x → Acc r y</code>。如果你把 <code>r y x</code> 考虑成一种序关系 <code>y ≺ x</code>，那么 <code>Acc r x</code> 说明 <code>x</code> 在下文中可访问，
+从某种意义上说，它的所有前继都是可访问的。特别地，如果 <code>x</code> 没有前继，它是可访问的。给定任何类型 <code>α</code>，我们应该能够通过首先为 <code>α</code> 的所有前继元素赋值，递归地为 <code>α</code> 的每个可访问元素赋值。</p>
+<p>使用 <code>WellFounded r</code> 来声明 <code>r</code> 是良基的，即说明该类型的每个元素都是可访问的。根据上述考虑，如果 <code>r</code> 是类型 <code>α</code> 上的一个成立良好的关系，那么对于关系 <code>r</code>，我们应该有一个关于 <code>α</code> 的成立良好的递归原则。确实，我们这样做了：标准库定义了 <code>WellFounded.fix</code>，它正好满足这个目的。</p>
 <pre><code class="language-lean">noncomputable def f {α : Sort u}
       (r : α → α → Prop)
       (h : WellFounded r)
@@ -704,26 +930,37 @@ exactly that purpose.</p>
       (F : (x : α) → ((y : α) → r y x → C y) → C x)
       : (x : α) → C x := WellFounded.fix h F
 </code></pre>
-<p>There is a long cast of characters here, but the first block we have
-already seen: the type, <code>α</code>, the relation, <code>r</code>, and the
-assumption, <code>h</code>, that <code>r</code> is well founded. The variable <code>C</code>
+<!--
+There is a long cast of characters here, but the first block we have
+already seen: the type, ``α``, the relation, ``r``, and the
+assumption, ``h``, that ``r`` is well founded. The variable ``C``
 represents the motive of the recursive definition: for each element
-<code>x : α</code>, we would like to construct an element of <code>C x</code>. The
-function <code>F</code> provides the inductive recipe for doing that: it tells
-us how to construct an element <code>C x</code>, given elements of <code>C y</code> for
-each predecessor <code>y</code> of <code>x</code>.</p>
-<p>Note that <code>WellFounded.fix</code> works equally well as an induction
-principle. It says that if <code>≺</code> is well founded and you want to prove
-<code>∀ x, C x</code>, it suffices to show that for an arbitrary <code>x</code>, if we
-have <code>∀ y ≺ x, C y</code>, then we have <code>C x</code>.</p>
-<p>In the example above we use the modifier <code>noncomputable</code> because the code
-generator currently does not support <code>WellFounded.fix</code>. The function
-<code>WellFounded.fix</code> is another tool Lean uses to justify that a function
-terminates.</p>
-<p>Lean knows that the usual order <code>&lt;</code> on the natural numbers is well
+``x : α``, we would like to construct an element of ``C x``. The
+function ``F`` provides the inductive recipe for doing that: it tells
+us how to construct an element ``C x``, given elements of ``C y`` for
+each predecessor ``y`` of ``x``.
+
+Note that ``WellFounded.fix`` works equally well as an induction
+principle. It says that if ``≺`` is well founded and you want to prove
+``∀ x, C x``, it suffices to show that for an arbitrary ``x``, if we
+have ``∀ y ≺ x, C y``, then we have ``C x``.
+
+In the example above we use the modifier `noncomputable` because the code
+generator currently does not support `WellFounded.fix`. The function
+`WellFounded.fix` is another tool Lean uses to justify that a function
+terminates.
+
+Lean knows that the usual order ``<`` on the natural numbers is well
 founded. It also knows a number of ways of constructing new well
-founded orders from others, for example, using lexicographic order.</p>
-<p>Here is essentially the definition of division on the natural numbers that is found in the standard library.</p>
+founded orders from others, for example, using lexicographic order.
+
+Here is essentially the definition of division on the natural numbers that is found in the standard library.
+-->
+<p>这里有一大堆字，但我们熟悉第一块：类型 <code>α</code>，关系 <code>r</code>和假设 <code>h</code>，即 <code>r</code> 是有良基的。变量' <code>C</code> 代表递归定义的动机：对于每个元素 <code>x : α</code>，我们想构造一个 <code>C x</code> 的元素。函数 <code>F</code> 提供了这样做的归纳方法：它告诉我们如何构造一个元素 <code>C x</code>，给定 <code>C y</code> 的元素对于 <code>x</code> 的每个 <code>y</code>。</p>
+<p>注意 <code>WellFounded.fix</code> 和归纳法原理一样有效。它说如果 <code>≺</code> 是良基的，而你想要证明 <code>∀ x, C x</code>，那么只要证明对于任意的 <code>x</code>，如果我们有 <code>∀ y ≺ x, C y</code>，那么我们就有 <code>C x</code> 就足够了。</p>
+<p>在上面的例子中，我们使用了修饰符 <code>noncomputable</code>，因为代码生成器目前不支持 <code>WellFounded.fix</code>。函数 <code>WellFounded.fix</code> 是 Lean 用来证明函数终止的另一个工具。</p>
+<p>Lean 知道自然数上通常的序 <code>&lt;</code> 是良基的。它还知道许多从其他东西中构造新的良基的序的方法，例如字典序。</p>
+<p>下面是标准库中自然数除法的定义。</p>
 <pre><code class="language-lean">open Nat
 
 theorem div_lemma {x y : Nat} : 0 &lt; y ∧ y ≤ x → x - y &lt; x :=
@@ -739,14 +976,19 @@ noncomputable def div := WellFounded.fix (measure id).wf div.F
 
 #reduce div 8 2 -- 4
 </code></pre>
-<p>The definition is somewhat inscrutable. Here the recursion is on
-<code>x</code>, and <code>div.F x f : Nat → Nat</code> returns the &quot;divide by <code>y</code>&quot;
-function for that fixed <code>x</code>. You have to remember that the second
-argument to <code>div.F</code>, the recipe for the recursion, is a function
-that is supposed to return the divide by <code>y</code> function for all values
-<code>x₁</code> smaller than <code>x</code>.</p>
-<p>The elaborator is designed to make definitions like this more
-convenient. It accepts the following:</p>
+<!--
+The definition is somewhat inscrutable. Here the recursion is on
+``x``, and ``div.F x f : Nat → Nat`` returns the "divide by ``y``"
+function for that fixed ``x``. You have to remember that the second
+argument to ``div.F``, the recipe for the recursion, is a function
+that is supposed to return the divide by ``y`` function for all values
+``x₁`` smaller than ``x``.
+
+The elaborator is designed to make definitions like this more
+convenient. It accepts the following:
+-->
+<p>这个定义有点难以理解。这里递归在 <code>x</code>上， <code>div.F x f : Nat → Nat</code> 为固定的 <code>x</code> 返回「除以 <code>y</code>」函数。你要记住 <code>div.F</code> 的第二个参数 <code>f</code> 是递归的具体实现，这个函数对所有小于 <code>x</code> 的自然数 <code>x₁</code> 返回「除以 <code>y</code>」函数。</p>
+<p>繁饰器（Elaborator）可以使这样的定义更加方便。它接受下列内容:</p>
 <pre><code class="language-lean">def div (x y : Nat) : Nat :=
   if h : 0 &lt; y ∧ y ≤ x then
     have : x - y &lt; x := Nat.sub_lt (Nat.lt_of_lt_of_le h.1 h.2) h.1
@@ -754,15 +996,36 @@ convenient. It accepts the following:</p>
   else
     0
 </code></pre>
-<p>When Lean encounters a recursive definition, it first
+<!--
+When Lean encounters a recursive definition, it first
 tries structural recursion, and only when that fails, does it fall
-back on well-founded recursion. Lean uses the tactic <code>decreasing_tactic</code>
+back on well-founded recursion. Lean uses the tactic `decreasing_tactic`
 to show that the recursive applications are smaller. The auxiliary
-proposition <code>x - y &lt; x</code> in the example above should be viewed as a hint
-for this tactic.</p>
-<p>The defining equation for <code>div</code> does <em>not</em> hold definitionally, but
-we can unfold <code>div</code> using the <code>unfold</code> tactic. We use <a href="./conv.html"><code>conv</code></a> to select which
-<code>div</code> application we want to unfold.</p>
+proposition `x - y < x` in the example above should be viewed as a hint
+for this tactic.
+
+The defining equation for ``div`` does *not* hold definitionally, but
+we can unfold `div` using the `unfold` tactic. We use [`conv`](./conv.md) to select which
+`div` application we want to unfold.
+-->
+<p>当 Lean 遇到递归定义时，它首先尝试结构递归，失败时才返回到良基递归。Lean 使用 <code>decreasing_tactic</code> 来显示递归应用会越来越小。上面例子中的辅助命题 <code>x - y &lt; x</code> 应该被视为这种策略的提示。</p>
+<p><code>div</code> 的定义公式不具有定义性，但我们可以使用 <code>unfold</code> 策略展开 <code>div</code>。我们使用 <a href="./conv.html"><code>conv</code></a> 来选择要展开的 <code>div</code> 应用。</p>
+<!--
+```lean
+# def div (x y : Nat) : Nat :=
+#  if h : 0 < y ∧ y ≤ x then
+#    have : x - y < x := Nat.sub_lt (Nat.lt_of_lt_of_le h.1 h.2) h.1
+#    div (x - y) y + 1
+#  else
+#    0
+example (x y : Nat) : div x y = if 0 < y ∧ y ≤ x then div (x - y) y + 1 else 0 := by
+  conv => lhs; unfold div -- unfold occurrence in the left-hand-side of the equation
+
+example (x y : Nat) (h : 0 < y ∧ y ≤ x) : div x y = div (x - y) y + 1 := by
+  conv => lhs; unfold div
+  simp [h]
+```
+-->
 <pre><code class="language-lean"><span class="boring">def div (x y : Nat) : Nat :=
 </span><span class="boring"> if h : 0 &lt; y ∧ y ≤ x then
 </span><span class="boring">   have : x - y &lt; x := Nat.sub_lt (Nat.lt_of_lt_of_le h.1 h.2) h.1
@@ -770,17 +1033,20 @@ we can unfold <code>div</code> using the <code>unfold</code> tactic. We use <a h
 </span><span class="boring"> else
 </span><span class="boring">   0
 </span>example (x y : Nat) : div x y = if 0 &lt; y ∧ y ≤ x then div (x - y) y + 1 else 0 := by
-  conv =&gt; lhs; unfold div -- unfold occurrence in the left-hand-side of the equation
+  conv =&gt; lhs; unfold div -- 展开方程左侧的div
 
 example (x y : Nat) (h : 0 &lt; y ∧ y ≤ x) : div x y = div (x - y) y + 1 := by
   conv =&gt; lhs; unfold div
   simp [h]
 </code></pre>
-<p>The following example is similar: it converts any natural number to a
+<!--
+The following example is similar: it converts any natural number to a
 binary expression, represented as a list of 0's and 1's. We have to
 provide evidence that the recursive call is
-decreasing, which we do here with a <code>sorry</code>. The <code>sorry</code> does not
-prevent the interpreter from evaluating the function successfully.</p>
+decreasing, which we do here with a ``sorry``. The ``sorry`` does not
+prevent the interpreter from evaluating the function successfully.
+-->
+<p>下面的示例与此类似：它将任何自然数转换为二进制表达式，表示为0和1的列表。我们必须提供递归调用正在递减的证据，我们在这里用 <code>sorry</code> 来做。<code>sorry</code> 并不会阻止解释器成功地对函数求值。</p>
 <pre><code class="language-lean">def natToBin : Nat → List Nat
   | 0     =&gt; [0]
   | 1     =&gt; [1]
@@ -790,25 +1056,34 @@ prevent the interpreter from evaluating the function successfully.</p>
 
 #eval natToBin 1234567
 </code></pre>
-<p>As a final example, we observe that Ackermann's function can be
+<!--
+As a final example, we observe that Ackermann's function can be
 defined directly, because it is justified by the well foundedness of
-the lexicographic order on the natural numbers. The <code>termination_by</code> clause
+the lexicographic order on the natural numbers. The `termination_by` clause
 instructs Lean to use a lexicographic order. This clause is actually mapping
-the function arguments to elements of type <code>Nat × Nat</code>. Then, Lean uses typeclass
-resolution to synthesize an element of type <code>WellFoundedRelation (Nat × Nat)</code>.</p>
+the function arguments to elements of type `Nat × Nat`. Then, Lean uses typeclass
+resolution to synthesize an element of type `WellFoundedRelation (Nat × Nat)`.
+-->
+<p>最后一个例子，我们观察到Ackermann函数可以直接定义，因为它可以被自然数上字典序的良基性证明。<code>termination_by</code> 子句指示 Lean 使用字典序。这个子句实际上是将函数参数映射到类型为 <code>Nat × Nat</code> 的元素。然后，Lean 使用类型类解析来合成类型为 <code>WellFoundedRelation (Nat × Nat)</code> 的元素。</p>
 <pre><code class="language-lean">def ack : Nat → Nat → Nat
   | 0,   y   =&gt; y+1
   | x+1, 0   =&gt; ack x 1
   | x+1, y+1 =&gt; ack x (ack (x+1) y)
 termination_by x y =&gt; (x, y)
 </code></pre>
-<p>Note that a lexicographic order is used in the example above because the instance
-<code>WellFoundedRelation (α × β)</code> uses a lexicographic order. Lean also defines the instance</p>
+<!--
+Note that a lexicographic order is used in the example above because the instance
+`WellFoundedRelation (α × β)` uses a lexicographic order. Lean also defines the instance
+-->
+<p>注意，在上面的例子中使用了字典序，因为实例 <code>WellFoundedRelation (α × β)</code> 使用了字典序。Lean还定义了实例</p>
 <pre><code class="language-lean">instance (priority := low) [SizeOf α] : WellFoundedRelation α :=
   sizeOfWFRel
 </code></pre>
-<p>In the following example, we prove termination by showing that <code>as.size - i</code> is decreasing
-in the recursive application.</p>
+<!--
+In the following example, we prove termination by showing that `as.size - i` is decreasing
+in the recursive application.
+-->
+<p>在下面的例子中，我们通过显示 <code>as.size - i</code> 在递归应用中是递减的来证明它会终止。</p>
 <pre><code class="language-lean">def takeWhile (p : α → Bool) (as : Array α) : Array α :=
   go 0 #[]
 where
@@ -823,8 +1098,13 @@ where
       r
   termination_by as.size - i
 </code></pre>
-<p>Note that, auxiliary function <code>go</code> is recursive in this example, but <code>takeWhile</code> is not.</p>
-<p>By default, Lean uses the tactic <code>decreasing_tactic</code> to prove recursive applications are decreasing. The modifier <code>decreasing_by</code> allows us to provide our own tactic. Here is an example.</p>
+<!--
+Note that, auxiliary function `go` is recursive in this example, but `takeWhile` is not.
+
+By default, Lean uses the tactic `decreasing_tactic` to prove recursive applications are decreasing. The modifier `decreasing_by` allows us to provide our own tactic. Here is an example.
+-->
+<p>注意，辅助函数 <code>go</code> 在这个例子中是递归的，但 <code>takeWhile</code> 不是。</p>
+<p>默认情况下，Lean 使用 <code>decreasing_tactic</code> 来证明递归应用正在递减。修饰词 <code>decreasing_by</code> 允许我们提供自己的策略。这里有一个例子。</p>
 <pre><code class="language-lean">theorem div_lemma {x y : Nat} : 0 &lt; y ∧ y ≤ x → x - y &lt; x :=
   fun ⟨ypos, ylex⟩ =&gt; Nat.sub_lt (Nat.lt_of_lt_of_le ypos ylex) ypos
 
@@ -835,19 +1115,40 @@ def div (x y : Nat) : Nat :=
     0
 decreasing_by apply div_lemma; assumption
 </code></pre>
-<p>Note that <code>decreasing_by</code> is not replacement for <code>termination_by</code>, they complement each other. <code>termination_by</code> is used to specify a well-founded relation, and <code>decreasing_by</code> for providing our own tactic for showing recursive applications are decreasing. In the following example, we use both of them.</p>
+<!--
+Note that `decreasing_by` is not replacement for `termination_by`, they complement each other. `termination_by` is used to specify a well-founded relation, and `decreasing_by` for providing our own tactic for showing recursive applications are decreasing. In the following example, we use both of them.
+-->
+<p>注意 <code>decreasing_by</code> 不是 <code>termination_by</code> 的替代，它们是互补的。 <code>termination_by</code> 用于指定一个良基关系， <code>decreasing_by</code> 用于提供我们自己的策略来显示递归应用正在递减。在下面的示例中，我们将同时使用它们。</p>
+<!--
+```lean
+def ack : Nat → Nat → Nat
+  | 0,   y   => y+1
+  | x+1, 0   => ack x 1
+  | x+1, y+1 => ack x (ack (x+1) y)
+termination_by x y => (x, y)
+decreasing_by
+  all_goals simp_wf -- unfolds well-founded recursion auxiliary definitions
+  · apply Prod.Lex.left; simp_arith
+  · apply Prod.Lex.right; simp_arith
+  · apply Prod.Lex.left; simp_arith
+```
+
+-->
 <pre><code class="language-lean">def ack : Nat → Nat → Nat
   | 0,   y   =&gt; y+1
   | x+1, 0   =&gt; ack x 1
   | x+1, y+1 =&gt; ack x (ack (x+1) y)
 termination_by x y =&gt; (x, y)
 decreasing_by
-  all_goals simp_wf -- unfolds well-founded recursion auxiliary definitions
+  all_goals simp_wf -- 展开良基的递归辅助定义
   · apply Prod.Lex.left; simp_arith
   · apply Prod.Lex.right; simp_arith
   · apply Prod.Lex.left; simp_arith
 </code></pre>
-<p>We can use <code>decreasing_by sorry</code> to instruct Lean to &quot;trust&quot; us that the function terminates.</p>
+<!--
+We can use `decreasing_by sorry` to instruct Lean to "trust" us that the function terminates.
+-->
+<p>我们可以使用 <code>decreasing_by sorry</code> 来指示 Lean 「相信」函数可以终止。</p>
 <pre><code class="language-lean">def natToBin : Nat → List Nat
   | 0     =&gt; [0]
   | 1     =&gt; [1]
@@ -856,8 +1157,13 @@ decreasing_by sorry
 
 #eval natToBin 1234567
 </code></pre>
-<p>Recall that using <code>sorry</code> is equivalent to using a new axiom, and should be avoided. In the following example, we used the <code>sorry</code> to prove <code>False</code>. The command <code>#print axioms</code> shows that <code>unsound</code> depends on the unsound axiom <code>sorryAx</code> used to implement <code>sorry</code>.</p>
-<pre><code class="language-lean">def unsound (x : Nat) : False :=
+<!--
+Recall that using `sorry` is equivalent to using a new axiom, and should be avoided. In the following example, we used the `sorry` to prove `False`. The command `#print axioms` shows that `unsound` depends on the unsound axiom `sorryAx` used to implement `sorry`.
+-->
+<p>回想一下，使用 <code>sorry</code> 相当于使用一个新的公理，应该避免使用。在下面的例子中，我们用 <code>sorry</code> 来证明 <code>False</code>。命令 <code>#print axioms</code> 显示，<code>unsound</code> 依赖于用于实现 <code>sorry</code> 的不健全公理 <code>sorryAx</code>。</p>
+<!--
+```lean
+def unsound (x : Nat) : False :=
   unsound (x + 1)
 decreasing_by sorry
 
@@ -866,24 +1172,53 @@ decreasing_by sorry
 
 #print axioms unsound
 -- 'unsound' depends on axioms: [sorryAx]
+```
+-->
+<pre><code class="language-lean">def unsound (x : Nat) : False :=
+  unsound (x + 1)
+decreasing_by sorry
+
+#check unsound 0
+-- `unsound 0` 是 `False` 的一个证明
+
+#print axioms unsound
+-- 'unsound' 依赖于公理：[sorryAx]
 </code></pre>
-<p>Summary:</p>
+<!--
+Summary:
+
+- If there is no `termination_by`, a well-founded relation is derived (if possible) by selecting an argument and then using typeclass resolution to synthesize a well-founded relation for this argument's type.
+
+- If `termination_by` is specified, it maps the arguments of the function to a type `α` and type class resolution is again used. Recall that, the default instance for `β × γ` is a lexicographic order based on the well-founded relations for `β` and `γ`.
+
+- The default well-founded relation instance for `Nat` is `<`.
+
+- By default, the tactic `decreasing_tactic` is used to show that recursive applications are smaller with respect to the selected well-founded relation. If `decreasing_tactic` fails, the error message includes the remaining goal `... |- G`. Note that, the `decreasing_tactic` uses `assumption`. So, you can include a `have`-expression to prove goal `G`. You can also provide your own tactic using `decreasing_by`.
+-->
+<p>总结：</p>
 <ul>
 <li>
-<p>If there is no <code>termination_by</code>, a well-founded relation is derived (if possible) by selecting an argument and then using typeclass resolution to synthesize a well-founded relation for this argument's type.</p>
+<p>如果没有 <code>termination_by</code>，良基关系（可能）可以这样被导出：选择一个参数，然后使用类型类解析为该参数的类型合成一个良基关系。</p>
 </li>
 <li>
-<p>If <code>termination_by</code> is specified, it maps the arguments of the function to a type <code>α</code> and type class resolution is again used. Recall that, the default instance for <code>β × γ</code> is a lexicographic order based on the well-founded relations for <code>β</code> and <code>γ</code>.</p>
+<p>如果指定了 <code>termination_by</code>，它将函数的参数映射为类型 <code>α</code>，并再次使用类型类解析。 回想一下，<code>β × γ</code> 的默认实例是基于 <code>β</code> 和 <code>γ</code>的良基关系的字典序。</p>
+</li>
+<li></li>
+<li>
+<p><code>Nat</code> 的默认良基关系实例是 <code>&lt;</code>。</p>
 </li>
 <li>
-<p>The default well-founded relation instance for <code>Nat</code> is <code>&lt;</code>.</p>
-</li>
-<li>
-<p>By default, the tactic <code>decreasing_tactic</code> is used to show that recursive applications are smaller with respect to the selected well-founded relation. If <code>decreasing_tactic</code> fails, the error message includes the remaining goal <code>... |- G</code>. Note that, the <code>decreasing_tactic</code> uses <code>assumption</code>. So, you can include a <code>have</code>-expression to prove goal <code>G</code>. You can also provide your own tactic using <code>decreasing_by</code>.</p>
+<p>默认情况下，策略 <code>decreasing_tactic</code> 用于显示递归应用小于选择的良基关系。如果 <code>decreasing_tactic</code> 失败，错误信息包括剩余目标 <code>... |- G</code>。注意，<code>decreasing_tactic</code> 使用 <code>assumption</code>。所以，你可以用 <code>have</code> 表达式来证明目标 <code>G</code>。你也可以使用 <code>decreasing_by</code> 来提供你自己的策略。</p>
 </li>
 </ul>
-<h2 id="mutual-recursion"><a class="header" href="#mutual-recursion">Mutual Recursion</a></h2>
-<p>Lean also supports mutual recursive definitions. The syntax is similar to that for mutual inductive types. Here is an example:</p>
+<!--
+Mutual Recursion
+-->
+<h2 id="相互递归"><a class="header" href="#相互递归">相互递归</a></h2>
+<!--
+Lean also supports mutual recursive definitions. The syntax is similar to that for mutual inductive types. Here is an example:
+-->
+<p>Lean 还提供相互递归定义，语法类似相互归纳类型。例子：</p>
 <pre><code class="language-lean">mutual
   def even : Nat → Bool
     | 0   =&gt; true
@@ -905,8 +1240,8 @@ theorem even_eq_not_odd : ∀ a, even a = not (odd a) := by
   . simp [even, odd]
   . simp [even, odd, *]
 </code></pre>
-<p>What makes this a mutual definition is that <code>even</code> is defined recursively in terms of <code>odd</code>, while <code>odd</code> is defined recursively in terms of <code>even</code>. Under the hood, this is compiled as a single recursive definition. The internally defined function takes, as argument, an element of a sum type, either an input to <code>even</code>, or an input to <code>odd</code>. It then returns an output appropriate to the input. To define that function, Lean uses a suitable well-founded measure. The internals are meant to be hidden from users; the canonical way to make use of such definitions is to use <code>simp</code> (or <code>unfold</code>), as we did above.</p>
-<p>Mutual recursive definitions also provide natural ways of working with mutual and nested inductive types. Recall the definition of <code>Even</code> and <code>Odd</code> as mutual inductive predicates as presented before.</p>
+<p>这是一个相互的定义，因为 <code>even</code> 是用 <code>odd</code> 递归定义的，而 <code>odd</code> 是用 <code>even</code> 递归定义的。在底层，它被编译为单个递归定义。内部定义的函数接受sum类型的元素作为参数，可以是 <code>even</code> 的输入，也可以是 <code>odd</code> 的输入。然后，它返回与输入相适应的输出。为了定义这个功能，Lean 使用了一个合适的、良基的度量。内部是对用户隐藏的；使用这些定义的规范方法是使用 <code>simp</code> （或 <code>unfold</code>），正如我们上面所做的那样。</p>
+<p>相互递归定义还提供了处理相互和嵌套归纳类型的自然方法。回想一下前面提到的 <code>Even</code> 和 <code>Odd</code> 作为相互归纳谓词的定义。</p>
 <pre><code class="language-lean">mutual
   inductive Even : Nat → Prop where
     | even_zero : Even 0
@@ -916,7 +1251,10 @@ theorem even_eq_not_odd : ∀ a, even a = not (odd a) := by
     | odd_succ : ∀ n, Even n → Odd (n + 1)
 end
 </code></pre>
-<p>The constructors, <code>even_zero</code>, <code>even_succ</code>, and <code>odd_succ</code> provide positive means for showing that a number is even or odd. We need to use the fact that the inductive type is generated by these constructors to know that zero is not odd, and that the latter two implications reverse. As usual, the constructors are kept in a namespace that is named after the type being defined, and the command <code>open Even Odd</code> allows us to access them more conveniently.</p>
+<!--
+The constructors, ``even_zero``, ``even_succ``, and ``odd_succ`` provide positive means for showing that a number is even or odd. We need to use the fact that the inductive type is generated by these constructors to know that zero is not odd, and that the latter two implications reverse. As usual, the constructors are kept in a namespace that is named after the type being defined, and the command ``open Even Odd`` allows us to access them more conveniently.
+-->
+<p>构造器<code>even_zero</code>、<code>even_succ</code> 和 <code>odd_succ</code> 提供了显示数字是偶数还是奇数的积极方法。我们需要利用归纳类型是由这些构造器生成的这一事实来知道零不是奇数，并且后两个含义是相反的。像往常一样，构造器保存在以定义的类型命名的命名空间中，并且命令 <code>open Even Odd</code> 允许我们更方便地访问它们。</p>
 <pre><code class="language-lean"><span class="boring">mutual
 </span><span class="boring"> inductive Even : Nat → Prop where
 </span><span class="boring">   | even_zero : Even 0
@@ -935,12 +1273,18 @@ theorem even_of_odd_succ : ∀ n, Odd (n + 1) → Even n
 theorem odd_of_even_succ : ∀ n, Even (n + 1) → Odd n
   | _, even_succ n h =&gt; h
 </code></pre>
-<p>For another example, suppose we use a nested inductive type to define a set of terms inductively, so that a term is either a constant (with a name given by a string), or the result of applying a constant to a list of constants.</p>
+<!--
+For another example, suppose we use a nested inductive type to define a set of terms inductively, so that a term is either a constant (with a name given by a string), or the result of applying a constant to a list of constants.
+-->
+<p>另一个例子，假设我们使用嵌套归纳类型来归纳定义一组项，这样，项要么是常量(由字符串给出名称)，要么是将常量应用于常量列表的结果。</p>
 <pre><code class="language-lean">inductive Term where
   | const : String → Term
   | app   : String → List Term → Term
 </code></pre>
-<p>We can then use a mutual recursive definition to count the number of constants occurring in a term, as well as the number occurring in a list of terms.</p>
+<!--
+We can then use a mutual recursive definition to count the number of constants occurring in a term, as well as the number occurring in a list of terms.
+-->
+<p>然后，我们可以使用一个相互递归的定义来计算在一个项中出现的常量的数量，以及在一个项列表中出现的常量的数量。</p>
 <pre><code class="language-lean"><span class="boring">inductive Term where
 </span><span class="boring"> | const : String → Term
 </span><span class="boring"> | app   : String → List Term → Term
@@ -962,7 +1306,10 @@ def sample := app &quot;f&quot; [app &quot;g&quot; [const &quot;x&quot;], const 
 
 end Term
 </code></pre>
-<p>As a final example, we define a function <code>replaceConst a b e</code> that replaces a constant <code>a</code> with <code>b</code> in a term <code>e</code>, and then prove the number of constants is the same. Note that, our proof uses mutual recursion (aka induction).</p>
+<!--
+As a final example, we define a function `replaceConst a b e` that replaces a constant `a` with `b` in a term `e`, and then prove the number of constants is the same. Note that, our proof uses mutual recursion (aka induction).
+-->
+<p>作为最后一个例子，我们定义了一个函数 <code>replaceConst a b e</code>，它将项 <code>e</code> 中的常数 <code>a</code> 替换为 <code>b</code>，然后证明常数的数量是相同的。注意，我们的证明使用了相互递归（即归纳法）。</p>
 <pre><code class="language-lean"><span class="boring">inductive Term where
 </span><span class="boring"> | const : String → Term
 </span><span class="boring"> | app   : String → List Term → Term
@@ -1001,18 +1348,25 @@ mutual
             numConsts_replaceConstLst a b cs]
 end
 </code></pre>
-<h2 id="dependent-pattern-matching"><a class="header" href="#dependent-pattern-matching">Dependent Pattern Matching</a></h2>
-<p>All the examples of pattern matching we considered in
-<a href="#pattern-matching">Section Pattern Matching</a> can easily be written using <code>casesOn</code>
-and <code>recOn</code>. However, this is often not the case with indexed
-inductive families such as <code>Vector α n</code>, since case splits impose
+<!--
+Dependent Pattern Matching
+--------------------------
+-->
+<h2 id="依值模式匹配"><a class="header" href="#依值模式匹配">依值模式匹配</a></h2>
+<!--
+All the examples of pattern matching we considered in
+[Section Pattern Matching](#pattern-matching) can easily be written using ``casesOn``
+and ``recOn``. However, this is often not the case with indexed
+inductive families such as ``Vector α n``, since case splits impose
 constraints on the values of the indices. Without the equation
 compiler, we would need a lot of boilerplate code to define very
-simple functions such as <code>map</code>, <code>zip</code>, and <code>unzip</code> using
+simple functions such as ``map``, ``zip``, and ``unzip`` using
 recursors. To understand the difficulty, consider what it would take
-to define a function <code>tail</code> which takes a vector
-<code>v : Vector α (succ n)</code> and deletes the first element. A first thought might be to
-use the <code>casesOn</code> function:</p>
+to define a function ``tail`` which takes a vector
+``v : Vector α (succ n)`` and deletes the first element. A first thought might be to
+use the ``casesOn`` function:
+-->
+<p>我们在<a href="#%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">模式匹配</a>一节中考虑的所有模式匹配示例都可以很容易地使用 <code>casesOn</code> 和 <code>recOn</code> 来编写。然而，对于索引归纳族，如 <code>Vector α n</code>，通常不是这种情况，因为区分情况要对索引的值施加约束。如果没有方程编译器，我们将需要大量的样板代码来定义非常简单的函数，例如使用递归定义 <code>map</code>、<code>zip</code> 和 <code>unzip</code>。为了理解其中的困难，考虑一下如何定义一个函数 <code>tail</code>，它接受一个向量 <code>v : Vector α (succ n)</code> 并删除第一个元素。首先想到的可能是使用 <code>casesOn</code> 函数:</p>
 <pre><code class="language-lean">inductive Vector (α : Type u) : Nat → Type u
   | nil  : Vector α 0
   | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1031,10 +1385,15 @@ namespace Vector
 
 end Vector
 </code></pre>
-<p>But what value should we return in the <code>nil</code> case? Something funny
-is going on: if <code>v</code> has type <code>Vector α (succ n)</code>, it <em>can't</em> be
-nil, but it is not clear how to tell that to <code>casesOn</code>.</p>
-<p>One solution is to define an auxiliary function:</p>
+<!--
+But what value should we return in the ``nil`` case? Something funny
+is going on: if ``v`` has type ``Vector α (succ n)``, it *can't* be
+nil, but it is not clear how to tell that to ``casesOn``.
+
+One solution is to define an auxiliary function:
+-->
+<p>但是在 <code>nil</code> 的情况下我们应该返回什么值呢？有趣的事情来了：如果 <code>v</code> 具有 <code>Vector α (succ n)</code> 类型，它「不能」为nil，但很难告诉 <code>casesOn</code>。</p>
+<p>一种解决方案是定义一个辅助函数:</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1050,19 +1409,26 @@ def tail (v : Vector α (n+1)) : Vector α n :=
   tailAux v rfl
 <span class="boring">end Vector
 </span></code></pre>
-<p>In the <code>nil</code> case, <code>m</code> is instantiated to <code>0</code>, and
-<code>noConfusion</code> makes use of the fact that <code>0 = succ n</code> cannot
-occur.  Otherwise, <code>v</code> is of the form <code>a :: w</code>, and we can simply
-return <code>w</code>, after casting it from a vector of length <code>m</code> to a
-vector of length <code>n</code>.</p>
-<p>The difficulty in defining <code>tail</code> is to maintain the relationships between the indices.
-The hypothesis <code>e : m = n + 1</code> in <code>tailAux</code> is used to communicate the relationship
-between <code>n</code> and the index associated with the minor premise.
-Moreover, the <code>zero = n + 1</code> case is unreachable, and the canonical way to discard such
-a case is to use <code>noConfusion</code>.</p>
-<p>The <code>tail</code> function is, however, easy to define using recursive
+<!--
+In the ``nil`` case, ``m`` is instantiated to ``0``, and
+``noConfusion`` makes use of the fact that ``0 = succ n`` cannot
+occur.  Otherwise, ``v`` is of the form ``a :: w``, and we can simply
+return ``w``, after casting it from a vector of length ``m`` to a
+vector of length ``n``.
+
+The difficulty in defining ``tail`` is to maintain the relationships between the indices.
+The hypothesis ``e : m = n + 1`` in ``tailAux`` is used to communicate the relationship
+between ``n`` and the index associated with the minor premise.
+Moreover, the ``zero = n + 1`` case is unreachable, and the canonical way to discard such
+a case is to use ``noConfusion``.
+
+The ``tail`` function is, however, easy to define using recursive
 equations, and the equation compiler generates all the boilerplate
-code automatically for us. Here are a number of similar examples:</p>
+code automatically for us. Here are a number of similar examples:
+-->
+<p>在 <code>nil</code> 的情况下，<code>m</code> 被实例化为 <code>0</code>，<code>noConfusion</code> 利用了 <code>0 = succ n</code> 不能出现的事实。否则，<code>v</code> 的形式为 <code>a :: w</code>，我们可以简单地将 <code>w</code>从长度 <code>m</code> 的向量转换为长度 <code>n</code>的向量后返回 <code>w</code>。</p>
+<p>定义 <code>tail</code> 的困难在于维持索引之间的关系。 <code>tailAux</code> 中的假设 <code>e : m = n + 1</code> 用于传达 <code>n</code> 与与小前提相关的索引之间的关系。此外，<code>zero = n + 1</code> 的情况是不可达的，而放弃这种情况的规范方法是使用 <code>noConfusion</code>。</p>
+<p>然而，<code>tail</code> 函数很容易使用递归方程来定义，并且方程编译器会自动为我们生成所有样板代码。下面是一些类似的例子:</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1085,9 +1451,12 @@ def zip : {n : Nat} → Vector α n → Vector β n → Vector (α × β) n
   | n+1, cons a as, cons b bs =&gt; cons (a, b) (zip as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<p>Note that we can omit recursive equations for &quot;unreachable&quot; cases such
-as <code>head nil</code>. The automatically generated definitions for indexed
-families are far from straightforward. For example:</p>
+<!--
+Note that we can omit recursive equations for "unreachable" cases such
+as ``head nil``. The automatically generated definitions for indexed
+families are far from straightforward. For example:
+-->
+<p>注意，对于「不可达」的情况，例如 <code>head nil</code>，我们可以省略递归方程。为索引族自动生成的定义远非直截了当。例如:</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1100,32 +1469,44 @@ families are far from straightforward. For example:</p>
 #print map.match_1
 <span class="boring">end Vector
 </span></code></pre>
-<p>The <code>map</code> function is even more tedious to define by hand than the
-<code>tail</code> function. We encourage you to try it, using <code>recOn</code>,
-<code>casesOn</code> and <code>noConfusion</code>.</p>
-<h2 id="inaccessible-patterns"><a class="header" href="#inaccessible-patterns">Inaccessible Patterns</a></h2>
-<p>Sometimes an argument in a dependent matching pattern is not essential
+<!--
+The ``map`` function is even more tedious to define by hand than the
+``tail`` function. We encourage you to try it, using ``recOn``,
+``casesOn`` and ``noConfusion``.
+-->
+<p>与 <code>tail</code> 函数相比，<code>map</code> 函数手工定义更加繁琐。我们鼓励您尝试使用 <code>recOn</code>、<code>casesOn</code> 和 <code>noConfusion</code>。</p>
+<!--
+Inaccessible Patterns
+------------------
+-->
+<h2 id="不可访问模式"><a class="header" href="#不可访问模式">不可访问模式</a></h2>
+<!--
+Sometimes an argument in a dependent matching pattern is not essential
 to the definition, but nonetheless has to be included to specialize
 the type of the expression appropriately. Lean allows users to mark
-such subterms as <em>inaccessible</em> for pattern matching. These
+such subterms as *inaccessible* for pattern matching. These
 annotations are essential, for example, when a term occurring in the
 left-hand side is neither a variable nor a constructor application,
 because these are not suitable targets for pattern matching. We can
-view such inaccessible patterns as &quot;don't care&quot; components of the
+view such inaccessible patterns as "don't care" components of the
 patterns. You can declare a subterm inaccessible by writing
-<code>.(t)</code>. If the inaccessible pattern can be inferred, you can also write
-<code>_</code>.</p>
-<p>The following example, we declare an inductive type that defines the
-property of &quot;being in the image of <code>f</code>&quot;. You can view an element of
-the type <code>ImageOf f b</code> as evidence that <code>b</code> is in the image of
-<code>f</code>, whereby the constructor <code>imf</code> is used to build such
-evidence. We can then define any function <code>f</code> with an &quot;inverse&quot;
-which takes anything in the image of <code>f</code> to an element that is
-mapped to it. The typing rules forces us to write <code>f a</code> for the
+``.(t)``. If the inaccessible pattern can be inferred, you can also write
+``_``.
+
+The following example, we declare an inductive type that defines the
+property of "being in the image of ``f``". You can view an element of
+the type ``ImageOf f b`` as evidence that ``b`` is in the image of
+``f``, whereby the constructor ``imf`` is used to build such
+evidence. We can then define any function ``f`` with an "inverse"
+which takes anything in the image of ``f`` to an element that is
+mapped to it. The typing rules forces us to write ``f a`` for the
 first argument, but this term is neither a variable nor a constructor
 application, and plays no role in the pattern-matching definition. To
-define the function <code>inverse</code> below, we <em>have to</em> mark <code>f a</code>
-inaccessible.</p>
+define the function ``inverse`` below, we *have to* mark ``f a``
+inaccessible.
+-->
+<p>有时候，依值匹配模式中的参数对定义来说并不是必需的，但是必须包含它来适当地确定表达式的类型。Lean 允许用户将这些子项标记为「不可访问」以进行模式匹配。例如，当左侧出现的项既不是变量也不是构造器应用时，这些注解是必不可少的，因为它们不适合用于模式匹配的目标。我们可以将这种不可访问的模式视为模式的「不关心」组件。你可以通过写 <code>.(t)</code> 来声明子项不可访问。如果不可访问的模式可以被推断出来，你也可以写 <code>_</code>。</p>
+<p>下面的例子中，我们声明了一个归纳类型，它定义了「在 <code>f</code> 的像中」的属性。您可以将 <code>ImageOf f b</code> 类型的元素视为 <code>b</code> 位于 <code>f</code> 的像中的证据，构造器<code>imf</code> 用于构建此类证据。然后，我们可以定义任何函数 <code>f</code> 的「逆」，逆函数将 <code>f</code> 的像中的任何元素赋给映射到它的元素。类型规则迫使我们为第一个参数写 <code>f a</code>，但是这个项既不是变量也不是构造器应用，并且在模式匹配定义中没有作用。为了定义下面的函数 <code>inverse</code>，我们必须将 <code>f a</code> 标记为不可访问。</p>
 <pre><code class="language-lean">inductive ImageOf {α β : Type u} (f : α → β) : β → Type u where
   | imf : (a : α) → ImageOf f (f a)
 
@@ -1137,13 +1518,18 @@ def inverse {f : α → β} : (b : β) → ImageOf f b → α
 def inverse' {f : α → β} : (b : β) → ImageOf f b → α
   | _, imf a =&gt; a
 </code></pre>
-<p>In the example above, the inaccessible annotation makes it clear that
-<code>f</code> is <em>not</em> a pattern matching variable.</p>
-<p>Inaccessible patterns can be used to clarify and control definitions that
+<!--
+In the example above, the inaccessible annotation makes it clear that
+``f`` is *not* a pattern matching variable.
+
+Inaccessible patterns can be used to clarify and control definitions that
 make use of dependent pattern matching. Consider the following
-definition of the function <code>Vector.add</code>, which adds two vectors of
+definition of the function ``Vector.add``, which adds two vectors of
 elements of a type, assuming that type has an associated addition
-function:</p>
+function:
+-->
+<p>在上面的例子中，不可访问记号清楚地表明 <code>f</code> 不是一个模式匹配变量。</p>
+<p>不可访问模式可用于澄清和控制使用依值模式匹配的定义。考虑函数 <code>Vector.add</code> 的以下定义，假设该类型有满足结合律的加法函数，它将一个类型的两个元素向量相加:</p>
 <pre><code class="language-lean">inductive Vector (α : Type u) : Nat → Type u
   | nil  : Vector α 0
   | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1156,18 +1542,23 @@ def add [Add α] : {n : Nat} → Vector α n → Vector α n → Vector α n
 
 end Vector
 </code></pre>
-<p>The argument <code>{n : Nat}</code> appear after the colon, because it cannot
+<!--
+The argument ``{n : Nat}`` appear after the colon, because it cannot
 be held fixed throughout the definition.  When implementing this
 definition, the equation compiler starts with a case distinction as to
-whether the first argument is <code>0</code> or of the form <code>n+1</code>.  This is
+whether the first argument is ``0`` or of the form ``n+1``.  This is
 followed by nested case splits on the next two arguments, and in each
 case the equation compiler rules out the cases are not compatible with
-the first pattern.</p>
-<p>But, in fact, a case split is not required on the first argument; the
-<code>casesOn</code> eliminator for <code>Vector</code> automatically abstracts this
-argument and replaces it by <code>0</code> and <code>n + 1</code> when we do a case
+the first pattern.
+
+But, in fact, a case split is not required on the first argument; the
+``casesOn`` eliminator for ``Vector`` automatically abstracts this
+argument and replaces it by ``0`` and ``n + 1`` when we do a case
 split on the second argument. Using inaccessible patterns, we can prompt
-the equation compiler to avoid the case split on <code>n</code></p>
+the equation compiler to avoid the case split on ``n``
+-->
+<p>参数 <code>{n : Nat}</code> 出现在冒号之后，因为它不能在整个定义中保持固定。在实现这个定义时，方程编译器首先区分第一个参数是 <code>0</code> 还是 <code>n+1</code>。对接下来的两个参数嵌套地区分情况，在每种情况下，方程编译器都会排除与第一个模式不兼容的情况。</p>
+<p>但事实上，在第一个参数上不需要区分情况；当我们对第二个参数区分情况时，<code>Vector</code> 的 <code>casesOn</code> 消去器会自动抽象该参数，并将其替换为 <code>0</code> 和 <code>n + 1</code>。使用不可访问的模式，我们可以提示方程编译器不要在 <code>n</code> 上区分情况。</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1177,12 +1568,17 @@ the equation compiler to avoid the case split on <code>n</code></p>
   | .(_), cons a as, cons b bs =&gt; cons (a + b) (add as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<p>Marking the position as an inaccessible pattern tells the
+<!--
+Marking the position as an inaccessible pattern tells the
 equation compiler first, that the form of the argument should be
 inferred from the constraints posed by the other arguments, and,
-second, that the first argument should <em>not</em> participate in pattern
-matching.</p>
-<p>The inaccessible pattern <code>.(_)</code> can be written as <code>_</code> for convenience.</p>
+second, that the first argument should *not* participate in pattern
+matching.
+
+The inaccessible pattern `.(_)` can be written as `_` for convenience.
+-->
+<p>将位置标记为不可访问模式首先告诉方程编译器，参数的形式应该从其他参数所构成的约束中推断出来，其次，第一个参数不应该参与模式匹配。</p>
+<p>为简便起见，不可访问的模式 <code>.(_)</code> 可以写成 <code>_</code>。</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1192,12 +1588,15 @@ matching.</p>
   | _, cons a as, cons b bs =&gt; cons (a + b) (add as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<p>As we mentioned above, the argument <code>{n : Nat}</code> is part of the
+<!--
+As we mentioned above, the argument ``{n : Nat}`` is part of the
 pattern matching, because it cannot be held fixed throughout the
 definition. In previous Lean versions, users often found it cumbersome
 to have to include these extra discriminants. Thus, Lean 4
-implements a new feature, <em>discriminant refinement</em>, which includes
-these extra discriminants automatically for us.</p>
+implements a new feature, *discriminant refinement*, which includes
+these extra discriminants automatically for us.
+-->
+<p>如前所述，参数 <code>{n : Nat}</code> 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性，<strong>判别精炼</strong>（discriminant refinement），它自动为我们包含了这些额外的判别。</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1207,8 +1606,11 @@ these extra discriminants automatically for us.</p>
   | cons a as, cons b bs =&gt; cons (a + b) (add as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<p>When combined with the <em>auto bound implicits</em> feature, you can simplify
-the declare further and write:</p>
+<!--
+When combined with the *auto bound implicits* feature, you can simplify
+the declare further and write:
+-->
+<p>当与「自动绑定隐式」特性结合使用时，你可以进一步简化声明并这样写：</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1218,8 +1620,11 @@ the declare further and write:</p>
   | cons a as, cons b bs =&gt; cons (a + b) (add as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<p>Using these new features, you can write the other vector functions defined
-in the previous sections more compactly as follows:</p>
+<!--
+Using these new features, you can write the other vector functions defined
+in the previous sections more compactly as follows:
+-->
+<p>使用这些新特性，您可以更紧凑地编写在前几节中定义的其他向量函数，如下所示:</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -1242,17 +1647,27 @@ def zip : Vector α n → Vector β n → Vector (α × β) n
   | cons a as, cons b bs =&gt; cons (a, b) (zip as bs)
 <span class="boring">end Vector
 </span></code></pre>
-<h2 id="match-expressions"><a class="header" href="#match-expressions">Match Expressions</a></h2>
-<p>Lean also provides a compiler for <em>match-with</em> expressions found in
-many functional languages.</p>
+<!--
+Match Expressions
+-----------------
+-->
+<h2 id="match-表达式"><a class="header" href="#match-表达式">Match 表达式</a></h2>
+<!--
+Lean also provides a compiler for *match-with* expressions found in
+many functional languages.
+-->
+<p>Lean 还提供「match-with」表达式，它在很多函数式语言中都能找到。</p>
 <pre><code class="language-lean">def isNotZero (m : Nat) : Bool :=
   match m with
   | 0   =&gt; false
   | n+1 =&gt; true
 </code></pre>
-<p>This does not look very different from an ordinary pattern matching
-definition, but the point is that a <code>match</code> can be used anywhere in
-an expression, and with arbitrary arguments.</p>
+<!--
+This does not look very different from an ordinary pattern matching
+definition, but the point is that a ``match`` can be used anywhere in
+an expression, and with arbitrary arguments.
+-->
+<p>这看起来与普通的模式匹配定义没有太大的不同，但关键是 <code>match</code> 可以在表达式中的任何地方使用，并带有任意参数。</p>
 <pre><code class="language-lean">def isNotZero (m : Nat) : Bool :=
   match m with
   | 0   =&gt; false
@@ -1267,7 +1682,10 @@ def filter (p : α → Bool) : List α → List α
 
 example : filter isNotZero [1, 0, 0, 3, 0] = [1, 3] := rfl
 </code></pre>
-<p>Here is another example:</p>
+<!--
+Here is another example:
+-->
+<p>另一例：</p>
 <pre><code class="language-lean">def foo (n : Nat) (b c : Bool) :=
   5 + match n - 5, b &amp;&amp; c with
       | 0,   true  =&gt; 0
@@ -1279,8 +1697,11 @@ example : filter isNotZero [1, 0, 0, 3, 0] = [1, 3] := rfl
 
 example : foo 7 true false = 9 := rfl
 </code></pre>
-<p>Lean uses the <code>match</code> construct internally to implement pattern-matching in all parts of the system.
-Thus, all four of these definitions have the same net effect.</p>
+<!--
+Lean uses the ``match`` construct internally to implement pattern-matching in all parts of the system.
+Thus, all four of these definitions have the same net effect.
+-->
+<p>Lean 使用内建的 <code>match</code> 来实现系统所有地方的模式匹配。因此，这四种定义具有相同的净效果。</p>
 <pre><code class="language-lean">def bar₁ : Nat × Nat → Nat
   | (m, n) =&gt; m + n
 
@@ -1294,7 +1715,10 @@ def bar₃ : Nat × Nat → Nat :=
 def bar₄ (p : Nat × Nat) : Nat :=
   let (m, n) := p; m + n
 </code></pre>
-<p>These variations are equally useful for destructing propositions:</p>
+<!--
+These variations are equally useful for destructing propositions:
+-->
+<p>这些变体在解构命题中也是同样有用的：</p>
 <pre><code class="language-lean">variable (p q : Nat → Prop)
 
 example : (∃ x, p x) → (∃ y, q y) → ∃ x y, p x ∧ q y
@@ -1314,8 +1738,15 @@ example (h₀ : ∃ x, p x) (h₁ : ∃ y, q y)
   let ⟨y, qy⟩ := h₁
   ⟨x, y, px, qy⟩
 </code></pre>
-<h2 id="local-recursive-declarations-1"><a class="header" href="#local-recursive-declarations-1">Local Recursive Declarations</a></h2>
-<p>You can define local recursive declarations using the <code>let rec</code> keyword.</p>
+<!--
+Local Recursive Declarations
+---------
+-->
+<h2 id="局域递归声明-1"><a class="header" href="#局域递归声明-1">局域递归声明</a></h2>
+<!--
+You can define local recursive declarations using the `let rec` keyword.
+-->
+<p>可以通过 <code>let rec</code> 关键字定义局域递归声明。</p>
 <pre><code class="language-lean">def replicate (n : Nat) (a : α) : List α :=
   let rec loop : Nat → List α → List α
     | 0,   as =&gt; as
@@ -1325,12 +1756,17 @@ example (h₀ : ∃ x, p x) (h₁ : ∃ y, q y)
 #check @replicate.loop
 -- {α : Type} → α → Nat → List α → List α
 </code></pre>
-<p>Lean creates an auxiliary declaration for each <code>let rec</code>. In the example above,
-it created the declaration <code>replicate.loop</code> for the <code>let rec loop</code> occurring at <code>replicate</code>.
-Note that, Lean &quot;closes&quot; the declaration by adding any local variable occurring in the
-<code>let rec</code> declaration as additional parameters. For example, the local variable <code>a</code> occurs
-at <code>let rec loop</code>.</p>
-<p>You can also use <code>let rec</code> in tactic mode and for creating proofs by induction.</p>
+<!--
+Lean creates an auxiliary declaration for each `let rec`. In the example above,
+it created the declaration `replicate.loop` for the `let rec loop` occurring at `replicate`.
+Note that, Lean "closes" the declaration by adding any local variable occurring in the
+`let rec` declaration as additional parameters. For example, the local variable `a` occurs
+at `let rec loop`.
+
+You can also use `let rec` in tactic mode and for creating proofs by induction.
+-->
+<p>Lean 对每个 <code>let rec</code>创建一个辅助声明。上例中，它为出现在 <code>replicate</code> 中的 <code>let rec loop</code> 创建了一个声明 <code>replicate.loop</code>。注意到，Lean 通过添加任意的出现在 <code>let rec</code> 声明中的局域变量作为附加参数来「关闭」声明。例如，局域变量 <code>a</code> 出现在 <code>let rec loop</code> 当中。</p>
+<p>也在策略模式中可使用 <code>let rec</code> 来建立归纳证明。</p>
 <pre><code class="language-lean"><span class="boring">def replicate (n : Nat) (a : α) : List α :=
 </span><span class="boring"> let rec loop : Nat → List α → List α
 </span><span class="boring">   | 0,   as =&gt; as
@@ -1344,8 +1780,11 @@ at <code>let rec loop</code>.</p>
     | n+1 =&gt; simp [replicate.loop, aux n, Nat.add_succ, Nat.succ_add]
   exact aux n []
 </code></pre>
-<p>You can also introduce auxiliary recursive declarations using a <code>where</code> clause after your definition.
-Lean converts them into a <code>let rec</code>.</p>
+<!--
+You can also introduce auxiliary recursive declarations using a `where` clause after your definition.
+Lean converts them into a `let rec`.
+-->
+<p>也可以用 <code>where</code> 语句在定义后面引入辅助递归声明，Lean 自动把它们转译成 <code>let rec</code>。</p>
 <pre><code class="language-lean">def replicate (n : Nat) (a : α) : List α :=
   loop n []
 where
@@ -1362,34 +1801,49 @@ where
     | 0   =&gt; simp [replicate.loop]
     | n+1 =&gt; simp [replicate.loop, aux n, Nat.add_succ, Nat.succ_add]
 </code></pre>
-<h2 id="exercises"><a class="header" href="#exercises">Exercises</a></h2>
+<!--
+Exercises
+---------
+-->
+<h2 id="练习"><a class="header" href="#练习">练习</a></h2>
+<!--
+1. Open a namespace ``Hidden`` to avoid naming conflicts, and use the
+   equation compiler to define addition, multiplication, and
+   exponentiation on the natural numbers. Then use the equation
+   compiler to derive some of their basic properties.
+
+2. Similarly, use the equation compiler to define some basic
+   operations on lists (like the ``reverse`` function) and prove
+   theorems about lists by induction (such as the fact that
+   ``reverse (reverse xs) = xs`` for any list ``xs``).
+
+3. Define your own function to carry out course-of-value recursion on
+   the natural numbers. Similarly, see if you can figure out how to
+   define ``WellFounded.fix`` on your own.
+
+4. Following the examples in [Section Dependent Pattern Matching](#dependent-pattern-matching),
+   define a function that will append two vectors.
+   This is tricky; you will have to define an auxiliary function.
+
+5. Consider the following type of arithmetic expressions. The idea is
+   that ``var n`` is a variable, ``vₙ``, and ``const n`` is the
+   constant whose value is ``n``.
+-->
 <ol>
 <li>
-<p>Open a namespace <code>Hidden</code> to avoid naming conflicts, and use the
-equation compiler to define addition, multiplication, and
-exponentiation on the natural numbers. Then use the equation
-compiler to derive some of their basic properties.</p>
+<p>打开命名空间 <code>Hidden</code> 以避免命名冲突，并使用方程编译器定义自然数的加法、乘法和幂运算。然后用方程编译器派生出它们的一些基本属性。</p>
 </li>
 <li>
-<p>Similarly, use the equation compiler to define some basic
-operations on lists (like the <code>reverse</code> function) and prove
-theorems about lists by induction (such as the fact that
-<code>reverse (reverse xs) = xs</code> for any list <code>xs</code>).</p>
+<p>类似地，使用方程编译器定义列表上的一些基本操作(如 <code>reverse</code> 函数)，并通过归纳法证明关于列表的定理（例如对于任何列表 <code>xs</code>，<code>reverse (reverse xs) = xs</code> ）。</p>
 </li>
 <li>
-<p>Define your own function to carry out course-of-value recursion on
-the natural numbers. Similarly, see if you can figure out how to
-define <code>WellFounded.fix</code> on your own.</p>
+<p>定义您自己的函数来对自然数执行值的过程递归。同样，看看你是否能弄清楚如何定义 <code>WellFounded.fix</code>。</p>
 </li>
 <li>
-<p>Following the examples in <a href="#dependent-pattern-matching">Section Dependent Pattern Matching</a>,
-define a function that will append two vectors.
-This is tricky; you will have to define an auxiliary function.</p>
+<p>按照<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>中的例子，定义一个追加（append）两个向量的函数。提示：你必须定义一个辅助函数。</p>
 </li>
 <li>
-<p>Consider the following type of arithmetic expressions. The idea is
-that <code>var n</code> is a variable, <code>vₙ</code>, and <code>const n</code> is the
-constant whose value is <code>n</code>.</p>
+<p>考虑以下类型的算术表达式。这个想法是，<code>var n</code> 是一个变量 <code>vₙ</code>，<code>const n</code> 是一个常量，它的值是 <code>n</code>。</p>
 </li>
 </ol>
 <pre><code class="language-lean">inductive Expr where
@@ -1404,8 +1858,39 @@ open Expr
 def sampleExpr : Expr :=
   plus (times (var 0) (const 7)) (times (const 2) (var 1))
 </code></pre>
-<p>Here <code>sampleExpr</code> represents <code>(v₀ * 7) + (2 * v₁)</code>.</p>
-<p>Write a function that evaluates such an expression, evaluating each <code>var n</code> to <code>v n</code>.</p>
+<!--
+Here ``sampleExpr`` represents ``(v₀ * 7) + (2 * v₁)``.
+
+Write a function that evaluates such an expression, evaluating each ``var n`` to ``v n``.
+-->
+<p>此处 <code>sampleExpr</code> 表示 <code>(v₀ * 7) + (2 * v₁)</code>。</p>
+<p>写一个函数来计算这些表达式，对每个<code>var n</code>赋值<code>v n</code>.</p>
+<!--
+```lean
+# inductive Expr where
+#   | const : Nat → Expr
+#   | var : Nat → Expr
+#   | plus : Expr → Expr → Expr
+#   | times : Expr → Expr → Expr
+#   deriving Repr
+# open Expr
+# def sampleExpr : Expr :=
+#   plus (times (var 0) (const 7)) (times (const 2) (var 1))
+def eval (v : Nat → Nat) : Expr → Nat
+  | const n     => sorry
+  | var n       => v n
+  | plus e₁ e₂  => sorry
+  | times e₁ e₂ => sorry
+
+def sampleVal : Nat → Nat
+  | 0 => 5
+  | 1 => 6
+  | _ => 0
+
+-- Try it out. You should get 47 here.
+-- #eval eval sampleVal sampleExpr
+```
+-->
 <pre><code class="language-lean"><span class="boring">inductive Expr where
 </span><span class="boring">  | const : Nat → Expr
 </span><span class="boring">  | var : Nat → Expr
@@ -1426,14 +1911,17 @@ def sampleVal : Nat → Nat
   | 1 =&gt; 6
   | _ =&gt; 0
 
--- Try it out. You should get 47 here.
+-- 如果答案是47说明你写的对。
 -- #eval eval sampleVal sampleExpr
 </code></pre>
-<p>Implement &quot;constant fusion,&quot; a procedure that simplifies subterms like
-<code>5 + 7</code> to <code>12</code>. Using the auxiliary function <code>simpConst</code>,
-define a function &quot;fuse&quot;: to simplify a plus or a times, first
-simplify the arguments recursively, and then apply <code>simpConst</code> to
-try to simplify the result.</p>
+<!--
+Implement "constant fusion," a procedure that simplifies subterms like
+``5 + 7`` to ``12``. Using the auxiliary function ``simpConst``,
+define a function "fuse": to simplify a plus or a times, first
+simplify the arguments recursively, and then apply ``simpConst`` to
+try to simplify the result.
+-->
+<p>实现「常数融合」，这是一个将 <code>5 + 7</code> 等子术语化简为 <code>12</code> 的过程。使用辅助函数 <code>simpConst</code>，定义一个函数「fuse」:为了化简加号或乘号，首先递归地化简参数，然后应用 <code>simpConst</code> 尝试化简结果。</p>
 <pre><code class="language-lean"><span class="boring">inductive Expr where
 </span><span class="boring">  | const : Nat → Expr
 </span><span class="boring">  | var : Nat → Expr
@@ -1461,7 +1949,10 @@ theorem fuse_eq (v : Nat → Nat)
         : ∀ e : Expr, eval v (fuse e) = eval v e :=
   sorry
 </code></pre>
-<p>The last two theorems show that the definitions preserve the value.</p>
+<!--
+The last two theorems show that the definitions preserve the value.
+-->
+<p>最后两个定理表明，定义保持值不变。</p>
 
                     </main>
 

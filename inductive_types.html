@@ -211,9 +211,9 @@ some basic examples of inductive types, and work our way up to more
 elaborate and complex examples.
 -->
 <p>我们的直觉是，每个构造器都指定了一种建立新的对象<code>Foo</code>的方法，可能是由以前构造的值构成。<code>Foo</code>类型只不过是由以这种方式构建的对象组成。归纳式声明中的第一个字符也可以用逗号而不是<code>|</code>来分隔构造器。</p>
-<p>我们将在下面看到，构造器的参数可以包括<code>Foo</code>类型的对象，但要遵守一定的“正向性”约束，即保证<code>Foo</code>的元素是自下而上构建的。粗略地说，每个<code>...</code>可以是由<code>Foo</code>和以前定义的类型构建的任何箭头类型，其中<code>Foo</code>如果出现，也只是作为依值箭头类型的“目标”。</p>
+<p>我们将在下面看到，构造器的参数可以包括<code>Foo</code>类型的对象，但要遵守一定的「正向性」约束，即保证<code>Foo</code>的元素是自下而上构建的。粗略地说，每个<code>...</code>可以是由<code>Foo</code>和以前定义的类型构建的任何箭头类型，其中<code>Foo</code>如果出现，也只是作为依值箭头类型的「目标」。</p>
 <p>我们将提供一些归纳类型的例子。我们还把上述方案稍微扩展，即相互定义的归纳类型，以及所谓的<em>归纳族</em>。</p>
-<p>就像逻辑连接词一样，每个归纳类型都有引入规则，说明如何构造该类型的一个元素；还有消去规则，说明如何在另一个构造中“使用”该类型的一个元素。其实逻辑连接词也是归纳类型结构的例子。你已经看到了归纳类型的引入规则：它们只是在类型的定义中指定的构造器。消去规则提供了类型上的递归原则，其中也包括作为一种特殊情况的归纳原则。</p>
+<p>就像逻辑连接词一样，每个归纳类型都有引入规则，说明如何构造该类型的一个元素；还有消去规则，说明如何在另一个构造中「使用」该类型的一个元素。其实逻辑连接词也是归纳类型结构的例子。你已经看到了归纳类型的引入规则：它们只是在类型的定义中指定的构造器。消去规则提供了类型上的递归原则，其中也包括作为一种特殊情况的归纳原则。</p>
 <p>在下一章中，我们将介绍Lean的函数定义包，它提供了更方便的方法来定义归纳类型上的函数并进行归纳证明。但是由于归纳类型的概念是如此的基本，我们觉得从低级的、实践的理解开始是很重要的。我们将从归纳类型的一些基本例子开始，然后逐步上升到更详细和复杂的例子。</p>
 <!--
 Enumerated Types
@@ -281,7 +281,7 @@ elements beyond those they construct.
 We will use the `match` expression to define a function from ``Weekday``
 to the natural numbers:
 -->
-<p>把<code>sunday</code>、<code>monday</code>、... 、<code>saturday</code>看作是<code>Weekday</code>的不同元素，没有其他有区别的属性。消去规则<code>Weekday.rec</code>，与<code>Weekday</code>类型及其构造器一起定义。它也被称为<strong>递归器</strong>（Recursor），它是使该类型“归纳”的原因：它允许我们通过给每个构造器分配相应的值来定义<code>Weekday</code>的函数。直观的说，归纳类型是由构造器详尽地生成的，除了它们构造的元素外，没有其他元素。</p>
+<p>把<code>sunday</code>、<code>monday</code>、... 、<code>saturday</code>看作是<code>Weekday</code>的不同元素，没有其他有区别的属性。消去规则<code>Weekday.rec</code>，与<code>Weekday</code>类型及其构造器一起定义。它也被称为<strong>递归器</strong>（Recursor），它是使该类型「归纳」的原因：它允许我们通过给每个构造器分配相应的值来定义<code>Weekday</code>的函数。直观的说，归纳类型是由构造器详尽地生成的，除了它们构造的元素外，没有其他元素。</p>
 <p>我们将使用<code>match</code>表达式来定义一个从<code>Weekday</code>到自然数的函数：</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday : Weekday
@@ -359,7 +359,7 @@ Lean to generate a function that converts `Weekday` objects into text.
 This function is used by the `#eval` command to display `Weekday` objects.
 -->
 <blockquote>
-<p>译者注：此处详细解释一下递归器<code>rec</code>。递归器作为归纳类型的消去规则，用于构造归纳类型到其他类型的函数。从最朴素的集合论直觉上讲，枚举类型的函数只需要规定每个元素的对应，也就是<code>match</code>的方式，但是要注意，<code>match</code>并不像其他Lean关键字那样是一种简单的语法声明，它实际上是一种功能，而这并不是类型论自带的功能。因此<code>match</code>需要一个类型论实现，也就是递归器。现在我们通过<code>#check @Weekday.rec</code>命令的输出来看递归器是如何工作的。首先回忆<code>@</code>是显式参数的意思。递归器是一个复杂的函数，输入的信息有1）motive：一个“目的”函数，表明想要拿当前类型构造什么类型。这个输出类型足够一般所以在u上；2）motive函数对所有枚举元素的输出值(这里就显得它非常“递归”)。这两点是准备工作，下面是这个函数的实际工作：输入一个具体的属于这个枚举类型的项<code>t</code>，输出结果<code>motive t</code>。下文在非枚举类型中，会直接用到这些递归器，届时可以更清晰地看到它们如何被使用。</p>
+<p>译者注：此处详细解释一下递归器<code>rec</code>。递归器作为归纳类型的消去规则，用于构造归纳类型到其他类型的函数。从最朴素的集合论直觉上讲，枚举类型的函数只需要规定每个元素的对应，也就是<code>match</code>的方式，但是要注意，<code>match</code>并不像其他Lean关键字那样是一种简单的语法声明，它实际上是一种功能，而这并不是类型论自带的功能。因此<code>match</code>需要一个类型论实现，也就是递归器。现在我们通过<code>#check @Weekday.rec</code>命令的输出来看递归器是如何工作的。首先回忆<code>@</code>是显式参数的意思。递归器是一个复杂的函数，输入的信息有1）motive：一个「目的」函数，表明想要拿当前类型构造什么类型。这个输出类型足够一般所以在u上；2）motive函数对所有枚举元素的输出值(这里就显得它非常「递归」)。这两点是准备工作，下面是这个函数的实际工作：输入一个具体的属于这个枚举类型的项<code>t</code>，输出结果<code>motive t</code>。下文在非枚举类型中，会直接用到这些递归器，届时可以更清晰地看到它们如何被使用。</p>
 </blockquote>
 <p>当声明一个归纳数据类型时，你可以使用<code>deriving Repr</code>来指示Lean生成一个函数，将<code>Weekday</code>对象转换为文本。这个函数被<code>#eval</code>命令用来显示<code>Weekday</code>对象。</p>
 <pre><code class="language-lean">inductive Weekday where
@@ -517,7 +517,7 @@ The `Bool` type in the Lean library is an instance of
 enumerated type.
 -->
 <p>下面的<a href="#%E5%BD%92%E7%BA%B3%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%AD%96%E7%95%A5">归纳类型的策略</a>一节将介绍额外的策略，这些策略是专门为利用归纳类型而设计。</p>
-<p>命题即类型的对应原则下，我们可以使用<code>match</code>来证明定理和定义函数。换句话说，逐情况证明是一种逐情况定义的另一表现形式，其中被“定义”的是一个证明而不是一段数据。</p>
+<p>命题即类型的对应原则下，我们可以使用<code>match</code>来证明定理和定义函数。换句话说，逐情况证明是一种逐情况定义的另一表现形式，其中被「定义」的是一个证明而不是一段数据。</p>
 <p>Lean库中的<code>Bool</code>类型是一个枚举类型的实例。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Bool where
@@ -538,7 +538,7 @@ suggest defining boolean operations ``and``, ``or``, ``not`` on the
 ``Bool`` type, and verifying common identities. Note that you can define a
 binary operation like ``and`` using `match`:
 -->
-<p>（为了运行这个例子，我们把它们放在一个叫做<code>Hidden</code>的命名空间中，这样像<code>Bool</code>这样的名字就不会和标准库中的 <code>Bool</code>冲突。这是必要的，因为这些类型是Lean“启动工作”的一部分，在系统启动时被自动导入）。</p>
+<p>（为了运行这个例子，我们把它们放在一个叫做<code>Hidden</code>的命名空间中，这样像<code>Bool</code>这样的名字就不会和标准库中的 <code>Bool</code>冲突。这是必要的，因为这些类型是Lean「启动工作」的一部分，在系统启动时被自动导入）。</p>
 <p>作为一个练习，你应该思考这些类型的引入和消去规则的作用。作为进一步的练习，我们建议在<code>Bool</code>类型上定义布尔运算 <code>and</code>、<code>or</code>、<code>not</code>，并验证其共性。提示，你可以使用<code>match</code>来定义像<code>and</code>这样的二元运算：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>def and (a b : Bool) : Bool :=
@@ -563,7 +563,7 @@ the constructors take no arguments at all. In general, a
 constructed argument. Consider the definitions of the product type and
 sum type in the library:
 -->
-<p>枚举类型是归纳类型的一种非常特殊的情况，其中构造器根本不需要参数。一般来说，“构造”可以依赖于数据，然后在构造参数中表示。考虑一下库中的乘积类型和求和类型的定义:</p>
+<p>枚举类型是归纳类型的一种非常特殊的情况，其中构造器根本不需要参数。一般来说，「构造」可以依赖于数据，然后在构造参数中表示。考虑一下库中的乘积类型和求和类型的定义:</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Prod (α : Type u) (β : Type v)
   | mk : α → β → Prod α β
@@ -631,7 +631,7 @@ input is of the form ``inr b``, in which case we have to specify an
 output value in terms of ``b``.
 -->
 <p>参数<code>motive</code>是用来指定你要构造的对象的类型，它是一个依值的函数，<code>_</code>是被自动推断出的类型，此处即<code>Bool × Nat</code>。函数<code>cond</code>是一个布尔条件：<code>cond b t1 t2</code>，如果<code>b</code>为真，返回<code>t1</code>，否则返回<code>t2</code>。函数<code>prod_example</code>接收一个由布尔值<code>b</code>和一个数字<code>n</code>组成的对，并根据<code>b</code>为真或假返回<code>2 * n</code>或<code>2 * n + 1</code>。</p>
-<p>相比之下，求和类型有<em>两个</em>构造器<code>inl</code>和<code>inr</code>（表示“从左引入”和“从右引入”），每个都需要<strong>一个</strong>（显式的）参数。要在<code>Sum α β</code>上定义一个函数，我们必须处理两种情况：要么输入的形式是<code>inl a</code>，由此必须依据<code>a</code>指定一个输出值；要么输入的形式是<code>inr b</code>，由此必须依据<code>b</code>指定一个输出值。</p>
+<p>相比之下，求和类型有<em>两个</em>构造器<code>inl</code>和<code>inr</code>（表示「从左引入」和「从右引入」），每个都需要<strong>一个</strong>（显式的）参数。要在<code>Sum α β</code>上定义一个函数，我们必须处理两种情况：要么输入的形式是<code>inl a</code>，由此必须依据<code>a</code>指定一个输出值；要么输入的形式是<code>inr b</code>，由此必须依据<code>b</code>指定一个输出值。</p>
 <pre><code class="language-lean">def sum_example (s : Sum Nat Nat) : Nat :=
   Sum.casesOn (motive := fun _ =&gt; Nat) s
     (fun n =&gt; 2 * n)
@@ -694,7 +694,7 @@ keyword ``structure`` can be used to define such an inductive type as
 well as its projections, at the same time.
 -->
 <p>这些定义的结果与本节前面给出的定义基本相同。</p>
-<p>像<code>Prod</code>这样只有一个构造器的类型是纯粹的合取型：构造器只是将参数列表打包成一块数据，基本上是一个元组，后续参数的类型可以取决于初始参数的类型。我们也可以把这样的类型看作是一个“记录”或“结构体”。在Lean中，关键词<code>structure</code>可以用来同时定义这样一个归纳类型以及它的投影。</p>
+<p>像<code>Prod</code>这样只有一个构造器的类型是纯粹的合取型：构造器只是将参数列表打包成一块数据，基本上是一个元组，后续参数的类型可以取决于初始参数的类型。我们也可以把这样的类型看作是一个「记录」或「结构体」。在Lean中，关键词<code>structure</code>可以用来同时定义这样一个归纳类型以及它的投影。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>structure Prod (α : Type u) (β : Type v) where
   mk :: (fst : α) (snd : β)
@@ -795,7 +795,7 @@ that it behaves as expected. We also encourage you to show that
 types is inhabited, and that the type of functions to an inhabited
 type is inhabited.
 -->
-<p>在依值类型论的语义中，没有内置的部分函数的概念。一个函数类型<code>α → β</code>或一个依值函数类型<code>(a : α) → β</code>的每个元素都被假定为在每个输入端有一个值。<code>Option</code>类型提供了一种表示部分函数的方法。<code>Option β</code>的一个元素要么是<code>none</code>，要么是<code>some b</code>的形式，用于某个值<code>b : β</code>。因此我们可以认为<code>α → Option β</code>类型的元素<code>f</code>是一个从<code>α</code>到<code>β</code>的部分函数：对于每一个<code>a : α</code>，<code>f a</code>要么返回<code>none</code>，表示<code>f a</code>是“未定义”，要么返回<code>some b</code>。</p>
+<p>在依值类型论的语义中，没有内置的部分函数的概念。一个函数类型<code>α → β</code>或一个依值函数类型<code>(a : α) → β</code>的每个元素都被假定为在每个输入端有一个值。<code>Option</code>类型提供了一种表示部分函数的方法。<code>Option β</code>的一个元素要么是<code>none</code>，要么是<code>some b</code>的形式，用于某个值<code>b : β</code>。因此我们可以认为<code>α → Option β</code>类型的元素<code>f</code>是一个从<code>α</code>到<code>β</code>的部分函数：对于每一个<code>a : α</code>，<code>f a</code>要么返回<code>none</code>，表示<code>f a</code>是「未定义」，要么返回<code>some b</code>。</p>
 <p><code>Inhabited α</code>的一个元素只是证明了<code>α</code>有一个元素的事实。稍后，我们将看到<code>Inhabited</code>是Lean中<em>类型类</em>的一个例子：Lean可以被告知合适的基础类型是含有元素的，并且可以在此基础上自动推断出其他构造类型是含有元素的。</p>
 <p>作为练习，我们鼓励你建立一个从<code>α</code>到<code>β</code>和<code>β</code>到<code>γ</code>的部分函数的组合概念，并证明其行为符合预期。我们也鼓励你证明<code>Bool</code>和<code>Nat</code>是含有元素的，两个含有元素的类型的乘积是含有元素的，以及到一个含有元素的类型的函数类型是含有元素的。</p>
 <!--
@@ -894,7 +894,7 @@ much more interesting when the constructors act on elements of the
 very type being defined. A canonical example is the type ``Nat`` of
 natural numbers:
 -->
-<p>到目前为止，我们所看到的归纳定义的类型都是“无趣的”：构造器打包数据并将其插入到一个类型中，而相应的递归器则解压数据并对其进行操作。当构造器作用于被定义的类型中的元素时，事情就变得更加有趣了。一个典型的例子是自然数<code>Nat</code>类型：</p>
+<p>到目前为止，我们所看到的归纳定义的类型都是「无趣的」：构造器打包数据并将其插入到一个类型中，而相应的递归器则解压数据并对其进行操作。当构造器作用于被定义的类型中的元素时，事情就变得更加有趣了。一个典型的例子是自然数<code>Nat</code>类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Nat where
   | zero : Nat
@@ -922,7 +922,7 @@ value of ``f`` at ``n`` has already been computed. As a result, the
 next argument to the recursor specifies a value for ``f (succ n)`` in
 terms of ``n`` and ``f n``. If we check the type of the recursor,
 -->
-<p>有两个构造器，我们从<code>zero : Nat</code>开始；它不需要参数，所以我们一开始就有了它。相反，构造器<code>succ</code>只能应用于先前构造的<code>Nat</code>。将其应用于<code>zero</code>，得到<code>succ zero : Nat</code>。再次应用它可以得到<code>succ (succ zero) : Nat</code>，依此类推。直观地说，<code>Nat</code>是具有这些构造器的“最小”类型，这意味着它是通过从<code>zero</code>开始并重复应用<code>succ</code>这样无穷无尽地（并且自由地）生成的。</p>
+<p>有两个构造器，我们从<code>zero : Nat</code>开始；它不需要参数，所以我们一开始就有了它。相反，构造器<code>succ</code>只能应用于先前构造的<code>Nat</code>。将其应用于<code>zero</code>，得到<code>succ zero : Nat</code>。再次应用它可以得到<code>succ (succ zero) : Nat</code>，依此类推。直观地说，<code>Nat</code>是具有这些构造器的「最小」类型，这意味着它是通过从<code>zero</code>开始并重复应用<code>succ</code>这样无穷无尽地（并且自由地）生成的。</p>
 <p>和以前一样，<code>Nat</code>的递归器被设计用来定义一个从<code>Nat</code>到任何域的依值函数<code>f</code>，也就是一个<code>(n : nat) → motive n</code>的元素<code>f</code>，其中<code>motive : Nat → Sort u</code>。它必须处理两种情况：一种是输入为<code>zero</code>的情况，另一种是输入为 <code>succ n</code>的情况，其中<code>n : Nat</code>。在第一种情况下，我们只需指定一个适当类型的目标值，就像以前一样。但是在第二种情况下，递归器可以假设在<code>n</code>处的<code>f</code>的值已经被计算过了。因此，递归器的下一个参数是以<code>n</code>和<code>f n</code>来指定<code>f (succ n)</code>的值。</p>
 <p>如果我们检查递归器的类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
@@ -1176,7 +1176,7 @@ and the remainder, ``t``, is known as the "tail."
 
 As an exercise, prove the following:
 -->
-<p>一个<code>α</code>类型的元素列表，要么是空列表<code>nil</code>，要么是一个元素<code>h : α</code>，后面是一个列表<code>t : List α</code>。第一个元素<code>h</code>，通常被称为列表的“头”，最后一个<code>t</code>，被称为“尾”。</p>
+<p>一个<code>α</code>类型的元素列表，要么是空列表<code>nil</code>，要么是一个元素<code>h : α</code>，后面是一个列表<code>t : List α</code>。第一个元素<code>h</code>，通常被称为列表的「头」，最后一个<code>t</code>，被称为「尾」。</p>
 <p>作为一个练习，请证明以下内容：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">inductive List (α : Type u) where
@@ -1380,7 +1380,7 @@ Think of this as saying "split on cases as to whether ``m + 3 * k`` is
 zero or the successor of some number." The result is functionally
 equivalent to the following:
 -->
-<p>可以认为这是在说“把<code>m + 3 * k</code>是零或者某个数字的后继的情况拆开”。其结果在功能上等同于以下：</p>
+<p>可以认为这是在说「把<code>m + 3 * k</code>是零或者某个数字的后继的情况拆开」。其结果在功能上等同于以下：</p>
 <pre><code class="language-lean">open Nat
 
 example (p : Nat → Prop) (hz : p 0) (hs : ∀ n, p (succ n)) (m k : Nat)
@@ -1728,7 +1728,7 @@ inductive definitions, for example, the principles of
 *induction-recursion* and *induction-induction*. These are not
 supported by Lean.
 -->
-<p>在类型论文献中，有对归纳定义的进一步推广，例如，“归纳-递归”和“归纳-归纳”的原则。这些东西Lean暂不支持。</p>
+<p>在类型论文献中，有对归纳定义的进一步推广，例如，「归纳-递归」和「归纳-归纳」的原则。这些东西Lean暂不支持。</p>
 <!--
 Axiomatic Details
 -----------------
@@ -1759,7 +1759,7 @@ to. Each constructor ``c`` in the definition of a family ``C`` of
 inductive types is of the form
 -->
 <p>我们已经通过例子描述了归纳类型和它们的语法。本节为那些对公理基础感兴趣的人提供额外的信息。</p>
-<p>我们已经看到，归纳类型的构造器需要<strong>参量</strong>（parameter，与argument都有“参数”译义，为区别此处译为参量）——即在整个归纳构造过程中保持固定的参数——和<strong>索引</strong>，即同时在构造中的类型类的参数。每个构造器都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。要求是，如果后者存在，它只<strong>严格正向</strong>出现。这意味着它所出现的构造器的任何参数都是一个依值箭头类型，其中定义中的归纳类型只作为结果类型出现，其中的索引是以常量和先前的参数来给出。</p>
+<p>我们已经看到，归纳类型的构造器需要<strong>参量</strong>（parameter，与argument都有「参数」译义，为区别此处译为参量）——即在整个归纳构造过程中保持固定的参数——和<strong>索引</strong>，即同时在构造中的类型类的参数。每个构造器都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。要求是，如果后者存在，它只<strong>严格正向</strong>出现。这意味着它所出现的构造器的任何参数都是一个依值箭头类型，其中定义中的归纳类型只作为结果类型出现，其中的索引是以常量和先前的参数来给出。</p>
 <p>既然一个归纳类型对于某些<code>u</code>来说存在于在<code>Sort u</code>中，那么我们有理由问<strong>哪些</strong>宇宙层次的<code>u</code>可以被实例化。归纳类型类 <code>C</code>的定义中的每个构造器<code>c</code>的形式为</p>
 <pre><code>  c : (a : α) → (b : β[a]) → C a p[a,b]
 </code></pre>
@@ -1837,7 +1837,7 @@ First, Lean supports *mutually defined* inductive types. The idea is
 that we can define two (or more) inductive types at the same time,
 where each one refers to the other(s).
 -->
-<p>我们现在考虑两个经常有用的归纳类型的推广，Lean通过“编译”它们来支持上述更原始的归纳类型种类。换句话说，Lean解析了更一般的定义，在此基础上定义了辅助的归纳类型，然后使用辅助类型来定义我们真正想要的类型。下一章将介绍Lean的方程编译器，它需要有效地利用这些类型。尽管如此，在这里描述这些声明还是有意义的，因为它们是普通归纳定义的直接变形。</p>
+<p>我们现在考虑两个经常有用的归纳类型的推广，Lean通过「编译」它们来支持上述更原始的归纳类型种类。换句话说，Lean解析了更一般的定义，在此基础上定义了辅助的归纳类型，然后使用辅助类型来定义我们真正想要的类型。下一章将介绍Lean的方程编译器，它需要有效地利用这些类型。尽管如此，在这里描述这些声明还是有意义的，因为它们是普通归纳定义的直接变形。</p>
 <p>首先，Lean支持<strong>相互定义</strong>的归纳类型。这个想法是，我们可以同时定义两个（或更多）归纳类型，其中每个类型都指代其他类型。</p>
 <pre><code class="language-lean">mutual
   inductive Even : Nat → Prop where
