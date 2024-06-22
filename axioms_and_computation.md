@@ -59,8 +59,8 @@ computation. This also blocks evaluation in the kernel, but it is
 compatible with compilation to bytecode.
 -->
 
-Lean 的标准库定义了一个公理：**命题外延性（Propositional Extensionality）**。
-以及一个**商（Qoutient）**结构，它蕴含了函数外延性的公理。
+Lean 的标准库定义了一个公理： **命题外延性（Propositional Extensionality）** 。
+以及一个 **商（Qoutient）** 结构，它蕴含了函数外延性的公理。
 这些扩展被用来发展如集合与有限集这些理论。我们在后面会看到，
 这些定理的使用会阻碍 Lean 内核中的求值，因此 ``Nat`` 类型的封闭项不再求值为数值。
 但是 Lean 在对其虚拟机器求值器进行字节码编译时会擦除类型和命题信息，
@@ -163,7 +163,7 @@ computational reading.
 然而在 19 世纪，数学论证复杂性的提升推动了数学家发展新的推理风格，
 抑制算法信息并调用数学对象，从而抽象掉了对象被表征的细节。
 目标是在不陷入繁重的计算细节的情况下获得强大的「概念」理解，
-但这可能导致数学定理在直接计算的解读上干脆就是 **错误** 的。
+但这可能导致数学定理在直接计算的解读上干脆就是  **错误**  的。
 
 <!--
 There is still fairly uniform agreement today that computation is
@@ -183,9 +183,9 @@ mathematical reasoning.
 
 今天数学界仍在相当普遍地同意计算对于数学很重要。
 但对于如何以最佳方式解决计算问题有不同的看法。
-从**构造性**的角度来看，将数学与其计算根源分开是一个错误；
+从 **构造性** 的角度来看，将数学与其计算根源分开是一个错误；
 每条有意义的数学定理都应具有直接的计算解释。
-从**经典的**角度来看，保持关注点的分离更有成效：
+从 **经典的** 角度来看，保持关注点的分离更有成效：
 我们可以使用一种语言和方法体系编写计算机程序，
 同时保持使用非构造性理论和方法对其进行推理的自由。
 Lean 旨在支持这两种方法。库的核心部分以构造性方式开发，
@@ -247,7 +247,7 @@ the theory.
 -->
 
 在通过了证明无关的 ``Prop`` 之后，可以认为使用排中律 ``p ∨ ¬p`` 是合法的，
-其中 ``p``是任何命题。当然，这也可能根据 CIC 的规则阻止计算，
+其中 ``p`` 是任何命题。当然，这也可能根据 CIC 的规则阻止计算，
 但它不会阻止字节码求值，如上所述。仅在 :numref:`choice`
 中讨论过的选择原则才能完全消除理论中与证明无关的部分和与数据相关部分之间的区别。
 
@@ -516,8 +516,8 @@ quotients, and more. But the solutions are not so clear cut, and the
 rules of Lean's underlying calculus do not sanction such reductions.
 -->
 
-当前的研究计划包括关于**观测类型论（Observational Type Theory）**
-和**立方类型论（Cubical Type Theory）**的研究，旨在扩展类型理论，
+当前的研究计划包括关于 **观测类型论（Observational Type Theory）**
+和 **立方类型论（Cubical Type Theory）** 的研究，旨在扩展类型理论，
 以便允许对涉及函数外延、商，等等的强制转换进行归约。
 但解决方案并不明朗，而 Lean 的底层演算法则对此类归约也不支持。
 
@@ -678,7 +678,7 @@ They are, like inductively defined types and the associated
 constructors and recursors, viewed as part of the logical framework.
 -->
 
-和归纳定义的类型以及相关的构造器和递归器一样，它们也被视为逻辑框架的一部分。
+和归纳定义的类型以及相关的构造子和递归器一样，它们也被视为逻辑框架的一部分。
 
 <!--
 What makes the ``Quot`` construction into a bona fide quotient is the
@@ -724,7 +724,7 @@ was an equivalence relation to start with, then for all ``a`` and
 当然，当 ``r`` 是等价关系时，商集的结构是最常用的。给定上面的 ``r``，
 如果我们根据法则 ``r' a b`` 当且仅当 ``Quot.mk r a = Quot.mk r b`` 定义 ``r'``，
 那么显然 ``r'`` 就是一个等价关系。事实上，``r'`` 是函数 ``a ↦ quot.mk r a``
-的**核（Kernel）**。公理 ``Quot.sound`` 表明 ``r a b`` 蕴含 ``r' a b``。
+的 **核（Kernel）** 。公理 ``Quot.sound`` 表明 ``r a b`` 蕴含 ``r' a b``。
 使用 ``Quot.lift`` 和 ``Quot.ind``，我们可以证明 ``r'`` 是包含 ``r`` 的最小的等价关系，
 意思就是，如果 ``r''`` 是包含 ``r`` 的任意等价关系，则 ``r' a b`` 蕴含 ``r'' a b``。
 特别地，如果 ``r`` 开始就是一个等价关系，那么对任意 ``a`` 和 ``b``，我们都有
@@ -736,7 +736,7 @@ notion of a *setoid*, which is simply a type with an associated
 equivalence relation:
 -->
 
-为支持这种通用使用案例，标准库定义了 **广集（Setoid）** 的概念，
+为支持这种通用使用案例，标准库定义了  **广集（Setoid）**  的概念，
 它只是一个带有与之关联的等价关系的类型：
 
 ```lean
@@ -818,7 +818,7 @@ the quotient correspond exactly to the equivalence classes of elements
 in ``α``.
 -->
 
-结合``Quotient.sound``，这意味着商的各个元素精确对应于 ``α``中各元素的等价类。
+结合 ``Quotient.sound``，这意味着商的各个元素精确对应于 ``α`` 中各元素的等价类。
 
 <!--
 Recall that in the standard library, ``α × β`` represents the
@@ -829,7 +829,7 @@ the relevant equivalence relation:
 -->
 
 回顾一下标准库中的 ``α × β`` 代表类型 ``α`` 和 ``β`` 的笛卡尔积。
-为了说明商的用法，让我们将类型为 ``α`` 的元素构成的**无序对（Unordered Pair）**的类型定义为
+为了说明商的用法，让我们将类型为 ``α`` 的元素构成的 **无序对（Unordered Pair）** 的类型定义为
 ``α × α`` 类型的商。首先，我们定义相关的等价关系：
 
 ```lean
@@ -1178,7 +1178,7 @@ subtypes as follows:
 -->
 
 这可以在 ``Classical`` 命名空间中找到，所以定理的全名是 ``Classical.choice``。
-选择公理等价于**非限定摹状词（Indefinite Description）**原理，可通过子类型表示如下：
+选择公理等价于 **非限定摹状词（Indefinite Description）** 原理，可通过子类型表示如下：
 
 ```lean
 # namespace Hidden
@@ -1254,7 +1254,7 @@ definition is conventionally known as *Hilbert's epsilon function*:
 -->
 
 假设环境类型 ``α`` 非空，``strongIndefiniteDescription p`` 产生一个满足 ``p``
-的元素 ``α``（如果存在的话）。该定义的数据部分通常被称为 **希尔伯特 ε 函数**：
+的元素 ``α``（如果存在的话）。该定义的数据部分通常被称为  **希尔伯特 ε 函数** ：
 
 ```lean
 # open Classical
@@ -1304,7 +1304,7 @@ sketch the proof that is found in the standard library.
 First, we import the necessary axioms, and define two predicates ``U`` and ``V``:
 -->
 
-首先，我们导入必要的公理，并定义两个谓词``U``和``V``：
+首先，我们导入必要的公理，并定义两个谓词 ``U`` 和 ``V``：
 
 ```lean
 # namespace Hidden

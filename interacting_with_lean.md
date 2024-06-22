@@ -52,9 +52,9 @@ manually, via an ``import`` statement at the beginning of a file. The
 command
 -->
 
-Lean的前端的目标是解释用户的输入，构建形式化的表达式，并检查它们是否形式良好和类型正确。Lean还支持使用各种编辑器，这些编辑器提供持续的检查和反馈。更多信息可以在Lean[文档](https://lean-lang.org/documentation/)上找到。
+Lean 的前端的目标是解释用户的输入，构建形式化的表达式，并检查它们是否形式良好和类型正确。Lean 还支持使用各种编辑器，这些编辑器提供持续的检查和反馈。更多信息可以在Lean[文档](https://lean-lang.org/documentation/)上找到。
 
-Lean的标准库中的定义和定理分布在多个文件中。用户也可能希望使用额外的库，或在多个文件中开发自己的项目。当 Lean 启动时，它会自动导入库中 `Init` 文件夹的内容，其中包括一些基本定义和结构。因此，我们在这里介绍的大多数例子都是「开箱即用」的。
+Lean 的标准库中的定义和定理分布在多个文件中。用户也可能希望使用额外的库，或在多个文件中开发自己的项目。当 Lean 启动时，它会自动导入库中 `Init` 文件夹的内容，其中包括一些基本定义和结构。因此，我们在这里介绍的大多数例子都是「开箱即用」的。
 
 然而，如果你想使用其他文件，需要通过文件开头的`import'语句手动导入。命令
 
@@ -74,7 +74,7 @@ Importing is transitive. In other words, if you import ``Foo`` and ``Foo`` impor
 then you also have access to the contents of ``Bar``, and do not need to import it explicitly.
 -->
 
-导入文件 ``Bar/Baz/Blah.olean``，其中的描述是相对于Lean**搜索路径**解释的。关于如何确定搜索路径的信息可以在[文档](https://lean-lang.org/documentation/)中找到。默认情况下，它包括标准库目录，以及（在某些情况下）用户的本地项目的根目录。
+导入文件 ``Bar/Baz/Blah.olean``，其中的描述是相对于 Lean **搜索路径** 解释的。关于如何确定搜索路径的信息可以在[文档](https://lean-lang.org/documentation/)中找到。默认情况下，它包括标准库目录，以及（在某些情况下）用户的本地项目的根目录。
 
 导入是传递性的。换句话说，如果你导入了 ``Foo``，并且 ``Foo`` 导入了 ``Bar``，那么你也可以访问 ``Bar`` 的内容，而不需要明确导入它。
 
@@ -96,7 +96,7 @@ necessary. Remember that the point of the `variable` command is to
 declare variables for use in theorems, as in the following example:
 -->
 
-Lean提供了各种分段机制来帮助构造理论。你在[变量和小节](./dependent_type_theory.md#变量和小节)中看到，``section`` 命令不仅可以将理论中的元素组合在一起，还可以在必要时声明变量，作为定理和定义的参数插入。请记住，`variable` 命令的意义在于声明变量，以便在定理中使用，如下面的例子：
+Lean 提供了各种分段机制来帮助构造理论。你在[变量和小节](./dependent_type_theory.md#变量和小节)中看到，``section`` 命令不仅可以将理论中的元素组合在一起，还可以在必要时声明变量，作为定理和定义的参数插入。请记住，`variable` 命令的意义在于声明变量，以便在定理中使用，如下面的例子：
 
 ```lean
 section
@@ -130,7 +130,7 @@ Note that ``double`` does *not* have ``y`` as argument. Variables are only
 included in declarations where they are actually used.
 -->
 
-``double`` 的定义不需要声明 ``x`` 作为参数；Lean检测到这种依赖关系并自动插入。同样，Lean检测到 ``x`` 在 ``t1`` 和 ``t2`` 中的出现，也会自动插入。注意，double**没有**``y`` 作为参数。变量只包括在实际使用的声明中。
+``double`` 的定义不需要声明 ``x`` 作为参数；Lean 检测到这种依赖关系并自动插入。同样，Lean 检测到 ``x`` 在 ``t1`` 和 ``t2`` 中的出现，也会自动插入。注意，double **没有** ``y`` 作为参数。变量只包括在实际使用的声明中。
 
 <!--
 More on Namespaces
@@ -150,7 +150,7 @@ definition and theorem until ``end foo`` is encountered. The command
 theorems that begin with prefix ``foo``.
 -->
 
-在 Lean 中，标识符是由层次化的*名称*给出的，如 ``Foo.Bar.baz``。我们在[命名空间](./dependent_type_theory.md#命名空间)一节中看到，Lean提供了处理分层名称的机制。命令 ``namespace foo`` 导致 ``foo`` 被添加到每个定义和定理的名称中，直到遇到 ``end foo``。命令 ``open foo`` 然后为以 `foo` 开头的定义和定理创建临时的**别名**。
+在 Lean 中，标识符是由层次化的*名称*给出的，如 ``Foo.Bar.baz``。我们在[命名空间](./dependent_type_theory.md#命名空间)一节中看到，Lean 提供了处理分层名称的机制。命令 ``namespace foo`` 导致 ``foo`` 被添加到每个定义和定理的名称中，直到遇到 ``end foo``。命令 ``open foo`` 然后为以 `foo` 开头的定义和定理创建临时的 **别名** 。
 
 ```lean
 namespace Foo
@@ -194,7 +194,7 @@ by giving the full name. To that end, the string ``_root_`` is an
 explicit description of the empty prefix.
 -->
 
-尽管定理和定义的名称必须是唯一的，但标识它们的别名却不是。当我们打开一个命名空间时，一个标识符可能是模糊的。Lean试图使用类型信息来消除上下文中的含义，但你总是可以通过给出全名来消除歧义。为此，字符串 ``_root_`` 是对空前缀的明确表述。
+尽管定理和定义的名称必须是唯一的，但标识它们的别名却不是。当我们打开一个命名空间时，一个标识符可能是模糊的。Lean 试图使用类型信息来消除上下文中的含义，但你总是可以通过给出全名来消除歧义。为此，字符串 ``_root_`` 是对空前缀的明确表述。
 
 ```lean
 def String.add (a b : String) : String :=
@@ -266,7 +266,7 @@ open Nat hiding succ gcd
 creates aliases for everything in the ``Nat`` namespace *except* the identifiers listed.
 -->
 
-给 ``Nat`` 命名空间中**除了**被列出的标识符都创建了别名。命令
+给 ``Nat`` 命名空间中 **除了** 被列出的标识符都创建了别名。命令
 
 ```lean
 open Nat renaming mul → times, add → plus
@@ -442,7 +442,7 @@ their scope is always restricted to the current section or current
 file.
 -->
 
-在下面的[符号](#符号)一节中，我们将讨论 Lean 定义符号的机制，并看到它们也支持 ``local`` 修饰符。然而，在[设置选项](#设置选项)一节中，我们将讨论 Lean 设置选项的机制，它并**不**遵循这种模式：选项**只能**在局部设置，也就是说，它们的范围总是限制在当前小节或当前文件中。
+在下面的[符号](#符号)一节中，我们将讨论 Lean 定义符号的机制，并看到它们也支持 ``local`` 修饰符。然而，在[设置选项](#设置选项)一节中，我们将讨论 Lean 设置选项的机制，它并 **不** 遵循这种模式：选项 **只能** 在局部设置，也就是说，它们的范围总是限制在当前小节或当前文件中。
 
 <!--
 More on Implicit Arguments
@@ -479,7 +479,7 @@ transitive.
 
 在[隐参数](./dependent_type_theory.md#隐参数)一节中，我们看到，如果 Lean 将术语 ``t`` 的类型显示为 ``{x : α} → β x``，那么大括号表示 ``x`` 被标记为 ``t`` 的*隐参数*。这意味着每当你写 ``t`` 时，就会插入一个占位符，或者说「洞」，这样 ``t`` 就会被 ``@t _`` 取代。如果你不希望这种情况发生，你必须写 ``@t`` 来代替。
 
-请注意，隐参数是急于插入的。假设我们定义一个函数 ``f (x : Nat) {y : Nat} (z : Nat)``。那么，当我们写表达式`f 7`时，没有进一步的参数，它会被解析为`f 7 _`。Lean提供了一个较弱的注释，``{{y : ℕ}}``，它指定了一个占位符只应在后一个显式参数之前添加。这个注释也可以写成 ``⦃y : Nat⦄``，其中的 unicode 括号输入方式为 ``\{{`` 和 ``\}}``。有了这个注释，表达式`f 7`将被解析为原样，而`f 7 3`将被解析为 ``f 7 _ 3``，就像使用强注释一样。
+请注意，隐参数是急于插入的。假设我们定义一个函数 ``f (x : Nat) {y : Nat} (z : Nat)``。那么，当我们写表达式`f 7`时，没有进一步的参数，它会被解析为`f 7 _`。Lean 提供了一个较弱的注释，``{{y : ℕ}}``，它指定了一个占位符只应在后一个显式参数之前添加。这个注释也可以写成 ``⦃y : Nat⦄``，其中的 unicode 括号输入方式为 ``\{{`` 和 ``\}}``。有了这个注释，表达式`f 7`将被解析为原样，而`f 7 3`将被解析为 ``f 7 _ 3``，就像使用强注释一样。
 
 为了说明这种区别，请看下面的例子，它表明一个自反的欧几里得关系既是对称的又是传递的。
 
@@ -613,13 +613,13 @@ textually encode subproblems efficiently and readably can be of great
 benefit to both programmers and proof engineers alike.
 -->
 
-Lean中的标识符可以包括任何字母数字字符，包括希腊字母（除了∀、Σ和λ，它们在依值类型论中有特殊的含义）。它们还可以包括下标，可以通过输入 ``\_``，然后再输入所需的下标字符。
+Lean 中的标识符可以包括任何字母数字字符，包括希腊字母（除了∀、Σ和λ，它们在依值类型论中有特殊的含义）。它们还可以包括下标，可以通过输入 ``\_``，然后再输入所需的下标字符。
 
-Lean的解析器是可扩展的，也就是说，我们可以定义新的符号。
+Lean 的解析器是可扩展的，也就是说，我们可以定义新的符号。
 
-Lean的语法可以由用户在各个层面进行扩展和定制，从基本的「mixfix」符号到自定义的繁饰器。事实上，所有内置的语法都是使用对用户开放的相同机制和 API 进行解析和处理的。 在本节中，我们将描述和解释各种扩展点。
+Lean 的语法可以由用户在各个层面进行扩展和定制，从基本的「mixfix」符号到自定义的繁饰器。事实上，所有内置的语法都是使用对用户开放的相同机制和 API 进行解析和处理的。 在本节中，我们将描述和解释各种扩展点。
 
-虽然在编程语言中引入新的符号是一个相对罕见的功能，有时甚至因为它有可能使代码变得模糊不清而被人诟病，但它是形式化的一个宝贵工具，可以在代码中简洁地表达各自领域的既定惯例和符号。 除了基本的符号之外，Lean的能力是将普通的样板代码分解成（良好的）宏，并嵌入整个定制的特定领域语言（DSL，domain specific language），对子问题进行高效和可读的文本编码，这对程序员和证明工程师都有很大的好处。
+虽然在编程语言中引入新的符号是一个相对罕见的功能，有时甚至因为它有可能使代码变得模糊不清而被人诟病，但它是形式化的一个宝贵工具，可以在代码中简洁地表达各自领域的既定惯例和符号。 除了基本的符号之外，Lean 的能力是将普通的样板代码分解成（良好的）宏，并嵌入整个定制的特定领域语言（DSL，domain specific language），对子问题进行高效和可读的文本编码，这对程序员和证明工程师都有很大的好处。
 
 <!--
 ### Notations and Precedence
@@ -698,7 +698,7 @@ operand, so `a ^ b ^ c` *can* be parsed as `a ^ (b ^ c)`.  Note that
 if we used `notation` directly to introduce an infix notation like
 -->
 
-事实证明，第一个代码块中的所有命令实际上都是命令**宏**，翻译成更通用的 `notation` 命令。我们将在下面学习如何编写这种宏。 `notation` 命令不接受单一的记号，而是接受一个混合的记号序列和有优先级的命名项占位符，这些占位符可以在`=>`的右侧被引用，并将被在该位置解析的相应项所取代。 优先级为 `p` 的占位符在该处只接受优先级至少为 `p` 的记号。因此，字符串`a + b + c`不能被解析为等同于`a + (b + c)`，因为 `infixl` 符号的右侧操作数的优先级比该符号本身大。 相反，`infixr` 重用了符号右侧操作数的优先级，所以`a ^ b ^ c` *可以*被解析为`a ^ (b ^ c)`。 注意，如果我们直接使用 `notation` 来引入一个 infix 符号，如
+事实证明，第一个代码块中的所有命令实际上都是命令 **宏** ，翻译成更通用的 `notation` 命令。我们将在下面学习如何编写这种宏。 `notation` 命令不接受单一的记号，而是接受一个混合的记号序列和有优先级的命名项占位符，这些占位符可以在`=>`的右侧被引用，并将被在该位置解析的相应项所取代。 优先级为 `p` 的占位符在该处只接受优先级至少为 `p` 的记号。因此，字符串`a + b + c`不能被解析为等同于`a + (b + c)`，因为 `infixl` 符号的右侧操作数的优先级比该符号本身大。 相反，`infixr` 重用了符号右侧操作数的优先级，所以`a ^ b ^ c` *可以*被解析为`a ^ (b ^ c)`。 注意，如果我们直接使用 `notation` 来引入一个 infix 符号，如
 
 ```lean
 # set_option quotPrecheck false
@@ -718,7 +718,7 @@ As mentioned above, the `notation` command allows us to define
 arbitrary *mixfix* syntax freely mixing tokens and placeholders.
 -->
 
-在上文没有充分确定结合规则的情况下，Lean的解析器将默认为右结合。 更确切地说，Lean的解析器在存在模糊语法的情况下遵循一个局部的*最长解析*规则：当解析`a ~`中`a ~ b ~ c`的右侧时，它将继续尽可能长的解析（在当前的上下文允许的情况下），不在 `b` 之后停止，而是同时解析`~ c`。因此该术语等同于`a ~ (b ~ c)`。
+在上文没有充分确定结合规则的情况下，Lean 的解析器将默认为右结合。 更确切地说，Lean 的解析器在存在模糊语法的情况下遵循一个局部的*最长解析*规则：当解析`a ~`中`a ~ b ~ c`的右侧时，它将继续尽可能长的解析（在当前的上下文允许的情况下），不在 `b` 之后停止，而是同时解析`~ c`。因此该术语等同于`a ~ (b ~ c)`。
 
 如上所述，`notation` 命令允许我们定义任意的*mixfix*语法，自由地混合记号和占位符。
 
@@ -766,7 +766,7 @@ any natural number as an integer, when needed. Lean has mechanisms to
 detect and insert *coercions* of this sort.
 -->
 
-在 Lean 中，自然数的类型 ``Nat``，与整数的类型 ``Int`` 不同。但是有一个函数 ``Int.ofNat`` 将自然数嵌入整数中，这意味着我们可以在需要时将任何自然数视为整数。Lean有机制来检测和插入这种**强制转换**。
+在 Lean 中，自然数的类型 ``Nat``，与整数的类型 ``Int`` 不同。但是有一个函数 ``Int.ofNat`` 将自然数嵌入整数中，这意味着我们可以在需要时将任何自然数视为整数。Lean 有机制来检测和插入这种 **强制转换** 。
 
 ```lean
 variable (m n : Nat)
@@ -798,7 +798,7 @@ prints the type of the symbol, and its definition. If it is a constant
 or an axiom, Lean indicates that fact, and shows the type.
 -->
 
-有很多方法可以让你查询 Lean 的当前状态以及当前上下文中可用的对象和定理的信息。你已经看到了两个最常见的方法，`#check`和`#eval`。请记住，`#check`经常与`@`操作符一起使用，它使定理或定义的所有参数显式化。此外，你可以使用`#print`命令来获得任何标识符的信息。如果标识符表示一个定义或定理，Lean会打印出符号的类型，以及它的定义。如果它是一个常数或公理，Lean会指出它并显示其类型。
+有很多方法可以让你查询 Lean 的当前状态以及当前上下文中可用的对象和定理的信息。你已经看到了两个最常见的方法，`#check`和`#eval`。请记住，`#check`经常与`@`操作符一起使用，它使定理或定义的所有参数显式化。此外，你可以使用`#print`命令来获得任何标识符的信息。如果标识符表示一个定义或定理，Lean 会打印出符号的类型，以及它的定义。如果它是一个常数或公理，Lean 会指出它并显示其类型。
 
 <!--
 ```lean
@@ -859,7 +859,7 @@ Lean maintains a number of internal variables that can be set by users
 to control its behavior. The syntax for doing so is as follows:
 -->
 
-Lean维护着一些内部变量，用户可以通过设置这些变量来控制其行为。语法如下：
+Lean 维护着一些内部变量，用户可以通过设置这些变量来控制其行为。语法如下：
 
 ```
 set_option <name> <value>
@@ -869,7 +869,7 @@ set_option <name> <value>
 One very useful family of options controls the way Lean's *pretty- printer* displays terms. The following options take an input of true or false:
 -->
 
-有一系列非常有用的选项可以控制 Lean 的**美观打印**显示项的方式。下列选项的输入值为真或假：
+有一系列非常有用的选项可以控制 Lean 的 **美观打印** 显示项的方式。下列选项的输入值为真或假：
 
 ```
 pp.explicit  : display implicit arguments
@@ -902,7 +902,7 @@ error message. Too much information can be overwhelming, though, and
 Lean's defaults are generally sufficient for ordinary interactions.
 -->
 
-命令 ``set_option pp.all true`` 一次性执行这些设置，而 ``set_option pp.all false`` 则恢复到之前的值。当你调试一个证明，或试图理解一个神秘的错误信息时，漂亮地打印额外的信息往往是非常有用的。不过太多的信息可能会让人不知所措，Lean的默认值一般来说对普通的交互是足够的。
+命令 ``set_option pp.all true`` 一次性执行这些设置，而 ``set_option pp.all false`` 则恢复到之前的值。当你调试一个证明，或试图理解一个神秘的错误信息时，漂亮地打印额外的信息往往是非常有用的。不过太多的信息可能会让人不知所措，Lean 的默认值一般来说对普通的交互是足够的。
 
 <!--
 Elaboration Hints
@@ -966,7 +966,7 @@ library can be found online, on GitHub:
 
 为了有效地使用Lean，你将不可避免地需要使用库中的定义和定理。回想一下，文件开头的 ``import`` 命令会从其他文件中导入之前编译的结果，而且导入是传递的；如果你导入了 ``Foo``，``Foo`` 又导入了 ``Bar``，那么 ``Bar`` 的定义和定理也可以被你利用。但是打开一个命名空间的行为，提供了更短的名字，并没有延续下去。在每个文件中，你需要打开你想使用的命名空间。
 
-一般来说，你必须熟悉库和它的内容，这样你就知道有哪些定理、定义、符号和资源可供你使用。下面我们将看到 Lean 的编辑器模式也可以帮助你找到你需要的东西，但直接研究库的内容往往是不可避免的。Lean的标准库在 GitHub 上。
+一般来说，你必须熟悉库和它的内容，这样你就知道有哪些定理、定义、符号和资源可供你使用。下面我们将看到 Lean 的编辑器模式也可以帮助你找到你需要的东西，但直接研究库的内容往往是不可避免的。Lean 的标准库在 GitHub 上。
 
 - [https://github.com/leanprover/lean4/tree/master/src/Init](https://github.com/leanprover/lean4/tree/master/src/Init)
 
@@ -990,7 +990,7 @@ by `_`s. Often the name of theorem simply describes the conclusion:
 
 你可以使用 GitHub 的浏览器界面查看这些目录和文件的内容。如果你在自己的电脑上安装了Lean，你可以在 ``lean`` 文件夹中找到这个库，用你的文件管理器探索它。每个文件顶部的注释标题提供了额外的信息。
 
-Lean库的开发者遵循一般的命名准则，以便于猜测你所需要的定理的名称，或者在支持 Lean 模式的编辑器中用 Tab 自动补全来找到它，这将在下一节讨论。标识符一般是 ``camelCase``，而类型是 `CamelCase`。对于定理的名称，我们依靠描述性的名称，其中不同的组成部分用 `_` 分开。通常情况下，定理的名称只是描述结论。
+Lean 库的开发者遵循一般的命名准则，以便于猜测你所需要的定理的名称，或者在支持 Lean 模式的编辑器中用 Tab 自动补全来找到它，这将在下一节讨论。标识符一般是 ``camelCase``，而类型是 `CamelCase`。对于定理的名称，我们依靠描述性的名称，其中不同的组成部分用 `_` 分开。通常情况下，定理的名称只是描述结论。
 
 ```lean
 #check Nat.succ_ne_zero
@@ -1012,7 +1012,7 @@ a namespace with the same name as the type under definition. For
 example, the product type comes with the following operations:
 -->
 
-Lean中的标识符可以被组织到分层的命名空间中。例如，命名空间 ``Nat`` 中名为 ``le_of_succ_le_succ`` 的定理有全称 ``Nat.le_of_succ_le_succ``，但较短的名称可由命令 ``open Nat`` 提供（对于未标记为 `protected` 的名称）。我们将在[归纳类型](./inductive_types.md)和[结构体和记录](./structures_and_records.md)中看到，在 Lean 中定义结构体和归纳数据类型会产生相关操作，这些操作存储在与被定义类型同名的命名空间。例如，乘积类型带有以下操作：
+Lean 中的标识符可以被组织到分层的命名空间中。例如，命名空间 ``Nat`` 中名为 ``le_of_succ_le_succ`` 的定理有全称 ``Nat.le_of_succ_le_succ``，但较短的名称可由命令 ``open Nat`` 提供（对于未标记为 `protected` 的名称）。我们将在[归纳类型](./inductive_types.md)和[结构体和记录](./structures_and_records.md)中看到，在 Lean 中定义结构体和归纳数据类型会产生相关操作，这些操作存储在与被定义类型同名的命名空间。例如，乘积类型带有以下操作：
 
 ```lean
 #check @Prod.mk
@@ -1095,7 +1095,7 @@ any unbound identifier is automatically added as an implicit argument *if* it is
 greek letter. With this feature we can write `compose` as
 -->
 
-Lean 4支持一个名为**自动约束隐参数**的新特性。它使诸如 `compose` 这样的函数在编写时更加方便。当 Lean 处理一个声明的头时，**如果**它是一个小写字母或希腊字母，任何未约束的标识符都会被自动添加为隐式参数。有了这个特性，我们可以把 `compose` 写成
+Lean 4支持一个名为 **自动约束隐参数** 的新特性。它使诸如 `compose` 这样的函数在编写时更加方便。当 Lean 处理一个声明的头时， **如果** 它是一个小写字母或希腊字母，任何未约束的标识符都会被自动添加为隐式参数。有了这个特性，我们可以把 `compose` 写成
 
 ```lean
 def compose (g : β → γ) (f : α → β) (x : α) : γ :=
@@ -1113,7 +1113,7 @@ we realize some users may feel uncomfortable with it. Thus, you can disable it u
 the command `set_option autoImplicit false`.
 -->
 
-请注意，Lean使用 `Sort` 而不是 `Type` 推断出了一个更通用的类型。
+请注意，Lean 使用 `Sort` 而不是 `Type` 推断出了一个更通用的类型。
 
 虽然我们很喜欢这个功能，并且在实现 Lean 时广泛使用，但我们意识到有些用户可能会对它感到不舒服。因此，你可以使用`set_option autoBoundImplicitLocal false`命令将其禁用。
 

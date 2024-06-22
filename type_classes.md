@@ -13,8 +13,8 @@ and then called that implementation on the remaining arguments. For example,
 suppose we declare a structure in Lean to hold implementations of addition.
 -->
 
-将 **类型类（Type Class）** 作为一种原则性方法引入，
-是为了在函数式编程语言中支持 **特设多态（Ad-hoc Polymorphism）**。
+将  **类型类（Type Class）**  作为一种原则性方法引入，
+是为了在函数式编程语言中支持  **特设多态（Ad-hoc Polymorphism）** 。
 我们首先观察到，如果函数简单地接受特定类型的实现作为参数，
 然后在其余参数上调用该实现，则很容易实现特设多态函数（如加法）。
 例如，假设我们在 Lean 中声明一个结构体来保存加法的实现：
@@ -97,7 +97,7 @@ i.e. that it should be synthesized using typeclass resolution. This version of
 Similarly, we can register instances by:
 -->
 
-其中方括号表示类型为 `Add a` 的参数是 **实例隐式的**，
+其中方括号表示类型为 `Add a` 的参数是  **实例隐式的** ，
 即，它应该使用类型类求解合成。这个版本的 `add` 是 Haskell 项
 `add :: Add a => a -> a -> a` 的 Lean 类比。
 同样，我们可以通过以下方式注册实例：
@@ -203,7 +203,7 @@ Let us start with the first step of the program above, declaring an appropriate 
 例如，我们可能希望当 ``xs`` 为 ``List a`` 类型时 ``head xs`` 表达式的类型为 ``a``。
 类似地，许多定理在类型不为空的附加假设下成立。例如，如果 ``a`` 是一个类型，
 则 ``exists x : a, x = x`` 仅在 ``a`` 不为空时为真。标准库定义了一个类型类
-``Inhabited``，它能够让类型类推理来推断**可居（Inhabited）**类型类的「默认」元素。
+``Inhabited``，它能够让类型类推理来推断 **可居（Inhabited）** 类型类的「默认」元素。
 让我们从上述程序的第一步开始，声明一个适当的类：
 
 ```lean
@@ -467,7 +467,7 @@ You can input the raw natural number `2` using the macro `nat_lit 2`.
 Lean 会将项 `(2 : Nat)` 和 `(2 : Rational)` 分别繁饰（Elaborate）为：
 `OfNat.ofNat Nat 2 (instOfNatNat 2)` 和
 `OfNat.ofNat Rational 2 (instOfNatRational 2)`。
-我们将繁饰的项中出现的数字 `2` 称为 **原始** 自然数。
+我们将繁饰的项中出现的数字 `2` 称为  **原始**  自然数。
 你可以使用宏 `nat_lit 2` 来输入原始自然数 `2`。
 
 ```lean
@@ -478,7 +478,7 @@ Lean 会将项 `(2 : Nat)` 和 `(2 : Rational)` 分别繁饰（Elaborate）为�
 Raw natural numbers are *not* polymorphic.
 -->
 
-原始自然数 **不是** 多态的。
+原始自然数  **不是**  多态的。
 
 <!--
 The `OfNat` instance is parametric on the numeral. So, you can define instances for particular numerals.
@@ -486,7 +486,7 @@ The second argument is often a variable as in the example above, or a *raw* natu
 -->
 
 `OfNat` 实例对数值进行了参数化，因此你可以定义特定数字的实例。
-第二个参数通常是变量，如上例所示，或者是一个 **原始** 自然数。
+第二个参数通常是变量，如上例所示，或者是一个  **原始**  自然数。
 
 ```lean
 class Monoid (α : Type u) where
@@ -528,10 +528,10 @@ In the following example, we use output parameters to define a *heterogeneous* p
 multiplication.
 -->
 
-你可以将类型类 `Inhabited` 的参数视为类型类合成器的 **输入** 值。
+你可以将类型类 `Inhabited` 的参数视为类型类合成器的  **输入**  值。
 当类型类有多个参数时，可以将其中一些标记为输出参数。
 即使这些参数有缺失部分，Lean 也会开始类型类合成。
-在下面的示例中，我们使用输出参数定义一个 **异质（Heterogeneous）** 的多态乘法。
+在下面的示例中，我们使用输出参数定义一个  **异质（Heterogeneous）**  的多态乘法。
 
 ```lean
 # namespace Ex
@@ -638,7 +638,7 @@ this kind of situation. We can achieve exactly that using *default instances*.
 
 实例 `HMul` 没有被 Lean 合成，因为没有提供 `y` 的类型。
 然而，在这种情况下，自然应该认为 `y` 和 `x` 的类型应该相同。
-我们可以使用 **默认实例** 来实现这一点。
+我们可以使用  **默认实例**  来实现这一点。
 
 ```lean
 # namespace Ex
@@ -985,7 +985,7 @@ connectives:
 -->
 
 如果没有经典逻辑，我们就不能证明每个命题都是可判定的。
-但我们可以证明**某些**命题是可判定的。
+但我们可以证明 **某些** 命题是可判定的。
 例如，我们可以证明基本运算（比如自然数和整数上的等式和比较）的可判定性。
 此外，命题连词下的可判定性被保留了下来：
 
@@ -1276,7 +1276,7 @@ is done:
 -->
 
 你可以按对类型类实例进行尝试的顺序来更改这些实例，
-方法是为它们分配一个**优先级**。在声明实例时，
+方法是为它们分配一个 **优先级** 。在声明实例时，
 它将被分配一个默认优先级值。在定义实例时，你可以分配其他的优先级。
 以下示例说明了如何执行此操作：
 
@@ -1442,7 +1442,7 @@ Lean 也会在有需要的时候构造链式（非依赖的）强制转换。事
 Let us now consider the second kind of coercion. By the *class of sorts*, we mean the collection of universes ``Type u``. A coercion of the second kind is of the form:
 -->
 
-现在我们来考查第二种强制转换。**种类类（Class of Sort）**是指宇宙 ``Type u`` 的集合。
+现在我们来考查第二种强制转换。 **种类类（Class of Sort）** 是指宇宙 ``Type u`` 的集合。
 第二种强制转换的形式如下：
 
 ```
@@ -1520,7 +1520,7 @@ It is the coercion that makes it possible to write ``(a b c : S)``. Note that, w
 By the *class of function types*, we mean the collection of Pi types ``(z : B) → C``. The third kind of coercion has the form:
 -->
 
-**函数类型的类**，是指 Π 类型集合 ``(z : B) → C``。第三种强制转换形式为：
+ **函数类型的类** ，是指 Π 类型集合 ``(z : B) → C``。第三种强制转换形式为：
 
 ```
     c : (x1 : A1) → ... → (xn : An) → (y : F x1 ... xn) → (z : B) → C

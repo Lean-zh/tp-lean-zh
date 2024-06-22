@@ -6,7 +6,7 @@
 
 作者：*Jeremy Avigad, Leonardo de Moura, Soonho Kong and Sebastian Ullrich, 以及来自 Lean 社区的贡献者*
 
-**[Lean-zh 项目组](https://github.com/Lean-zh) 译**
+ **[Lean-zh 项目组](https://github.com/Lean-zh) 译**
 
 <!--
 This version of the text assumes you’re using Lean 4. See the

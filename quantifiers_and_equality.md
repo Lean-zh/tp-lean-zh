@@ -402,7 +402,7 @@ example : f a = g b := congr h₂ h₁
 Lean's library contains a large number of common identities, such as these:
 -->
 
-Lean的库包含大量通用的等式，例如：
+Lean 的库包含大量通用的等式，例如：
 
 ```lean
 variable (a b c : Nat)
@@ -467,7 +467,7 @@ chapter.
 
 注意，``Eq.subst`` 的第二个隐式参数提供了将要发生代换的表达式上下文，其类型为 ``α → Prop``。因此，推断这个谓词需要一个*高阶合一*（higher-order unification）的实例。一般来说，确定高阶合一器是否存在的问题是无法确定的，而 Lean 充其量只能提供不完美的和近似的解决方案。因此，``Eq.subst`` 并不总是做你想要它做的事。宏 ``h ▸ e`` 使用了更有效的启发式方法来计算这个隐参数，并且在不能应用 ``Eq.subst`` 的情况下通常会成功。
 
-因为等式推理是如此普遍和重要，Lean提供了许多机制来更有效地执行它。下一节将提供允许你以更自然和清晰的方式编写计算式证明的语法。但更重要的是，等式推理是由项重写器、简化器和其他种类的自动化方法支持的。术语重写器和简化器将在下一节中简要描述，然后在下一章中更详细地描述。
+因为等式推理是如此普遍和重要，Lean 提供了许多机制来更有效地执行它。下一节将提供允许你以更自然和清晰的方式编写计算式证明的语法。但更重要的是，等式推理是由项重写器、简化器和其他种类的自动化方法支持的。术语重写器和简化器将在下一节中简要描述，然后在下一章中更详细地描述。
 
 <!--
 Calculational Proofs
@@ -784,7 +784,7 @@ We can use the anonymous constructor notation ``⟨t, h⟩`` for
 ``Exists.intro t h``, when the type is clear from the context.
 -->
 
-当类型可从上下文中推断时，我们可以使用匿名构造器表示法 ``⟨t, h⟩`` 替换 ``Exists.intro t h``。
+当类型可从上下文中推断时，我们可以使用匿名构造子表示法 ``⟨t, h⟩`` 替换 ``Exists.intro t h``。
 
 ```lean
 example : ∃ x : Nat, x > 0 :=
@@ -810,7 +810,7 @@ following example, in which we set the option ``pp.explicit`` to true
 to ask Lean's pretty-printer to show the implicit arguments.
 -->
 
-注意 ``Exists.intro`` 有隐参数：Lean必须在结论 ``∃ x, p x`` 中推断谓词 ``p : α → Prop``。这不是一件小事。例如，如果我们有 ``hg : g 0 0 = 0`` 和 ``Exists.intro 0 hg``，有许多可能的值的谓词 ``p``，对应定理 ``∃ x, g x x = x``，``∃ x, g x x = 0``，``∃ x, g x 0 = x``，等等。Lean使用上下文来推断哪个是合适的。下面的例子说明了这一点，在这个例子中，我们设置了选项 ``pp.explicit`` 为true，要求 Lean 打印隐参数。
+注意 ``Exists.intro`` 有隐参数：Lean 必须在结论 ``∃ x, p x`` 中推断谓词 ``p : α → Prop``。这不是一件小事。例如，如果我们有 ``hg : g 0 0 = 0`` 和 ``Exists.intro 0 hg``，有许多可能的值的谓词 ``p``，对应定理 ``∃ x, g x x = x``，``∃ x, g x x = 0``，``∃ x, g x 0 = x``，等等。Lean 使用上下文来推断哪个是合适的。下面的例子说明了这一点，在这个例子中，我们设置了选项 ``pp.explicit`` 为true，要求 Lean 打印隐参数。
 
 <!--
 ```lean
@@ -890,11 +890,11 @@ Lean provides a more convenient way to eliminate from an existential
 quantifier with the ``match`` expression:
 -->
 
-把存在消去规则和析取消去规则作个比较可能会带来一些启发。命题 ``∃ x : α, p x`` 可以看成一个对所有 ``α`` 中的元素 ``a`` 所组成的命题 ``p a`` 的大型析取。注意到匿名构造器 ``⟨w, hw.right, hw.left⟩`` 是嵌套的构造器 ``⟨w, ⟨hw.right, hw.left⟩⟩`` 的缩写。
+把存在消去规则和析取消去规则作个比较可能会带来一些启发。命题 ``∃ x : α, p x`` 可以看成一个对所有 ``α`` 中的元素 ``a`` 所组成的命题 ``p a`` 的大型析取。注意到匿名构造子 ``⟨w, hw.right, hw.left⟩`` 是嵌套的构造子 ``⟨w, ⟨hw.right, hw.left⟩⟩`` 的缩写。
 
 存在式命题类型很像依值类型一节所述的 sigma 类型。给定 ``a : α`` 和 ``h : p a`` 时，项 ``Exists.intro a h`` 具有类型 ``(∃ x : α, p x) : Prop``，而 ``Sigma.mk a h`` 具有类型 ``(Σ x : α, p x) : Type``。``∃`` 和 ``Σ`` 之间的相似性是Curry-Howard同构的另一例子。
 
-Lean提供一个更加方便的消去存在量词的途径，那就是通过 ``match`` 表达式。
+Lean 提供一个更加方便的消去存在量词的途径，那就是通过 ``match`` 表达式。
 
 ```lean
 variable (α : Type) (p q : α → Prop)
@@ -941,7 +941,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
 Lean also provides a pattern-matching ``let`` expression:
 -->
 
-Lean还提供了一个模式匹配的 ``let`` 表达式：
+Lean 还提供了一个模式匹配的 ``let`` 表达式：
 
 ```lean
 # variable (α : Type) (p q : α → Prop)
@@ -956,7 +956,7 @@ construct above. Lean will even allow us to use an implicit ``match``
 in the ``fun`` expression:
 -->
 
-这实际上是上面的 ``match`` 结构的替代表示法。Lean甚至允许我们在 ``fun`` 表达式中使用隐含的 ``match``：
+这实际上是上面的 ``match`` 结构的替代表示法。Lean 甚至允许我们在 ``fun`` 表达式中使用隐含的 ``match``：
 
 
 ```lean
@@ -996,7 +996,7 @@ statement, anonymous constructors, and the ``rewrite`` tactic, we can
 write this proof concisely as follows:
 -->
 
-使用本章描述的各种小工具——``match`` 语句、匿名构造器和 ``rewrite`` 策略，我们可以简洁地写出如下证明：
+使用本章描述的各种小工具——``match`` 语句、匿名构造子和 ``rewrite`` 策略，我们可以简洁地写出如下证明：
 
 ```lean
 # def is_even (a : Nat) := ∃ b, a = 2 * b

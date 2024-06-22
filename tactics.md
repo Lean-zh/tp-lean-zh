@@ -29,9 +29,10 @@ write. Moreover, tactics offer a gateway to using Lean's automation,
 since automated procedures are themselves tactics.
 -->
 
-在本章中，我们描述了另一种构建证明的方法，即使用**策略**（Tactic）。 一个证明项代表一个数学证明；策略是描述如何建立这样一个证明的命令或指令。你可以在数学证明开始时非正式地说：「为了证明条件的必要性，展开定义，应用前面的定理，并进行简化。」就像这些指令告诉读者如何构建证明一样，策略告诉 Lean 如何构建证明。它们自然而然地支持增量式的证明书写，在这种写作方式中，你将分解一个证明，并一步步地实现目标。
+在本章中，我们描述了另一种构建证明的方法，即使用 **策略（Tactic）** 。 一个证明项代表一个数学证明；策略是描述如何建立这样一个证明的命令或指令。你可以在数学证明开始时非正式地说：「为了证明条件的必要性，展开定义，应用前面的定理，并进行简化。」就像这些指令告诉读者如何构建证明一样，策略告诉 Lean 如何构建证明。它们自然而然地支持增量式的证明书写，在这种写作方式中，你将分解一个证明，并一步步地实现目标。
 
-> 译者注：tactic 和 strategy 都有策略的意思，其中 tactic 侧重细节，如排兵布阵，strategy面向整体，如大规模战略。试译 strategy 为「要略」，与 tactic 相区分。
+> 译者注：tactic 和 strategy 都有策略的意思，其中 tactic 侧重细节，如排兵布阵，
+> strategy 面向整体，如大规模战略。试译 strategy 为「要略」，与 tactic 相区分。
 
 我们将把由策略序列组成的证明描述为「策略式」证明，前几章的证明我们称为「项式」证明。每种风格都有自己的优点和缺点。例如，策略式证明可能更难读，因为它们要求读者预测或猜测每条指令的结果。但它们一般更短，更容易写。此外，策略提供了一个使用 Lean 自动化的途径，因为自动化程序本身就是策略。
 
@@ -80,9 +81,9 @@ separated by semicolons or line breaks. You can prove the theorem above
 in that way:
 -->
 
-事实上，如果你把上面的例子中的「sorry」换成下划线，Lean会报告说，正是这个目标没有得到解决。
+事实上，如果你把上面的例子中的「sorry」换成下划线，Lean 会报告说，正是这个目标没有得到解决。
 
-通常情况下，你会通过写一个明确的项来满足这样的目标。但在任何需要项的地方，Lean允许我们插入一个 ``by <tactics>`` 块，其中 ``<tactics>`` 是一串命令，用分号或换行符分开。你可以用下面这种方式来证明上面的定理：
+通常情况下，你会通过写一个明确的项来满足这样的目标。但在任何需要项的地方，Lean 允许我们插入一个 ``by <tactics>`` 块，其中 ``<tactics>`` 是一串命令，用分号或换行符分开。你可以用下面这种方式来证明上面的定理：
 
 ```lean
 theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p :=
@@ -262,9 +263,9 @@ the "bullet" notation ``. <tactics>`` (or ``· <tactics>``) for
 structuring proof.
 -->
 
-注意，Lean将其他目标隐藏在 ``case`` 块内。我们说它「专注」于选定的目标。 此外，如果所选目标在 ``case`` 块的末尾没有完全解决，Lean会标记一个错误。
+注意，Lean 将其他目标隐藏在 ``case`` 块内。我们说它「专注」于选定的目标。 此外，如果所选目标在 ``case`` 块的末尾没有完全解决，Lean 会标记一个错误。
 
-对于简单的子目标，可能不值得使用其标签来选择一个子目标，但你可能仍然想要结构化证明。Lean还提供了「子弹」符号 ``. <tactics>`` 或 ``· <tactics>``。
+对于简单的子目标，可能不值得使用其标签来选择一个子目标，但你可能仍然想要结构化证明。Lean 还提供了「子弹」符号 ``. <tactics>`` 或 ``· <tactics>``。
 
 ```lean
 theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := by
@@ -779,7 +780,7 @@ constructor for conjunction, ``And.intro``. With these tactics, an
 example from the previous section can be rewritten as follows:
 -->
 
-在这个例子中，应用 ``cases`` 策略后只有一个目标，``h : p ∧ q`` 被一对假设取代，``hp : p`` 和 ``hq : q``。``constructor`` 策略应用了唯一一个合取构造器 ``And.intro``。有了这些策略，上一节的一个例子可以改写如下。
+在这个例子中，应用 ``cases`` 策略后只有一个目标，``h : p ∧ q`` 被一对假设取代，``hp : p`` 和 ``hq : q``。``constructor`` 策略应用了唯一一个合取构造子 ``And.intro``。有了这些策略，上一节的一个例子可以改写如下。
 
 ```lean
 example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
@@ -808,7 +809,7 @@ always applies the first applicable constructor of an inductively defined type.
 For example, you can use ``cases`` and ``constructor`` with an existential quantifier:
 -->
 
-你将在[归纳类型](./inductive_types.md)一章中看到，这些策略是相当通用的。``cases`` 策略可以用来分解递归定义类型的任何元素；``constructor`` 总是应用递归定义类型的第一个适用构造器。例如，你可以使用 ``cases`` 和 ``constructor`` 与一个存在量词：
+你将在[归纳类型](./inductive_types.md)一章中看到，这些策略是相当通用的。``cases`` 策略可以用来分解递归定义类型的任何元素；``constructor`` 总是应用递归定义类型的第一个适用构造子。例如，你可以使用 ``cases`` 和 ``constructor`` 与一个存在量词：
 
 ```lean
 example (p q : Nat → Prop) : (∃ x, p x) → ∃ x, p x ∨ q x := by
@@ -970,7 +971,7 @@ block. The following is a somewhat toy example:
 
 策略通常提供了建立证明的有效方法，但一长串指令会掩盖论证的结构。在这一节中，我们将描述一些有助于为策略式证明提供结构的方法，使这种证明更易读，更稳健。
 
-Lean的证明写作语法的一个优点是，它可以混合项式和策略式证明，并在两者之间自由转换。例如，策略 ``apply`` 和 ``exact`` 可以传入任意的项，你可以用 ``have``，``show`` 等等来写这些项。反之，当写一个任意的 Lean 项时，你总是可以通过插入一个 ``by`` 块来调用策略模式。下面是一个简易例子：
+Lean 的证明写作语法的一个优点是，它可以混合项式和策略式证明，并在两者之间自由转换。例如，策略 ``apply`` 和 ``exact`` 可以传入任意的项，你可以用 ``have``，``show`` 等等来写这些项。反之，当写一个任意的 Lean 项时，你总是可以通过插入一个 ``by`` 块来调用策略模式。下面是一个简易例子：
 
 ```lean
 example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := by
@@ -1116,7 +1117,7 @@ auxiliary facts. It is the tactic analogue of a ``let`` in a proof
 term.
 -->
 
-Lean还有一个 ``let`` 策略，与 ``have`` 策略类似，但用于引入局部定义而不是辅助事实。它是证明项中 ``let`` 的策略版。
+Lean 还有一个 ``let`` 策略，与 ``have`` 策略类似，但用于引入局部定义而不是辅助事实。它是证明项中 ``let`` 的策略版。
 
 ```lean
 example : ∃ x, x + 2 = 8 := by
@@ -1141,7 +1142,7 @@ define tactic blocks using curly braces and semicolons.
 
 和 ``have`` 一样，你可以通过写 ``let a := 3 * 2`` 来保留类型为隐式。``let`` 和 ``have`` 的区别在于，``let`` 在上下文中引入了一个局部定义，因此局部声明的定义可以在证明中展开。
 
-我们使用了`.`来创建嵌套的策略块。 在一个嵌套块中，Lean专注于第一个目标，如果在该块结束时还没有完全解决，就会产生一个错误。这对于表明一个策略所引入的多个子目标的单独证明是有帮助的。符号 ``.`` 是对空格敏感的，并且依靠缩进来检测策略块是否结束。另外，你也可以用大括号和分号来定义策略块。
+我们使用了`.`来创建嵌套的策略块。 在一个嵌套块中，Lean 专注于第一个目标，如果在该块结束时还没有完全解决，就会产生一个错误。这对于表明一个策略所引入的多个子目标的单独证明是有帮助的。符号 ``.`` 是对空格敏感的，并且依靠缩进来检测策略块是否结束。另外，你也可以用大括号和分号来定义策略块。
 
 ```lean
 example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
@@ -1221,7 +1222,7 @@ Tactic Combinators
 ones. A sequencing combinator is already implicit in the ``by`` block:
 -->
 
-**策略组合器**是由旧策略形成新策略的操作。``by`` 隐含了一个序列组合器：
+ **策略组合器** 是由旧策略形成新策略的操作。``by`` 隐含了一个序列组合器：
 
 ```lean
 example (p q : Prop) (hp : p) : p ∨ q :=
@@ -1559,7 +1560,7 @@ number of identities in Lean's library have been tagged with the
 rewrite subterms in an expression.
 -->
 
-``rewrite`` 被设计为操纵目标的手术刀，而简化器提供了一种更强大的自动化形式。Lean库中的一些特性已经被标记为`[simp]`属性，`simp` 策略使用它们来反复重写表达式中的子项。
+``rewrite`` 被设计为操纵目标的手术刀，而简化器提供了一种更强大的自动化形式。Lean 库中的一些特性已经被标记为`[simp]`属性，`simp` 策略使用它们来反复重写表达式中的子项。
 
 ```lean
 example (x y z : Nat) : (x + 0) * (0 + y * 1 + z * 0) = x * y := by

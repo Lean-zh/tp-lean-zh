@@ -24,7 +24,7 @@ of the trusted code base; its output consists of terms that are
 checked independently by the kernel.
 -->
 
-在上一章中，我们看到归纳定义提供了在 Lean 中引入新类型的强大手段。此外，构造器和递归器提供了在这些类型上定义函数的唯一手段。命题即类型的对应关系，意味着归纳法是证明的基本方法。
+在上一章中，我们看到归纳定义提供了在 Lean 中引入新类型的强大手段。此外，构造子和递归器提供了在这些类型上定义函数的唯一手段。命题即类型的对应关系，意味着归纳法是证明的基本方法。
 
 Lean 提供了定义递归函数、执行模式匹配和编写归纳证明的自然方法。它允许你通过指定它应该满足的方程来定义一个函数，它允许你通过指定如何处理可能出现的各种情况来证明一个定理。在它内部，这些描述被「方程编译器」程序「编译」成原始递归器。方程编译器不是可信代码库的一部分；它的输出包括由内核独立检查的项。
 
@@ -52,7 +52,7 @@ a function from the natural numbers to an arbitrary type by specifying
 a value in each of those cases:
 -->
 
-对示意图模式的解释是编译过程的第一步。我们已经看到，`casesOn` 递归器可以通过分情况讨论来定义函数和证明定理，根据归纳定义类型所涉及的构造器。但是复杂的定义可能会使用几个嵌套的 ``casesOn`` 应用，而且可能很难阅读和理解。模式匹配提供了一种更方便的方法，并且为函数式编程语言的用户所熟悉。
+对示意图模式的解释是编译过程的第一步。我们已经看到，`casesOn` 递归器可以通过分情况讨论来定义函数和证明定理，根据归纳定义类型所涉及的构造子。但是复杂的定义可能会使用几个嵌套的 ``casesOn`` 应用，而且可能很难阅读和理解。模式匹配提供了一种更方便的方法，并且为函数式编程语言的用户所熟悉。
 
 考虑一下自然数的归纳定义类型。每个自然数要么是 ``zero``，要么是 ``succ x``，因此你可以通过在每个情况下指定一个值来定义一个从自然数到任意类型的函数：
 
@@ -117,7 +117,7 @@ and ``succ`` are exposed.
 Pattern matching works with any inductive type, such as products and option types:
 -->
 
-因为加法和零符号已经被赋予 `[matchPattern]` 属性，它们可以被用于模式匹配。Lean 简单地将这些表达式规范化，直到显示构造器 ``zero`` 和 ``succ``。
+因为加法和零符号已经被赋予 `[matchPattern]` 属性，它们可以被用于模式匹配。Lean 简单地将这些表达式规范化，直到显示构造子 ``zero`` 和 ``succ``。
 
 模式匹配适用于任何归纳类型，如乘积和 Option 类型：
 
@@ -177,7 +177,7 @@ constructors, as in the following examples.
 
 这样解决带逻辑连接词的命题就很紧凑。
 
-在所有这些例子中，模式匹配被用来进行单一情况的区分。更有趣的是，模式可以涉及嵌套的构造器，如下面的例子。
+在所有这些例子中，模式匹配被用来进行单一情况的区分。更有趣的是，模式可以涉及嵌套的构造子，如下面的例子。
 
 ```lean
 def sub2 : Nat → Nat
@@ -322,7 +322,7 @@ is a parameter and occurs before the colon to indicate it does not participate i
 Lean also allows parameters to occur after ``:``, but it cannot pattern match on them.
 -->
 
-还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为**通配符模式**，或**匿名变量**。与方程编译器之外的用法不同，这里的下划线并**不**表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。[通配符和重叠模式](#通配符和重叠模式)一节阐述了通配符的概念，而[不可访问模式](#不可访问模式)一节解释了你如何在模式中使用隐参数。
+还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为 **通配符模式** ，或 **匿名变量** 。与方程编译器之外的用法不同，这里的下划线 **并不** 表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。[通配符和重叠模式](#通配符和重叠模式)一节阐述了通配符的概念，而[不可访问模式](#不可访问模式)一节解释了你如何在模式中使用隐参数。
 
 正如[归纳类型](./inductive_types.md)一章中所描述的，归纳数据类型可以依赖于参数。下面的例子使用模式匹配定义了 ``tail`` 函数。参数 ``α : Type`` 是一个参数，出现在冒号之前，表示它不参与模式匹配。Lean 也允许参数出现在 ``:`` 之后，但它不能对其进行模式匹配。
 
@@ -350,7 +350,7 @@ considered in the [Section Dependent Pattern Matching](#dependent-pattern-matchi
 
 尽管参数 ``α`` 在这两个例子中的位置不同，但在这两种情况下，它的处理方式是一样的，即它不参与情况分割。
 
-Lean也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种**依值模式匹配**的例子在[依值模式匹配](#依值模式匹配)一节中考虑。
+Lean 也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种 **依值模式匹配** 的例子在[依值模式匹配](#依值模式匹配)一节中考虑。
 
 <!--
 Wildcards and Overlapping Patterns
@@ -394,7 +394,7 @@ the net result is the same. In particular, the following equations hold
 definitionally:
 -->
 
-在第二种表述中，模式是重叠的；例如，一对参数 ``0 0`` 符合所有三种情况。但是Lean通过使用第一个适用的方程来处理这种模糊性，所以在这个例子中，最终结果是一样的。特别是，以下方程在定义上是成立的：
+在第二种表述中，模式是重叠的；例如，一对参数 ``0 0`` 符合所有三种情况。但是Lean 通过使用第一个适用的方程来处理这种模糊性，所以在这个例子中，最终结果是一样的。特别是，以下方程在定义上是成立的：
 
 ```lean
 # def foo : Nat → Nat → Nat
@@ -411,7 +411,7 @@ example : foo (m+1) (n+1) = 2 := rfl
 Since the values of ``m`` and ``n`` are not needed, we can just as well use wildcard patterns instead.
 -->
 
-由于不需要``m``和``n``的值，我们也可以用通配符模式代替。
+由于不需要 ``m`` 和 ``n`` 的值，我们也可以用通配符模式代替。
 
 ```lean
 def foo : Nat → Nat → Nat
@@ -444,7 +444,7 @@ both approaches.
 
 你可以检查这个 ``foo`` 的定义是否满足与之前相同的定义特性。
 
-一些函数式编程语言支持**不完整的模式**。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 ``Inhabited`` （含元素的）类型类来模拟任意值的方法。粗略的说，``Inhabited α`` 的一个元素是对 ``α`` 拥有一个元素的见证；在[类型类](./type_classes.md)中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素``arbitrary``，任何含元素的类型。
+一些函数式编程语言支持 **不完整的模式** 。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 ``Inhabited`` （含元素的）类型类来模拟任意值的方法。粗略的说，``Inhabited α`` 的一个元素是对 ``α`` 拥有一个元素的见证；在[类型类](./type_classes.md)中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素 ``arbitrary``，任何含元素的类型。
 
 我们还可以使用类型`Option α`来模拟不完整的模式。我们的想法是对所提供的模式返回`some a`，而对不完整的情况使用`none`。下面的例子演示了这两种方法。
 
@@ -593,9 +593,9 @@ recursion from the last chapter, now defined using the equation
 compiler:
 -->
 
-这里 `(a : α)` 是一个参数序列，`(b : β)` 是进行模式匹配的参数序列，`γ` 是任何类型，它可以取决于 `a` 和 `b `。每一行应该包含相同数量的模式，对应于 `β` 的每个元素。正如我们所看到的，模式要么是一个变量，要么是应用于其他模式的构造器，要么是一个正规化为该形式的表达式（其中非构造器用 ``[matchPattern]`` 属性标记）。构造器的出现会提示情况拆分，构造器的参数由给定的变量表示。在[依值模式匹配](#依值模式匹配)一节中，我们将看到有时有必要在模式中包含明确的项，这些项需要进行表达式类型检查，尽管它们在模式匹配中没有起到作用。由于这个原因，这些被称为「不可访问的模式」。但是在[依值模式匹配](#依值模式匹配)一节之前，我们将不需要使用这种不可访问的模式。
+这里 `(a : α)` 是一个参数序列，`(b : β)` 是进行模式匹配的参数序列，`γ` 是任何类型，它可以取决于 `a` 和 `b `。每一行应该包含相同数量的模式，对应于 `β` 的每个元素。正如我们所看到的，模式要么是一个变量，要么是应用于其他模式的构造子，要么是一个正规化为该形式的表达式（其中非构造子用 ``[matchPattern]`` 属性标记）。构造子的出现会提示情况拆分，构造子的参数由给定的变量表示。在[依值模式匹配](#依值模式匹配)一节中，我们将看到有时有必要在模式中包含明确的项，这些项需要进行表达式类型检查，尽管它们在模式匹配中没有起到作用。由于这个原因，这些被称为「不可访问的模式」。但是在[依值模式匹配](#依值模式匹配)一节之前，我们将不需要使用这种不可访问的模式。
 
-正如我们在上一节所看到的，项 `t₁,...,tₙ` 可以利用任何一个参数 `a`，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 ``foo`` 的递归调用。在本节中，我们将处理**结构性递归**，其中 `foo` 的参数出现在 `:=` 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。
+正如我们在上一节所看到的，项 `t₁,...,tₙ` 可以利用任何一个参数 `a`，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 ``foo`` 的递归调用。在本节中，我们将处理 **结构性递归** ，其中 `foo` 的参数出现在 `:=` 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。
 
 ```lean
 open Nat
@@ -633,7 +633,7 @@ proofs of `zero_add` work:
 
 ``zero_add`` 的证明清楚地表明，归纳证明实际上是 Lean 中的一种递归形式。
 
-上面的例子表明，``add``的定义方程具有定义意义，`` mul``也是如此。方程编译器试图确保在任何可能的情况下都是这样，就像直接的结构归纳法一样。然而，在其他情况下，约简只在命题上成立，也就是说，它们是必须明确应用的方程定理。方程编译器在内部生成这样的定理。用户不能直接使用它们;相反，``simp``策略被配置为在必要时使用它们。因此，对`zero_add`的以下两种证明都成立：
+上面的例子表明，``add`` 的定义方程具有定义意义，`` mul`` 也是如此。方程编译器试图确保在任何可能的情况下都是这样，就像直接的结构归纳法一样。然而，在其他情况下，约简只在命题上成立，也就是说，它们是必须明确应用的方程定理。方程编译器在内部生成这样的定理。用户不能直接使用它们;相反，``simp`` 策略被配置为在必要时使用它们。因此，对`zero_add`的以下两种证明都成立：
 
 ```lean
 open Nat
@@ -742,9 +742,9 @@ type. You can get a sense of how it works by looking at the types of
 ``Nat.below`` and ``Nat.brecOn``:
 -->
 
-在这两种情况下，Lean都会生成辅助函数 ``fibFast.loop``。
+在这两种情况下，Lean 都会生成辅助函数 ``fibFast.loop``。
 
-为了处理结构递归，方程编译器使用**值过程**（course-of-values）递归，使用由每个归纳定义类型自动生成的常量 `below` 和 `brecOn`。你可以通过查看 ``Nat.below`` 和 ``Nat.brecOn`` 的类型来了解它是如何工作的。
+为了处理结构递归，方程编译器使用 **值过程** （course-of-values）递归，使用由每个归纳定义类型自动生成的常量 `below` 和 `brecOn`。你可以通过查看 ``Nat.below`` 和 ``Nat.brecOn`` 的类型来了解它是如何工作的。
 
 ```lean
 variable (C : Nat → Type u)
@@ -847,7 +847,7 @@ Local recursive declarations
 You can define local recursive declarations using the `let rec` keyword.
 -->
 
-可以使用``let rec``关键字定义局域递归声明。
+可以使用 ``let rec`` 关键字定义局域递归声明。
 
 ```lean
 def replicate (n : Nat) (a : α) : List α :=
@@ -870,7 +870,7 @@ at `let rec loop`.
 You can also use `let rec` in tactic mode and for creating proofs by induction.
 -->
 
-Lean为每个 ``let rec`` 创建一个辅助声明。在上面的例子中，它对于出现在 ``replicate`` 的 ``let rec loop`` 创建了声明 ``replication.loop``。请注意，Lean 通过添加 ``let rec`` 声明中出现的任何局部变量作为附加参数来「关闭」声明。例如，局部变量 ``a`` 出现在 ``let rec`` 循环中。
+Lean 为每个 ``let rec`` 创建一个辅助声明。在上面的例子中，它对于出现在 ``replicate`` 的 ``let rec loop`` 创建了声明 ``replication.loop``。请注意，Lean 通过添加 ``let rec`` 声明中出现的任何局部变量作为附加参数来「关闭」声明。例如，局部变量 ``a`` 出现在 ``let rec`` 循环中。
 
 你也可以在策略证明模式中使用 ``let rec``，并通过归纳来创建证明。
 
@@ -894,7 +894,7 @@ You can also introduce auxiliary recursive declarations using `where` clause aft
 Lean converts them into a `let rec`.
 -->
 
-还可以在定义后使用 ``where`` 子句引入辅助递归声明。Lean将它们转换为 ``let rec``。
+还可以在定义后使用 ``where`` 子句引入辅助递归声明。Lean 将它们转换为 ``let rec``。
 
 ```lean
 def replicate (n : Nat) (a : α) : List α :=
@@ -1007,7 +1007,7 @@ founded orders from others, for example, using lexicographic order.
 Here is essentially the definition of division on the natural numbers that is found in the standard library.
 -->
 
-这里有一大堆字，但我们熟悉第一块：类型 ``α``，关系 ``r``和假设 ``h``，即 ``r`` 是有良基的。变量' ``C`` 代表递归定义的动机：对于每个元素 ``x : α``，我们想构造一个 ``C x`` 的元素。函数 ``F`` 提供了这样做的归纳方法：它告诉我们如何构造一个元素 ``C x``，给定 ``C y`` 的元素对于 ``x`` 的每个 ``y``。
+这里有一大堆字，但我们熟悉第一块：类型 ``α``，关系 ``r`` 和假设 ``h``，即 ``r`` 是有良基的。变量' ``C`` 代表递归定义的动机：对于每个元素 ``x : α``，我们想构造一个 ``C x`` 的元素。函数 ``F`` 提供了这样做的归纳方法：它告诉我们如何构造一个元素 ``C x``，给定 ``C y`` 的元素对于 ``x`` 的每个 ``y``。
 
 注意 ``WellFounded.fix`` 和归纳法原理一样有效。它说如果 ``≺`` 是良基的，而你想要证明 ``∀ x, C x``，那么只要证明对于任意的 ``x``，如果我们有 ``∀ y ≺ x, C y``，那么我们就有 ``C x`` 就足够了。
 
@@ -1046,7 +1046,7 @@ The elaborator is designed to make definitions like this more
 convenient. It accepts the following:
 -->
 
-这个定义有点难以理解。这里递归在 ``x``上， ``div.F x f : Nat → Nat`` 为固定的 ``x`` 返回「除以 ``y``」函数。你要记住 ``div.F`` 的第二个参数 ``f`` 是递归的具体实现，这个函数对所有小于 ``x`` 的自然数 ``x₁`` 返回「除以 ``y``」函数。
+这个定义有点难以理解。这里递归在 ``x`` 上， ``div.F x f : Nat → Nat`` 为固定的 ``x`` 返回「除以 ``y``」函数。你要记住 ``div.F`` 的第二个参数 ``f`` 是递归的具体实现，这个函数对所有小于 ``x`` 的自然数 ``x₁`` 返回「除以 ``y``」函数。
 
 繁饰器（Elaborator）可以使这样的定义更加方便。它接受下列内容:
 
@@ -1153,7 +1153,7 @@ Note that a lexicographic order is used in the example above because the instanc
 `WellFoundedRelation (α × β)` uses a lexicographic order. Lean also defines the instance
 -->
 
-注意，在上面的例子中使用了字典序，因为实例 `WellFoundedRelation (α × β)` 使用了字典序。Lean还定义了实例
+注意，在上面的例子中使用了字典序，因为实例 `WellFoundedRelation (α × β)` 使用了字典序。Lean 还定义了实例
 
 ```lean
 instance (priority := low) [SizeOf α] : WellFoundedRelation α :=
@@ -1305,7 +1305,7 @@ Summary:
 - 如果没有 `termination_by`，良基关系（可能）可以这样被导出：选择一个参数，然后使用类型类解析为该参数的类型合成一个良基关系。
 
 - 如果指定了 `termination_by`，它将函数的参数映射为类型 `α`，并再次使用类型类解析。 回想一下，`β × γ` 的默认实例是基于 `β` 和 `γ`的良基关系的字典序。
-- 
+-
 - `Nat` 的默认良基关系实例是 `<`。
 
 - 默认情况下，策略 `decreasing_tactic` 用于显示递归应用小于选择的良基关系。如果 `decreasing_tactic` 失败，错误信息包括剩余目标 `... |- G`。注意，`decreasing_tactic` 使用 `assumption`。所以，你可以用 `have` 表达式来证明目标 `G`。你也可以使用 `decreasing_by` 来提供你自己的策略。
@@ -1365,7 +1365,7 @@ end
 The constructors, ``even_zero``, ``even_succ``, and ``odd_succ`` provide positive means for showing that a number is even or odd. We need to use the fact that the inductive type is generated by these constructors to know that zero is not odd, and that the latter two implications reverse. As usual, the constructors are kept in a namespace that is named after the type being defined, and the command ``open Even Odd`` allows us to access them more conveniently.
 -->
 
-构造器``even_zero``、``even_succ`` 和 ``odd_succ`` 提供了显示数字是偶数还是奇数的积极方法。我们需要利用归纳类型是由这些构造器生成的这一事实来知道零不是奇数，并且后两个含义是相反的。像往常一样，构造器保存在以定义的类型命名的命名空间中，并且命令 ``open Even Odd`` 允许我们更方便地访问它们。
+构造子 ``even_zero``、``even_succ`` 和 ``odd_succ`` 提供了显示数字是偶数还是奇数的积极方法。我们需要利用归纳类型是由这些构造子生成的这一事实来知道零不是奇数，并且后两个含义是相反的。像往常一样，构造子保存在以定义的类型命名的命名空间中，并且命令 ``open Even Odd`` 允许我们更方便地访问它们。
 
 ```lean
 # mutual
@@ -1565,7 +1565,7 @@ equations, and the equation compiler generates all the boilerplate
 code automatically for us. Here are a number of similar examples:
 -->
 
-在 ``nil`` 的情况下，``m`` 被实例化为 ``0``，``noConfusion`` 利用了 ``0 = succ n`` 不能出现的事实。否则，``v`` 的形式为 ``a :: w``，我们可以简单地将 ``w``从长度 ``m`` 的向量转换为长度 ``n``的向量后返回 ``w``。
+在 ``nil`` 的情况下，``m`` 被实例化为 ``0``，``noConfusion`` 利用了 ``0 = succ n`` 不能出现的事实。否则，``v`` 的形式为 ``a :: w``，我们可以简单地将 ``w`` 从长度 ``m`` 的向量转换为长度 ``n`` 的向量后返回 ``w``。
 
 定义 ``tail`` 的困难在于维持索引之间的关系。 ``tailAux`` 中的假设 ``e : m = n + 1`` 用于传达 ``n`` 与与小前提相关的索引之间的关系。此外，``zero = n + 1`` 的情况是不可达的，而放弃这种情况的规范方法是使用 ``noConfusion``。
 
@@ -1659,9 +1659,9 @@ define the function ``inverse`` below, we *have to* mark ``f a``
 inaccessible.
 -->
 
-有时候，依值匹配模式中的参数对定义来说并不是必需的，但是必须包含它来适当地确定表达式的类型。Lean 允许用户将这些子项标记为「不可访问」以进行模式匹配。例如，当左侧出现的项既不是变量也不是构造器应用时，这些注解是必不可少的，因为它们不适合用于模式匹配的目标。我们可以将这种不可访问的模式视为模式的「不关心」组件。你可以通过写 ``.(t)`` 来声明子项不可访问。如果不可访问的模式可以被推断出来，你也可以写 ``_``。
+有时候，依值匹配模式中的参数对定义来说并不是必需的，但是必须包含它来适当地确定表达式的类型。Lean 允许用户将这些子项标记为「不可访问」以进行模式匹配。例如，当左侧出现的项既不是变量也不是构造子应用时，这些注解是必不可少的，因为它们不适合用于模式匹配的目标。我们可以将这种不可访问的模式视为模式的「不关心」组件。你可以通过写 ``.(t)`` 来声明子项不可访问。如果不可访问的模式可以被推断出来，你也可以写 ``_``。
 
-下面的例子中，我们声明了一个归纳类型，它定义了「在 ``f`` 的像中」的属性。您可以将 ``ImageOf f b`` 类型的元素视为 ``b`` 位于 ``f`` 的像中的证据，构造器``imf`` 用于构建此类证据。然后，我们可以定义任何函数 ``f`` 的「逆」，逆函数将 ``f`` 的像中的任何元素赋给映射到它的元素。类型规则迫使我们为第一个参数写 ``f a``，但是这个项既不是变量也不是构造器应用，并且在模式匹配定义中没有作用。为了定义下面的函数 ``inverse``，我们必须将 ``f a`` 标记为不可访问。
+下面的例子中，我们声明了一个归纳类型，它定义了「在 ``f`` 的像中」的属性。您可以将 ``ImageOf f b`` 类型的元素视为 ``b`` 位于 ``f`` 的像中的证据，构造子 ``imf`` 用于构建此类证据。然后，我们可以定义任何函数 ``f`` 的「逆」，逆函数将 ``f`` 的像中的任何元素赋给映射到它的元素。类型规则迫使我们为第一个参数写 ``f a``，但是这个项既不是变量也不是构造子应用，并且在模式匹配定义中没有作用。为了定义下面的函数 ``inverse``，我们必须将 ``f a`` 标记为不可访问。
 
 ```lean
 inductive ImageOf {α β : Type u} (f : α → β) : β → Type u where
@@ -1770,7 +1770,7 @@ implements a new feature, *discriminant refinement*, which includes
 these extra discriminants automatically for us.
 -->
 
-如前所述，参数 ``{n : Nat}`` 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性，**判别精炼**（discriminant refinement），它自动为我们包含了这些额外的判别。
+如前所述，参数 ``{n : Nat}`` 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性， **判别精炼（discriminant refinement）** ，它自动为我们包含了这些额外的判别。
 
 ```lean
 # inductive Vector (α : Type u) : Nat → Type u
@@ -2089,7 +2089,7 @@ Write a function that evaluates such an expression, evaluating each ``var n`` to
 
 此处 ``sampleExpr`` 表示 ``(v₀ * 7) + (2 * v₁)``。
 
-写一个函数来计算这些表达式，对每个``var n``赋值``v n``.
+写一个函数来计算这些表达式，对每个 ``var n`` 赋值 ``v n``.
 
 <!--
 ```lean
