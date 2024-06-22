@@ -361,7 +361,7 @@ distinction between the proof-irrelevant and data-relevant parts of
 the theory.
 -->
 <p>在通过了证明无关的 <code>Prop</code> 之后，可以认为使用排中律 <code>p ∨ ¬p</code> 是合法的，
-其中 <code>p</code>是任何命题。当然，这也可能根据 CIC 的规则阻止计算，
+其中 <code>p</code> 是任何命题。当然，这也可能根据 CIC 的规则阻止计算，
 但它不会阻止字节码求值，如上所述。仅在 :numref:<code>choice</code>
 中讨论过的选择原则才能完全消除理论中与证明无关的部分和与数据相关部分之间的区别。</p>
 <!--
@@ -732,7 +732,7 @@ additional axioms.
 They are, like inductively defined types and the associated
 constructors and recursors, viewed as part of the logical framework.
 -->
-<p>和归纳定义的类型以及相关的构造器和递归器一样，它们也被视为逻辑框架的一部分。</p>
+<p>和归纳定义的类型以及相关的构造子和递归器一样，它们也被视为逻辑框架的一部分。</p>
 <!--
 What makes the ``Quot`` construction into a bona fide quotient is the
 following additional axiom:
@@ -850,7 +850,7 @@ Together with ``Quotient.sound``, this implies that the elements of
 the quotient correspond exactly to the equivalence classes of elements
 in ``α``.
 -->
-<p>结合<code>Quotient.sound</code>，这意味着商的各个元素精确对应于 <code>α</code>中各元素的等价类。</p>
+<p>结合 <code>Quotient.sound</code>，这意味着商的各个元素精确对应于 <code>α</code> 中各元素的等价类。</p>
 <!--
 Recall that in the standard library, ``α × β`` represents the
 Cartesian product of the types ``α`` and ``β``. To illustrate the use
@@ -1258,7 +1258,7 @@ sketch the proof that is found in the standard library.
 <!--
 First, we import the necessary axioms, and define two predicates ``U`` and ``V``:
 -->
-<p>首先，我们导入必要的公理，并定义两个谓词<code>U</code>和<code>V</code>：</p>
+<p>首先，我们导入必要的公理，并定义两个谓词 <code>U</code> 和 <code>V</code>：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>open Classical
 theorem em (p : Prop) : p ∨ ¬p :=

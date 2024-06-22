@@ -155,7 +155,7 @@ theory known as the *Calculus of Constructions*, with a countable
 hierarchy of non-cumulative universes and inductive types. By the end
 of this chapter, you will understand much of what this means.
 -->
-<p>依值类型论（Dependent type theory）是一种强大而富有表达力的语言，允许你表达复杂的数学断言，编写复杂的硬件和软件规范，并以自然和统一的方式对这两者进行推理。Lean是基于一个被称为构造演算（Calculus of Constructions）的依值类型论的版本，它拥有一个可数的非累积性宇宙（non-cumulative universe）的层次结构以及归纳类型（Inductive type）。在本章结束时，你将学会一大部分。</p>
+<p>依值类型论（Dependent type theory）是一种强大而富有表达力的语言，允许你表达复杂的数学断言，编写复杂的硬件和软件规范，并以自然和统一的方式对这两者进行推理。Lean 是基于一个被称为构造演算（Calculus of Constructions）的依值类型论的版本，它拥有一个可数的非累积性宇宙（non-cumulative universe）的层次结构以及归纳类型（Inductive type）。在本章结束时，你将学会一大部分。</p>
 <!--
 ## Simple Type Theory
 -->
@@ -167,7 +167,7 @@ denote a natural number and ``f`` may denote a function on the natural
 numbers. For those who like precise definitions, a Lean natural number
 is an arbitrary-precision unsigned integer.
 -->
-<p>「类型论」得名于其中每个表达式都有一个<em>类型</em>。举例：在一个给定的语境中，<code>x + 0</code> 可能表示一个自然数，<code>f</code> 可能表示一个定义在自然数上的函数。Lean中的自然数是任意精度的无符号整数。</p>
+<p>「类型论」得名于其中每个表达式都有一个<em>类型</em>。举例：在一个给定的语境中，<code>x + 0</code> 可能表示一个自然数，<code>f</code> 可能表示一个定义在自然数上的函数。Lean 中的自然数是任意精度的无符号整数。</p>
 <!--
 Here are some examples of how you can declare objects in Lean and
 check their types.
@@ -373,7 +373,7 @@ theory is that types themselves --- entities like ``Nat`` and ``Bool``
 objects. For that to be the case, each of them also has to have a
 type.
 -->
-<p>Lean所依据的依值类型论对简单类型论的其中一项升级是，类型本身（如 <code>Nat</code> 和 <code>Bool</code> 这些东西）也是对象，因此也具有类型。</p>
+<p>Lean 所依据的依值类型论对简单类型论的其中一项升级是，类型本身（如 <code>Nat</code> 和 <code>Bool</code> 这些东西）也是对象，因此也具有类型。</p>
 <pre><code class="language-lean">#check Nat               -- Type
 #check Bool              -- Type
 #check Nat → Bool        -- Type
@@ -438,7 +438,7 @@ You have actually come up against one of the most subtle aspects of
 Lean's typing system. Lean's underlying foundation has an infinite
 hierarchy of types:
 -->
-<p>实际上，这是 Lean 系统的一个最微妙的方面：Lean的底层基础有无限的类型层次：</p>
+<p>实际上，这是 Lean 系统的一个最微妙的方面：Lean 的底层基础有无限的类型层次：</p>
 <pre><code class="language-lean">#check Type     -- Type 1
 #check Type 1   -- Type 2
 #check Type 2   -- Type 3
@@ -475,7 +475,7 @@ universes. For example, ``List α`` should make sense for any type
 ``α``, no matter which type universe ``α`` lives in. This explains the
 type signature of the function ``List``:
 -->
-<p>然而，有些操作需要在类型宇宙上具有<strong>多态</strong>（polymorphic）。例如，<code>List α</code> 应该对任何类型的 <code>α</code> 都有意义，无论 <code>α</code> 存在于哪种类型的宇宙中。所以函数 <code>List</code> 有如下的类型：</p>
+<p>然而，有些操作需要在类型宇宙上具有<strong>多态（Polymorphic）</strong>。例如，<code>List α</code> 应该对任何类型的 <code>α</code> 都有意义，无论 <code>α</code> 存在于哪种类型的宇宙中。所以函数 <code>List</code> 有如下的类型：</p>
 <pre><code class="language-lean">#check List    -- List.{u} (α : Type u) : Type u
 </code></pre>
 <!--
@@ -510,7 +510,7 @@ You can avoid the universe command by providing the universe parameters when def
 ## Function Abstraction and Evaluation
 -->
 <h2 id="函数抽象和求值"><a class="header" href="#函数抽象和求值">函数抽象和求值</a></h2>
-<p>Lean提供 <code>fun</code> (或 <code>λ</code>)关键字用于从给定表达式创建函数，如下所示：</p>
+<p>Lean 提供 <code>fun</code> (或 <code>λ</code>)关键字用于从给定表达式创建函数，如下所示：</p>
 <!--
 ```lean
 #check fun (x : Nat) => x + 5   -- Nat → Nat
@@ -554,7 +554,7 @@ expression `if not y then x + 1 else x + 2`.
 Some mathematically common examples of operations of functions can be
 described in terms of lambda abstraction:
 -->
-<p>Lean将这三个例子解释为相同的表达式；在最后一个表达式中，Lean可以从表达式<code>if not y then x + 1 else x + 2</code>推断 <code>x</code> 和 <code>y</code> 的类型。</p>
+<p>Lean 将这三个例子解释为相同的表达式；在最后一个表达式中，Lean 可以从表达式<code>if not y then x + 1 else x + 2</code>推断 <code>x</code> 和 <code>y</code> 的类型。</p>
 <p>一些数学上常见的函数运算的例子可以用 lambda 抽象的项来描述:</p>
 <pre><code class="language-lean">def f (n : Nat) : String := toString n
 def g (s : String) : Bool := s.length &gt; 0
@@ -611,7 +611,7 @@ renaming bound variables for clarity, notice the types of the
 following expressions:
 -->
 <p>这个表达式表示一个接受三个类型 <code>α</code>，<code>β</code> 和 <code>γ</code> 和两个函数 <code>g : β → γ</code> 和 <code>f : α → β</code>，并返回的 <code>g</code> 和 <code>f</code> 的复合的函数。(理解这个函数的类型需要理解依值积类型，下面将对此进行解释。)</p>
-<p>lambda表达式的一般形式是 <code>fun x : α =&gt; t</code>，其中变量 <code>x</code> 是一个<strong>绑定变量</strong>（bound variable）：它实际上是一个占位符，其「作用域」没有扩展到表达式 <code>t</code> 之外。例如，表达式 <code>fun (b : β) (x : α) =&gt; b</code> 中的变量 <code>b</code> 与前面声明的常量 <code>b</code> 没有任何关系。事实上，这个表达式表示的函数与 <code>fun (u : β) (z : α) =&gt; u</code> 是一样的。形式上，可以通过给绑定变量重命名来使形式相同的表达式被看作是<strong>alpha等价</strong>的，也就是被认为是「一样的」。Lean认识这种等价性。</p>
+<p>lambda表达式的一般形式是 <code>fun x : α =&gt; t</code>，其中变量 <code>x</code> 是一个<strong>绑定变量（Bound Variable）</strong>：它实际上是一个占位符，其「作用域」没有扩展到表达式 <code>t</code> 之外。例如，表达式 <code>fun (b : β) (x : α) =&gt; b</code> 中的变量 <code>b</code> 与前面声明的常量 <code>b</code> 没有任何关系。事实上，这个表达式表示的函数与 <code>fun (u : β) (z : α) =&gt; u</code> 是一样的。形式上，可以通过给绑定变量重命名来使形式相同的表达式被看作是<strong>alpha等价</strong>的，也就是被认为是「一样的」。Lean 认识这种等价性。</p>
 <p>注意到项 <code>t : α → β</code> 应用到项 <code>s : α</code> 上导出了表达式 <code>t s : β</code>。回到前面的例子，为清晰起见给绑定变量重命名，注意以下表达式的类型:</p>
 <pre><code class="language-lean">#check (fun x : Nat =&gt; x) 1     -- Nat
 #check (fun x : Nat =&gt; true) 1  -- Bool
@@ -647,7 +647,7 @@ use the command `#eval` to execute expressions, and it is the
 preferred way of testing your functions.
 -->
 <p>稍后你将看到这些项是如何计算的。现在，请注意这是依值类型论的一个重要特征：每个项都有一个计算行为，并支持「标准化」的概念。从原则上讲，两个可以化约为相同形式的项被称为「定义等价」。它们被 Lean 的类型检查器认为是「相同的」，并且 Lean 尽其所能地识别和支持这些识别结果。</p>
-<p>Lean是个完备的编程语言。它有一个生成二进制可执行文件的编译器，和一个交互式解释器。你可以用<code>#eval</code>命令执行表达式，这也是测试你的函数的好办法。</p>
+<p>Lean 是个完备的编程语言。它有一个生成二进制可执行文件的编译器，和一个交互式解释器。你可以用<code>#eval</code>命令执行表达式，这也是测试你的函数的好办法。</p>
 <!--
 Note that `#eval` and
 `#reduce` are *not* equivalent. The command `#eval` first compiles
@@ -721,7 +721,7 @@ type.
 The right hand side `bar` can be any expression, not just a lambda.
 So `def` can also be used to simply name a value like this:
 -->
-<p>定义的一般形式是 <code>def foo : α := bar</code>，其中 <code>α</code> 是表达式 <code>bar</code> 返回的类型。Lean通常可以推断类型 <code>α</code>，但是精确写出它可以澄清你的意图，并且如果定义的右侧没有匹配你的类型，Lean将标记一个错误。</p>
+<p>定义的一般形式是 <code>def foo : α := bar</code>，其中 <code>α</code> 是表达式 <code>bar</code> 返回的类型。Lean 通常可以推断类型 <code>α</code>，但是精确写出它可以澄清你的意图，并且如果定义的右侧没有匹配你的类型，Lean 将标记一个错误。</p>
 <p><code>bar</code> 可以是任何一个表达式，不只是一个 lambda 表达式。因此 <code>def</code> 也可以用于给一些值命名，例如：</p>
 <pre><code class="language-lean">def pi := 3.141592654
 </code></pre>
@@ -824,7 +824,7 @@ Lean also allows you to introduce "local" definitions using the
 definitionally equal to the result of replacing every occurrence of
 ``a`` in ``t2`` by ``t1``.
 -->
-<p>Lean还允许你使用 <code>let</code> 关键字来引入「局部定义」。表达式 <code>let a := t1; t2</code> 定义等价于把 <code>t2</code> 中所有的 <code>a</code> 替换成 <code>t1</code> 的结果。</p>
+<p>Lean 还允许你使用 <code>let</code> 关键字来引入「局部定义」。表达式 <code>let a := t1; t2</code> 定义等价于把 <code>t2</code> 中所有的 <code>a</code> 替换成 <code>t1</code> 的结果。</p>
 <pre><code class="language-lean">#check let y := 2 + 2; y * y   -- Nat
 #eval  let y := 2 + 2; y * y   -- 16
 
@@ -891,7 +891,7 @@ def doThrice (α : Type) (h : α → α) (x : α) : α :=
 Lean provides you with the ``variable`` command to make such
 declarations look more compact:
 -->
-<p>Lean提供 <code>variable</code> 指令来让这些声明变得紧凑：</p>
+<p>Lean 提供 <code>variable</code> 指令来让这些声明变得紧凑：</p>
 <pre><code class="language-lean">variable (α β γ : Type)
 
 def compose (g : β → γ) (f : α → β) (x : α) : γ :=
@@ -937,8 +937,8 @@ the scope of a variable. For that purpose, Lean provides the notion of
 a ``section``:
 -->
 <p>输出结果表明所有三组定义具有完全相同的效果。</p>
-<p><code>variable</code> 命令指示 Lean 将声明的变量作为绑定变量插入定义中，这些定义通过名称引用它们。Lean足够聪明，它能找出定义中显式或隐式使用哪些变量。因此在写定义时，你可以将 <code>α</code>、<code>β</code>、<code>γ</code>、<code>g</code>、<code>f</code>、<code>h</code> 和 <code>x</code> 视为固定的对象，并让 Lean 自动抽象这些定义。</p>
-<p>当以这种方式声明时，变量将一直保持存在，直到所处理的文件结束。然而，有时需要限制变量的作用范围。Lean提供了小节标记 <code>section</code> 来实现这个目的：</p>
+<p><code>variable</code> 命令指示 Lean 将声明的变量作为绑定变量插入定义中，这些定义通过名称引用它们。Lean 足够聪明，它能找出定义中显式或隐式使用哪些变量。因此在写定义时，你可以将 <code>α</code>、<code>β</code>、<code>γ</code>、<code>g</code>、<code>f</code>、<code>h</code> 和 <code>x</code> 视为固定的对象，并让 Lean 自动抽象这些定义。</p>
+<p>当以这种方式声明时，变量将一直保持存在，直到所处理的文件结束。然而，有时需要限制变量的作用范围。Lean 提供了小节标记 <code>section</code> 来实现这个目的：</p>
 <pre><code class="language-lean">section useful
   variable (α β γ : Type)
   variable (g : β → γ) (f : α → β) (h : α → α)
@@ -969,7 +969,7 @@ which allows you to declare new variables incrementally.
 Lean provides you with the ability to group definitions into nested,
 hierarchical *namespaces*:
 -->
-<p>Lean可以让你把定义放进一个「命名空间」（<code>namespace</code>）里，并且命名空间也是层次化的：</p>
+<p>Lean 可以让你把定义放进一个「命名空间」（<code>namespace</code>）里，并且命名空间也是层次化的：</p>
 <pre><code class="language-lean">namespace Foo
   def a : Nat := 5
   def f (x : Nat) : Nat := x + 7
@@ -1019,7 +1019,7 @@ a namespace ``List``.
 -->
 <p>当你声明你在命名空间 <code>Foo</code> 中工作时，你声明的每个标识符都有一个前缀 <code>Foo.</code>。在打开的命名空间中，可以通过较短的名称引用标识符，但是关闭命名空间后，必须使用较长的名称。与 <code>section</code> 不同，命名空间需要一个名称。只有一个匿名命名空间在根级别上。</p>
 <p><code>open</code> 命令使你可以在当前使用较短的名称。通常，当你导入一个模块时，你会想打开它包含的一个或多个命名空间，以访问短标识符。但是，有时你希望将这些信息保留在一个完全限定的名称中，例如，当它们与你想要使用的另一个命名空间中的标识符冲突时。因此，命名空间为你提供了一种在工作环境中管理名称的方法。</p>
-<p>例如，Lean把和列表相关的定义和定理都放在了命名空间 <code>List</code> 之中。</p>
+<p>例如，Lean 把和列表相关的定义和定理都放在了命名空间 <code>List</code> 之中。</p>
 <pre><code class="language-lean">#check List.nil
 #check List.cons
 #check List.map
@@ -1164,7 +1164,7 @@ explained momentarily.
 <p>这就是<em>依值函数类型</em>，或者<em>依值箭头类型</em>的一个例子。给定 <code>α : Type</code> 和 <code>β : α → Type</code>，把 <code>β</code> 考虑成 <code>α</code> 之上的类型类，也就是说，对于每个 <code>a : α</code> 都有类型 <code>β a</code>。在这种情况下，类型 <code>(a : α) → β a</code> 表示的是具有如下性质的函数 <code>f</code> 的类型：对于每个 <code>a : α</code>，<code>f a</code> 是 <code>β a</code> 的一个元素。换句话说，<code>f</code> 返回值的类型取决于其输入。</p>
 <p>注意到 <code>(a : α) → β</code> 对于任意表达式 <code>β : Type</code> 都有意义。当 <code>β</code> 的值依赖于 <code>a</code>（例如，在前一段的表达式 <code>β a</code>），<code>(a : α) → β</code> 表示一个依值函数类型。当 <code>β</code> 的值不依赖于 <code>a</code>，<code>(a : α) → β</code> 与类型 <code>α → β</code> 无异。实际上，在依值类型论（以及Lean）中，<code>α → β</code> 表达的意思就是当 <code>β</code> 的值不依赖于 <code>a</code> 时的 <code>(a : α) → β</code>。【注】</p>
 <blockquote>
-<p>译者注：在依值类型论的数学符号体系中，依值类型是用 <code>Π</code> 符号来表达的，在Lean 3中还使用这种表达，例如 <code>Π x : α, β x</code>。Lean 4抛弃了这种不友好的写法。<code>(x : α) → β x</code> 这种写法在引入「构造器」之后意义会更明朗一些（见下一个注释），对于来自数学背景的读者可以把它类比于 <code>forall x : α, β x</code> 这种写法（这也是合法的 Lean 语句），关于前一种符号在<a href="./quantifiers_and_equality.html">量词与等价</a>一章中有更详细的说明。同时，依值类型有着更丰富的引入动机，推荐读者寻找一些拓展读物。</p>
+<p>译者注：在依值类型论的数学符号体系中，依值类型是用 <code>Π</code> 符号来表达的，在Lean 3中还使用这种表达，例如 <code>Π x : α, β x</code>。Lean 4抛弃了这种不友好的写法。<code>(x : α) → β x</code> 这种写法在引入「构造子」之后意义会更明朗一些（见下一个注释），对于来自数学背景的读者可以把它类比于 <code>forall x : α, β x</code> 这种写法（这也是合法的 Lean 语句），关于前一种符号在<a href="./quantifiers_and_equality.html">量词与等价</a>一章中有更详细的说明。同时，依值类型有着更丰富的引入动机，推荐读者寻找一些拓展读物。</p>
 </blockquote>
 <p>回到列表的例子，你可以使用<code>#check</code>命令来检查下列的 <code>List</code> 函数。<code>@</code> 符号以及圆括号和花括号之间的区别将在后面解释。</p>
 <pre><code class="language-lean">#check @List.cons    -- {α : Type u_1} → α → List α → List α
@@ -1260,9 +1260,9 @@ from the context. In Lean, one uses an underscore, ``_``, to specify
 that the system should fill in the information automatically. This is
 known as an "implicit argument."
 -->
-<p>由于构造器对类型是多态的【注】，我们需要重复插入类型 <code>Nat</code> 作为一个参数。但是这个信息是多余的：我们可以推断表达式 <code>Lst.cons Nat 5 (Lst.nil Nat)</code> 中参数 <code>α</code> 的类型，这是通过第二个参数 <code>5</code> 的类型是 <code>Nat</code> 来实现的。类似地，我们可以推断 <code>Lst.nil Nat</code> 中参数的类型，这是通过它作为函数 <code>Lst.cons</code> 的一个参数，且这个函数在这个位置需要接收的是一个具有 <code>Lst α</code> 类型的参数来实现的。</p>
+<p>由于构造子对类型是多态的【注】，我们需要重复插入类型 <code>Nat</code> 作为一个参数。但是这个信息是多余的：我们可以推断表达式 <code>Lst.cons Nat 5 (Lst.nil Nat)</code> 中参数 <code>α</code> 的类型，这是通过第二个参数 <code>5</code> 的类型是 <code>Nat</code> 来实现的。类似地，我们可以推断 <code>Lst.nil Nat</code> 中参数的类型，这是通过它作为函数 <code>Lst.cons</code> 的一个参数，且这个函数在这个位置需要接收的是一个具有 <code>Lst α</code> 类型的参数来实现的。</p>
 <blockquote>
-<p>译者注：「构造器」（Constructor）的概念前文未加解释，对类型论不熟悉的读者可能会困惑。它指的是一种「依值类型的类型」，也可以看作「类型的构造器」，例如 <code>λ α : α -&gt; α</code> 甚至可看成 <code>⋆ -&gt; ⋆</code>。当给 <code>α</code> 或者 <code>⋆</code> 赋予一个具体的类型时，这个表达式就成为了一个类型。前文中 <code>(x : α) → β x</code> 中的 <code>β</code> 就可以看成一个构造器，<code>(x : α)</code> 就是传进的类型参数。原句「构造器对类型是多态的」意为给构造器中放入不同类型时它会变成不同类型。</p>
+<p>译者注：「构造子」（Constructor）的概念前文未加解释，对类型论不熟悉的读者可能会困惑。它指的是一种「依值类型的类型」，也可以看作「类型的构造子」，例如 <code>λ α : α -&gt; α</code> 甚至可看成 <code>⋆ -&gt; ⋆</code>。当给 <code>α</code> 或者 <code>⋆</code> 赋予一个具体的类型时，这个表达式就成为了一个类型。前文中 <code>(x : α) → β x</code> 中的 <code>β</code> 就可以看成一个构造子，<code>(x : α)</code> 就是传进的类型参数。原句「构造子对类型是多态的」意为给构造子中放入不同类型时它会变成不同类型。</p>
 </blockquote>
 <p>这是依值类型论的一个主要特征：项包含大量信息，而且通常可以从上下文推断出一些信息。在 Lean 中，我们使用下划线 <code>_</code> 来指定系统应该自动填写信息。这就是所谓的「隐参数」。</p>
 <pre><code class="language-lean"><span class="boring">universe u
@@ -1288,7 +1288,7 @@ context, Lean allows you to specify that this argument should, by
 default, be left implicit. This is done by putting the arguments in
 curly braces, as follows:
 -->
-<p>然而，敲这么多下划线仍然很无聊。当一个函数接受一个通常可以从上下文推断出来的参数时，Lean允许你指定该参数在默认情况下应该保持隐式。这是通过将参数放入花括号来实现的，如下所示:</p>
+<p>然而，敲这么多下划线仍然很无聊。当一个函数接受一个通常可以从上下文推断出来的参数时，Lean 允许你指定该参数在默认情况下应该保持隐式。这是通过将参数放入花括号来实现的，如下所示:</p>
 <pre><code class="language-lean">universe u
 def Lst (α : Type u) : Type u := List α
 
@@ -1363,7 +1363,7 @@ used to specify the desired types of the expressions ``id`` and
 ``List.nil``:
 -->
 <p>此处定义的 <code>ident</code> 和上面那个效果是一样的。</p>
-<p>Lean有非常复杂的机制来实例化隐参数，我们将看到它们可以用来推断函数类型、谓词，甚至证明。实例化这些「洞」或「占位符」的过程通常被称为<strong>繁饰</strong>（Elaboration）。隐参数的存在意味着有时可能没有足够的信息来精确地确定表达式的含义。像 <code>id</code> 或 <code>List.nil</code> 这样的表达式被认为是「多态的」，因为它可以在不同的上下文中具有不同的含义。</p>
+<p>Lean 有非常复杂的机制来实例化隐参数，我们将看到它们可以用来推断函数类型、谓词，甚至证明。实例化这些「洞」或「占位符」的过程通常被称为<strong>繁饰（Elaboration）</strong>。隐参数的存在意味着有时可能没有足够的信息来精确地确定表达式的含义。像 <code>id</code> 或 <code>List.nil</code> 这样的表达式被认为是「多态的」，因为它可以在不同的上下文中具有不同的含义。</p>
 <p>可以通过写 <code>(e : T)</code> 来指定表达式 <code>e</code> 的类型 <code>T</code>。这就指导 Lean 的繁饰器在试图解决隐式参数时使用值 <code>T</code> 作为 <code>e</code> 的类型。在下面的第二个例子中，这种机制用于指定表达式 <code>id</code> 和 <code>List.nil</code> 所需的类型:</p>
 <pre><code class="language-lean">#check List.nil               -- List ?m
 #check id                     -- ?m → ?m
@@ -1378,7 +1378,7 @@ the expressions in the first two ``#check`` commands below are
 elaborated in the same way, whereas the third ``#check`` command
 interprets ``2`` as an integer.
 -->
-<p>Lean中数字是重载的，但是当数字的类型不能被推断时，Lean默认假设它是一个自然数。因此，下面的前两个 <code>#check</code> 命令中的表达式以同样的方式进行了繁饰，而第三个 <code>#check</code> 命令将 <code>2</code> 解释为整数。</p>
+<p>Lean 中数字是重载的，但是当数字的类型不能被推断时，Lean 默认假设它是一个自然数。因此，下面的前两个 <code>#check</code> 命令中的表达式以同样的方式进行了繁饰，而第三个 <code>#check</code> 命令将 <code>2</code> 解释为整数。</p>
 <pre><code class="language-lean">#check 2            -- Nat
 #check (2 : Nat)    -- Nat
 #check (2 : Int)    -- Int

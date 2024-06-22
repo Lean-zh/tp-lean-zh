@@ -174,9 +174,9 @@ automatically generates all the projection functions. The
 previously defined ones. Moreover, Lean provides convenient notation
 for defining instances of a given structure.
 -->
-<p>我们已经看到Lean的基本系统包括归纳类型。此外，显然仅基于类型宇宙、依赖箭头类型和归纳类型，就有可能构建一个坚实的数学大厦；其他的一切都是由此而来。Lean标准库包含许多归纳类型的实例(例如，<code>Nat</code>，<code>Prod</code>，<code>List</code>)，甚至逻辑连接词也是使用归纳类型定义的。</p>
-<p>回忆一下，只包含一个构造器的非递归归纳类型被称为<strong>结构体</strong>（structure）或<strong>记录</strong>（record）。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体<code>S</code>时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code>的每个实例并检索存储在其字段中的值。<code>prod.pr1</code>和<code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
-<p>在编写程序或形式化数学时，定义包含许多字段的结构体是很常见的。Lean中可用<code>structure</code>命令实现此过程。当我们使用这个命令定义一个结构体时，Lean会自动生成所有的投影函数。<code>structure</code>命令还允许我们根据以前定义的结构体定义新的结构体。此外，Lean为定义给定结构体的实例提供了方便的符号。</p>
+<p>我们已经看到Lean 的基本系统包括归纳类型。此外，显然仅基于类型宇宙、依赖箭头类型和归纳类型，就有可能构建一个坚实的数学大厦；其他的一切都是由此而来。Lean 标准库包含许多归纳类型的实例(例如，<code>Nat</code>，<code>Prod</code>，<code>List</code>)，甚至逻辑连接词也是使用归纳类型定义的。</p>
+<p>回忆一下，只包含一个构造子的非递归归纳类型被称为<strong>结构体（structure）<strong>或</strong>记录（record）</strong>。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体 <code>S</code> 时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code> 的每个实例并检索存储在其字段中的值。<code>prod.pr1</code> 和 <code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
+<p>在编写程序或形式化数学时，定义包含许多字段的结构体是很常见的。Lean 中可用 <code>structure</code> 命令实现此过程。当我们使用这个命令定义一个结构体时，Lean 会自动生成所有的投影函数。<code>structure</code> 命令还允许我们根据以前定义的结构体定义新的结构体。此外，Lean 为定义给定结构体的实例提供了方便的符号。</p>
 <!--
 Declaring Structures
 --------------------
@@ -187,7 +187,7 @@ The structure command is essentially a "front end" for defining
 inductive data types. Every ``structure`` declaration introduces a
 namespace with the same name. The general form is as follows:
 -->
-<p>结构体命令本质上是定义归纳数据类型的「前端」。每个<code>structure</code>声明都会引入一个同名的命名空间。一般形式如下:</p>
+<p>结构体命令本质上是定义归纳数据类型的「前端」。每个 <code>structure</code> 声明都会引入一个同名的命名空间。一般形式如下:</p>
 <pre><code>    structure &lt;name&gt; &lt;parameters&gt; &lt;parent-structures&gt; where
       &lt;constructor&gt; :: &lt;fields&gt;
 </code></pre>
@@ -206,7 +206,7 @@ The structure command also generates useful recursors and
 theorems. Here are some of the constructions generated for the
 declaration above.
 -->
-<p>类型<code>Point</code>的值是使用<code>Point.mk a b</code>创建的，并且点<code>p</code>的字段可以使用<code>Point.x p</code>和<code>Point.y p</code>。结构体命令还生成有用的递归器和定理。下面是为上述声明生成的一些结构体方法。</p>
+<p>类型 <code>Point</code> 的值是使用 <code>Point.mk a b</code> 创建的，并且点 <code>p</code> 的字段可以使用 <code>Point.x p</code> 和 <code>Point.y p</code>。结构体命令还生成有用的递归器和定理。下面是为上述声明生成的一些结构体方法。</p>
 <!--
 ```lean
 # structure Point (α : Type u) where
@@ -222,7 +222,7 @@ declaration above.
 </span><span class="boring"> mk :: (x : α) (y : α)
 </span>#check Point       -- 类型
 #check @Point.rec  -- 消去器（eliminator）
-#check @Point.mk   -- 构造器
+#check @Point.mk   -- 构造子
 #check @Point.x    -- 投影
 #check @Point.y    -- 投影
 </code></pre>
@@ -236,7 +236,7 @@ If the constructor name is not provided, then a constructor is named
 ``mk`` by default.  You can also avoid the parentheses around field
 names if you add a line break between each field.
 -->
-<p>如果没有提供构造器名称，则默认的构造函数名为<code>mk</code>。如果在每个字段之间添加换行符，也可以避免字段名周围的括号。</p>
+<p>如果没有提供构造子名称，则默认的构造函数名为 <code>mk</code>。如果在每个字段之间添加换行符，也可以避免字段名周围的括号。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -246,7 +246,7 @@ Here are some simple theorems and expressions that use the generated
 constructions. As usual, you can avoid the prefix ``Point`` by using
 the command ``open Point``.
 -->
-<p>下面是一些使用生成的结构的简单定理和表达式。像往常一样，您可以通过使用命令<code>open Point</code>来避免前缀<code>Point</code>。</p>
+<p>下面是一些使用生成的结构的简单定理和表达式。像往常一样，您可以通过使用命令 <code>open Point</code> 来避免前缀 <code>Point</code>。</p>
 <pre><code class="language-lean"><span class="boring">structure Point (α : Type u) where
 </span><span class="boring"> x : α
 </span><span class="boring"> y : α
@@ -266,7 +266,7 @@ Given ``p : Point Nat``, the dot notation ``p.x`` is shorthand for
 ``Point.x p``. This provides a convenient way of accessing the fields
 of a structure.
 -->
-<p>给定<code>p : Point Nat</code>，符号<code>p.x</code>是<code>Point.x p</code>的缩写。这提供了一种方便的方式来访问结构体的字段。</p>
+<p>给定 <code>p : Point Nat</code>，符号 <code>p.x</code> 是 <code>Point.x p</code> 的缩写。这提供了一种方便的方式来访问结构体的字段。</p>
 <pre><code class="language-lean"><span class="boring">structure Point (α : Type u) where
 </span><span class="boring"> x : α
 </span><span class="boring"> y : α
@@ -285,7 +285,7 @@ has type ``Point``, the expression ``p.foo`` is interpreted as
 ``foo`` has type ``Point``. The expression ``p.add q`` is therefore
 shorthand for ``Point.add p q`` in the example below.
 -->
-<p>点记号不仅方便于访问记录的投影，而且也方便于应用同名命名空间中定义的函数。回想一下<a href="./propositions_and_proofs.html#_conjunction">合取</a>一节，如果<code>p</code>具有<code>Point</code>类型，那么表达式<code>p.foo</code>被解释为<code>Point.foo p</code>，假设<code>foo</code>的第一个非隐式参数具有类型<code>Point</code>，表达式<code>p.add q</code>因此是<code>Point.add p q</code>的缩写。可见下面的例子。</p>
+<p>点记号不仅方便于访问记录的投影，而且也方便于应用同名命名空间中定义的函数。回想一下<a href="./propositions_and_proofs.html#_conjunction">合取</a>一节，如果 <code>p</code> 具有 <code>Point</code> 类型，那么表达式 <code>p.foo</code> 被解释为 <code>Point.foo p</code>，假设 <code>foo</code> 的第一个非隐式参数具有类型 <code>Point</code>，表达式 <code>p.add q</code> 因此是 <code>Point.add p q</code> 的缩写。可见下面的例子。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -310,8 +310,8 @@ Lean will insert ``p`` at the first argument to ``Point.foo`` of type
 ``Point``. For example, with the definition of scalar multiplication
 below, ``p.smul 3`` is interpreted as ``Point.smul 3 p``.
 -->
-<p>在下一章中，您将学习如何定义一个像<code>add</code>这样的函数，这样它就可以通用地为<code>Point α</code>的元素工作，而不仅仅是<code>Point Nat</code>，只要假设<code>α</code>有一个关联的加法操作。</p>
-<p>更一般地，给定一个表达式<code>p.foo x y z</code>其中<code>p : Point</code>，Lean会把<code>p</code>以<code>Point</code>为类型插入到<code>Point.foo</code>的第一个参数。例如，下面是标量乘法的定义，<code>p.smul 3</code>被解释为<code>Point.smul 3 p</code>。</p>
+<p>在下一章中，您将学习如何定义一个像 <code>add</code> 这样的函数，这样它就可以通用地为 <code>Point α</code> 的元素工作，而不仅仅是 <code>Point Nat</code>，只要假设 <code>α</code> 有一个关联的加法操作。</p>
+<p>更一般地，给定一个表达式 <code>p.foo x y z</code> 其中<code>p : Point</code>，Lean 会把 <code>p</code> 以 <code>Point</code> 为类型插入到 <code>Point.foo</code> 的第一个参数。例如，下面是标量乘法的定义，<code>p.smul 3</code> 被解释为 <code>Point.smul 3 p</code>。</p>
 <pre><code class="language-lean"><span class="boring">structure Point (α : Type u) where
 </span><span class="boring"> x : α
 </span><span class="boring"> y : α
@@ -327,7 +327,7 @@ def p : Point Nat := Point.mk 1 2
 It is common to use a similar trick with the ``List.map`` function,
 which takes a list as its second non-implicit argument:
 -->
-<p>对<code>List.map</code>函数使用类似的技巧很常用。它接受一个列表作为它的第二个非隐式参数:</p>
+<p>对 <code>List.map</code> 函数使用类似的技巧很常用。它接受一个列表作为它的第二个非隐式参数:</p>
 <pre><code class="language-lean">#check @List.map
 
 def xs : List Nat := [1, 2, 3]
@@ -338,7 +338,7 @@ def f : Nat → Nat := fun x =&gt; x * x
 <!--
 Here ``xs.map f`` is interpreted as ``List.map f xs``.
 -->
-<p>此处<code>xs.map f</code>被解释为<code>List.map f xs</code>。</p>
+<p>此处 <code>xs.map f</code> 被解释为 <code>List.map f xs</code>。</p>
 <!--
 Objects
 -------
@@ -351,7 +351,7 @@ inconvenient, because we have to remember the order in which the
 fields were defined. Lean therefore provides the following alternative
 notations for defining elements of a structure type.
 -->
-<p>我们一直在使用构造器创建结构体类型的元素。对于包含许多字段的结构，这通常是不方便的，因为我们必须记住字段定义的顺序。因此，Lean为定义结构体类型的元素提供了以下替代符号。</p>
+<p>我们一直在使用构造子创建结构体类型的元素。对于包含许多字段的结构，这通常是不方便的，因为我们必须记住字段定义的顺序。因此，Lean 为定义结构体类型的元素提供了以下替代符号。</p>
 <pre><code>    { (&lt;field-name&gt; := &lt;expr&gt;)* : structure-type }
     or
     { (&lt;field-name&gt; := &lt;expr&gt;)* }
@@ -363,7 +363,7 @@ use this notation to define "points." The order that the fields are
 specified does not matter, so all the expressions below define the
 same point.
 -->
-<p>只要可以从期望的类型推断出结构体的名称，后缀<code>: structure-type</code>就可以省略。例如，我们使用这种表示法来定义「Point」。字段的指定顺序无关紧要，因此下面的所有表达式定义相同的Point。</p>
+<p>只要可以从期望的类型推断出结构体的名称，后缀 <code>: structure-type</code> 就可以省略。例如，我们使用这种表示法来定义「Point」。字段的指定顺序无关紧要，因此下面的所有表达式定义相同的Point。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -380,7 +380,7 @@ If the value of a field is not specified, Lean tries to infer it. If
 the unspecified fields cannot be inferred, Lean flags an error
 indicating the corresponding placeholder could not be synthesized.
 -->
-<p>如果一个字段的值没有指定，Lean会尝试推断它。如果不能推断出未指定的字段，Lean会标记一个错误，表明相应的占位符无法合成。</p>
+<p>如果一个字段的值没有指定，Lean 会尝试推断它。如果不能推断出未指定的字段，Lean 会标记一个错误，表明相应的占位符无法合成。</p>
 <pre><code class="language-lean">structure MyStruct where
     {α : Type u}
     {β : Type v}
@@ -400,7 +400,7 @@ visited in order until Lean finds one that contains the unspecified
 field. Lean raises an error if any of the field names remain
 unspecified after all the objects are visited.
 -->
-<p><strong>记录更新</strong>（Record update）是另一个常见的操作，相当于通过修改旧记录中的一个或多个字段的值来创建一个新的记录对象。通过在字段赋值之前添加注释<code>s with</code>，Lean允许您指定记录规范中未赋值的字段，该字段应从之前定义的结构对象<code>s</code>中获取。如果提供了多个记录对象，那么将按顺序访问它们，直到Lean找到一个包含未指定字段的记录对象。如果在访问了所有对象之后仍未指定任何字段名，Lean将引发错误。</p>
+<p>**记录更新（Record update）**是另一个常见的操作，相当于通过修改旧记录中的一个或多个字段的值来创建一个新的记录对象。通过在字段赋值之前添加注释 <code>s with</code>，Lean 允许您指定记录规范中未赋值的字段，该字段应从之前定义的结构对象 <code>s</code> 中获取。如果提供了多个记录对象，那么将按顺序访问它们，直到Lean 找到一个包含未指定字段的记录对象。如果在访问了所有对象之后仍未指定任何字段名，Lean 将引发错误。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α

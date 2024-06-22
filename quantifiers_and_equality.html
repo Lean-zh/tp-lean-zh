@@ -470,7 +470,7 @@ example : f a = g b := congr h₂ h₁
 <!--
 Lean's library contains a large number of common identities, such as these:
 -->
-<p>Lean的库包含大量通用的等式，例如：</p>
+<p>Lean 的库包含大量通用的等式，例如：</p>
 <pre><code class="language-lean">variable (a b c : Nat)
 
 example : a + 0 = a := Nat.add_zero a
@@ -525,7 +525,7 @@ briefly in the next section, and then in greater detail in the next
 chapter.
 -->
 <p>注意，<code>Eq.subst</code> 的第二个隐式参数提供了将要发生代换的表达式上下文，其类型为 <code>α → Prop</code>。因此，推断这个谓词需要一个<em>高阶合一</em>（higher-order unification）的实例。一般来说，确定高阶合一器是否存在的问题是无法确定的，而 Lean 充其量只能提供不完美的和近似的解决方案。因此，<code>Eq.subst</code> 并不总是做你想要它做的事。宏 <code>h ▸ e</code> 使用了更有效的启发式方法来计算这个隐参数，并且在不能应用 <code>Eq.subst</code> 的情况下通常会成功。</p>
-<p>因为等式推理是如此普遍和重要，Lean提供了许多机制来更有效地执行它。下一节将提供允许你以更自然和清晰的方式编写计算式证明的语法。但更重要的是，等式推理是由项重写器、简化器和其他种类的自动化方法支持的。术语重写器和简化器将在下一节中简要描述，然后在下一章中更详细地描述。</p>
+<p>因为等式推理是如此普遍和重要，Lean 提供了许多机制来更有效地执行它。下一节将提供允许你以更自然和清晰的方式编写计算式证明的语法。但更重要的是，等式推理是由项重写器、简化器和其他种类的自动化方法支持的。术语重写器和简化器将在下一节中简要描述，然后在下一章中更详细地描述。</p>
 <!--
 Calculational Proofs
 --------------------
@@ -777,7 +777,7 @@ example (x y z : Nat) (hxy : x &lt; y) (hyz : y &lt; z) : ∃ w, x &lt; w ∧ w 
 We can use the anonymous constructor notation ``⟨t, h⟩`` for
 ``Exists.intro t h``, when the type is clear from the context.
 -->
-<p>当类型可从上下文中推断时，我们可以使用匿名构造器表示法 <code>⟨t, h⟩</code> 替换 <code>Exists.intro t h</code>。</p>
+<p>当类型可从上下文中推断时，我们可以使用匿名构造子表示法 <code>⟨t, h⟩</code> 替换 <code>Exists.intro t h</code>。</p>
 <pre><code class="language-lean">example : ∃ x : Nat, x &gt; 0 :=
   have h : 1 &gt; 0 := Nat.zero_lt_succ 0
   ⟨1, h⟩
@@ -799,7 +799,7 @@ context to infer which one is appropriate. This is illustrated in the
 following example, in which we set the option ``pp.explicit`` to true
 to ask Lean's pretty-printer to show the implicit arguments.
 -->
-<p>注意 <code>Exists.intro</code> 有隐参数：Lean必须在结论 <code>∃ x, p x</code> 中推断谓词 <code>p : α → Prop</code>。这不是一件小事。例如，如果我们有 <code>hg : g 0 0 = 0</code> 和 <code>Exists.intro 0 hg</code>，有许多可能的值的谓词 <code>p</code>，对应定理 <code>∃ x, g x x = x</code>，<code>∃ x, g x x = 0</code>，<code>∃ x, g x 0 = x</code>，等等。Lean使用上下文来推断哪个是合适的。下面的例子说明了这一点，在这个例子中，我们设置了选项 <code>pp.explicit</code> 为true，要求 Lean 打印隐参数。</p>
+<p>注意 <code>Exists.intro</code> 有隐参数：Lean 必须在结论 <code>∃ x, p x</code> 中推断谓词 <code>p : α → Prop</code>。这不是一件小事。例如，如果我们有 <code>hg : g 0 0 = 0</code> 和 <code>Exists.intro 0 hg</code>，有许多可能的值的谓词 <code>p</code>，对应定理 <code>∃ x, g x x = x</code>，<code>∃ x, g x x = 0</code>，<code>∃ x, g x 0 = x</code>，等等。Lean 使用上下文来推断哪个是合适的。下面的例子说明了这一点，在这个例子中，我们设置了选项 <code>pp.explicit</code> 为true，要求 Lean 打印隐参数。</p>
 <!--
 ```lean
 variable (g : Nat → Nat → Nat)
@@ -870,9 +870,9 @@ instance of the Curry-Howard isomorphism.
 Lean provides a more convenient way to eliminate from an existential
 quantifier with the ``match`` expression:
 -->
-<p>把存在消去规则和析取消去规则作个比较可能会带来一些启发。命题 <code>∃ x : α, p x</code> 可以看成一个对所有 <code>α</code> 中的元素 <code>a</code> 所组成的命题 <code>p a</code> 的大型析取。注意到匿名构造器 <code>⟨w, hw.right, hw.left⟩</code> 是嵌套的构造器 <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> 的缩写。</p>
+<p>把存在消去规则和析取消去规则作个比较可能会带来一些启发。命题 <code>∃ x : α, p x</code> 可以看成一个对所有 <code>α</code> 中的元素 <code>a</code> 所组成的命题 <code>p a</code> 的大型析取。注意到匿名构造子 <code>⟨w, hw.right, hw.left⟩</code> 是嵌套的构造子 <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> 的缩写。</p>
 <p>存在式命题类型很像依值类型一节所述的 sigma 类型。给定 <code>a : α</code> 和 <code>h : p a</code> 时，项 <code>Exists.intro a h</code> 具有类型 <code>(∃ x : α, p x) : Prop</code>，而 <code>Sigma.mk a h</code> 具有类型 <code>(Σ x : α, p x) : Type</code>。<code>∃</code> 和 <code>Σ</code> 之间的相似性是Curry-Howard同构的另一例子。</p>
-<p>Lean提供一个更加方便的消去存在量词的途径，那就是通过 <code>match</code> 表达式。</p>
+<p>Lean 提供一个更加方便的消去存在量词的途径，那就是通过 <code>match</code> 表达式。</p>
 <pre><code class="language-lean">variable (α : Type) (p q : α → Prop)
 
 example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
@@ -907,7 +907,7 @@ We can even use the match statement to decompose the conjunction at the same tim
 <!--
 Lean also provides a pattern-matching ``let`` expression:
 -->
-<p>Lean还提供了一个模式匹配的 <code>let</code> 表达式：</p>
+<p>Lean 还提供了一个模式匹配的 <code>let</code> 表达式：</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   let ⟨w, hpw, hqw⟩ := h
@@ -918,7 +918,7 @@ This is essentially just alternative notation for the ``match``
 construct above. Lean will even allow us to use an implicit ``match``
 in the ``fun`` expression:
 -->
-<p>这实际上是上面的 <code>match</code> 结构的替代表示法。Lean甚至允许我们在 <code>fun</code> 表达式中使用隐含的 <code>match</code>：</p>
+<p>这实际上是上面的 <code>match</code> 结构的替代表示法。Lean 甚至允许我们在 <code>fun</code> 表达式中使用隐含的 <code>match</code>：</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x :=
   fun ⟨w, hpw, hqw⟩ =&gt; ⟨w, hqw, hpw⟩
@@ -947,7 +947,7 @@ Using the various gadgets described in this chapter --- the match
 statement, anonymous constructors, and the ``rewrite`` tactic, we can
 write this proof concisely as follows:
 -->
-<p>使用本章描述的各种小工具——<code>match</code> 语句、匿名构造器和 <code>rewrite</code> 策略，我们可以简洁地写出如下证明：</p>
+<p>使用本章描述的各种小工具——<code>match</code> 语句、匿名构造子和 <code>rewrite</code> 策略，我们可以简洁地写出如下证明：</p>
 <pre><code class="language-lean"><span class="boring">def is_even (a : Nat) := ∃ b, a = 2 * b
 </span>theorem even_plus_even (h1 : is_even a) (h2 : is_even b) : is_even (a + b) :=
   match h1, h2 with
