@@ -169,7 +169,7 @@ instruction. But they can also be shorter and easier to
 write. Moreover, tactics offer a gateway to using Lean's automation,
 since automated procedures are themselves tactics.
 -->
-<p>在本章中，我们描述了另一种构建证明的方法，即使用<strong>策略（Tactic）</strong>。 一个证明项代表一个数学证明；策略是描述如何建立这样一个证明的命令或指令。你可以在数学证明开始时非正式地说：「为了证明条件的必要性，展开定义，应用前面的定理，并进行简化。」就像这些指令告诉读者如何构建证明一样，策略告诉 Lean 如何构建证明。它们自然而然地支持增量式的证明书写，在这种写作方式中，你将分解一个证明，并一步步地实现目标。</p>
+<p>在本章中，我们描述了另一种构建证明的方法，即使用 <strong>策略（Tactic）</strong> 。 一个证明项代表一个数学证明；策略是描述如何建立这样一个证明的命令或指令。你可以在数学证明开始时非正式地说：「为了证明条件的必要性，展开定义，应用前面的定理，并进行简化。」就像这些指令告诉读者如何构建证明一样，策略告诉 Lean 如何构建证明。它们自然而然地支持增量式的证明书写，在这种写作方式中，你将分解一个证明，并一步步地实现目标。</p>
 <blockquote>
 <p>译者注：tactic 和 strategy 都有策略的意思，其中 tactic 侧重细节，如排兵布阵，
 strategy 面向整体，如大规模战略。试译 strategy 为「要略」，与 tactic 相区分。</p>
@@ -1097,7 +1097,7 @@ Tactic Combinators
 *Tactic combinators* are operations that form new tactics from old
 ones. A sequencing combinator is already implicit in the ``by`` block:
 -->
-<p><strong>策略组合器</strong>是由旧策略形成新策略的操作。<code>by</code> 隐含了一个序列组合器：</p>
+<p><strong>策略组合器</strong> 是由旧策略形成新策略的操作。<code>by</code> 隐含了一个序列组合器：</p>
 <pre><code class="language-lean">example (p q : Prop) (hp : p) : p ∨ q :=
   by apply Or.inl; assumption
 </code></pre>

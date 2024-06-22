@@ -400,7 +400,7 @@ the ``tail`` function using pattern matching. The argument ``α : Type u``
 is a parameter and occurs before the colon to indicate it does not participate in the pattern matching.
 Lean also allows parameters to occur after ``:``, but it cannot pattern match on them.
 -->
-<p>还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为<strong>通配符模式</strong>，或<strong>匿名变量</strong>。与方程编译器之外的用法不同，这里的下划线<strong>并不</strong>表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。<a href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E9%87%8D%E5%8F%A0%E6%A8%A1%E5%BC%8F">通配符和重叠模式</a>一节阐述了通配符的概念，而<a href="#%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F">不可访问模式</a>一节解释了你如何在模式中使用隐参数。</p>
+<p>还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为 <strong>通配符模式</strong> ，或 <strong>匿名变量</strong> 。与方程编译器之外的用法不同，这里的下划线 <strong>并不</strong> 表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。<a href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E9%87%8D%E5%8F%A0%E6%A8%A1%E5%BC%8F">通配符和重叠模式</a>一节阐述了通配符的概念，而<a href="#%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F">不可访问模式</a>一节解释了你如何在模式中使用隐参数。</p>
 <p>正如<a href="./inductive_types.html">归纳类型</a>一章中所描述的，归纳数据类型可以依赖于参数。下面的例子使用模式匹配定义了 <code>tail</code> 函数。参数 <code>α : Type</code> 是一个参数，出现在冒号之前，表示它不参与模式匹配。Lean 也允许参数出现在 <code>:</code> 之后，但它不能对其进行模式匹配。</p>
 <pre><code class="language-lean">def tail1 {α : Type u} : List α → List α
   | []      =&gt; []
@@ -422,7 +422,7 @@ considered in the [Section Dependent Pattern Matching](#dependent-pattern-matchi
 
 -->
 <p>尽管参数 <code>α</code> 在这两个例子中的位置不同，但在这两种情况下，它的处理方式是一样的，即它不参与情况分割。</p>
-<p>Lean 也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种<strong>依值模式匹配</strong>的例子在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中考虑。</p>
+<p>Lean 也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种 <strong>依值模式匹配</strong> 的例子在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中考虑。</p>
 <!--
 Wildcards and Overlapping Patterns
 ----------------------------------
@@ -494,7 +494,7 @@ The idea is to return ``some a`` for the provided patterns, and use
 both approaches.
 -->
 <p>你可以检查这个 <code>foo</code> 的定义是否满足与之前相同的定义特性。</p>
-<p>一些函数式编程语言支持<strong>不完整的模式</strong>。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 <code>Inhabited</code> （含元素的）类型类来模拟任意值的方法。粗略的说，<code>Inhabited α</code> 的一个元素是对 <code>α</code> 拥有一个元素的见证；在<a href="./type_classes.html">类型类</a>中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素 <code>arbitrary</code>，任何含元素的类型。</p>
+<p>一些函数式编程语言支持 <strong>不完整的模式</strong> 。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 <code>Inhabited</code> （含元素的）类型类来模拟任意值的方法。粗略的说，<code>Inhabited α</code> 的一个元素是对 <code>α</code> 拥有一个元素的见证；在<a href="./type_classes.html">类型类</a>中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素 <code>arbitrary</code>，任何含元素的类型。</p>
 <p>我们还可以使用类型<code>Option α</code>来模拟不完整的模式。我们的想法是对所提供的模式返回<code>some a</code>，而对不完整的情况使用<code>none</code>。下面的例子演示了这两种方法。</p>
 <!--
 ```lean
@@ -623,7 +623,7 @@ recursion from the last chapter, now defined using the equation
 compiler:
 -->
 <p>这里 <code>(a : α)</code> 是一个参数序列，<code>(b : β)</code> 是进行模式匹配的参数序列，<code>γ</code> 是任何类型，它可以取决于 <code>a</code> 和 <code>b </code>。每一行应该包含相同数量的模式，对应于 <code>β</code> 的每个元素。正如我们所看到的，模式要么是一个变量，要么是应用于其他模式的构造子，要么是一个正规化为该形式的表达式（其中非构造子用 <code>[matchPattern]</code> 属性标记）。构造子的出现会提示情况拆分，构造子的参数由给定的变量表示。在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中，我们将看到有时有必要在模式中包含明确的项，这些项需要进行表达式类型检查，尽管它们在模式匹配中没有起到作用。由于这个原因，这些被称为「不可访问的模式」。但是在<a href="#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节之前，我们将不需要使用这种不可访问的模式。</p>
-<p>正如我们在上一节所看到的，项 <code>t₁,...,tₙ</code> 可以利用任何一个参数 <code>a</code>，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 <code>foo</code> 的递归调用。在本节中，我们将处理<strong>结构性递归</strong>，其中 <code>foo</code> 的参数出现在 <code>:=</code> 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。</p>
+<p>正如我们在上一节所看到的，项 <code>t₁,...,tₙ</code> 可以利用任何一个参数 <code>a</code>，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 <code>foo</code> 的递归调用。在本节中，我们将处理 <strong>结构性递归</strong> ，其中 <code>foo</code> 的参数出现在 <code>:=</code> 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。</p>
 <pre><code class="language-lean">open Nat
 def add : Nat → Nat → Nat
   | m, zero   =&gt; m
@@ -742,7 +742,7 @@ type. You can get a sense of how it works by looking at the types of
 ``Nat.below`` and ``Nat.brecOn``:
 -->
 <p>在这两种情况下，Lean 都会生成辅助函数 <code>fibFast.loop</code>。</p>
-<p>为了处理结构递归，方程编译器使用<strong>值过程</strong>（course-of-values）递归，使用由每个归纳定义类型自动生成的常量 <code>below</code> 和 <code>brecOn</code>。你可以通过查看 <code>Nat.below</code> 和 <code>Nat.brecOn</code> 的类型来了解它是如何工作的。</p>
+<p>为了处理结构递归，方程编译器使用 <strong>值过程</strong> （course-of-values）递归，使用由每个归纳定义类型自动生成的常量 <code>below</code> 和 <code>brecOn</code>。你可以通过查看 <code>Nat.below</code> 和 <code>Nat.brecOn</code> 的类型来了解它是如何工作的。</p>
 <pre><code class="language-lean">variable (C : Nat → Type u)
 
 #check (@Nat.below C : Nat → Type u)
@@ -1596,7 +1596,7 @@ to have to include these extra discriminants. Thus, Lean 4
 implements a new feature, *discriminant refinement*, which includes
 these extra discriminants automatically for us.
 -->
-<p>如前所述，参数 <code>{n : Nat}</code> 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性，<strong>判别精炼（discriminant refinement）</strong>，它自动为我们包含了这些额外的判别。</p>
+<p>如前所述，参数 <code>{n : Nat}</code> 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性， <strong>判别精炼（discriminant refinement）</strong> ，它自动为我们包含了这些额外的判别。</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)

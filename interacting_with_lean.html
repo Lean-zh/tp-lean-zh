@@ -202,7 +202,7 @@ the root of the user's local project.
 Importing is transitive. In other words, if you import ``Foo`` and ``Foo`` imports ``Bar``,
 then you also have access to the contents of ``Bar``, and do not need to import it explicitly.
 -->
-<p>导入文件 <code>Bar/Baz/Blah.olean</code>，其中的描述是相对于Lean<strong>搜索路径</strong>解释的。关于如何确定搜索路径的信息可以在<a href="https://lean-lang.org/documentation/">文档</a>中找到。默认情况下，它包括标准库目录，以及（在某些情况下）用户的本地项目的根目录。</p>
+<p>导入文件 <code>Bar/Baz/Blah.olean</code>，其中的描述是相对于Lean <strong>搜索路径</strong> 解释的。关于如何确定搜索路径的信息可以在<a href="https://lean-lang.org/documentation/">文档</a>中找到。默认情况下，它包括标准库目录，以及（在某些情况下）用户的本地项目的根目录。</p>
 <p>导入是传递性的。换句话说，如果你导入了 <code>Foo</code>，并且 <code>Foo</code> 导入了 <code>Bar</code>，那么你也可以访问 <code>Bar</code> 的内容，而不需要明确导入它。</p>
 <!--
 More on Sections
@@ -248,7 +248,7 @@ automatically. Similarly, Lean detects the occurrence of ``x`` in
 Note that ``double`` does *not* have ``y`` as argument. Variables are only
 included in declarations where they are actually used.
 -->
-<p><code>double</code> 的定义不需要声明 <code>x</code> 作为参数；Lean 检测到这种依赖关系并自动插入。同样，Lean 检测到 <code>x</code> 在 <code>t1</code> 和 <code>t2</code> 中的出现，也会自动插入。注意，double<strong>没有</strong><code>y</code> 作为参数。变量只包括在实际使用的声明中。</p>
+<p><code>double</code> 的定义不需要声明 <code>x</code> 作为参数；Lean 检测到这种依赖关系并自动插入。同样，Lean 检测到 <code>x</code> 在 <code>t1</code> 和 <code>t2</code> 中的出现，也会自动插入。注意，double <strong>没有</strong> <code>y</code> 作为参数。变量只包括在实际使用的声明中。</p>
 <!--
 More on Namespaces
 ------------------
@@ -263,7 +263,7 @@ definition and theorem until ``end foo`` is encountered. The command
 ``open foo`` then creates temporary *aliases* to definitions and
 theorems that begin with prefix ``foo``.
 -->
-<p>在 Lean 中，标识符是由层次化的<em>名称</em>给出的，如 <code>Foo.Bar.baz</code>。我们在<a href="./dependent_type_theory.html#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">命名空间</a>一节中看到，Lean 提供了处理分层名称的机制。命令 <code>namespace foo</code> 导致 <code>foo</code> 被添加到每个定义和定理的名称中，直到遇到 <code>end foo</code>。命令 <code>open foo</code> 然后为以 <code>foo</code> 开头的定义和定理创建临时的<strong>别名</strong>。</p>
+<p>在 Lean 中，标识符是由层次化的<em>名称</em>给出的，如 <code>Foo.Bar.baz</code>。我们在<a href="./dependent_type_theory.html#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">命名空间</a>一节中看到，Lean 提供了处理分层名称的机制。命令 <code>namespace foo</code> 导致 <code>foo</code> 被添加到每个定义和定理的名称中，直到遇到 <code>end foo</code>。命令 <code>open foo</code> 然后为以 <code>foo</code> 开头的定义和定理创建临时的 <strong>别名</strong> 。</p>
 <pre><code class="language-lean">namespace Foo
 def bar : Nat := 1
 end Foo
@@ -350,7 +350,7 @@ creates aliases for only the identifiers listed. The command
 <!--
 creates aliases for everything in the ``Nat`` namespace *except* the identifiers listed.
 -->
-<p>给 <code>Nat</code> 命名空间中<strong>除了</strong>被列出的标识符都创建了别名。命令</p>
+<p>给 <code>Nat</code> 命名空间中 <strong>除了</strong> 被列出的标识符都创建了别名。命令</p>
 <pre><code class="language-lean">open Nat renaming mul → times, add → plus
 #eval plus (times 2 2) 3  -- 7
 </code></pre>
@@ -490,7 +490,7 @@ this pattern: options can *only* be set locally, which is to say,
 their scope is always restricted to the current section or current
 file.
 -->
-<p>在下面的<a href="#%E7%AC%A6%E5%8F%B7">符号</a>一节中，我们将讨论 Lean 定义符号的机制，并看到它们也支持 <code>local</code> 修饰符。然而，在<a href="#%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9">设置选项</a>一节中，我们将讨论 Lean 设置选项的机制，它并<strong>不</strong>遵循这种模式：选项<strong>只能</strong>在局部设置，也就是说，它们的范围总是限制在当前小节或当前文件中。</p>
+<p>在下面的<a href="#%E7%AC%A6%E5%8F%B7">符号</a>一节中，我们将讨论 Lean 定义符号的机制，并看到它们也支持 <code>local</code> 修饰符。然而，在<a href="#%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9">设置选项</a>一节中，我们将讨论 Lean 设置选项的机制，它并 <strong>不</strong> 遵循这种模式：选项 <strong>只能</strong> 在局部设置，也就是说，它们的范围总是限制在当前小节或当前文件中。</p>
 <!--
 More on Implicit Arguments
 --------------------------
@@ -708,7 +708,7 @@ has precedence one greater than the notation itself.  In contrast,
 operand, so `a ^ b ^ c` *can* be parsed as `a ^ (b ^ c)`.  Note that
 if we used `notation` directly to introduce an infix notation like
 -->
-<p>事实证明，第一个代码块中的所有命令实际上都是命令<strong>宏</strong>，翻译成更通用的 <code>notation</code> 命令。我们将在下面学习如何编写这种宏。 <code>notation</code> 命令不接受单一的记号，而是接受一个混合的记号序列和有优先级的命名项占位符，这些占位符可以在<code>=&gt;</code>的右侧被引用，并将被在该位置解析的相应项所取代。 优先级为 <code>p</code> 的占位符在该处只接受优先级至少为 <code>p</code> 的记号。因此，字符串<code>a + b + c</code>不能被解析为等同于<code>a + (b + c)</code>，因为 <code>infixl</code> 符号的右侧操作数的优先级比该符号本身大。 相反，<code>infixr</code> 重用了符号右侧操作数的优先级，所以<code>a ^ b ^ c</code> <em>可以</em>被解析为<code>a ^ (b ^ c)</code>。 注意，如果我们直接使用 <code>notation</code> 来引入一个 infix 符号，如</p>
+<p>事实证明，第一个代码块中的所有命令实际上都是命令 <strong>宏</strong> ，翻译成更通用的 <code>notation</code> 命令。我们将在下面学习如何编写这种宏。 <code>notation</code> 命令不接受单一的记号，而是接受一个混合的记号序列和有优先级的命名项占位符，这些占位符可以在<code>=&gt;</code>的右侧被引用，并将被在该位置解析的相应项所取代。 优先级为 <code>p</code> 的占位符在该处只接受优先级至少为 <code>p</code> 的记号。因此，字符串<code>a + b + c</code>不能被解析为等同于<code>a + (b + c)</code>，因为 <code>infixl</code> 符号的右侧操作数的优先级比该符号本身大。 相反，<code>infixr</code> 重用了符号右侧操作数的优先级，所以<code>a ^ b ^ c</code> <em>可以</em>被解析为<code>a ^ (b ^ c)</code>。 注意，如果我们直接使用 <code>notation</code> 来引入一个 infix 符号，如</p>
 <pre><code class="language-lean"><span class="boring">set_option quotPrecheck false
 </span>notation:65 lhs:65 &quot; ~ &quot; rhs:65 =&gt; wobble lhs rhs
 </code></pre>
@@ -758,7 +758,7 @@ embeds the natural numbers in the integers, meaning that we can view
 any natural number as an integer, when needed. Lean has mechanisms to
 detect and insert *coercions* of this sort.
 -->
-<p>在 Lean 中，自然数的类型 <code>Nat</code>，与整数的类型 <code>Int</code> 不同。但是有一个函数 <code>Int.ofNat</code> 将自然数嵌入整数中，这意味着我们可以在需要时将任何自然数视为整数。Lean 有机制来检测和插入这种<strong>强制转换</strong>。</p>
+<p>在 Lean 中，自然数的类型 <code>Nat</code>，与整数的类型 <code>Int</code> 不同。但是有一个函数 <code>Int.ofNat</code> 将自然数嵌入整数中，这意味着我们可以在需要时将任何自然数视为整数。Lean 有机制来检测和插入这种 <strong>强制转换</strong> 。</p>
 <pre><code class="language-lean">variable (m n : Nat)
 variable (i j : Int)
 
@@ -842,7 +842,7 @@ to control its behavior. The syntax for doing so is as follows:
 <!--
 One very useful family of options controls the way Lean's *pretty- printer* displays terms. The following options take an input of true or false:
 -->
-<p>有一系列非常有用的选项可以控制 Lean 的<strong>美观打印</strong>显示项的方式。下列选项的输入值为真或假：</p>
+<p>有一系列非常有用的选项可以控制 Lean 的 <strong>美观打印</strong> 显示项的方式。下列选项的输入值为真或假：</p>
 <pre><code>pp.explicit  : display implicit arguments
 pp.universes : display hidden universe parameters
 pp.notation  : display output using defined notations
@@ -1030,7 +1030,7 @@ Lean 4 supports a new feature called *auto bound implicit arguments*. It makes f
 any unbound identifier is automatically added as an implicit argument *if* it is a single lower case or
 greek letter. With this feature we can write `compose` as
 -->
-<p>Lean 4支持一个名为<strong>自动约束隐参数</strong>的新特性。它使诸如 <code>compose</code> 这样的函数在编写时更加方便。当 Lean 处理一个声明的头时，<strong>如果</strong>它是一个小写字母或希腊字母，任何未约束的标识符都会被自动添加为隐式参数。有了这个特性，我们可以把 <code>compose</code> 写成</p>
+<p>Lean 4支持一个名为 <strong>自动约束隐参数</strong> 的新特性。它使诸如 <code>compose</code> 这样的函数在编写时更加方便。当 Lean 处理一个声明的头时， <strong>如果</strong> 它是一个小写字母或希腊字母，任何未约束的标识符都会被自动添加为隐式参数。有了这个特性，我们可以把 <code>compose</code> 写成</p>
 <pre><code class="language-lean">def compose (g : β → γ) (f : α → β) (x : α) : γ :=
   g (f x)
 

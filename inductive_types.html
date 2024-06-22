@@ -281,7 +281,7 @@ elements beyond those they construct.
 We will use the `match` expression to define a function from ``Weekday``
 to the natural numbers:
 -->
-<p>把 <code>sunday</code>、<code>monday</code>、... 、<code>saturday</code> 看作是 <code>Weekday</code> 的不同元素，没有其他有区别的属性。消去规则 <code>Weekday.rec</code>，与 <code>Weekday</code> 类型及其构造子一起定义。它也被称为<strong>递归器（Recursor）</strong>，它是使该类型「归纳」的原因：它允许我们通过给每个构造子分配相应的值来定义<code>Weekday</code>的函数。直观的说，归纳类型是由构造子详尽地生成的，除了它们构造的元素外，没有其他元素。</p>
+<p>把 <code>sunday</code>、<code>monday</code>、... 、<code>saturday</code> 看作是 <code>Weekday</code> 的不同元素，没有其他有区别的属性。消去规则 <code>Weekday.rec</code>，与 <code>Weekday</code> 类型及其构造子一起定义。它也被称为 <strong>递归器（Recursor）</strong> ，它是使该类型「归纳」的原因：它允许我们通过给每个构造子分配相应的值来定义<code>Weekday</code>的函数。直观的说，归纳类型是由构造子详尽地生成的，除了它们构造的元素外，没有其他元素。</p>
 <p>我们将使用<code>match</code>表达式来定义一个从 <code>Weekday</code> 到自然数的函数：</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday : Weekday
@@ -631,7 +631,7 @@ input is of the form ``inr b``, in which case we have to specify an
 output value in terms of ``b``.
 -->
 <p>参数<code>motive</code>是用来指定你要构造的对象的类型，它是一个依值的函数，<code>_</code>是被自动推断出的类型，此处即<code>Bool × Nat</code>。函数<code>cond</code>是一个布尔条件：<code>cond b t1 t2</code>，如果<code>b</code>为真，返回<code>t1</code>，否则返回<code>t2</code>。函数<code>prod_example</code>接收一个由布尔值<code>b</code>和一个数字<code>n</code>组成的对，并根据<code>b</code>为真或假返回<code>2 * n</code>或<code>2 * n + 1</code>。</p>
-<p>相比之下，求和类型有<em>两个</em>构造子<code>inl</code>和<code>inr</code>（表示「从左引入」和「从右引入」），每个都需要<strong>一个</strong>（显式的）参数。要在 <code>Sum α β</code> 上定义一个函数，我们必须处理两种情况：要么输入的形式是 <code>inl a</code>，由此必须依据 <code>a</code> 指定一个输出值；要么输入的形式是 <code>inr b</code>，由此必须依据 <code>b</code> 指定一个输出值。</p>
+<p>相比之下，求和类型有<em>两个</em>构造子<code>inl</code>和<code>inr</code>（表示「从左引入」和「从右引入」），每个都需要 <strong>一个</strong> （显式的）参数。要在 <code>Sum α β</code> 上定义一个函数，我们必须处理两种情况：要么输入的形式是 <code>inl a</code>，由此必须依据 <code>a</code> 指定一个输出值；要么输入的形式是 <code>inr b</code>，由此必须依据 <code>b</code> 指定一个输出值。</p>
 <pre><code class="language-lean">def sum_example (s : Sum Nat Nat) : Nat :=
   Sum.casesOn (motive := fun _ =&gt; Nat) s
     (fun n =&gt; 2 * n)
@@ -951,7 +951,7 @@ Finally, the ``t : Nat``, is the input to the function. It is also known as the 
 
 The `Nat.recOn` is similar to `Nat.rec` but the major premise occurs before the minor premises.
 -->
-<p>隐参数 <code>motive</code>，是被定义的函数的陪域。在类型论中，通常说 <code>motive</code> 是消去/递归的<strong>目的</strong>，因为它描述了我们希望构建的对象类型。接下来的两个参数指定了如何计算零和后继的情况，如上所述。它们也被称为小前提 <code>minor premises</code>。最后，<code>t : Nat</code>，是函数的输入。它也被称为大前提 <code>major premise</code>。</p>
+<p>隐参数 <code>motive</code>，是被定义的函数的陪域。在类型论中，通常说 <code>motive</code> 是消去/递归的 <strong>目的</strong> ，因为它描述了我们希望构建的对象类型。接下来的两个参数指定了如何计算零和后继的情况，如上所述。它们也被称为小前提 <code>minor premises</code>。最后，<code>t : Nat</code>，是函数的输入。它也被称为大前提 <code>major premise</code>。</p>
 <p><code>Nat.recOn</code>与<code>Nat.rec</code>类似，但大前提发生在小前提之前。</p>
 <pre><code>@Nat.recOn :
   {motive : Nat → Sort u}
@@ -1604,7 +1604,7 @@ indexed *family* of inductive types, in a manner we now describe.
 An inductive family is an indexed family of types defined by a
 simultaneous induction of the following form:
 -->
-<p>我们几乎已经完成了对Lean 所接受的全部归纳定义的描述。到目前为止，你已经看到Lean 允许你用任何数量的递归构造子引入归纳类型。事实上，一个归纳定义可以引入一个有索引的归纳类型的<strong>族（Family）</strong>。</p>
+<p>我们几乎已经完成了对Lean 所接受的全部归纳定义的描述。到目前为止，你已经看到Lean 允许你用任何数量的递归构造子引入归纳类型。事实上，一个归纳定义可以引入一个有索引的归纳类型的 <strong>族（Family）</strong> 。</p>
 <p>归纳族是一个由以下形式的同时归纳定义的有索引的家族：</p>
 <pre><code>inductive foo : ... → Sort u where
   | constructor₁ : ... → foo ...
@@ -1621,7 +1621,7 @@ constructs an element of some member of the family. One example is the
 definition of ``Vector α n``, the type of vectors of elements of ``α``
 of length ``n``:
 -->
-<p>与普通的归纳定义不同，它构造了某个 <code>Sort u</code> 的元素，更一般的版本构造了一个函数 <code>... → Sort u</code>，其中 <code>...</code> 表示一串参数类型，也称为<strong>索引</strong>。然后，每个构造子都会构造一个家族中某个成员的元素。一个例子是 <code>Vector α n</code> 的定义，它是长度为 <code>n</code> 的 <code>α</code> 元素的向量的类型：</p>
+<p>与普通的归纳定义不同，它构造了某个 <code>Sort u</code> 的元素，更一般的版本构造了一个函数 <code>... → Sort u</code>，其中 <code>...</code> 表示一串参数类型，也称为 <strong>索引</strong> 。然后，每个构造子都会构造一个家族中某个成员的元素。一个例子是 <code>Vector α n</code> 的定义，它是长度为 <code>n</code> 的 <code>α</code> 元素的向量的类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Vector (α : Type u) : Nat → Type u where
   | nil  : Vector α 0
@@ -1759,8 +1759,8 @@ to. Each constructor ``c`` in the definition of a family ``C`` of
 inductive types is of the form
 -->
 <p>我们已经通过例子描述了归纳类型和它们的语法。本节为那些对公理基础感兴趣的人提供额外的信息。</p>
-<p>我们已经看到，归纳类型的构造子需要<strong>参量</strong>（parameter，与argument都有「参数」译义，为区别此处译为参量）——即在整个归纳构造过程中保持固定的参数——和<strong>索引</strong>，即同时在构造中的类型类的参数。每个构造子都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。要求是，如果后者存在，它只<strong>严格正向</strong>出现。这意味着它所出现的构造子的任何参数都是一个依值箭头类型，其中定义中的归纳类型只作为结果类型出现，其中的索引是以常量和先前的参数来给出。</p>
-<p>既然一个归纳类型对于某些 <code>u</code> 来说存在于在 <code>Sort u</code> 中，那么我们有理由问<strong>哪些</strong>宇宙层次的 <code>u</code> 可以被实例化。归纳类型类 <code>C</code> 的定义中的每个构造子 <code>c</code> 的形式为</p>
+<p>我们已经看到，归纳类型的构造子需要 <strong>参量</strong> （parameter，与argument都有「参数」译义，为区别此处译为参量）——即在整个归纳构造过程中保持固定的参数——和 <strong>索引</strong> ，即同时在构造中的类型类的参数。每个构造子都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。要求是，如果后者存在，它只 <strong>严格正向</strong> 出现。这意味着它所出现的构造子的任何参数都是一个依值箭头类型，其中定义中的归纳类型只作为结果类型出现，其中的索引是以常量和先前的参数来给出。</p>
+<p>既然一个归纳类型对于某些 <code>u</code> 来说存在于在 <code>Sort u</code> 中，那么我们有理由问 <strong>哪些</strong> 宇宙层次的 <code>u</code> 可以被实例化。归纳类型类 <code>C</code> 的定义中的每个构造子 <code>c</code> 的形式为</p>
 <pre><code>  c : (a : α) → (b : β[a]) → C a p[a,b]
 </code></pre>
 <!--
@@ -1838,7 +1838,7 @@ that we can define two (or more) inductive types at the same time,
 where each one refers to the other(s).
 -->
 <p>我们现在考虑两个经常有用的归纳类型的推广，Lean 通过「编译」它们来支持上述更原始的归纳类型种类。换句话说，Lean 解析了更一般的定义，在此基础上定义了辅助的归纳类型，然后使用辅助类型来定义我们真正想要的类型。下一章将介绍Lean 的方程编译器，它需要有效地利用这些类型。尽管如此，在这里描述这些声明还是有意义的，因为它们是普通归纳定义的直接变形。</p>
-<p>首先，Lean 支持<strong>相互定义</strong>的归纳类型。这个想法是，我们可以同时定义两个（或更多）归纳类型，其中每个类型都指代其他类型。</p>
+<p>首先，Lean 支持 <strong>相互定义</strong> 的归纳类型。这个想法是，我们可以同时定义两个（或更多）归纳类型，其中每个类型都指代其他类型。</p>
 <pre><code class="language-lean">mutual
   inductive Even : Nat → Prop where
     | even_zero : Even 0
@@ -1899,7 +1899,7 @@ constructor. Lean then automatically builds the
 isomorphism between ``TreeList α`` and ``List (Tree α)`` in its kernel,
 and defines the constructors for ``Tree`` in terms of the isomorphism.
 -->
-<p>这就是所谓的<strong>嵌套</strong>归纳类型。它不属于上一节给出的归纳类型的严格规范，因为<code>Tree</code>不是严格意义上出现在<code>mk</code>的参数中，而是嵌套在<code>List</code>类型构造子中。然后Lean 在其内核中自动建立了 <code>TreeList α</code> 和 <code>List (Tree α)</code> 之间的同构关系，并根据同构关系定义了 <code>Tree</code> 的构造子。</p>
+<p>这就是所谓的 <strong>嵌套</strong> 归纳类型。它不属于上一节给出的归纳类型的严格规范，因为<code>Tree</code>不是严格意义上出现在<code>mk</code>的参数中，而是嵌套在<code>List</code>类型构造子中。然后Lean 在其内核中自动建立了 <code>TreeList α</code> 和 <code>List (Tree α)</code> 之间的同构关系，并根据同构关系定义了 <code>Tree</code> 的构造子。</p>
 <!--
 Exercises
 ---------

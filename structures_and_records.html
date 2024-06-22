@@ -175,7 +175,7 @@ previously defined ones. Moreover, Lean provides convenient notation
 for defining instances of a given structure.
 -->
 <p>我们已经看到Lean 的基本系统包括归纳类型。此外，显然仅基于类型宇宙、依赖箭头类型和归纳类型，就有可能构建一个坚实的数学大厦；其他的一切都是由此而来。Lean 标准库包含许多归纳类型的实例(例如，<code>Nat</code>，<code>Prod</code>，<code>List</code>)，甚至逻辑连接词也是使用归纳类型定义的。</p>
-<p>回忆一下，只包含一个构造子的非递归归纳类型被称为<strong>结构体（structure）<strong>或</strong>记录（record）</strong>。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体 <code>S</code> 时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code> 的每个实例并检索存储在其字段中的值。<code>prod.pr1</code> 和 <code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
+<p>回忆一下，只包含一个构造子的非递归归纳类型被称为 <strong>结构体（structure）</strong> 或 <strong>记录（record）</strong> 。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体 <code>S</code> 时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code> 的每个实例并检索存储在其字段中的值。<code>prod.pr1</code> 和 <code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
 <p>在编写程序或形式化数学时，定义包含许多字段的结构体是很常见的。Lean 中可用 <code>structure</code> 命令实现此过程。当我们使用这个命令定义一个结构体时，Lean 会自动生成所有的投影函数。<code>structure</code> 命令还允许我们根据以前定义的结构体定义新的结构体。此外，Lean 为定义给定结构体的实例提供了方便的符号。</p>
 <!--
 Declaring Structures
@@ -400,7 +400,7 @@ visited in order until Lean finds one that contains the unspecified
 field. Lean raises an error if any of the field names remain
 unspecified after all the objects are visited.
 -->
-<p>**记录更新（Record update）**是另一个常见的操作，相当于通过修改旧记录中的一个或多个字段的值来创建一个新的记录对象。通过在字段赋值之前添加注释 <code>s with</code>，Lean 允许您指定记录规范中未赋值的字段，该字段应从之前定义的结构对象 <code>s</code> 中获取。如果提供了多个记录对象，那么将按顺序访问它们，直到Lean 找到一个包含未指定字段的记录对象。如果在访问了所有对象之后仍未指定任何字段名，Lean 将引发错误。</p>
+<p><strong>记录更新（Record update）</strong> 是另一个常见的操作，相当于通过修改旧记录中的一个或多个字段的值来创建一个新的记录对象。通过在字段赋值之前添加注释 <code>s with</code>，Lean 允许您指定记录规范中未赋值的字段，该字段应从之前定义的结构对象 <code>s</code> 中获取。如果提供了多个记录对象，那么将按顺序访问它们，直到Lean 找到一个包含未指定字段的记录对象。如果在访问了所有对象之后仍未指定任何字段名，Lean 将引发错误。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -436,7 +436,7 @@ Inheritance
 We can *extend* existing structures by adding new fields. This feature
 allows us to simulate a form of *inheritance*.
 -->
-<p>我们可以通过添加新的字段来<strong>扩展</strong>现有的结构体。这个特性允许我们模拟一种形式的<strong>继承</strong>。</p>
+<p>我们可以通过添加新的字段来 <strong>扩展</strong> 现有的结构体。这个特性允许我们模拟一种形式的 <strong>继承</strong> 。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α

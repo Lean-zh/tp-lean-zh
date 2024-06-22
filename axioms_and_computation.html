@@ -195,8 +195,8 @@ wish to use the classical law of the excluded middle to reason about
 computation. This also blocks evaluation in the kernel, but it is
 compatible with compilation to bytecode.
 -->
-<p>Lean 的标准库定义了一个公理：<strong>命题外延性（Propositional Extensionality）</strong>。
-以及一个**商（Qoutient）**结构，它蕴含了函数外延性的公理。
+<p>Lean 的标准库定义了一个公理： <strong>命题外延性（Propositional Extensionality）</strong> 。
+以及一个 <strong>商（Qoutient）</strong> 结构，它蕴含了函数外延性的公理。
 这些扩展被用来发展如集合与有限集这些理论。我们在后面会看到，
 这些定理的使用会阻碍 Lean 内核中的求值，因此 <code>Nat</code> 类型的封闭项不再求值为数值。
 但是 Lean 在对其虚拟机器求值器进行字节码编译时会擦除类型和命题信息，
@@ -285,7 +285,7 @@ computational reading.
 <p>然而在 19 世纪，数学论证复杂性的提升推动了数学家发展新的推理风格，
 抑制算法信息并调用数学对象，从而抽象掉了对象被表征的细节。
 目标是在不陷入繁重的计算细节的情况下获得强大的「概念」理解，
-但这可能导致数学定理在直接计算的解读上干脆就是 <strong>错误</strong> 的。</p>
+但这可能导致数学定理在直接计算的解读上干脆就是  <strong>错误</strong>  的。</p>
 <!--
 There is still fairly uniform agreement today that computation is
 important to mathematics. But there are different views as to how best
@@ -303,9 +303,9 @@ mathematical reasoning.
 -->
 <p>今天数学界仍在相当普遍地同意计算对于数学很重要。
 但对于如何以最佳方式解决计算问题有不同的看法。
-从<strong>构造性</strong>的角度来看，将数学与其计算根源分开是一个错误；
+从 <strong>构造性</strong> 的角度来看，将数学与其计算根源分开是一个错误；
 每条有意义的数学定理都应具有直接的计算解释。
-从<strong>经典的</strong>角度来看，保持关注点的分离更有成效：
+从 <strong>经典的</strong> 角度来看，保持关注点的分离更有成效：
 我们可以使用一种语言和方法体系编写计算机程序，
 同时保持使用非构造性理论和方法对其进行推理的自由。
 Lean 旨在支持这两种方法。库的核心部分以构造性方式开发，
@@ -590,8 +590,8 @@ that permit reductions for casts involving function extensionality,
 quotients, and more. But the solutions are not so clear cut, and the
 rules of Lean's underlying calculus do not sanction such reductions.
 -->
-<p>当前的研究计划包括关于<strong>观测类型论（Observational Type Theory）</strong>
-和**立方类型论（Cubical Type Theory）**的研究，旨在扩展类型理论，
+<p>当前的研究计划包括关于 <strong>观测类型论（Observational Type Theory）</strong>
+和 <strong>立方类型论（Cubical Type Theory）</strong> 的研究，旨在扩展类型理论，
 以便允许对涉及函数外延、商，等等的强制转换进行归约。
 但解决方案并不明朗，而 Lean 的底层演算法则对此类归约也不支持。</p>
 <!--
@@ -770,7 +770,7 @@ was an equivalence relation to start with, then for all ``a`` and
 <p>当然，当 <code>r</code> 是等价关系时，商集的结构是最常用的。给定上面的 <code>r</code>，
 如果我们根据法则 <code>r' a b</code> 当且仅当 <code>Quot.mk r a = Quot.mk r b</code> 定义 <code>r'</code>，
 那么显然 <code>r'</code> 就是一个等价关系。事实上，<code>r'</code> 是函数 <code>a ↦ quot.mk r a</code>
-的<strong>核（Kernel）</strong>。公理 <code>Quot.sound</code> 表明 <code>r a b</code> 蕴含 <code>r' a b</code>。
+的 <strong>核（Kernel）</strong> 。公理 <code>Quot.sound</code> 表明 <code>r a b</code> 蕴含 <code>r' a b</code>。
 使用 <code>Quot.lift</code> 和 <code>Quot.ind</code>，我们可以证明 <code>r'</code> 是包含 <code>r</code> 的最小的等价关系，
 意思就是，如果 <code>r''</code> 是包含 <code>r</code> 的任意等价关系，则 <code>r' a b</code> 蕴含 <code>r'' a b</code>。
 特别地，如果 <code>r</code> 开始就是一个等价关系，那么对任意 <code>a</code> 和 <code>b</code>，我们都有
@@ -780,7 +780,7 @@ To support this common use case, the standard library defines the
 notion of a *setoid*, which is simply a type with an associated
 equivalence relation:
 -->
-<p>为支持这种通用使用案例，标准库定义了 <strong>广集（Setoid）</strong> 的概念，
+<p>为支持这种通用使用案例，标准库定义了  <strong>广集（Setoid）</strong>  的概念，
 它只是一个带有与之关联的等价关系的类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>class Setoid (α : Sort u) where
@@ -859,7 +859,7 @@ of a type ``α`` as a quotient of the type ``α × α``. First, we define
 the relevant equivalence relation:
 -->
 <p>回顾一下标准库中的 <code>α × β</code> 代表类型 <code>α</code> 和 <code>β</code> 的笛卡尔积。
-为了说明商的用法，让我们将类型为 <code>α</code> 的元素构成的**无序对（Unordered Pair）**的类型定义为
+为了说明商的用法，让我们将类型为 <code>α</code> 的元素构成的 <strong>无序对（Unordered Pair）</strong> 的类型定义为
 <code>α × α</code> 类型的商。首先，我们定义相关的等价关系：</p>
 <pre><code class="language-lean">private def eqv (p₁ p₂ : α × α) : Prop :=
   (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
@@ -1161,7 +1161,7 @@ the principle of *indefinite description*, which can be expressed with
 subtypes as follows:
 -->
 <p>这可以在 <code>Classical</code> 命名空间中找到，所以定理的全名是 <code>Classical.choice</code>。
-选择公理等价于**非限定摹状词（Indefinite Description）**原理，可通过子类型表示如下：</p>
+选择公理等价于 <strong>非限定摹状词（Indefinite Description）</strong> 原理，可通过子类型表示如下：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">universe u
 </span><span class="boring">axiom choice {α : Sort u} : Nonempty α → α
@@ -1221,7 +1221,7 @@ satisfying ``p`` if there is one. The data component of this
 definition is conventionally known as *Hilbert's epsilon function*:
 -->
 <p>假设环境类型 <code>α</code> 非空，<code>strongIndefiniteDescription p</code> 产生一个满足 <code>p</code>
-的元素 <code>α</code>（如果存在的话）。该定义的数据部分通常被称为 <strong>希尔伯特 ε 函数</strong>：</p>
+的元素 <code>α</code>（如果存在的话）。该定义的数据部分通常被称为  <strong>希尔伯特 ε 函数</strong> ：</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span><span class="boring">universe u
 </span>#check (@epsilon :

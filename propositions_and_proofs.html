@@ -385,7 +385,7 @@ a theorem.
 -->
 <p>这与上一章中常量函数的定义完全相同，唯一的区别是参数是 <code>Prop</code> 的元素，而不是 <code>Type</code> 的元素。直观地说，我们对 <code>p → q → p</code> 的证明假设 <code>p</code> 和 <code>q</code> 为真，并使用第一个假设(平凡地)建立结论 <code>p</code> 为真。</p>
 <p>请注意，<code>theorem</code> 命令实际上是 <code>def</code> 命令的一个翻版：在命题和类型对应下，证明定理 <code>p → q → p</code> 实际上与定义关联类型的元素是一样的。对于内核类型检查器，这两者之间没有区别。</p>
-<p>然而，定义和定理之间有一些实用的区别。正常情况下，永远没有必要展开一个定理的「定义」；通过证明无关性，该定理的任何两个证明在定义上都是相等的。一旦一个定理的证明完成，通常我们只需要知道该证明的存在；证明是什么并不重要。鉴于这一事实，Lean 将证明标记为<em>不可还原</em>（irreducible），作为对解析器（更确切地说，是<strong>繁饰器</strong>）的提示，在处理文件时一般不需要展开它。事实上，Lean 通常能够并行地处理和检查证明，因为评估一个证明的正确性不需要知道另一个证明的细节。</p>
+<p>然而，定义和定理之间有一些实用的区别。正常情况下，永远没有必要展开一个定理的「定义」；通过证明无关性，该定理的任何两个证明在定义上都是相等的。一旦一个定理的证明完成，通常我们只需要知道该证明的存在；证明是什么并不重要。鉴于这一事实，Lean 将证明标记为<em>不可还原</em>（irreducible），作为对解析器（更确切地说，是 <strong>繁饰器</strong> ）的提示，在处理文件时一般不需要展开它。事实上，Lean 通常能够并行地处理和检查证明，因为评估一个证明的正确性不需要知道另一个证明的细节。</p>
 <p>和定义一样，<code>#print</code> 命令可以展示一个定理的证明。</p>
 <pre><code class="language-lean"><span class="boring">variable {p : Prop}
 </span><span class="boring">variable {q : Prop}
@@ -1048,7 +1048,7 @@ such contexts without relying on excluded middle.
 The full list of axioms that are used in Lean to support classical
 reasoning are discussed in [Axioms and Computation](./axioms_and_computation.md).
 -->
-<p>稍后我们将看到，构造逻辑中<strong>有</strong>某些情况允许「排中律」和「双重否定消除律」等，而 Lean 支持在这种情况下使用经典推理，而不依赖于排中律。</p>
+<p>稍后我们将看到，构造逻辑中 <strong>有</strong> 某些情况允许「排中律」和「双重否定消除律」等，而 Lean 支持在这种情况下使用经典推理，而不依赖于排中律。</p>
 <p>Lean 中使用的公理的完整列表见<a href="./axioms_and_computation.html">公理与计算</a>。</p>
 <!--
 Examples of Propositional Validities

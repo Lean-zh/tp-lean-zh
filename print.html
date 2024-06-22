@@ -174,7 +174,7 @@ as to their correctness becomes a form of theorem proving. Conversely, the proof
 lengthy computation, in which case verifying the truth of the theorem requires verifying that the computation does what
 it is supposed to do.
 -->
-<p>**形式验证（Formal Verification）**是指使用逻辑和计算方法来验证用精确的数学术语表达的命题。
+<p><strong>形式验证（Formal Verification）</strong> 是指使用逻辑和计算方法来验证用精确的数学术语表达的命题。
 这包括普通的数学定理，以及硬件或软件、网络协议、机械和混合系统中的形式命题。
 在实践中，验证数学命题和验证系统的正确性之间很类似：形式验证用数学术语描述硬件和软件系统，
 在此基础上验证其命题的正确性，这就像定理证明的过程。相反，一个数学定理的证明可能需要冗长的计算，
@@ -198,11 +198,11 @@ specialized mathematical software packages provide means of carrying out mathema
 mathematical bounds, or finding mathematical objects. A calculation can be viewed as a proof as well, and these systems,
 too, help establish mathematical claims.
 -->
-<p>**自动定理证明（Automated theorem proving）**着眼于「寻找」证明。归结（Resolution）定理证明器、
-<strong>表格法（tableau）<strong>定理证明器、<strong>快速可满足性求解器（Fast satisfiability solvers）</strong>
+<p><strong>自动定理证明（Automated theorem proving）</strong> 着眼于「寻找」证明。归结（Resolution）定理证明器、
+<strong>表格法（tableau）</strong> 定理证明器、 <strong>快速可满足性求解器（Fast satisfiability solvers）</strong>
 等提供了在命题逻辑和一阶逻辑中验证公式有效性的方法；
 还有些系统为特定的语言和问题提供搜索和决策程序，
-例如整数或实数上的线性或非线性表达式；像</strong>SMT（Satisfiability modulo theories）</strong>
+例如整数或实数上的线性或非线性表达式；像 <strong>SMT（Satisfiability modulo theories）</strong>
 这样的架构将通用的搜索方法与特定领域的程序相结合；
 计算机代数系统和专门的数学软件包提供了进行数学计算或寻找数学对象的手段，
 这些系统中的计算也可以被看作是一种证明，而这些系统也可以帮助建立数学命题。</p>
@@ -217,7 +217,7 @@ checked independently. Constructing such proofs typically requires much more inp
 allows you to obtain deeper and more complex proofs.
 -->
 <p>自动推理系统努力追求能力和效率，但往往牺牲稳定性。这样的系统可能会有 bug，
-而且很难保证它们所提供的结果是正确的。相比之下，<strong>交互式定理证明器（Interactive theorem proving）</strong>
+而且很难保证它们所提供的结果是正确的。相比之下， <strong>交互式定理证明器（Interactive theorem proving）</strong>
 侧重于「验证」证明，要求每个命题都有合适的公理基础的证明来支持。
 这就设定了非常高的标准：每一条推理规则和每一步计算都必须通过求助于先前的定义和定理来证明，
 一直到基本公理和规则。事实上，大多数这样的系统提供了精心设计的「证明对象」，
@@ -229,7 +229,7 @@ automated tools and methods in a framework that supports user interaction and th
 axiomatic proofs. The goal is to support both mathematical reasoning and reasoning about complex systems, and to verify
 claims in both domains.
 -->
-<p><strong>Lean 定理证明器</strong>旨在融合交互式和自动定理证明，
+<p><strong>Lean 定理证明器</strong> 旨在融合交互式和自动定理证明，
 它将自动化工具和方法置于一个支持用户交互和构建完整公理化证明的框架中。
 它的目标是支持数学推理和复杂系统的推理，并验证这两个领域的命题。</p>
 <!--
@@ -242,7 +242,7 @@ aspects of the system will make an appearance here.
 -->
 <p>Lean 的底层逻辑有一个计算的解释，与此同时 Lean 可以被视为一种编程语言。
 更重要的是，它可以被看作是一个编写具有精确语义的程序的系统，
-以及对程序所表示的计算功能进行推理。Lean 中也有机制使它能够作为它自己的<strong>元编程语言</strong>，
+以及对程序所表示的计算功能进行推理。Lean 中也有机制使它能够作为它自己的 <strong>元编程语言</strong> ，
 这意味着你可以使用 Lean 本身实现自动化和扩展 Lean 的功能。
 Lean 的这些方面将在本教程的配套教程
 <a href="https://www.leanprover.cn/fp-lean-zh/">Lean 4函数式编程</a>中进行探讨，本书只介绍计算方面。</p>
@@ -285,7 +285,7 @@ theorem, and expressive enough to do it in a natural way. More specifically, Lea
 known as the Calculus of Constructions with inductive types. Lean can not only define mathematical objects and express
 mathematical assertions in dependent type theory, but it also can be used as a language for writing proofs.
 -->
-<p>本书的目的是教你在 Lean 中编写和验证证明，并且不太需要针对 Lean 的基础知识。首先，你将学习 Lean 所基于的逻辑系统，它是**依值类型论（Dependent type theory）**的一个版本，足以证明几乎所有传统的数学定理，并且有足够的表达能力自然地表示数学定理。更具体地说，Lean 是基于具有归纳类型（Inductive type）的构造演算（Calculus of Construction）系统的类型论版本。Lean 不仅可以定义数学对象和表达依值类型论的数学断言，而且还可以作为一种语言来编写证明。</p>
+<p>本书的目的是教你在 Lean 中编写和验证证明，并且不太需要针对 Lean 的基础知识。首先，你将学习 Lean 所基于的逻辑系统，它是 <strong>依值类型论（Dependent type theory）</strong> 的一个版本，足以证明几乎所有传统的数学定理，并且有足够的表达能力自然地表示数学定理。更具体地说，Lean 是基于具有归纳类型（Inductive type）的构造演算（Calculus of Construction）系统的类型论版本。Lean 不仅可以定义数学对象和表达依值类型论的数学断言，而且还可以作为一种语言来编写证明。</p>
 <!--
 Because fully detailed axiomatic proofs are so complicated, the challenge of theorem proving is to have the computer
 fill in as many of the details as possible. You will learn various methods to support this in [dependent type
@@ -295,8 +295,8 @@ flexible forms of algebraic reasoning.
 -->
 <p>由于完全深入细节的公理证明十分复杂，定理证明的难点在于让计算机尽可能多地填补证明细节。
 你将通过<a href="dependent_type_theory.html">依值类型论</a>语言来学习各种方法实现自动证明，例如项重写，
-以及 Lean 中的项和表达式的自动简化方法。同样，<strong>繁饰（Elaboration）</strong>
-和**类型推断（Type inference）**的方法，可以用来支持灵活的代数推理。</p>
+以及 Lean 中的项和表达式的自动简化方法。同样， <strong>繁饰（Elaboration）</strong>
+和 <strong>类型推断（Type inference）</strong> 的方法，可以用来支持灵活的代数推理。</p>
 <!--
 Finally, you will learn about features that are specific to Lean, including the language you use to communicate
 with the system, and the mechanisms Lean offers for managing complex theories and data.
@@ -672,7 +672,7 @@ universes. For example, ``List α`` should make sense for any type
 ``α``, no matter which type universe ``α`` lives in. This explains the
 type signature of the function ``List``:
 -->
-<p>然而，有些操作需要在类型宇宙上具有<strong>多态（Polymorphic）</strong>。例如，<code>List α</code> 应该对任何类型的 <code>α</code> 都有意义，无论 <code>α</code> 存在于哪种类型的宇宙中。所以函数 <code>List</code> 有如下的类型：</p>
+<p>然而，有些操作需要在类型宇宙上具有 <strong>多态（Polymorphic）</strong> 。例如，<code>List α</code> 应该对任何类型的 <code>α</code> 都有意义，无论 <code>α</code> 存在于哪种类型的宇宙中。所以函数 <code>List</code> 有如下的类型：</p>
 <pre><code class="language-lean">#check List    -- List.{u} (α : Type u) : Type u
 </code></pre>
 <!--
@@ -737,7 +737,7 @@ any value ``x`` to the value ``t``.
 
 Here are some more examples
 -->
-<p>从另一个表达式创建函数的过程称为<strong>lambda 抽象</strong>。假设你有一个变量 <code>x : α</code> 和一个表达式 <code>t : β</code>，那么表达式 <code>fun (x : α) =&gt; t</code> 或者 <code>λ (x : α) =&gt; t</code> 是一个类型为 <code>α → β</code> 的对象。这个从 <code>α</code> 到 <code>β</code> 的函数把任意 <code>x</code> 映射到 <code>t</code>。</p>
+<p>从另一个表达式创建函数的过程称为 <strong>lambda 抽象</strong> 。假设你有一个变量 <code>x : α</code> 和一个表达式 <code>t : β</code>，那么表达式 <code>fun (x : α) =&gt; t</code> 或者 <code>λ (x : α) =&gt; t</code> 是一个类型为 <code>α → β</code> 的对象。这个从 <code>α</code> 到 <code>β</code> 的函数把任意 <code>x</code> 映射到 <code>t</code>。</p>
 <p>这有些例子：</p>
 <pre><code class="language-lean">#check fun x : Nat =&gt; fun y : Bool =&gt; if not y then x + 1 else x + 2
 #check fun (x : Nat) (y : Bool) =&gt; if not y then x + 1 else x + 2
@@ -808,7 +808,7 @@ renaming bound variables for clarity, notice the types of the
 following expressions:
 -->
 <p>这个表达式表示一个接受三个类型 <code>α</code>，<code>β</code> 和 <code>γ</code> 和两个函数 <code>g : β → γ</code> 和 <code>f : α → β</code>，并返回的 <code>g</code> 和 <code>f</code> 的复合的函数。(理解这个函数的类型需要理解依值积类型，下面将对此进行解释。)</p>
-<p>lambda表达式的一般形式是 <code>fun x : α =&gt; t</code>，其中变量 <code>x</code> 是一个<strong>绑定变量（Bound Variable）</strong>：它实际上是一个占位符，其「作用域」没有扩展到表达式 <code>t</code> 之外。例如，表达式 <code>fun (b : β) (x : α) =&gt; b</code> 中的变量 <code>b</code> 与前面声明的常量 <code>b</code> 没有任何关系。事实上，这个表达式表示的函数与 <code>fun (u : β) (z : α) =&gt; u</code> 是一样的。形式上，可以通过给绑定变量重命名来使形式相同的表达式被看作是<strong>alpha等价</strong>的，也就是被认为是「一样的」。Lean 认识这种等价性。</p>
+<p>lambda表达式的一般形式是 <code>fun x : α =&gt; t</code>，其中变量 <code>x</code> 是一个 <strong>绑定变量（Bound Variable）</strong> ：它实际上是一个占位符，其「作用域」没有扩展到表达式 <code>t</code> 之外。例如，表达式 <code>fun (b : β) (x : α) =&gt; b</code> 中的变量 <code>b</code> 与前面声明的常量 <code>b</code> 没有任何关系。事实上，这个表达式表示的函数与 <code>fun (u : β) (z : α) =&gt; u</code> 是一样的。形式上，可以通过给绑定变量重命名来使形式相同的表达式被看作是 <strong>alpha等价</strong> 的，也就是被认为是「一样的」。Lean 认识这种等价性。</p>
 <p>注意到项 <code>t : α → β</code> 应用到项 <code>s : α</code> 上导出了表达式 <code>t s : β</code>。回到前面的例子，为清晰起见给绑定变量重命名，注意以下表达式的类型:</p>
 <pre><code class="language-lean">#check (fun x : Nat =&gt; x) 1     -- Nat
 #check (fun x : Nat =&gt; true) 1  -- Bool
@@ -1560,7 +1560,7 @@ used to specify the desired types of the expressions ``id`` and
 ``List.nil``:
 -->
 <p>此处定义的 <code>ident</code> 和上面那个效果是一样的。</p>
-<p>Lean 有非常复杂的机制来实例化隐参数，我们将看到它们可以用来推断函数类型、谓词，甚至证明。实例化这些「洞」或「占位符」的过程通常被称为<strong>繁饰（Elaboration）</strong>。隐参数的存在意味着有时可能没有足够的信息来精确地确定表达式的含义。像 <code>id</code> 或 <code>List.nil</code> 这样的表达式被认为是「多态的」，因为它可以在不同的上下文中具有不同的含义。</p>
+<p>Lean 有非常复杂的机制来实例化隐参数，我们将看到它们可以用来推断函数类型、谓词，甚至证明。实例化这些「洞」或「占位符」的过程通常被称为 <strong>繁饰（Elaboration）</strong> 。隐参数的存在意味着有时可能没有足够的信息来精确地确定表达式的含义。像 <code>id</code> 或 <code>List.nil</code> 这样的表达式被认为是「多态的」，因为它可以在不同的上下文中具有不同的含义。</p>
 <p>可以通过写 <code>(e : T)</code> 来指定表达式 <code>e</code> 的类型 <code>T</code>。这就指导 Lean 的繁饰器在试图解决隐式参数时使用值 <code>T</code> 作为 <code>e</code> 的类型。在下面的第二个例子中，这种机制用于指定表达式 <code>id</code> 和 <code>List.nil</code> 所需的类型:</p>
 <pre><code class="language-lean">#check List.nil               -- List ?m
 #check id                     -- ?m → ?m
@@ -1839,7 +1839,7 @@ a theorem.
 -->
 <p>这与上一章中常量函数的定义完全相同，唯一的区别是参数是 <code>Prop</code> 的元素，而不是 <code>Type</code> 的元素。直观地说，我们对 <code>p → q → p</code> 的证明假设 <code>p</code> 和 <code>q</code> 为真，并使用第一个假设(平凡地)建立结论 <code>p</code> 为真。</p>
 <p>请注意，<code>theorem</code> 命令实际上是 <code>def</code> 命令的一个翻版：在命题和类型对应下，证明定理 <code>p → q → p</code> 实际上与定义关联类型的元素是一样的。对于内核类型检查器，这两者之间没有区别。</p>
-<p>然而，定义和定理之间有一些实用的区别。正常情况下，永远没有必要展开一个定理的「定义」；通过证明无关性，该定理的任何两个证明在定义上都是相等的。一旦一个定理的证明完成，通常我们只需要知道该证明的存在；证明是什么并不重要。鉴于这一事实，Lean 将证明标记为<em>不可还原</em>（irreducible），作为对解析器（更确切地说，是<strong>繁饰器</strong>）的提示，在处理文件时一般不需要展开它。事实上，Lean 通常能够并行地处理和检查证明，因为评估一个证明的正确性不需要知道另一个证明的细节。</p>
+<p>然而，定义和定理之间有一些实用的区别。正常情况下，永远没有必要展开一个定理的「定义」；通过证明无关性，该定理的任何两个证明在定义上都是相等的。一旦一个定理的证明完成，通常我们只需要知道该证明的存在；证明是什么并不重要。鉴于这一事实，Lean 将证明标记为<em>不可还原</em>（irreducible），作为对解析器（更确切地说，是 <strong>繁饰器</strong> ）的提示，在处理文件时一般不需要展开它。事实上，Lean 通常能够并行地处理和检查证明，因为评估一个证明的正确性不需要知道另一个证明的细节。</p>
 <p>和定义一样，<code>#print</code> 命令可以展示一个定理的证明。</p>
 <pre><code class="language-lean"><span class="boring">variable {p : Prop}
 </span><span class="boring">variable {q : Prop}
@@ -2502,7 +2502,7 @@ such contexts without relying on excluded middle.
 The full list of axioms that are used in Lean to support classical
 reasoning are discussed in [Axioms and Computation](./axioms_and_computation.md).
 -->
-<p>稍后我们将看到，构造逻辑中<strong>有</strong>某些情况允许「排中律」和「双重否定消除律」等，而 Lean 支持在这种情况下使用经典推理，而不依赖于排中律。</p>
+<p>稍后我们将看到，构造逻辑中 <strong>有</strong> 某些情况允许「排中律」和「双重否定消除律」等，而 Lean 支持在这种情况下使用经典推理，而不依赖于排中律。</p>
 <p>Lean 中使用的公理的完整列表见<a href="./axioms_and_computation.html">公理与计算</a>。</p>
 <!--
 Examples of Propositional Validities
@@ -3858,7 +3858,7 @@ instruction. But they can also be shorter and easier to
 write. Moreover, tactics offer a gateway to using Lean's automation,
 since automated procedures are themselves tactics.
 -->
-<p>在本章中，我们描述了另一种构建证明的方法，即使用<strong>策略（Tactic）</strong>。 一个证明项代表一个数学证明；策略是描述如何建立这样一个证明的命令或指令。你可以在数学证明开始时非正式地说：「为了证明条件的必要性，展开定义，应用前面的定理，并进行简化。」就像这些指令告诉读者如何构建证明一样，策略告诉 Lean 如何构建证明。它们自然而然地支持增量式的证明书写，在这种写作方式中，你将分解一个证明，并一步步地实现目标。</p>
+<p>在本章中，我们描述了另一种构建证明的方法，即使用 <strong>策略（Tactic）</strong> 。 一个证明项代表一个数学证明；策略是描述如何建立这样一个证明的命令或指令。你可以在数学证明开始时非正式地说：「为了证明条件的必要性，展开定义，应用前面的定理，并进行简化。」就像这些指令告诉读者如何构建证明一样，策略告诉 Lean 如何构建证明。它们自然而然地支持增量式的证明书写，在这种写作方式中，你将分解一个证明，并一步步地实现目标。</p>
 <blockquote>
 <p>译者注：tactic 和 strategy 都有策略的意思，其中 tactic 侧重细节，如排兵布阵，
 strategy 面向整体，如大规模战略。试译 strategy 为「要略」，与 tactic 相区分。</p>
@@ -4786,7 +4786,7 @@ Tactic Combinators
 *Tactic combinators* are operations that form new tactics from old
 ones. A sequencing combinator is already implicit in the ``by`` block:
 -->
-<p><strong>策略组合器</strong>是由旧策略形成新策略的操作。<code>by</code> 隐含了一个序列组合器：</p>
+<p><strong>策略组合器</strong> 是由旧策略形成新策略的操作。<code>by</code> 隐含了一个序列组合器：</p>
 <pre><code class="language-lean">example (p q : Prop) (hp : p) : p ∨ q :=
   by apply Or.inl; assumption
 </code></pre>
@@ -5600,7 +5600,7 @@ the root of the user's local project.
 Importing is transitive. In other words, if you import ``Foo`` and ``Foo`` imports ``Bar``,
 then you also have access to the contents of ``Bar``, and do not need to import it explicitly.
 -->
-<p>导入文件 <code>Bar/Baz/Blah.olean</code>，其中的描述是相对于Lean<strong>搜索路径</strong>解释的。关于如何确定搜索路径的信息可以在<a href="https://lean-lang.org/documentation/">文档</a>中找到。默认情况下，它包括标准库目录，以及（在某些情况下）用户的本地项目的根目录。</p>
+<p>导入文件 <code>Bar/Baz/Blah.olean</code>，其中的描述是相对于Lean <strong>搜索路径</strong> 解释的。关于如何确定搜索路径的信息可以在<a href="https://lean-lang.org/documentation/">文档</a>中找到。默认情况下，它包括标准库目录，以及（在某些情况下）用户的本地项目的根目录。</p>
 <p>导入是传递性的。换句话说，如果你导入了 <code>Foo</code>，并且 <code>Foo</code> 导入了 <code>Bar</code>，那么你也可以访问 <code>Bar</code> 的内容，而不需要明确导入它。</p>
 <!--
 More on Sections
@@ -5646,7 +5646,7 @@ automatically. Similarly, Lean detects the occurrence of ``x`` in
 Note that ``double`` does *not* have ``y`` as argument. Variables are only
 included in declarations where they are actually used.
 -->
-<p><code>double</code> 的定义不需要声明 <code>x</code> 作为参数；Lean 检测到这种依赖关系并自动插入。同样，Lean 检测到 <code>x</code> 在 <code>t1</code> 和 <code>t2</code> 中的出现，也会自动插入。注意，double<strong>没有</strong><code>y</code> 作为参数。变量只包括在实际使用的声明中。</p>
+<p><code>double</code> 的定义不需要声明 <code>x</code> 作为参数；Lean 检测到这种依赖关系并自动插入。同样，Lean 检测到 <code>x</code> 在 <code>t1</code> 和 <code>t2</code> 中的出现，也会自动插入。注意，double <strong>没有</strong> <code>y</code> 作为参数。变量只包括在实际使用的声明中。</p>
 <!--
 More on Namespaces
 ------------------
@@ -5661,7 +5661,7 @@ definition and theorem until ``end foo`` is encountered. The command
 ``open foo`` then creates temporary *aliases* to definitions and
 theorems that begin with prefix ``foo``.
 -->
-<p>在 Lean 中，标识符是由层次化的<em>名称</em>给出的，如 <code>Foo.Bar.baz</code>。我们在<a href="./dependent_type_theory.html#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">命名空间</a>一节中看到，Lean 提供了处理分层名称的机制。命令 <code>namespace foo</code> 导致 <code>foo</code> 被添加到每个定义和定理的名称中，直到遇到 <code>end foo</code>。命令 <code>open foo</code> 然后为以 <code>foo</code> 开头的定义和定理创建临时的<strong>别名</strong>。</p>
+<p>在 Lean 中，标识符是由层次化的<em>名称</em>给出的，如 <code>Foo.Bar.baz</code>。我们在<a href="./dependent_type_theory.html#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">命名空间</a>一节中看到，Lean 提供了处理分层名称的机制。命令 <code>namespace foo</code> 导致 <code>foo</code> 被添加到每个定义和定理的名称中，直到遇到 <code>end foo</code>。命令 <code>open foo</code> 然后为以 <code>foo</code> 开头的定义和定理创建临时的 <strong>别名</strong> 。</p>
 <pre><code class="language-lean">namespace Foo
 def bar : Nat := 1
 end Foo
@@ -5748,7 +5748,7 @@ creates aliases for only the identifiers listed. The command
 <!--
 creates aliases for everything in the ``Nat`` namespace *except* the identifiers listed.
 -->
-<p>给 <code>Nat</code> 命名空间中<strong>除了</strong>被列出的标识符都创建了别名。命令</p>
+<p>给 <code>Nat</code> 命名空间中 <strong>除了</strong> 被列出的标识符都创建了别名。命令</p>
 <pre><code class="language-lean">open Nat renaming mul → times, add → plus
 #eval plus (times 2 2) 3  -- 7
 </code></pre>
@@ -5888,7 +5888,7 @@ this pattern: options can *only* be set locally, which is to say,
 their scope is always restricted to the current section or current
 file.
 -->
-<p>在下面的<a href="interacting_with_lean.html#%E7%AC%A6%E5%8F%B7">符号</a>一节中，我们将讨论 Lean 定义符号的机制，并看到它们也支持 <code>local</code> 修饰符。然而，在<a href="interacting_with_lean.html#%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9">设置选项</a>一节中，我们将讨论 Lean 设置选项的机制，它并<strong>不</strong>遵循这种模式：选项<strong>只能</strong>在局部设置，也就是说，它们的范围总是限制在当前小节或当前文件中。</p>
+<p>在下面的<a href="interacting_with_lean.html#%E7%AC%A6%E5%8F%B7">符号</a>一节中，我们将讨论 Lean 定义符号的机制，并看到它们也支持 <code>local</code> 修饰符。然而，在<a href="interacting_with_lean.html#%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9">设置选项</a>一节中，我们将讨论 Lean 设置选项的机制，它并 <strong>不</strong> 遵循这种模式：选项 <strong>只能</strong> 在局部设置，也就是说，它们的范围总是限制在当前小节或当前文件中。</p>
 <!--
 More on Implicit Arguments
 --------------------------
@@ -6106,7 +6106,7 @@ has precedence one greater than the notation itself.  In contrast,
 operand, so `a ^ b ^ c` *can* be parsed as `a ^ (b ^ c)`.  Note that
 if we used `notation` directly to introduce an infix notation like
 -->
-<p>事实证明，第一个代码块中的所有命令实际上都是命令<strong>宏</strong>，翻译成更通用的 <code>notation</code> 命令。我们将在下面学习如何编写这种宏。 <code>notation</code> 命令不接受单一的记号，而是接受一个混合的记号序列和有优先级的命名项占位符，这些占位符可以在<code>=&gt;</code>的右侧被引用，并将被在该位置解析的相应项所取代。 优先级为 <code>p</code> 的占位符在该处只接受优先级至少为 <code>p</code> 的记号。因此，字符串<code>a + b + c</code>不能被解析为等同于<code>a + (b + c)</code>，因为 <code>infixl</code> 符号的右侧操作数的优先级比该符号本身大。 相反，<code>infixr</code> 重用了符号右侧操作数的优先级，所以<code>a ^ b ^ c</code> <em>可以</em>被解析为<code>a ^ (b ^ c)</code>。 注意，如果我们直接使用 <code>notation</code> 来引入一个 infix 符号，如</p>
+<p>事实证明，第一个代码块中的所有命令实际上都是命令 <strong>宏</strong> ，翻译成更通用的 <code>notation</code> 命令。我们将在下面学习如何编写这种宏。 <code>notation</code> 命令不接受单一的记号，而是接受一个混合的记号序列和有优先级的命名项占位符，这些占位符可以在<code>=&gt;</code>的右侧被引用，并将被在该位置解析的相应项所取代。 优先级为 <code>p</code> 的占位符在该处只接受优先级至少为 <code>p</code> 的记号。因此，字符串<code>a + b + c</code>不能被解析为等同于<code>a + (b + c)</code>，因为 <code>infixl</code> 符号的右侧操作数的优先级比该符号本身大。 相反，<code>infixr</code> 重用了符号右侧操作数的优先级，所以<code>a ^ b ^ c</code> <em>可以</em>被解析为<code>a ^ (b ^ c)</code>。 注意，如果我们直接使用 <code>notation</code> 来引入一个 infix 符号，如</p>
 <pre><code class="language-lean"><span class="boring">set_option quotPrecheck false
 </span>notation:65 lhs:65 &quot; ~ &quot; rhs:65 =&gt; wobble lhs rhs
 </code></pre>
@@ -6156,7 +6156,7 @@ embeds the natural numbers in the integers, meaning that we can view
 any natural number as an integer, when needed. Lean has mechanisms to
 detect and insert *coercions* of this sort.
 -->
-<p>在 Lean 中，自然数的类型 <code>Nat</code>，与整数的类型 <code>Int</code> 不同。但是有一个函数 <code>Int.ofNat</code> 将自然数嵌入整数中，这意味着我们可以在需要时将任何自然数视为整数。Lean 有机制来检测和插入这种<strong>强制转换</strong>。</p>
+<p>在 Lean 中，自然数的类型 <code>Nat</code>，与整数的类型 <code>Int</code> 不同。但是有一个函数 <code>Int.ofNat</code> 将自然数嵌入整数中，这意味着我们可以在需要时将任何自然数视为整数。Lean 有机制来检测和插入这种 <strong>强制转换</strong> 。</p>
 <pre><code class="language-lean">variable (m n : Nat)
 variable (i j : Int)
 
@@ -6240,7 +6240,7 @@ to control its behavior. The syntax for doing so is as follows:
 <!--
 One very useful family of options controls the way Lean's *pretty- printer* displays terms. The following options take an input of true or false:
 -->
-<p>有一系列非常有用的选项可以控制 Lean 的<strong>美观打印</strong>显示项的方式。下列选项的输入值为真或假：</p>
+<p>有一系列非常有用的选项可以控制 Lean 的 <strong>美观打印</strong> 显示项的方式。下列选项的输入值为真或假：</p>
 <pre><code>pp.explicit  : display implicit arguments
 pp.universes : display hidden universe parameters
 pp.notation  : display output using defined notations
@@ -6428,7 +6428,7 @@ Lean 4 supports a new feature called *auto bound implicit arguments*. It makes f
 any unbound identifier is automatically added as an implicit argument *if* it is a single lower case or
 greek letter. With this feature we can write `compose` as
 -->
-<p>Lean 4支持一个名为<strong>自动约束隐参数</strong>的新特性。它使诸如 <code>compose</code> 这样的函数在编写时更加方便。当 Lean 处理一个声明的头时，<strong>如果</strong>它是一个小写字母或希腊字母，任何未约束的标识符都会被自动添加为隐式参数。有了这个特性，我们可以把 <code>compose</code> 写成</p>
+<p>Lean 4支持一个名为 <strong>自动约束隐参数</strong> 的新特性。它使诸如 <code>compose</code> 这样的函数在编写时更加方便。当 Lean 处理一个声明的头时， <strong>如果</strong> 它是一个小写字母或希腊字母，任何未约束的标识符都会被自动添加为隐式参数。有了这个特性，我们可以把 <code>compose</code> 写成</p>
 <pre><code class="language-lean">def compose (g : β → γ) (f : α → β) (x : α) : γ :=
   g (f x)
 
@@ -6796,7 +6796,7 @@ elements beyond those they construct.
 We will use the `match` expression to define a function from ``Weekday``
 to the natural numbers:
 -->
-<p>把 <code>sunday</code>、<code>monday</code>、... 、<code>saturday</code> 看作是 <code>Weekday</code> 的不同元素，没有其他有区别的属性。消去规则 <code>Weekday.rec</code>，与 <code>Weekday</code> 类型及其构造子一起定义。它也被称为<strong>递归器（Recursor）</strong>，它是使该类型「归纳」的原因：它允许我们通过给每个构造子分配相应的值来定义<code>Weekday</code>的函数。直观的说，归纳类型是由构造子详尽地生成的，除了它们构造的元素外，没有其他元素。</p>
+<p>把 <code>sunday</code>、<code>monday</code>、... 、<code>saturday</code> 看作是 <code>Weekday</code> 的不同元素，没有其他有区别的属性。消去规则 <code>Weekday.rec</code>，与 <code>Weekday</code> 类型及其构造子一起定义。它也被称为 <strong>递归器（Recursor）</strong> ，它是使该类型「归纳」的原因：它允许我们通过给每个构造子分配相应的值来定义<code>Weekday</code>的函数。直观的说，归纳类型是由构造子详尽地生成的，除了它们构造的元素外，没有其他元素。</p>
 <p>我们将使用<code>match</code>表达式来定义一个从 <code>Weekday</code> 到自然数的函数：</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday : Weekday
@@ -7146,7 +7146,7 @@ input is of the form ``inr b``, in which case we have to specify an
 output value in terms of ``b``.
 -->
 <p>参数<code>motive</code>是用来指定你要构造的对象的类型，它是一个依值的函数，<code>_</code>是被自动推断出的类型，此处即<code>Bool × Nat</code>。函数<code>cond</code>是一个布尔条件：<code>cond b t1 t2</code>，如果<code>b</code>为真，返回<code>t1</code>，否则返回<code>t2</code>。函数<code>prod_example</code>接收一个由布尔值<code>b</code>和一个数字<code>n</code>组成的对，并根据<code>b</code>为真或假返回<code>2 * n</code>或<code>2 * n + 1</code>。</p>
-<p>相比之下，求和类型有<em>两个</em>构造子<code>inl</code>和<code>inr</code>（表示「从左引入」和「从右引入」），每个都需要<strong>一个</strong>（显式的）参数。要在 <code>Sum α β</code> 上定义一个函数，我们必须处理两种情况：要么输入的形式是 <code>inl a</code>，由此必须依据 <code>a</code> 指定一个输出值；要么输入的形式是 <code>inr b</code>，由此必须依据 <code>b</code> 指定一个输出值。</p>
+<p>相比之下，求和类型有<em>两个</em>构造子<code>inl</code>和<code>inr</code>（表示「从左引入」和「从右引入」），每个都需要 <strong>一个</strong> （显式的）参数。要在 <code>Sum α β</code> 上定义一个函数，我们必须处理两种情况：要么输入的形式是 <code>inl a</code>，由此必须依据 <code>a</code> 指定一个输出值；要么输入的形式是 <code>inr b</code>，由此必须依据 <code>b</code> 指定一个输出值。</p>
 <pre><code class="language-lean">def sum_example (s : Sum Nat Nat) : Nat :=
   Sum.casesOn (motive := fun _ =&gt; Nat) s
     (fun n =&gt; 2 * n)
@@ -7466,7 +7466,7 @@ Finally, the ``t : Nat``, is the input to the function. It is also known as the 
 
 The `Nat.recOn` is similar to `Nat.rec` but the major premise occurs before the minor premises.
 -->
-<p>隐参数 <code>motive</code>，是被定义的函数的陪域。在类型论中，通常说 <code>motive</code> 是消去/递归的<strong>目的</strong>，因为它描述了我们希望构建的对象类型。接下来的两个参数指定了如何计算零和后继的情况，如上所述。它们也被称为小前提 <code>minor premises</code>。最后，<code>t : Nat</code>，是函数的输入。它也被称为大前提 <code>major premise</code>。</p>
+<p>隐参数 <code>motive</code>，是被定义的函数的陪域。在类型论中，通常说 <code>motive</code> 是消去/递归的 <strong>目的</strong> ，因为它描述了我们希望构建的对象类型。接下来的两个参数指定了如何计算零和后继的情况，如上所述。它们也被称为小前提 <code>minor premises</code>。最后，<code>t : Nat</code>，是函数的输入。它也被称为大前提 <code>major premise</code>。</p>
 <p><code>Nat.recOn</code>与<code>Nat.rec</code>类似，但大前提发生在小前提之前。</p>
 <pre><code>@Nat.recOn :
   {motive : Nat → Sort u}
@@ -8119,7 +8119,7 @@ indexed *family* of inductive types, in a manner we now describe.
 An inductive family is an indexed family of types defined by a
 simultaneous induction of the following form:
 -->
-<p>我们几乎已经完成了对Lean 所接受的全部归纳定义的描述。到目前为止，你已经看到Lean 允许你用任何数量的递归构造子引入归纳类型。事实上，一个归纳定义可以引入一个有索引的归纳类型的<strong>族（Family）</strong>。</p>
+<p>我们几乎已经完成了对Lean 所接受的全部归纳定义的描述。到目前为止，你已经看到Lean 允许你用任何数量的递归构造子引入归纳类型。事实上，一个归纳定义可以引入一个有索引的归纳类型的 <strong>族（Family）</strong> 。</p>
 <p>归纳族是一个由以下形式的同时归纳定义的有索引的家族：</p>
 <pre><code>inductive foo : ... → Sort u where
   | constructor₁ : ... → foo ...
@@ -8136,7 +8136,7 @@ constructs an element of some member of the family. One example is the
 definition of ``Vector α n``, the type of vectors of elements of ``α``
 of length ``n``:
 -->
-<p>与普通的归纳定义不同，它构造了某个 <code>Sort u</code> 的元素，更一般的版本构造了一个函数 <code>... → Sort u</code>，其中 <code>...</code> 表示一串参数类型，也称为<strong>索引</strong>。然后，每个构造子都会构造一个家族中某个成员的元素。一个例子是 <code>Vector α n</code> 的定义，它是长度为 <code>n</code> 的 <code>α</code> 元素的向量的类型：</p>
+<p>与普通的归纳定义不同，它构造了某个 <code>Sort u</code> 的元素，更一般的版本构造了一个函数 <code>... → Sort u</code>，其中 <code>...</code> 表示一串参数类型，也称为 <strong>索引</strong> 。然后，每个构造子都会构造一个家族中某个成员的元素。一个例子是 <code>Vector α n</code> 的定义，它是长度为 <code>n</code> 的 <code>α</code> 元素的向量的类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Vector (α : Type u) : Nat → Type u where
   | nil  : Vector α 0
@@ -8274,8 +8274,8 @@ to. Each constructor ``c`` in the definition of a family ``C`` of
 inductive types is of the form
 -->
 <p>我们已经通过例子描述了归纳类型和它们的语法。本节为那些对公理基础感兴趣的人提供额外的信息。</p>
-<p>我们已经看到，归纳类型的构造子需要<strong>参量</strong>（parameter，与argument都有「参数」译义，为区别此处译为参量）——即在整个归纳构造过程中保持固定的参数——和<strong>索引</strong>，即同时在构造中的类型类的参数。每个构造子都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。要求是，如果后者存在，它只<strong>严格正向</strong>出现。这意味着它所出现的构造子的任何参数都是一个依值箭头类型，其中定义中的归纳类型只作为结果类型出现，其中的索引是以常量和先前的参数来给出。</p>
-<p>既然一个归纳类型对于某些 <code>u</code> 来说存在于在 <code>Sort u</code> 中，那么我们有理由问<strong>哪些</strong>宇宙层次的 <code>u</code> 可以被实例化。归纳类型类 <code>C</code> 的定义中的每个构造子 <code>c</code> 的形式为</p>
+<p>我们已经看到，归纳类型的构造子需要 <strong>参量</strong> （parameter，与argument都有「参数」译义，为区别此处译为参量）——即在整个归纳构造过程中保持固定的参数——和 <strong>索引</strong> ，即同时在构造中的类型类的参数。每个构造子都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。要求是，如果后者存在，它只 <strong>严格正向</strong> 出现。这意味着它所出现的构造子的任何参数都是一个依值箭头类型，其中定义中的归纳类型只作为结果类型出现，其中的索引是以常量和先前的参数来给出。</p>
+<p>既然一个归纳类型对于某些 <code>u</code> 来说存在于在 <code>Sort u</code> 中，那么我们有理由问 <strong>哪些</strong> 宇宙层次的 <code>u</code> 可以被实例化。归纳类型类 <code>C</code> 的定义中的每个构造子 <code>c</code> 的形式为</p>
 <pre><code>  c : (a : α) → (b : β[a]) → C a p[a,b]
 </code></pre>
 <!--
@@ -8353,7 +8353,7 @@ that we can define two (or more) inductive types at the same time,
 where each one refers to the other(s).
 -->
 <p>我们现在考虑两个经常有用的归纳类型的推广，Lean 通过「编译」它们来支持上述更原始的归纳类型种类。换句话说，Lean 解析了更一般的定义，在此基础上定义了辅助的归纳类型，然后使用辅助类型来定义我们真正想要的类型。下一章将介绍Lean 的方程编译器，它需要有效地利用这些类型。尽管如此，在这里描述这些声明还是有意义的，因为它们是普通归纳定义的直接变形。</p>
-<p>首先，Lean 支持<strong>相互定义</strong>的归纳类型。这个想法是，我们可以同时定义两个（或更多）归纳类型，其中每个类型都指代其他类型。</p>
+<p>首先，Lean 支持 <strong>相互定义</strong> 的归纳类型。这个想法是，我们可以同时定义两个（或更多）归纳类型，其中每个类型都指代其他类型。</p>
 <pre><code class="language-lean">mutual
   inductive Even : Nat → Prop where
     | even_zero : Even 0
@@ -8414,7 +8414,7 @@ constructor. Lean then automatically builds the
 isomorphism between ``TreeList α`` and ``List (Tree α)`` in its kernel,
 and defines the constructors for ``Tree`` in terms of the isomorphism.
 -->
-<p>这就是所谓的<strong>嵌套</strong>归纳类型。它不属于上一节给出的归纳类型的严格规范，因为<code>Tree</code>不是严格意义上出现在<code>mk</code>的参数中，而是嵌套在<code>List</code>类型构造子中。然后Lean 在其内核中自动建立了 <code>TreeList α</code> 和 <code>List (Tree α)</code> 之间的同构关系，并根据同构关系定义了 <code>Tree</code> 的构造子。</p>
+<p>这就是所谓的 <strong>嵌套</strong> 归纳类型。它不属于上一节给出的归纳类型的严格规范，因为<code>Tree</code>不是严格意义上出现在<code>mk</code>的参数中，而是嵌套在<code>List</code>类型构造子中。然后Lean 在其内核中自动建立了 <code>TreeList α</code> 和 <code>List (Tree α)</code> 之间的同构关系，并根据同构关系定义了 <code>Tree</code> 的构造子。</p>
 <!--
 Exercises
 ---------
@@ -8737,7 +8737,7 @@ the ``tail`` function using pattern matching. The argument ``α : Type u``
 is a parameter and occurs before the colon to indicate it does not participate in the pattern matching.
 Lean also allows parameters to occur after ``:``, but it cannot pattern match on them.
 -->
-<p>还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为<strong>通配符模式</strong>，或<strong>匿名变量</strong>。与方程编译器之外的用法不同，这里的下划线<strong>并不</strong>表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。<a href="induction_and_recursion.html#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E9%87%8D%E5%8F%A0%E6%A8%A1%E5%BC%8F">通配符和重叠模式</a>一节阐述了通配符的概念，而<a href="induction_and_recursion.html#%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F">不可访问模式</a>一节解释了你如何在模式中使用隐参数。</p>
+<p>还要注意的是，当定义中不需要一个参数的值时，你可以用下划线来代替。这个下划线被称为 <strong>通配符模式</strong> ，或 <strong>匿名变量</strong> 。与方程编译器之外的用法不同，这里的下划线 <strong>并不</strong> 表示一个隐参数。使用下划线表示通配符在函数式编程语言中是很常见的，所以 Lean 采用了这种符号。<a href="induction_and_recursion.html#%E9%80%9A%E9%85%8D%E7%AC%A6%E5%92%8C%E9%87%8D%E5%8F%A0%E6%A8%A1%E5%BC%8F">通配符和重叠模式</a>一节阐述了通配符的概念，而<a href="induction_and_recursion.html#%E4%B8%8D%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F">不可访问模式</a>一节解释了你如何在模式中使用隐参数。</p>
 <p>正如<a href="./inductive_types.html">归纳类型</a>一章中所描述的，归纳数据类型可以依赖于参数。下面的例子使用模式匹配定义了 <code>tail</code> 函数。参数 <code>α : Type</code> 是一个参数，出现在冒号之前，表示它不参与模式匹配。Lean 也允许参数出现在 <code>:</code> 之后，但它不能对其进行模式匹配。</p>
 <pre><code class="language-lean">def tail1 {α : Type u} : List α → List α
   | []      =&gt; []
@@ -8759,7 +8759,7 @@ considered in the [Section Dependent Pattern Matching](#dependent-pattern-matchi
 
 -->
 <p>尽管参数 <code>α</code> 在这两个例子中的位置不同，但在这两种情况下，它的处理方式是一样的，即它不参与情况分割。</p>
-<p>Lean 也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种<strong>依值模式匹配</strong>的例子在<a href="induction_and_recursion.html#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中考虑。</p>
+<p>Lean 也可以处理更复杂的模式匹配形式，其中从属类型的参数对各种情况构成了额外的约束。这种 <strong>依值模式匹配</strong> 的例子在<a href="induction_and_recursion.html#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中考虑。</p>
 <!--
 Wildcards and Overlapping Patterns
 ----------------------------------
@@ -8831,7 +8831,7 @@ The idea is to return ``some a`` for the provided patterns, and use
 both approaches.
 -->
 <p>你可以检查这个 <code>foo</code> 的定义是否满足与之前相同的定义特性。</p>
-<p>一些函数式编程语言支持<strong>不完整的模式</strong>。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 <code>Inhabited</code> （含元素的）类型类来模拟任意值的方法。粗略的说，<code>Inhabited α</code> 的一个元素是对 <code>α</code> 拥有一个元素的见证；在<a href="./type_classes.html">类型类</a>中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素 <code>arbitrary</code>，任何含元素的类型。</p>
+<p>一些函数式编程语言支持 <strong>不完整的模式</strong> 。在这些语言中，解释器对不完整的情况产生一个异常或返回一个任意的值。我们可以使用 <code>Inhabited</code> （含元素的）类型类来模拟任意值的方法。粗略的说，<code>Inhabited α</code> 的一个元素是对 <code>α</code> 拥有一个元素的见证；在<a href="./type_classes.html">类型类</a>中，我们将看到 Lean 可以被告知合适的基础类型是含元素的，并且可以自动推断出其他构造类型是含元素的。在此基础上，标准库提供了一个任意元素 <code>arbitrary</code>，任何含元素的类型。</p>
 <p>我们还可以使用类型<code>Option α</code>来模拟不完整的模式。我们的想法是对所提供的模式返回<code>some a</code>，而对不完整的情况使用<code>none</code>。下面的例子演示了这两种方法。</p>
 <!--
 ```lean
@@ -8960,7 +8960,7 @@ recursion from the last chapter, now defined using the equation
 compiler:
 -->
 <p>这里 <code>(a : α)</code> 是一个参数序列，<code>(b : β)</code> 是进行模式匹配的参数序列，<code>γ</code> 是任何类型，它可以取决于 <code>a</code> 和 <code>b </code>。每一行应该包含相同数量的模式，对应于 <code>β</code> 的每个元素。正如我们所看到的，模式要么是一个变量，要么是应用于其他模式的构造子，要么是一个正规化为该形式的表达式（其中非构造子用 <code>[matchPattern]</code> 属性标记）。构造子的出现会提示情况拆分，构造子的参数由给定的变量表示。在<a href="induction_and_recursion.html#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节中，我们将看到有时有必要在模式中包含明确的项，这些项需要进行表达式类型检查，尽管它们在模式匹配中没有起到作用。由于这个原因，这些被称为「不可访问的模式」。但是在<a href="induction_and_recursion.html#%E4%BE%9D%E5%80%BC%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D">依值模式匹配</a>一节之前，我们将不需要使用这种不可访问的模式。</p>
-<p>正如我们在上一节所看到的，项 <code>t₁,...,tₙ</code> 可以利用任何一个参数 <code>a</code>，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 <code>foo</code> 的递归调用。在本节中，我们将处理<strong>结构性递归</strong>，其中 <code>foo</code> 的参数出现在 <code>:=</code> 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。</p>
+<p>正如我们在上一节所看到的，项 <code>t₁,...,tₙ</code> 可以利用任何一个参数 <code>a</code>，以及在相应模式中引入的任何一个变量。使得递归和归纳成为可能的是，它们也可以涉及对 <code>foo</code> 的递归调用。在本节中，我们将处理 <strong>结构性递归</strong> ，其中 <code>foo</code> 的参数出现在 <code>:=</code> 的右侧，是左侧模式的子项。我们的想法是，它们在结构上更小，因此在归纳类型中出现在更早的阶段。下面是上一章的一些结构递归的例子，现在用方程编译器来定义。</p>
 <pre><code class="language-lean">open Nat
 def add : Nat → Nat → Nat
   | m, zero   =&gt; m
@@ -9079,7 +9079,7 @@ type. You can get a sense of how it works by looking at the types of
 ``Nat.below`` and ``Nat.brecOn``:
 -->
 <p>在这两种情况下，Lean 都会生成辅助函数 <code>fibFast.loop</code>。</p>
-<p>为了处理结构递归，方程编译器使用<strong>值过程</strong>（course-of-values）递归，使用由每个归纳定义类型自动生成的常量 <code>below</code> 和 <code>brecOn</code>。你可以通过查看 <code>Nat.below</code> 和 <code>Nat.brecOn</code> 的类型来了解它是如何工作的。</p>
+<p>为了处理结构递归，方程编译器使用 <strong>值过程</strong> （course-of-values）递归，使用由每个归纳定义类型自动生成的常量 <code>below</code> 和 <code>brecOn</code>。你可以通过查看 <code>Nat.below</code> 和 <code>Nat.brecOn</code> 的类型来了解它是如何工作的。</p>
 <pre><code class="language-lean">variable (C : Nat → Type u)
 
 #check (@Nat.below C : Nat → Type u)
@@ -9933,7 +9933,7 @@ to have to include these extra discriminants. Thus, Lean 4
 implements a new feature, *discriminant refinement*, which includes
 these extra discriminants automatically for us.
 -->
-<p>如前所述，参数 <code>{n : Nat}</code> 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性，<strong>判别精炼（discriminant refinement）</strong>，它自动为我们包含了这些额外的判别。</p>
+<p>如前所述，参数 <code>{n : Nat}</code> 是模式匹配的一部分，因为它不能在整个定义中保持固定。在以前的 Lean 版本中，用户经常发现必须包含这些额外的判别符是很麻烦的。因此，Lean 4 实现了一个新特性， <strong>判别精炼（discriminant refinement）</strong> ，它自动为我们包含了这些额外的判别。</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
 </span><span class="boring">  | nil  : Vector α 0
 </span><span class="boring">  | cons : α → {n : Nat} → Vector α n → Vector α (n+1)
@@ -10323,7 +10323,7 @@ previously defined ones. Moreover, Lean provides convenient notation
 for defining instances of a given structure.
 -->
 <p>我们已经看到Lean 的基本系统包括归纳类型。此外，显然仅基于类型宇宙、依赖箭头类型和归纳类型，就有可能构建一个坚实的数学大厦；其他的一切都是由此而来。Lean 标准库包含许多归纳类型的实例(例如，<code>Nat</code>，<code>Prod</code>，<code>List</code>)，甚至逻辑连接词也是使用归纳类型定义的。</p>
-<p>回忆一下，只包含一个构造子的非递归归纳类型被称为<strong>结构体（structure）<strong>或</strong>记录（record）</strong>。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体 <code>S</code> 时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code> 的每个实例并检索存储在其字段中的值。<code>prod.pr1</code> 和 <code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
+<p>回忆一下，只包含一个构造子的非递归归纳类型被称为 <strong>结构体（structure）</strong> 或 <strong>记录（record）</strong> 。乘积类型是一种结构体，依值乘积(Sigma)类型也是如此。一般来说，每当我们定义一个结构体 <code>S</code> 时，我们通常定义<em>投影</em>（projection）函数来「析构」（destruct）<code>S</code> 的每个实例并检索存储在其字段中的值。<code>prod.pr1</code> 和 <code>prod.pr2</code>，分别返回乘积对中的第一个和第二个元素的函数，就是这种投影的例子。</p>
 <p>在编写程序或形式化数学时，定义包含许多字段的结构体是很常见的。Lean 中可用 <code>structure</code> 命令实现此过程。当我们使用这个命令定义一个结构体时，Lean 会自动生成所有的投影函数。<code>structure</code> 命令还允许我们根据以前定义的结构体定义新的结构体。此外，Lean 为定义给定结构体的实例提供了方便的符号。</p>
 <!--
 Declaring Structures
@@ -10548,7 +10548,7 @@ visited in order until Lean finds one that contains the unspecified
 field. Lean raises an error if any of the field names remain
 unspecified after all the objects are visited.
 -->
-<p>**记录更新（Record update）**是另一个常见的操作，相当于通过修改旧记录中的一个或多个字段的值来创建一个新的记录对象。通过在字段赋值之前添加注释 <code>s with</code>，Lean 允许您指定记录规范中未赋值的字段，该字段应从之前定义的结构对象 <code>s</code> 中获取。如果提供了多个记录对象，那么将按顺序访问它们，直到Lean 找到一个包含未指定字段的记录对象。如果在访问了所有对象之后仍未指定任何字段名，Lean 将引发错误。</p>
+<p><strong>记录更新（Record update）</strong> 是另一个常见的操作，相当于通过修改旧记录中的一个或多个字段的值来创建一个新的记录对象。通过在字段赋值之前添加注释 <code>s with</code>，Lean 允许您指定记录规范中未赋值的字段，该字段应从之前定义的结构对象 <code>s</code> 中获取。如果提供了多个记录对象，那么将按顺序访问它们，直到Lean 找到一个包含未指定字段的记录对象。如果在访问了所有对象之后仍未指定任何字段名，Lean 将引发错误。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -10584,7 +10584,7 @@ Inheritance
 We can *extend* existing structures by adding new fields. This feature
 allows us to simulate a form of *inheritance*.
 -->
-<p>我们可以通过添加新的字段来<strong>扩展</strong>现有的结构体。这个特性允许我们模拟一种形式的<strong>继承</strong>。</p>
+<p>我们可以通过添加新的字段来 <strong>扩展</strong> 现有的结构体。这个特性允许我们模拟一种形式的 <strong>继承</strong> 。</p>
 <pre><code class="language-lean">structure Point (α : Type u) where
   x : α
   y : α
@@ -10634,8 +10634,8 @@ function simply took the type-specific implementation of addition as an argument
 and then called that implementation on the remaining arguments. For example,
 suppose we declare a structure in Lean to hold implementations of addition.
 -->
-<p>将 <strong>类型类（Type Class）</strong> 作为一种原则性方法引入，
-是为了在函数式编程语言中支持 <strong>特设多态（Ad-hoc Polymorphism）</strong>。
+<p>将  <strong>类型类（Type Class）</strong>  作为一种原则性方法引入，
+是为了在函数式编程语言中支持  <strong>特设多态（Ad-hoc Polymorphism）</strong> 。
 我们首先观察到，如果函数简单地接受特定类型的实现作为参数，
 然后在其余参数上调用该实现，则很容易实现特设多态函数（如加法）。
 例如，假设我们在 Lean 中声明一个结构体来保存加法的实现：</p>
@@ -10704,7 +10704,7 @@ i.e. that it should be synthesized using typeclass resolution. This version of
 `add` is the Lean analogue of the Haskell term `add :: Add a => a -> a -> a`.
 Similarly, we can register instances by:
 -->
-<p>其中方括号表示类型为 <code>Add a</code> 的参数是 <strong>实例隐式的</strong>，
+<p>其中方括号表示类型为 <code>Add a</code> 的参数是  <strong>实例隐式的</strong> ，
 即，它应该使用类型类求解合成。这个版本的 <code>add</code> 是 Haskell 项
 <code>add :: Add a =&gt; a -&gt; a -&gt; a</code> 的 Lean 类比。
 同样，我们可以通过以下方式注册实例：</p>
@@ -10796,7 +10796,7 @@ Let us start with the first step of the program above, declaring an appropriate 
 例如，我们可能希望当 <code>xs</code> 为 <code>List a</code> 类型时 <code>head xs</code> 表达式的类型为 <code>a</code>。
 类似地，许多定理在类型不为空的附加假设下成立。例如，如果 <code>a</code> 是一个类型，
 则 <code>exists x : a, x = x</code> 仅在 <code>a</code> 不为空时为真。标准库定义了一个类型类
-<code>Inhabited</code>，它能够让类型类推理来推断**可居（Inhabited）**类型类的「默认」元素。
+<code>Inhabited</code>，它能够让类型类推理来推断 <strong>可居（Inhabited）</strong> 类型类的「默认」元素。
 让我们从上述程序的第一步开始，声明一个适当的类：</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class Inhabited (a : Type u) where
@@ -11007,20 +11007,20 @@ You can input the raw natural number `2` using the macro `nat_lit 2`.
 <p>Lean 会将项 <code>(2 : Nat)</code> 和 <code>(2 : Rational)</code> 分别繁饰（Elaborate）为：
 <code>OfNat.ofNat Nat 2 (instOfNatNat 2)</code> 和
 <code>OfNat.ofNat Rational 2 (instOfNatRational 2)</code>。
-我们将繁饰的项中出现的数字 <code>2</code> 称为 <strong>原始</strong> 自然数。
+我们将繁饰的项中出现的数字 <code>2</code> 称为  <strong>原始</strong>  自然数。
 你可以使用宏 <code>nat_lit 2</code> 来输入原始自然数 <code>2</code>。</p>
 <pre><code class="language-lean">#check nat_lit 2  -- Nat
 </code></pre>
 <!--
 Raw natural numbers are *not* polymorphic.
 -->
-<p>原始自然数 <strong>不是</strong> 多态的。</p>
+<p>原始自然数  <strong>不是</strong>  多态的。</p>
 <!--
 The `OfNat` instance is parametric on the numeral. So, you can define instances for particular numerals.
 The second argument is often a variable as in the example above, or a *raw* natural number.
 -->
 <p><code>OfNat</code> 实例对数值进行了参数化，因此你可以定义特定数字的实例。
-第二个参数通常是变量，如上例所示，或者是一个 <strong>原始</strong> 自然数。</p>
+第二个参数通常是变量，如上例所示，或者是一个  <strong>原始</strong>  自然数。</p>
 <pre><code class="language-lean">class Monoid (α : Type u) where
   unit : α
   op   : α → α → α
@@ -11052,10 +11052,10 @@ Lean will start type class synthesizer even when these parameters have missing p
 In the following example, we use output parameters to define a *heterogeneous* polymorphic
 multiplication.
 -->
-<p>你可以将类型类 <code>Inhabited</code> 的参数视为类型类合成器的 <strong>输入</strong> 值。
+<p>你可以将类型类 <code>Inhabited</code> 的参数视为类型类合成器的  <strong>输入</strong>  值。
 当类型类有多个参数时，可以将其中一些标记为输出参数。
 即使这些参数有缺失部分，Lean 也会开始类型类合成。
-在下面的示例中，我们使用输出参数定义一个 <strong>异质（Heterogeneous）</strong> 的多态乘法。</p>
+在下面的示例中，我们使用输出参数定义一个  <strong>异质（Heterogeneous）</strong>  的多态乘法。</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
   hMul : α → β → γ
@@ -11146,7 +11146,7 @@ this kind of situation. We can achieve exactly that using *default instances*.
 -->
 <p>实例 <code>HMul</code> 没有被 Lean 合成，因为没有提供 <code>y</code> 的类型。
 然而，在这种情况下，自然应该认为 <code>y</code> 和 <code>x</code> 的类型应该相同。
-我们可以使用 <strong>默认实例</strong> 来实现这一点。</p>
+我们可以使用  <strong>默认实例</strong>  来实现这一点。</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
   hMul : α → β → γ
@@ -11436,7 +11436,7 @@ the integers. Moreover, decidability is preserved under propositional
 connectives:
 -->
 <p>如果没有经典逻辑，我们就不能证明每个命题都是可判定的。
-但我们可以证明<strong>某些</strong>命题是可判定的。
+但我们可以证明 <strong>某些</strong> 命题是可判定的。
 例如，我们可以证明基本运算（比如自然数和整数上的等式和比较）的可判定性。
 此外，命题连词下的可判定性被保留了下来：</p>
 <pre><code class="language-lean">#check @instDecidableAnd
@@ -11667,7 +11667,7 @@ when defining an instance. The following example illustrates how this
 is done:
 -->
 <p>你可以按对类型类实例进行尝试的顺序来更改这些实例，
-方法是为它们分配一个<strong>优先级</strong>。在声明实例时，
+方法是为它们分配一个 <strong>优先级</strong> 。在声明实例时，
 它将被分配一个默认优先级值。在定义实例时，你可以分配其他的优先级。
 以下示例说明了如何执行此操作：</p>
 <pre><code class="language-lean">class Foo where
@@ -11800,7 +11800,7 @@ Lean will also chain (non-dependent) coercions as necessary. Actually, the type 
 <!--
 Let us now consider the second kind of coercion. By the *class of sorts*, we mean the collection of universes ``Type u``. A coercion of the second kind is of the form:
 -->
-<p>现在我们来考查第二种强制转换。**种类类（Class of Sort）**是指宇宙 <code>Type u</code> 的集合。
+<p>现在我们来考查第二种强制转换。 <strong>种类类（Class of Sort）</strong> 是指宇宙 <code>Type u</code> 的集合。
 第二种强制转换的形式如下：</p>
 <pre><code>    c : (x1 : A1) → ... → (xn : An) → F x1 ... xn → Type u
 </code></pre>
@@ -11860,7 +11860,7 @@ It is the coercion that makes it possible to write ``(a b c : S)``. Note that, w
 <!--
 By the *class of function types*, we mean the collection of Pi types ``(z : B) → C``. The third kind of coercion has the form:
 -->
-<p><strong>函数类型的类</strong>，是指 Π 类型集合 <code>(z : B) → C</code>。第三种强制转换形式为：</p>
+<p><strong>函数类型的类</strong> ，是指 Π 类型集合 <code>(z : B) → C</code>。第三种强制转换形式为：</p>
 <pre><code>    c : (x1 : A1) → ... → (xn : An) → (y : F x1 ... xn) → (z : B) → C
 </code></pre>
 <!--
@@ -12236,8 +12236,8 @@ wish to use the classical law of the excluded middle to reason about
 computation. This also blocks evaluation in the kernel, but it is
 compatible with compilation to bytecode.
 -->
-<p>Lean 的标准库定义了一个公理：<strong>命题外延性（Propositional Extensionality）</strong>。
-以及一个**商（Qoutient）**结构，它蕴含了函数外延性的公理。
+<p>Lean 的标准库定义了一个公理： <strong>命题外延性（Propositional Extensionality）</strong> 。
+以及一个 <strong>商（Qoutient）</strong> 结构，它蕴含了函数外延性的公理。
 这些扩展被用来发展如集合与有限集这些理论。我们在后面会看到，
 这些定理的使用会阻碍 Lean 内核中的求值，因此 <code>Nat</code> 类型的封闭项不再求值为数值。
 但是 Lean 在对其虚拟机器求值器进行字节码编译时会擦除类型和命题信息，
@@ -12326,7 +12326,7 @@ computational reading.
 <p>然而在 19 世纪，数学论证复杂性的提升推动了数学家发展新的推理风格，
 抑制算法信息并调用数学对象，从而抽象掉了对象被表征的细节。
 目标是在不陷入繁重的计算细节的情况下获得强大的「概念」理解，
-但这可能导致数学定理在直接计算的解读上干脆就是 <strong>错误</strong> 的。</p>
+但这可能导致数学定理在直接计算的解读上干脆就是  <strong>错误</strong>  的。</p>
 <!--
 There is still fairly uniform agreement today that computation is
 important to mathematics. But there are different views as to how best
@@ -12344,9 +12344,9 @@ mathematical reasoning.
 -->
 <p>今天数学界仍在相当普遍地同意计算对于数学很重要。
 但对于如何以最佳方式解决计算问题有不同的看法。
-从<strong>构造性</strong>的角度来看，将数学与其计算根源分开是一个错误；
+从 <strong>构造性</strong> 的角度来看，将数学与其计算根源分开是一个错误；
 每条有意义的数学定理都应具有直接的计算解释。
-从<strong>经典的</strong>角度来看，保持关注点的分离更有成效：
+从 <strong>经典的</strong> 角度来看，保持关注点的分离更有成效：
 我们可以使用一种语言和方法体系编写计算机程序，
 同时保持使用非构造性理论和方法对其进行推理的自由。
 Lean 旨在支持这两种方法。库的核心部分以构造性方式开发，
@@ -12631,8 +12631,8 @@ that permit reductions for casts involving function extensionality,
 quotients, and more. But the solutions are not so clear cut, and the
 rules of Lean's underlying calculus do not sanction such reductions.
 -->
-<p>当前的研究计划包括关于<strong>观测类型论（Observational Type Theory）</strong>
-和**立方类型论（Cubical Type Theory）**的研究，旨在扩展类型理论，
+<p>当前的研究计划包括关于 <strong>观测类型论（Observational Type Theory）</strong>
+和 <strong>立方类型论（Cubical Type Theory）</strong> 的研究，旨在扩展类型理论，
 以便允许对涉及函数外延、商，等等的强制转换进行归约。
 但解决方案并不明朗，而 Lean 的底层演算法则对此类归约也不支持。</p>
 <!--
@@ -12811,7 +12811,7 @@ was an equivalence relation to start with, then for all ``a`` and
 <p>当然，当 <code>r</code> 是等价关系时，商集的结构是最常用的。给定上面的 <code>r</code>，
 如果我们根据法则 <code>r' a b</code> 当且仅当 <code>Quot.mk r a = Quot.mk r b</code> 定义 <code>r'</code>，
 那么显然 <code>r'</code> 就是一个等价关系。事实上，<code>r'</code> 是函数 <code>a ↦ quot.mk r a</code>
-的<strong>核（Kernel）</strong>。公理 <code>Quot.sound</code> 表明 <code>r a b</code> 蕴含 <code>r' a b</code>。
+的 <strong>核（Kernel）</strong> 。公理 <code>Quot.sound</code> 表明 <code>r a b</code> 蕴含 <code>r' a b</code>。
 使用 <code>Quot.lift</code> 和 <code>Quot.ind</code>，我们可以证明 <code>r'</code> 是包含 <code>r</code> 的最小的等价关系，
 意思就是，如果 <code>r''</code> 是包含 <code>r</code> 的任意等价关系，则 <code>r' a b</code> 蕴含 <code>r'' a b</code>。
 特别地，如果 <code>r</code> 开始就是一个等价关系，那么对任意 <code>a</code> 和 <code>b</code>，我们都有
@@ -12821,7 +12821,7 @@ To support this common use case, the standard library defines the
 notion of a *setoid*, which is simply a type with an associated
 equivalence relation:
 -->
-<p>为支持这种通用使用案例，标准库定义了 <strong>广集（Setoid）</strong> 的概念，
+<p>为支持这种通用使用案例，标准库定义了  <strong>广集（Setoid）</strong>  的概念，
 它只是一个带有与之关联的等价关系的类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>class Setoid (α : Sort u) where
@@ -12900,7 +12900,7 @@ of a type ``α`` as a quotient of the type ``α × α``. First, we define
 the relevant equivalence relation:
 -->
 <p>回顾一下标准库中的 <code>α × β</code> 代表类型 <code>α</code> 和 <code>β</code> 的笛卡尔积。
-为了说明商的用法，让我们将类型为 <code>α</code> 的元素构成的**无序对（Unordered Pair）**的类型定义为
+为了说明商的用法，让我们将类型为 <code>α</code> 的元素构成的 <strong>无序对（Unordered Pair）</strong> 的类型定义为
 <code>α × α</code> 类型的商。首先，我们定义相关的等价关系：</p>
 <pre><code class="language-lean">private def eqv (p₁ p₂ : α × α) : Prop :=
   (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
@@ -13202,7 +13202,7 @@ the principle of *indefinite description*, which can be expressed with
 subtypes as follows:
 -->
 <p>这可以在 <code>Classical</code> 命名空间中找到，所以定理的全名是 <code>Classical.choice</code>。
-选择公理等价于**非限定摹状词（Indefinite Description）**原理，可通过子类型表示如下：</p>
+选择公理等价于 <strong>非限定摹状词（Indefinite Description）</strong> 原理，可通过子类型表示如下：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">universe u
 </span><span class="boring">axiom choice {α : Sort u} : Nonempty α → α
@@ -13262,7 +13262,7 @@ satisfying ``p`` if there is one. The data component of this
 definition is conventionally known as *Hilbert's epsilon function*:
 -->
 <p>假设环境类型 <code>α</code> 非空，<code>strongIndefiniteDescription p</code> 产生一个满足 <code>p</code>
-的元素 <code>α</code>（如果存在的话）。该定义的数据部分通常被称为 <strong>希尔伯特 ε 函数</strong>：</p>
+的元素 <code>α</code>（如果存在的话）。该定义的数据部分通常被称为  <strong>希尔伯特 ε 函数</strong> ：</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span><span class="boring">universe u
 </span>#check (@epsilon :

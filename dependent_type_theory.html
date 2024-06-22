@@ -475,7 +475,7 @@ universes. For example, ``List α`` should make sense for any type
 ``α``, no matter which type universe ``α`` lives in. This explains the
 type signature of the function ``List``:
 -->
-<p>然而，有些操作需要在类型宇宙上具有<strong>多态（Polymorphic）</strong>。例如，<code>List α</code> 应该对任何类型的 <code>α</code> 都有意义，无论 <code>α</code> 存在于哪种类型的宇宙中。所以函数 <code>List</code> 有如下的类型：</p>
+<p>然而，有些操作需要在类型宇宙上具有 <strong>多态（Polymorphic）</strong> 。例如，<code>List α</code> 应该对任何类型的 <code>α</code> 都有意义，无论 <code>α</code> 存在于哪种类型的宇宙中。所以函数 <code>List</code> 有如下的类型：</p>
 <pre><code class="language-lean">#check List    -- List.{u} (α : Type u) : Type u
 </code></pre>
 <!--
@@ -540,7 +540,7 @@ any value ``x`` to the value ``t``.
 
 Here are some more examples
 -->
-<p>从另一个表达式创建函数的过程称为<strong>lambda 抽象</strong>。假设你有一个变量 <code>x : α</code> 和一个表达式 <code>t : β</code>，那么表达式 <code>fun (x : α) =&gt; t</code> 或者 <code>λ (x : α) =&gt; t</code> 是一个类型为 <code>α → β</code> 的对象。这个从 <code>α</code> 到 <code>β</code> 的函数把任意 <code>x</code> 映射到 <code>t</code>。</p>
+<p>从另一个表达式创建函数的过程称为 <strong>lambda 抽象</strong> 。假设你有一个变量 <code>x : α</code> 和一个表达式 <code>t : β</code>，那么表达式 <code>fun (x : α) =&gt; t</code> 或者 <code>λ (x : α) =&gt; t</code> 是一个类型为 <code>α → β</code> 的对象。这个从 <code>α</code> 到 <code>β</code> 的函数把任意 <code>x</code> 映射到 <code>t</code>。</p>
 <p>这有些例子：</p>
 <pre><code class="language-lean">#check fun x : Nat =&gt; fun y : Bool =&gt; if not y then x + 1 else x + 2
 #check fun (x : Nat) (y : Bool) =&gt; if not y then x + 1 else x + 2
@@ -611,7 +611,7 @@ renaming bound variables for clarity, notice the types of the
 following expressions:
 -->
 <p>这个表达式表示一个接受三个类型 <code>α</code>，<code>β</code> 和 <code>γ</code> 和两个函数 <code>g : β → γ</code> 和 <code>f : α → β</code>，并返回的 <code>g</code> 和 <code>f</code> 的复合的函数。(理解这个函数的类型需要理解依值积类型，下面将对此进行解释。)</p>
-<p>lambda表达式的一般形式是 <code>fun x : α =&gt; t</code>，其中变量 <code>x</code> 是一个<strong>绑定变量（Bound Variable）</strong>：它实际上是一个占位符，其「作用域」没有扩展到表达式 <code>t</code> 之外。例如，表达式 <code>fun (b : β) (x : α) =&gt; b</code> 中的变量 <code>b</code> 与前面声明的常量 <code>b</code> 没有任何关系。事实上，这个表达式表示的函数与 <code>fun (u : β) (z : α) =&gt; u</code> 是一样的。形式上，可以通过给绑定变量重命名来使形式相同的表达式被看作是<strong>alpha等价</strong>的，也就是被认为是「一样的」。Lean 认识这种等价性。</p>
+<p>lambda表达式的一般形式是 <code>fun x : α =&gt; t</code>，其中变量 <code>x</code> 是一个 <strong>绑定变量（Bound Variable）</strong> ：它实际上是一个占位符，其「作用域」没有扩展到表达式 <code>t</code> 之外。例如，表达式 <code>fun (b : β) (x : α) =&gt; b</code> 中的变量 <code>b</code> 与前面声明的常量 <code>b</code> 没有任何关系。事实上，这个表达式表示的函数与 <code>fun (u : β) (z : α) =&gt; u</code> 是一样的。形式上，可以通过给绑定变量重命名来使形式相同的表达式被看作是 <strong>alpha等价</strong> 的，也就是被认为是「一样的」。Lean 认识这种等价性。</p>
 <p>注意到项 <code>t : α → β</code> 应用到项 <code>s : α</code> 上导出了表达式 <code>t s : β</code>。回到前面的例子，为清晰起见给绑定变量重命名，注意以下表达式的类型:</p>
 <pre><code class="language-lean">#check (fun x : Nat =&gt; x) 1     -- Nat
 #check (fun x : Nat =&gt; true) 1  -- Bool
@@ -1363,7 +1363,7 @@ used to specify the desired types of the expressions ``id`` and
 ``List.nil``:
 -->
 <p>此处定义的 <code>ident</code> 和上面那个效果是一样的。</p>
-<p>Lean 有非常复杂的机制来实例化隐参数，我们将看到它们可以用来推断函数类型、谓词，甚至证明。实例化这些「洞」或「占位符」的过程通常被称为<strong>繁饰（Elaboration）</strong>。隐参数的存在意味着有时可能没有足够的信息来精确地确定表达式的含义。像 <code>id</code> 或 <code>List.nil</code> 这样的表达式被认为是「多态的」，因为它可以在不同的上下文中具有不同的含义。</p>
+<p>Lean 有非常复杂的机制来实例化隐参数，我们将看到它们可以用来推断函数类型、谓词，甚至证明。实例化这些「洞」或「占位符」的过程通常被称为 <strong>繁饰（Elaboration）</strong> 。隐参数的存在意味着有时可能没有足够的信息来精确地确定表达式的含义。像 <code>id</code> 或 <code>List.nil</code> 这样的表达式被认为是「多态的」，因为它可以在不同的上下文中具有不同的含义。</p>
 <p>可以通过写 <code>(e : T)</code> 来指定表达式 <code>e</code> 的类型 <code>T</code>。这就指导 Lean 的繁饰器在试图解决隐式参数时使用值 <code>T</code> 作为 <code>e</code> 的类型。在下面的第二个例子中，这种机制用于指定表达式 <code>id</code> 和 <code>List.nil</code> 所需的类型:</p>
 <pre><code class="language-lean">#check List.nil               -- List ?m
 #check id                     -- ?m → ?m
