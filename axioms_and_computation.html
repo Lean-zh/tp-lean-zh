@@ -142,11 +142,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="axioms-and-computation"><a class="header" href="#axioms-and-computation">Axioms and Computation</a></h1>
-<p>We have seen that the version of the Calculus of Constructions that
+                        <!--
+Axioms and Computation
+======================
+-->
+<h1 id="公理与计算"><a class="header" href="#公理与计算">公理与计算</a></h1>
+<!--
+We have seen that the version of the Calculus of Constructions that
 has been implemented in Lean includes dependent function types,
 inductive types, and a hierarchy of universes that starts with an
-impredicative, proof-irrelevant <code>Prop</code> at the bottom. In this
+impredicative, proof-irrelevant ``Prop`` at the bottom. In this
 chapter, we consider ways of extending the CIC with additional axioms
 and rules. Extending a foundational system in such a way is often
 convenient; it can make it possible to prove more theorems, as well as
@@ -155,124 +160,234 @@ otherwise. But there can be negative consequences of adding additional
 axioms, consequences which may go beyond concerns about their
 correctness. In particular, the use of axioms bears on the
 computational content of definitions and theorems, in ways we will
-explore here.</p>
-<p>Lean is designed to support both computational and classical
-reasoning. Users that are so inclined can stick to a &quot;computationally
-pure&quot; fragment, which guarantees that closed expressions in the system
+explore here.
+-->
+<p>我们已经看到 Lean 中实现的构造演算的版本包括有：依值函数类型、
+归纳类型以及一个以非直谓的与证明无关（Proof-Irrelevant）的 <code>Prop</code> 为底层的宇宙层级。
+在本章中，我们要探讨使用附加公理和规则扩展 CIC 的方法。
+用这种方式扩展一个基础系统通常很方便；它可以使得证明更多的定理成为可能，
+并使得证明原本可以被证明的定理变得更容易。但是，添加附加公理可能会产生负面后果，
+这些后果可能超出了人们对它们的正确性的担忧。
+特别是，公理的使用会以我们将在本文中探究的方式，对定义和定理的计算内容产生影响。</p>
+<!--
+Lean is designed to support both computational and classical
+reasoning. Users that are so inclined can stick to a "computationally
+pure" fragment, which guarantees that closed expressions in the system
 evaluate to canonical normal forms. In particular, any closed
-computationally pure expression of type <code>Nat</code>, for example, will
-reduce to a numeral.</p>
-<p>Lean's standard library defines an additional axiom, propositional
+computationally pure expression of type ``Nat``, for example, will
+reduce to a numeral.
+-->
+<p>Lean 被设计为支持计算推理和经典推理。有此需求的用户可坚持使用「计算上纯粹」的片段，
+它可以确保系统中的封闭表达式会求值为标准范式。具体说来，任何类型为 <code>Nat</code>
+的封闭计算上纯粹表达式最终都将归约为一个数值。</p>
+<!--
+Lean's standard library defines an additional axiom, propositional
 extensionality, and a quotient construction which in turn implies the
 principle of function extensionality. These extensions are used, for
 example, to develop theories of sets and finite sets. We will see
 below that using these theorems can block evaluation in Lean's kernel,
-so that closed terms of type <code>Nat</code> no longer evaluate to numerals. But
+so that closed terms of type ``Nat`` no longer evaluate to numerals. But
 Lean erases types and propositional information when compiling
 definitions to bytecode for its virtual machine evaluator, and since
 these axioms only add new propositions, they are compatible with that
 computational interpretation. Even computationally inclined users may
 wish to use the classical law of the excluded middle to reason about
 computation. This also blocks evaluation in the kernel, but it is
-compatible with compilation to bytecode.</p>
-<p>The standard library also defines a choice principle that is entirely
+compatible with compilation to bytecode.
+-->
+<p>Lean 的标准库定义了一个公理：<strong>命题外延性（Propositional Extensionality）</strong>。
+以及一个**商（Qoutient）**结构，它蕴含了函数外延性的公理。
+这些扩展被用来发展如集合与有限集这些理论。我们在后面会看到，
+这些定理的使用会阻碍 Lean 内核中的求值，因此 <code>Nat</code> 类型的封闭项不再求值为数值。
+但是 Lean 在对其虚拟机器求值器进行字节码编译时会擦除类型和命题信息，
+并且由于这些公理只增加了新的命题，它们与这种计算解释是相容的。
+即使是倾向于可计算性的用户也可能希望使用排中律来推理计算。
+这也会阻碍内核中的求值，但它与字节码编译是兼容的。</p>
+<!--
+The standard library also defines a choice principle that is entirely
 antithetical to a computational interpretation, since it magically
-produces &quot;data&quot; from a proposition asserting its existence. Its use is
+produces "data" from a proposition asserting its existence. Its use is
 essential to some classical constructions, and users can import it
 when needed. But expressions that use this construction to produce
 data do not have computational content, and in Lean we are required to
-mark such definitions as <code>noncomputable</code> to flag that fact.</p>
-<p>Using a clever trick (known as Diaconescu's theorem), one can use
+mark such definitions as ``noncomputable`` to flag that fact.
+-->
+<p>标准函数库还定义了一个选择公理（Choice Principle），该公理与计算诠释完全相反，
+因为它神奇地根据断言自身存在的命题产生「数据」。
+它对于一些经典结构来说是必不可少的，用户可以在需要时导入它。
+但使用此构造来产生数据的表达式将不存在计算内容，
+在 Lean 中我们需要将此类定义标记为 <code>noncomputable</code>（不可计算的）以表明该事实。</p>
+<!--
+Using a clever trick (known as Diaconescu's theorem), one can use
 propositional extensionality, function extensionality, and choice to
 derive the law of the excluded middle. As noted above, however, use of
 the law of the excluded middle is still compatible with bytecode
 compilation and code extraction, as are other classical principles, as
-long as they are not used to manufacture data.</p>
-<p>To summarize, then, on top of the underlying framework of universes,
+long as they are not used to manufacture data.
+-->
+<p>使用一个巧妙的技巧（称为狄阿科涅斯库定理），人们可以使用命题外延性、
+函数外延性和选择公理来导出排中律。然而，如上所述，使用排中律仍然兼容字节码编译和代码提取，
+就像其他经典公理一样，只要它们不被用来制造数据。</p>
+<!--
+To summarize, then, on top of the underlying framework of universes,
 dependent function types, and inductive types, the standard library
-adds three additional components:</p>
+adds three additional components:
+
+- the axiom of propositional extensionality
+- a quotient construction, which implies function extensionality
+- a choice principle, which produces data from an existential proposition.
+-->
+<p>总而言之，在我们的宇宙类型，依值函数类型和归纳类型的底层框架之上，
+标准库增加了三个附加元素：</p>
 <ul>
-<li>the axiom of propositional extensionality</li>
-<li>a quotient construction, which implies function extensionality</li>
-<li>a choice principle, which produces data from an existential proposition.</li>
+<li>命题外延性公理</li>
+<li>蕴含了函数外延性的的商构造</li>
+<li>选择公理，它从存在命题中产生数据。</li>
 </ul>
-<p>The first two of these block normalization within Lean, but are
+<!--
+The first two of these block normalization within Lean, but are
 compatible with bytecode evaluation, whereas the third is not amenable
 to computational interpretation. We will spell out the details more
-precisely below.</p>
-<h2 id="historical-and-philosophical-context"><a class="header" href="#historical-and-philosophical-context">Historical and Philosophical Context</a></h2>
-<p>For most of its history, mathematics was essentially computational:
+precisely below.
+-->
+<p>前两项在 Lean 中对这些块标准化，但与字节码求值兼容，
+而第三项不适合可计算性解释。我们将在下面更精确地说明这些细节。</p>
+<!--
+Historical and Philosophical Context
+------------------------------------
+-->
+<h2 id="历史与哲学背景"><a class="header" href="#历史与哲学背景">历史与哲学背景</a></h2>
+<!--
+For most of its history, mathematics was essentially computational:
 geometry dealt with constructions of geometric objects, algebra was
 concerned with algorithmic solutions to systems of equations, and
 analysis provided means to compute the future behavior of systems
 evolving over time. From the proof of a theorem to the effect that
-&quot;for every <code>x</code>, there is a <code>y</code> such that ...&quot;, it was generally
-straightforward to extract an algorithm to compute such a <code>y</code> given
-<code>x</code>.</p>
-<p>In the nineteenth century, however, increases in the complexity of
+"for every ``x``, there is a ``y`` such that ...", it was generally
+straightforward to extract an algorithm to compute such a ``y`` given
+``x``.
+-->
+<p>历史上大部分时候，数学主要是计算性的：几何处理涉及几何对象的构造，
+代数涉及方程组的算法解，分析提供了计算系统随时间演变的未来行为的方法。
+从定理的证明到「对于每个 <code>x</code>，都有一个 <code>y</code> 使得 ...」这一效果，
+通常可以提取一种算法来根据给定的 <code>x</code> 计算这样的的 <code>y</code>。</p>
+<!--
+In the nineteenth century, however, increases in the complexity of
 mathematical arguments pushed mathematicians to develop new styles of
 reasoning that suppress algorithmic information and invoke
 descriptions of mathematical objects that abstract away the details of
 how those objects are represented. The goal was to obtain a powerful
-&quot;conceptual&quot; understanding without getting bogged down in
+"conceptual" understanding without getting bogged down in
 computational details, but this had the effect of admitting
-mathematical theorems that are simply <em>false</em> on a direct
-computational reading.</p>
-<p>There is still fairly uniform agreement today that computation is
+mathematical theorems that are simply *false* on a direct
+computational reading.
+-->
+<p>然而在 19 世纪，数学论证复杂性的提升推动了数学家发展新的推理风格，
+抑制算法信息并调用数学对象，从而抽象掉了对象被表征的细节。
+目标是在不陷入繁重的计算细节的情况下获得强大的「概念」理解，
+但这可能导致数学定理在直接计算的解读上干脆就是 <strong>错误</strong> 的。</p>
+<!--
+There is still fairly uniform agreement today that computation is
 important to mathematics. But there are different views as to how best
-to address computational concerns. From a <em>constructive</em> point of
+to address computational concerns. From a *constructive* point of
 view, it is a mistake to separate mathematics from its computational
 roots; every meaningful mathematical theorem should have a direct
-computational interpretation. From a <em>classical</em> point of view, it is
+computational interpretation. From a *classical* point of view, it is
 more fruitful to maintain a separation of concerns: we can use one
 language and body of methods to write computer programs, while
 maintaining the freedom to use nonconstructive theories and methods
 to reason about them. Lean is designed to support both of these
 approaches. Core parts of the library are developed constructively,
 but the system also provides support for carrying out classical
-mathematical reasoning.</p>
-<p>Computationally, the purest part of dependent type theory avoids the
-use of <code>Prop</code> entirely. Inductive types and dependent function types
+mathematical reasoning.
+-->
+<p>今天数学界仍在相当普遍地同意计算对于数学很重要。
+但对于如何以最佳方式解决计算问题有不同的看法。
+从<strong>构造性</strong>的角度来看，将数学与其计算根源分开是一个错误；
+每条有意义的数学定理都应具有直接的计算解释。
+从<strong>经典的</strong>角度来看，保持关注点的分离更有成效：
+我们可以使用一种语言和方法体系编写计算机程序，
+同时保持使用非构造性理论和方法对其进行推理的自由。
+Lean 旨在支持这两种方法。库的核心部分以构造性方式开发，
+但该系统还提供了支持进行经典数学推理的支持。</p>
+<!--
+Computationally, the purest part of dependent type theory avoids the
+use of ``Prop`` entirely. Inductive types and dependent function types
 can be viewed as data types, and terms of these types can be
-&quot;evaluated&quot; by applying reduction rules until no more rules can be
+"evaluated" by applying reduction rules until no more rules can be
 applied. In principle, any closed term (that is, term with no free
-variables) of type <code>Nat</code> should evaluate to a numeral, <code>succ (... (succ zero)...)</code>.</p>
-<p>Introducing a proof-irrelevant <code>Prop</code> and marking theorems
+variables) of type ``Nat`` should evaluate to a numeral, ``succ
+(... (succ zero)...)``.
+-->
+<p>从计算的角度来看，依值类型论中最纯粹的部分完全避免使用 <code>Prop</code>。
+归纳类型和依值函数类型可以看作是数据类型，这些类型的项可以通过应用归约规则进行「求值」，
+直到不能再应用任何规则为止。原则上，类型为 <code>Nat</code> 的任何封闭项（即没有自由变量的项）
+都应求值为一个数值：<code>succ(... (succ zero)...)</code>。</p>
+<!--
+Introducing a proof-irrelevant ``Prop`` and marking theorems
 irreducible represents a first step towards separation of
-concerns. The intention is that elements of a type <code>p : Prop</code> should
+concerns. The intention is that elements of a type ``p : Prop`` should
 play no role in computation, and so the particular construction of a
-term <code>t : p</code> is &quot;irrelevant&quot; in that sense. One can still define
-computational objects that incorporate elements of type <code>Prop</code>; the
+term ``t : p`` is "irrelevant" in that sense. One can still define
+computational objects that incorporate elements of type ``Prop``; the
 point is that these elements can help us reason about the effects of
-the computation, but can be ignored when we extract &quot;code&quot; from the
-term. Elements of type <code>Prop</code> are not entirely innocuous,
-however. They include equations <code>s = t : α</code> for any type <code>α</code>, and
+the computation, but can be ignored when we extract "code" from the
+term. Elements of type ``Prop`` are not entirely innocuous,
+however. They include equations ``s = t : α`` for any type ``α``, and
 such equations can be used as casts, to type check terms. Below, we
 will see examples of how such casts can block computation in the
 system. However, computation is still possible under an evaluation
 scheme that erases propositional content, ignores intermediate typing
 constraints, and reduces terms until they reach a normal form. This is
-precisely what Lean's virtual machine does.</p>
-<p>Having adopted a proof-irrelevant <code>Prop</code>, one might consider it
+precisely what Lean's virtual machine does.
+-->
+<p>引入一个与证明无关的 <code>Prop</code> 并标记定理不可约表示了分离关注点的第一步。
+目的是类型为 <code>p : Prop</code> 的元素在计算中不应发挥任何作用，因此从这个意义上说，
+项 <code>t : p</code> 的特定构造是「无关的」。人们仍然可以定义包含类型为 <code>Prop</code>
+的元素的计算对象；关键是这些元素可以帮助我们推理计算的影响，
+但在我们从项中提取「代码」时可以忽略。但是，<code>Prop</code> 类型的元素并非完全无害。
+它们包括任何类型 <code>α</code> 的方程 <code>s = t : α</code>，并且此类方程可以作为强制转换使用，
+以对项进行类型检查。在后面，我们将看到此类强制转换是如何阻碍系统中的计算的示例。
+但是，在擦除命题内容、忽略中间定型约束并归约项，直到它们达到正规形式的求值方案下，
+它们仍然可以进行计算。这正是 Lean 的虚拟机所做的。</p>
+<!--
+Having adopted a proof-irrelevant ``Prop``, one might consider it
 legitimate to use, for example, the law of the excluded middle,
-<code>p ∨ ¬p</code>, where <code>p</code> is any proposition. Of course, this, too, can block
+``p ∨ ¬p``, where ``p`` is any proposition. Of course, this, too, can block
 computation according to the rules of CIC, but it does not block
 bytecode evaluation, as described above. It is only the choice
-principles discussed in :numref:<code>choice</code> that completely erase the
+principles discussed in :numref:`choice` that completely erase the
 distinction between the proof-irrelevant and data-relevant parts of
-the theory.</p>
-<h2 id="propositional-extensionality"><a class="header" href="#propositional-extensionality">Propositional Extensionality</a></h2>
-<p>Propositional extensionality is the following axiom:</p>
+the theory.
+-->
+<p>在通过了证明无关的 <code>Prop</code> 之后，可以认为使用排中律 <code>p ∨ ¬p</code> 是合法的，
+其中 <code>p</code>是任何命题。当然，这也可能根据 CIC 的规则阻止计算，
+但它不会阻止字节码求值，如上所述。仅在 :numref:<code>choice</code>
+中讨论过的选择原则才能完全消除理论中与证明无关的部分和与数据相关部分之间的区别。</p>
+<!--
+Propositional Extensionality
+----------------------------
+-->
+<h2 id="命题外延性"><a class="header" href="#命题外延性">命题外延性</a></h2>
+<!--
+Propositional extensionality is the following axiom:
+-->
+<p>命题外延性公理如下：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>axiom propext {a b : Prop} : (a ↔ b) → a = b
 <span class="boring">end Hidden
 </span></code></pre>
-<p>It asserts that when two propositions imply one another, they are
+<!--
+It asserts that when two propositions imply one another, they are
 actually equal. This is consistent with set-theoretic interpretations
-in which any element <code>a : Prop</code> is either empty or the singleton set
-<code>{*}</code>, for some distinguished element <code>*</code>. The axiom has the
+in which any element ``a : Prop`` is either empty or the singleton set
+``{*}``, for some distinguished element ``*``. The axiom has the
 effect that equivalent propositions can be substituted for one another
-in any context:</p>
+in any context:
+-->
+<p>它断言当两个命题互相蕴含时，二者实质相等。这与集合论的解释一致，
+即对于某个特定的元素 <code>*</code>，其中任何元素 <code>a : Prop</code> 要么为空集，
+要么是单元素集 <code>{*}</code>。此公理具有这样的效果，即等价的命题可以在任何语境中彼此替换：</p>
 <pre><code class="language-lean">theorem thm₁ (a b c d e : Prop) (h : a ↔ b) : (c ∧ a ∧ d → e) ↔ (c ∧ b ∧ d → e) :=
   propext h ▸ Iff.refl _
 
@@ -305,7 +420,11 @@ axioms`` command to display the axioms it depends on.
     #print axioms thm₂  -- propext
     -- END
 -->
-<h2 id="function-extensionality"><a class="header" href="#function-extensionality">Function Extensionality</a></h2>
+<!--
+Function Extensionality
+-----------------------
+-->
+<h2 id="函数外延性"><a class="header" href="#函数外延性">函数外延性</a></h2>
 <p>Similar to propositional extensionality, function extensionality
 asserts that any two functions of type <code>(x : α) → β x</code> that agree on
 all their inputs are equal.</p>
@@ -319,8 +438,9 @@ all their inputs are equal.</p>
 
 #print funext
 </code></pre>
-<p>From a classical, set-theoretic perspective, this is exactly what it
-means for two functions to be equal. This is known as an &quot;extensional&quot;
+<!--
+From a classical, set-theoretic perspective, this is exactly what it
+means for two functions to be equal. This is known as an "extensional"
 view of functions. From a constructive perspective, however, it is
 sometimes more natural to think of functions as algorithms, or
 computer programs, that are presented in some explicit way. It is
@@ -329,15 +449,32 @@ answer for every input despite the fact that they are syntactically
 quite different. In much the same way, you might want to maintain a
 view of functions that does not force you to identify two functions
 that have the same input / output behavior. This is known as an
-&quot;intensional&quot; view of functions.</p>
-<p>In fact, function extensionality follows from the existence of
+"intensional" view of functions.
+-->
+<p>从经典的集合论角度来看，这正是两个函数相等的确切含义。
+它被称作函数的「外延性（Extensional）」视角。然而，从构造主义的角度来看，
+有时把函数看作算法，或者以某种明确的方式给出的计算机程序要更加自然。
+肯定存在这样的情况：两个计算机程序对每个输入都计算出相同的答案，
+尽管它们在语法上非常不同。与此类似，你可能想要维护一种函数的视角，
+它不会强迫你将具有相同输入/输出行为的两个函数认定为同样的。
+这被称为函数的「内涵（Intensional）」视角。</p>
+<!--
+In fact, function extensionality follows from the existence of
 quotients, which we describe in the next section. In the Lean standard
-library, therefore, <code>funext</code> is thus
-<a href="https://github.com/leanprover/lean4/blob/master/src/Init/Core.lean">proved from the quotient construction</a>.</p>
-<p>Suppose that for <code>α : Type</code> we define the <code>Set α := α → Prop</code> to
-denote the type of subsets of <code>α</code>, essentially identifying subsets
-with predicates. By combining <code>funext</code> and <code>propext</code>, we obtain an
-extensional theory of such sets:</p>
+library, therefore, ``funext`` is thus
+[proved from the quotient construction](https://github.com/leanprover/lean4/blob/master/src/Init/Core.lean).
+-->
+<p>实际上，函数外延性来自于商的存在，我们将在下一节中进行描述。
+因此，在 Lean 标准库中，<code>funext</code> 通过<a href="https://github.com/leanprover/lean4/blob/master/src/Init/Core.lean">商的构造来证明</a>。</p>
+<!--
+Suppose that for ``α : Type`` we define the ``Set α := α → Prop`` to
+denote the type of subsets of ``α``, essentially identifying subsets
+with predicates. By combining ``funext`` and ``propext``, we obtain an
+extensional theory of such sets:
+-->
+<p>假设对于 <code>α : Type</code>，我们定义 <code>Set α := α → Prop</code> 来表达 <code>α</code> 子集的类型，
+本质上是用谓词来表示子集。通过组合 <code>funext</code> 和 <code>propext</code>，
+我们得到了一个这样的集合的外延性理论：</p>
 <pre><code class="language-lean">def Set (α : Type u) := α → Prop
 
 namespace Set
@@ -351,8 +488,11 @@ theorem setext {a b : Set α} (h : ∀ x, x ∈ a ↔ x ∈ b) : a = b :=
 
 end Set
 </code></pre>
-<p>We can then proceed to define the empty set and set intersection, for
-example, and prove set identities:</p>
+<!--
+We can then proceed to define the empty set and set intersection, for
+example, and prove set identities:
+-->
+<p>我们可以继续定义例如空集和交集，并证明的集合恒等性：</p>
 <pre><code class="language-lean"><span class="boring">def Set (α : Type u) := α → Prop
 </span><span class="boring">namespace Set
 </span><span class="boring">def mem (x : α) (a : Set α) := a x
@@ -389,8 +529,11 @@ theorem inter.comm (a b : Set α) : a ∩ b = b ∩ a :=
     (fun ⟨h₁, h₂⟩ =&gt; ⟨h₂, h₁⟩)
 <span class="boring">end Set
 </span></code></pre>
-<p>The following is an example of how function extensionality blocks
-computation inside the Lean kernel.</p>
+<!--
+The following is an example of how function extensionality blocks
+computation inside the Lean kernel.
+-->
+<p>以下是一个函数外延性阻碍了 Lean 核心中计算的示例：</p>
 <pre><code class="language-lean">def f (x : Nat) := x
 def g (x : Nat) := 0 + x
 
@@ -400,24 +543,34 @@ theorem f_eq_g : f = g :=
 def val : Nat :=
   Eq.recOn (motive := fun _ _ =&gt; Nat) f_eq_g 0
 
--- does not reduce to 0
+-- 无法归约为 0
 #reduce val
 
--- evaluates to 0
+-- 求值为 0
 #eval val
 </code></pre>
-<p>First, we show that the two functions <code>f</code> and <code>g</code> are equal using
-function extensionality, and then we cast <code>0</code> of type <code>Nat</code> by
-replacing <code>f</code> by <code>g</code> in the type. Of course, the cast is
-vacuous, because <code>Nat</code> does not depend on <code>f</code>. But that is enough
+<!--
+First, we show that the two functions ``f`` and ``g`` are equal using
+function extensionality, and then we cast ``0`` of type ``Nat`` by
+replacing ``f`` by ``g`` in the type. Of course, the cast is
+vacuous, because ``Nat`` does not depend on ``f``. But that is enough
 to do the damage: under the computational rules of the system, we now
-have a closed term of <code>Nat</code> that does not reduce to a numeral. In this
-case, we may be tempted to reduce the expression to <code>0</code>. But in
+have a closed term of ``Nat`` that does not reduce to a numeral. In this
+case, we may be tempted to reduce the expression to ``0``. But in
 nontrivial examples, eliminating cast changes the type of the term,
 which might make an ambient expression type incorrect. The virtual
 machine, however, has no trouble evaluating the expression to
-<code>0</code>. Here is a similarly contrived example that shows how
-<code>propext</code> can get in the way.</p>
+``0``. Here is a similarly contrived example that shows how
+``propext`` can get in the way.
+-->
+<p>首先，我们使用函数外延性来证明两个函数 <code>f</code> 和 <code>g</code> 相等，
+然后用 <code>g</code> 替换类型为 <code>Nat</code> 的 <code>f</code>，从而转换该类型。
+当然，转换是无意义的，因为 <code>Nat</code> 不依赖于 <code>f</code>。
+但这已经足够了：在系统的计算规则之下，我们现在有了 <code>Nat</code> 的一个封闭项，
+它不会归约为一个数值。在这种情况下，我们可能倾向于将该表达式归约为 <code>0</code>。
+但是，在非平凡的例子里，消除转换会改变该项的类型，这可能会导致周围的表达式类型不正确。
+然而，虚拟机将表达式求值为 <code>0</code> 则不会遇到问题。下面是一个类似的例子，
+展示了 <code>propext</code> 如何造成阻碍。</p>
 <pre><code class="language-lean">theorem tteq : (True ∧ True) = True :=
   propext (Iff.intro (fun ⟨h, _⟩ =&gt; h) (fun h =&gt; ⟨h, h⟩))
 
@@ -430,35 +583,65 @@ def val : Nat :=
 -- evaluates to 0
 #eval val
 </code></pre>
-<p>Current research programs, including work on <em>observational type
-theory</em> and <em>cubical type theory</em>, aim to extend type theory in ways
+<!--
+Current research programs, including work on *observational type
+theory* and *cubical type theory*, aim to extend type theory in ways
 that permit reductions for casts involving function extensionality,
 quotients, and more. But the solutions are not so clear cut, and the
-rules of Lean's underlying calculus do not sanction such reductions.</p>
-<p>In a sense, however, a cast does not change the meaning of an
+rules of Lean's underlying calculus do not sanction such reductions.
+-->
+<p>当前的研究计划包括关于<strong>观测类型论（Observational Type Theory）</strong>
+和**立方类型论（Cubical Type Theory）**的研究，旨在扩展类型理论，
+以便允许对涉及函数外延、商，等等的强制转换进行归约。
+但解决方案并不明朗，而 Lean 的底层演算法则对此类归约也不支持。</p>
+<!--
+In a sense, however, a cast does not change the meaning of an
 expression. Rather, it is a mechanism to reason about the expression's
 type. Given an appropriate semantics, it then makes sense to reduce
 terms in ways that preserve their meaning, ignoring the intermediate
 bookkeeping needed to make the reductions type correct. In that case,
-adding new axioms in <code>Prop</code> does not matter; by proof irrelevance,
-an expression in <code>Prop</code> carries no information, and can be safely
-ignored by the reduction procedures.</p>
-<h2 id="quotients"><a class="header" href="#quotients">Quotients</a></h2>
-<p>Let <code>α</code> be any type, and let <code>r</code> be an equivalence relation on
-<code>α</code>. It is mathematically common to form the &quot;quotient&quot; <code>α / r</code>,
-that is, the type of elements of <code>α</code> &quot;modulo&quot; <code>r</code>. Set
-theoretically, one can view <code>α / r</code> as the set of equivalence
-classes of <code>α</code> modulo <code>r</code>. If <code>f : α → β</code> is any function that
+adding new axioms in ``Prop`` does not matter; by proof irrelevance,
+an expression in ``Prop`` carries no information, and can be safely
+ignored by the reduction procedures.
+-->
+<p>从某种意义上来说，一个强制转换不会改变一个表达式的含义。
+相反，它是一种关于表达式类型的推理机制。给定一个适当的语义，
+那么忽略掉归约为正确类型所需的中间记录操作，以不改变其含义的方式归约项是有意义的。
+在这种情况下，在 <code>Prop</code> 中添加新公理并不重要；通过证明无关性，
+<code>Prop</code> 中的表达式不会承载任何信息，可以被归约过程安全地忽略。</p>
+<!--
+Quotients
+---------
+-->
+<h2 id="商"><a class="header" href="#商">商</a></h2>
+<!--
+Let ``α`` be any type, and let ``r`` be an equivalence relation on
+``α``. It is mathematically common to form the "quotient" ``α / r``,
+that is, the type of elements of ``α`` "modulo" ``r``. Set
+theoretically, one can view ``α / r`` as the set of equivalence
+classes of ``α`` modulo ``r``. If ``f : α → β`` is any function that
 respects the equivalence relation in the sense that for every
-<code>x y : α</code>, <code>r x y</code> implies <code>f x = f y</code>, then <code>f</code> &quot;lifts&quot; to a function
-<code>f' : α / r → β</code> defined on each equivalence class <code>⟦x⟧</code> by
-<code>f' ⟦x⟧ = f x</code>. Lean's standard library extends the Calculus of
+``x y : α``, ``r x y`` implies ``f x = f y``, then ``f`` "lifts" to a function
+``f' : α / r → β`` defined on each equivalence class ``⟦x⟧`` by
+``f' ⟦x⟧ = f x``. Lean's standard library extends the Calculus of
 Constructions with additional constants that perform exactly these
 constructions, and installs this last equation as a definitional
-reduction rule.</p>
-<p>In its most basic form, the quotient construction does not even
-require <code>r</code> to be an equivalence relation. The following constants
-are built into Lean:</p>
+reduction rule.
+-->
+<p>设 <code>α</code> 为任意类型，且 <code>r</code> 为 <code>α</code> 上的等价关系。在数学中，
+常见的做法是形成「商（Quotient）」<code>α / r</code>，即 <code>α</code> 中元素的类型「模（modulo）」<code>r</code>。
+从集合论的角度，可以将 <code>α / r</code> 视为 <code>α</code> 模 <code>r</code> 的等价类的集合。
+若 <code>f : α → β</code> 是任意满足等价关系的函数，即对于任意 <code>x y : α</code>, <code>r x y</code>
+蕴含 <code>f x = f y</code>, 则 <code>f</code>「提升（lift）」到函数 <code>f' : α / r → β</code>，
+其在每个等价类 <code>⟦x⟧</code> 上由 <code>f' ⟦x⟧ = f x</code> 定义。
+Lean 的标准库通过执行这些构造的附加常量来扩展构造演算，并将该最后的方程作为定义归约规则。</p>
+<!--
+In its most basic form, the quotient construction does not even
+require ``r`` to be an equivalence relation. The following constants
+are built into Lean:
+-->
+<p>在最基本的表述形式中，商构造甚至不需要 <code>r</code> 成为一个等价关系。
+下列常量被内置在 Lean 中：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>universe u v
 
@@ -475,19 +658,31 @@ axiom Quot.lift :
     → (∀ a b, r a b → f a = f b) → Quot r → β
 <span class="boring">end Hidden
 </span></code></pre>
-<p>The first one forms a type <code>Quot r</code> given a type <code>α</code> by any binary
-relation <code>r</code> on <code>α</code>. The second maps <code>α</code> to <code>Quot α</code>, so that
-if <code>r : α → α → Prop</code> and <code>a : α</code>, then <code>Quot.mk r a</code> is an
-element of <code>Quot r</code>. The third principle, <code>Quot.ind</code>, says that
-every element of <code>Quot.mk r a</code> is of this form.  As for
-<code>Quot.lift</code>, given a function <code>f : α → β</code>, if <code>h</code> is a proof
-that <code>f</code> respects the relation <code>r</code>, then <code>Quot.lift f h</code> is the
-corresponding function on <code>Quot r</code>. The idea is that for each
-element <code>a</code> in <code>α</code>, the function <code>Quot.lift f h</code> maps
-<code>Quot.mk r a</code> (the <code>r</code>-class containing <code>a</code>) to <code>f a</code>, wherein <code>h</code>
+<!--
+The first one forms a type ``Quot r`` given a type ``α`` by any binary
+relation ``r`` on ``α``. The second maps ``α`` to ``Quot α``, so that
+if ``r : α → α → Prop`` and ``a : α``, then ``Quot.mk r a`` is an
+element of ``Quot r``. The third principle, ``Quot.ind``, says that
+every element of ``Quot.mk r a`` is of this form.  As for
+``Quot.lift``, given a function ``f : α → β``, if ``h`` is a proof
+that ``f`` respects the relation ``r``, then ``Quot.lift f h`` is the
+corresponding function on ``Quot r``. The idea is that for each
+element ``a`` in ``α``, the function ``Quot.lift f h`` maps
+``Quot.mk r a`` (the ``r``-class containing ``a``) to ``f a``, wherein ``h``
 shows that this function is well defined. In fact, the computation
 principle is declared as a reduction rule, as the proof below makes
-clear.</p>
+clear.
+-->
+<p>第一条公理根据任何二元关系 <code>r</code> 的类型 <code>α</code> 形成类型 <code>Quot r</code>。
+第二条公理将 <code>α</code> 映射到 <code>Quot α</code>，因此若 <code>r : α → α → Prop</code> 且 <code>a : α</code>，
+则 <code>Quot.mk r a</code> 是 <code>Quot r</code> 的一个元素。
+第三条公理 <code>Quot.ind</code> 是说 <code>Quot.mk r a</code> 的每个元素都属于此形式。
+至于 <code>Quot.lift</code>，给定函数 <code>f : α → β</code>，若 <code>h</code> 是一个「<code>f</code>
+遵循关系 <code>r</code>」的证明，则 <code>Quot.lift f h</code> 是 <code>Quot r</code> 上的对应函数。
+其思想是对于 <code>α</code> 中的每个元素 <code>a</code>，函数 <code>Quot.lift f h</code>
+将 <code>Quot.mk r a</code>（包含 <code>a</code> 的 <code>r</code>-类）映射到 <code>f a</code>，
+其中 <code>h</code> 表明此函数是良定义的。事实上，计算公理被声明为一个归约规则，
+如下方的证明所示。</p>
 <pre><code class="language-lean">def mod7Rel (x y : Nat) : Prop :=
   x % 7 = y % 7
 
@@ -510,12 +705,18 @@ theorem f_respects (a b : Nat) (h : mod7Rel a b) : f a = f b := by
 example (a : Nat) : Quot.lift f f_respects (Quot.mk mod7Rel a) = f a :=
   rfl
 </code></pre>
-<p>The four constants, <code>Quot</code>, <code>Quot.mk</code>, <code>Quot.ind</code>, and
-<code>Quot.lift</code> in and of themselves are not very strong. You can check
-that the <code>Quot.ind</code> is satisfied if we take <code>Quot r</code> to be simply
-<code>α</code>, and take <code>Quot.lift</code> to be the identity function (ignoring
-<code>h</code>). For that reason, these four constants are not viewed as
-additional axioms.</p>
+<!--
+The four constants, ``Quot``, ``Quot.mk``, ``Quot.ind``, and
+``Quot.lift`` in and of themselves are not very strong. You can check
+that the ``Quot.ind`` is satisfied if we take ``Quot r`` to be simply
+``α``, and take ``Quot.lift`` to be the identity function (ignoring
+``h``). For that reason, these four constants are not viewed as
+additional axioms.
+-->
+<p>四个常量 <code>Quot</code>、<code>Quot.mk</code>、<code>Quot.ind</code> 和 <code>Quot.lift</code> 在它们本身上并不强。
+你可以检查如果我们把 <code>Quot r</code> 简单地取为 <code>α</code>，并取 <code>Quot.lift</code> 为恒等函数
+（忽略 <code>h</code>），那么 <code>Quot.ind</code> 将得到满足。
+由于这个原因，这四个常量并没有被看作附加公理。</p>
 <!--
     variables α β : Type
     variable  r : α → α → Prop
@@ -527,10 +728,16 @@ additional axioms.</p>
     #print axioms thm   -- no axioms
     -- END
 -->
-<p>They are, like inductively defined types and the associated
-constructors and recursors, viewed as part of the logical framework.</p>
-<p>What makes the <code>Quot</code> construction into a bona fide quotient is the
-following additional axiom:</p>
+<!--
+They are, like inductively defined types and the associated
+constructors and recursors, viewed as part of the logical framework.
+-->
+<p>和归纳定义的类型以及相关的构造器和递归器一样，它们也被视为逻辑框架的一部分。</p>
+<!--
+What makes the ``Quot`` construction into a bona fide quotient is the
+following additional axiom:
+-->
+<p>使 <code>Quot</code> 构造成为真正商的是以下一个附加公理：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">universe u v
 </span>axiom Quot.sound :
@@ -538,25 +745,43 @@ following additional axiom:</p>
         r a b → Quot.mk r a = Quot.mk r b
 <span class="boring">end Hidden
 </span></code></pre>
-<p>This is the axiom that asserts that any two elements of <code>α</code> that are
-related by <code>r</code> become identified in the quotient. If a theorem or
-definition makes use of <code>Quot.sound</code>, it will show up in the
-<code>#print axioms</code> command.</p>
-<p>Of course, the quotient construction is most commonly used in
-situations when <code>r</code> is an equivalence relation. Given <code>r</code> as
-above, if we define <code>r'</code> according to the rule <code>r' a b</code> iff
-<code>Quot.mk r a = Quot.mk r b</code>, then it's clear that <code>r'</code> is an
-equivalence relation. Indeed, <code>r'</code> is the <em>kernel</em> of the function
-<code>a ↦ quot.mk r a</code>.  The axiom <code>Quot.sound</code> says that <code>r a b</code>
-implies <code>r' a b</code>. Using <code>Quot.lift</code> and <code>Quot.ind</code>, we can show
-that <code>r'</code> is the smallest equivalence relation containing <code>r</code>, in
-the sense that if <code>r''</code> is any equivalence relation containing
-<code>r</code>, then <code>r' a b</code> implies <code>r'' a b</code>. In particular, if <code>r</code>
-was an equivalence relation to start with, then for all <code>a</code> and
-<code>b</code> we have <code>r a b</code> iff <code>r' a b</code>.</p>
-<p>To support this common use case, the standard library defines the
-notion of a <em>setoid</em>, which is simply a type with an associated
-equivalence relation:</p>
+<!--
+This is the axiom that asserts that any two elements of ``α`` that are
+related by ``r`` become identified in the quotient. If a theorem or
+definition makes use of ``Quot.sound``, it will show up in the
+``#print axioms`` command.
+-->
+<p>这条公理断言 <code>α</code> 的任何两个元素，只要满足关系 <code>r</code>，就能在商中被识别的。
+如果定理或定义使用了 <code>Quot.sound</code>，它将会在 <code>#print axioms</code> 命令中显示。</p>
+<!--
+Of course, the quotient construction is most commonly used in
+situations when ``r`` is an equivalence relation. Given ``r`` as
+above, if we define ``r'`` according to the rule ``r' a b`` iff
+``Quot.mk r a = Quot.mk r b``, then it's clear that ``r'`` is an
+equivalence relation. Indeed, ``r'`` is the *kernel* of the function
+``a ↦ quot.mk r a``.  The axiom ``Quot.sound`` says that ``r a b``
+implies ``r' a b``. Using ``Quot.lift`` and ``Quot.ind``, we can show
+that ``r'`` is the smallest equivalence relation containing ``r``, in
+the sense that if ``r''`` is any equivalence relation containing
+``r``, then ``r' a b`` implies ``r'' a b``. In particular, if ``r``
+was an equivalence relation to start with, then for all ``a`` and
+``b`` we have ``r a b`` iff ``r' a b``.
+-->
+<p>当然，当 <code>r</code> 是等价关系时，商集的结构是最常用的。给定上面的 <code>r</code>，
+如果我们根据法则 <code>r' a b</code> 当且仅当 <code>Quot.mk r a = Quot.mk r b</code> 定义 <code>r'</code>，
+那么显然 <code>r'</code> 就是一个等价关系。事实上，<code>r'</code> 是函数 <code>a ↦ quot.mk r a</code>
+的<strong>核（Kernel）</strong>。公理 <code>Quot.sound</code> 表明 <code>r a b</code> 蕴含 <code>r' a b</code>。
+使用 <code>Quot.lift</code> 和 <code>Quot.ind</code>，我们可以证明 <code>r'</code> 是包含 <code>r</code> 的最小的等价关系，
+意思就是，如果 <code>r''</code> 是包含 <code>r</code> 的任意等价关系，则 <code>r' a b</code> 蕴含 <code>r'' a b</code>。
+特别地，如果 <code>r</code> 开始就是一个等价关系，那么对任意 <code>a</code> 和 <code>b</code>，我们都有
+<code>r a b</code> 等价于 <code>r' a b</code>。</p>
+<!--
+To support this common use case, the standard library defines the
+notion of a *setoid*, which is simply a type with an associated
+equivalence relation:
+-->
+<p>为支持这种通用使用案例，标准库定义了 <strong>广集（Setoid）</strong> 的概念，
+它只是一个带有与之关联的等价关系的类型：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>class Setoid (α : Sort u) where
   r : α → α → Prop
@@ -581,50 +806,77 @@ theorem trans {a b c : α} (hab : a ≈ b) (hbc : b ≈ c) : a ≈ c :=
 end Setoid
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Given a type <code>α</code>, a relation <code>r</code> on <code>α</code>, and a proof <code>p</code>
-that <code>r</code> is an equivalence relation, we can define <code>Setoid.mk r p</code>
-as an instance of the setoid class.</p>
+<!--
+Given a type ``α``, a relation ``r`` on ``α``, and a proof ``p``
+that ``r`` is an equivalence relation, we can define ``Setoid.mk r p``
+as an instance of the setoid class.
+-->
+<p>给定一个类型 <code>α</code> 和其上的关系 <code>r</code>，以及一个证明 <code>p</code> 证明 <code>r</code> 是一个等价关系，
+我们可以定义 <code>Setoid.mk r p</code> 为广集类的一个实例。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>def Quotient {α : Sort u} (s : Setoid α) :=
   @Quot α Setoid.r
 <span class="boring">end Hidden
 </span></code></pre>
-<p>The constants <code>Quotient.mk</code>, <code>Quotient.ind</code>, <code>Quotient.lift</code>,
-and <code>Quotient.sound</code> are nothing more than the specializations of
-the corresponding elements of <code>Quot</code>. The fact that type class
-inference can find the setoid associated to a type <code>α</code> brings a
-number of benefits. First, we can use the notation <code>a ≈ b</code> (entered
-with <code>\approx</code>) for <code>Setoid.r a b</code>, where the instance of
-<code>Setoid</code> is implicit in the notation <code>Setoid.r</code>. We can use the
-generic theorems <code>Setoid.refl</code>, <code>Setoid.symm</code>, <code>Setoid.trans</code> to
+<!--
+The constants ``Quotient.mk``, ``Quotient.ind``, ``Quotient.lift``,
+and ``Quotient.sound`` are nothing more than the specializations of
+the corresponding elements of ``Quot``. The fact that type class
+inference can find the setoid associated to a type ``α`` brings a
+number of benefits. First, we can use the notation ``a ≈ b`` (entered
+with ``\approx``) for ``Setoid.r a b``, where the instance of
+``Setoid`` is implicit in the notation ``Setoid.r``. We can use the
+generic theorems ``Setoid.refl``, ``Setoid.symm``, ``Setoid.trans`` to
 reason about the relation. Specifically with quotients we can use the
-generic notation <code>⟦a⟧</code> for <code>Quot.mk Setoid.r</code> where the instance
-of <code>Setoid</code> is implicit in the notation <code>Setoid.r</code>, as well as the
-theorem <code>Quotient.exact</code>:</p>
+generic notation ``⟦a⟧`` for ``Quot.mk Setoid.r`` where the instance
+of ``Setoid`` is implicit in the notation ``Setoid.r``, as well as the
+theorem ``Quotient.exact``:
+-->
+<p>常量 <code>Quotient.mk</code>、<code>Quotient.ind</code>、<code>Quotient.lift</code>
+以及 <code>Quotient.sound</code> 仅为 <code>Quot</code> 对应元素的特化形式。
+类型类推断能找到与类型 <code>α</code> 关联的广集，这带来了大量好处。
+首先，我们可以对 <code>Setoid.r a b</code> 使用符号 <code>a ≈ b</code>（用 <code>\approx</code> 输入），
+其中 <code>Setoid</code> 的实例在符号 <code>Setoid.r</code> 中是内隐的。
+我们可以使用通用定理 <code>Setoid.refl</code>、<code>Setoid.symm</code>、<code>Setoid.trans</code>
+来推断关系。具体来说，在商中，我们可以对 <code>Quot.mk Setoid.r</code> 使用通用符号 <code>⟦a⟧</code>，
+其中 <code>Setoid</code> 的实例在符号 <code>Setoid.r</code> 中是内隐的，以及定理 <code>Quotient.exact</code>：</p>
 <pre><code class="language-lean"><span class="boring">universe u
 </span>#check (@Quotient.exact :
          ∀ {α : Sort u} {s : Setoid α} {a b : α},
            Quotient.mk s a = Quotient.mk s b → a ≈ b)
 </code></pre>
-<p>Together with <code>Quotient.sound</code>, this implies that the elements of
+<!--
+Together with ``Quotient.sound``, this implies that the elements of
 the quotient correspond exactly to the equivalence classes of elements
-in <code>α</code>.</p>
-<p>Recall that in the standard library, <code>α × β</code> represents the
-Cartesian product of the types <code>α</code> and <code>β</code>. To illustrate the use
-of quotients, let us define the type of <em>unordered</em> pairs of elements
-of a type <code>α</code> as a quotient of the type <code>α × α</code>. First, we define
-the relevant equivalence relation:</p>
+in ``α``.
+-->
+<p>结合<code>Quotient.sound</code>，这意味着商的各个元素精确对应于 <code>α</code>中各元素的等价类。</p>
+<!--
+Recall that in the standard library, ``α × β`` represents the
+Cartesian product of the types ``α`` and ``β``. To illustrate the use
+of quotients, let us define the type of *unordered* pairs of elements
+of a type ``α`` as a quotient of the type ``α × α``. First, we define
+the relevant equivalence relation:
+-->
+<p>回顾一下标准库中的 <code>α × β</code> 代表类型 <code>α</code> 和 <code>β</code> 的笛卡尔积。
+为了说明商的用法，让我们将类型为 <code>α</code> 的元素构成的**无序对（Unordered Pair）**的类型定义为
+<code>α × α</code> 类型的商。首先，我们定义相关的等价关系：</p>
 <pre><code class="language-lean">private def eqv (p₁ p₂ : α × α) : Prop :=
   (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
 
 infix:50 &quot; ~ &quot; =&gt; eqv
 </code></pre>
-<p>The next step is to prove that <code>eqv</code> is in fact an equivalence
+<!--
+The next step is to prove that ``eqv`` is in fact an equivalence
 relation, which is to say, it is reflexive, symmetric and
 transitive. We can prove these three facts in a convenient and
 readable way by using dependent pattern matching to perform
 case-analysis and break the hypotheses into pieces that are then
-reassembled to produce the conclusion.</p>
+reassembled to produce the conclusion.
+-->
+<p>下一步是证明 <code>eqv</code> 实际上是一个等价关系，即满足自反性、对称性和传递性。
+我们可以使用依值模式匹配进行情况分析，将假设分解然后重新组合以得出结论，
+从而以一种简便易读的方式证明这三个事实。</p>
 <pre><code class="language-lean"><span class="boring">private def eqv (p₁ p₂ : α × α) : Prop :=
 </span><span class="boring">  (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
 </span><span class="boring">infix:50 &quot; ~ &quot; =&gt; eqv
@@ -650,9 +902,13 @@ private theorem eqv.trans : ∀ {p₁ p₂ p₃ : α × α}, p₁ ~ p₂ → p�
 private theorem is_equivalence : Equivalence (@eqv α) :=
   { refl := eqv.refl, symm := eqv.symm, trans := eqv.trans }
 </code></pre>
-<p>Now that we have proved that <code>eqv</code> is an equivalence relation, we
-can construct a <code>Setoid (α × α)</code>, and use it to define the type
-<code>UProd α</code> of unordered pairs.</p>
+<!--
+Now that we have proved that ``eqv`` is an equivalence relation, we
+can construct a ``Setoid (α × α)``, and use it to define the type
+``UProd α`` of unordered pairs.
+-->
+<p>现在我们已经证明了 <code>eqv</code> 是一个等价关系，我们可以构造一个 <code>Setoid (α × α)</code>，
+并使用它来定义无序对的类型 <code>UProd α</code>。</p>
 <pre><code class="language-lean"><span class="boring">private def eqv (p₁ p₂ : α × α) : Prop :=
 </span><span class="boring">  (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
 </span><span class="boring">infix:50 &quot; ~ &quot; =&gt; eqv
@@ -690,13 +946,22 @@ notation &quot;{ &quot; a₁ &quot;, &quot; a₂ &quot; }&quot; =&gt; mk a₁ a�
 
 end UProd
 </code></pre>
-<p>Notice that we locally define the notation <code>{a₁, a₂}</code> for unordered
-pairs as <code>Quotient.mk (a₁, a₂)</code>. This is useful for illustrative
+<!--
+Notice that we locally define the notation ``{a₁, a₂}`` for unordered
+pairs as ``Quotient.mk (a₁, a₂)``. This is useful for illustrative
 purposes, but it is not a good idea in general, since the notation
 will shadow other uses of curly brackets, such as for records and
-sets.</p>
-<p>We can easily prove that <code>{a₁, a₂} = {a₂, a₁}</code> using <code>Quot.sound</code>,
-since we have <code>(a₁, a₂) ~ (a₂, a₁)</code>.</p>
+sets.
+-->
+<p>请注意，我们将 <code>{a₁, a₂}</code> 无序对的记法局部定义为 <code>Quotient.mk (a₁, a₂)</code>。
+这对展示来说很有用，但一般来说这不是一个好主意，因为该记法将会与花括号的其它用法冲突，
+例如记录和集合。</p>
+<!--
+We can easily prove that ``{a₁, a₂} = {a₂, a₁}`` using ``Quot.sound``,
+since we have ``(a₁, a₂) ~ (a₂, a₁)``.
+-->
+<p>我们可以很容易地使用 <code>Quot.sound</code> 证明 <code>{a₁, a₂} = {a₂, a₁}</code>，
+因为我们有 <code>(a₁, a₂) ~ (a₂, a₁)</code>。</p>
 <pre><code class="language-lean"><span class="boring">private def eqv (p₁ p₂ : α × α) : Prop :=
 </span><span class="boring">  (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
 </span><span class="boring">infix:50 &quot; ~ &quot; =&gt; eqv
@@ -731,13 +996,20 @@ since we have <code>(a₁, a₂) ~ (a₂, a₁)</code>.</p>
   Quot.sound (Or.inr ⟨rfl, rfl⟩)
 <span class="boring">end UProd
 </span></code></pre>
-<p>To complete the example, given <code>a : α</code> and <code>u : uprod α</code>, we
-define the proposition <code>a ∈ u</code> which should hold if <code>a</code> is one of
-the elements of the unordered pair <code>u</code>. First, we define a similar
-proposition <code>mem_fn a u</code> on (ordered) pairs; then we show that
-<code>mem_fn</code> respects the equivalence relation <code>eqv</code> with the lemma
-<code>mem_respects</code>. This is an idiom that is used extensively in the
-Lean standard library.</p>
+<!--
+To complete the example, given ``a : α`` and ``u : uprod α``, we
+define the proposition ``a ∈ u`` which should hold if ``a`` is one of
+the elements of the unordered pair ``u``. First, we define a similar
+proposition ``mem_fn a u`` on (ordered) pairs; then we show that
+``mem_fn`` respects the equivalence relation ``eqv`` with the lemma
+``mem_respects``. This is an idiom that is used extensively in the
+Lean standard library.
+-->
+<p>为了完成此示例，给定 <code>a : α</code> 和 <code>u : uprod α</code>，我们定义命题 <code>a ∈ u</code>，
+若 <code>a</code> 是无序对 <code>u</code> 的元素之一，则该命题应成立。
+首先，我们在（有序）对上定义一个类似的命题 <code>mem_fn a u</code>；
+然后用引理 <code>mem_respects</code> 证明 <code>mem_fn</code> 关于等价关系 <code>eqv</code> 成立。
+这是一个在 Lean 标准库中广泛使用的惯用法。</p>
 <pre><code class="language-lean"><span class="boring">private def eqv (p₁ p₂ : α × α) : Prop :=
 </span><span class="boring">  (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
 </span><span class="boring">infix:50 &quot; ~ &quot; =&gt; eqv
@@ -774,6 +1046,7 @@ Lean standard library.</p>
   | (a₁, a₂) =&gt; a = a₁ ∨ a = a₂
 
 -- auxiliary lemma for proving mem_respects
+-- 用于证明 mem_respects 的辅助引理
 private theorem mem_swap {a : α} :
       ∀ {p : α × α}, mem_fn a p = mem_fn a (⟨p.2, p.1⟩)
   | (a₁, a₂) =&gt; by
@@ -807,50 +1080,88 @@ theorem mem_or_mem_of_mem_mk {a b c : α} : c ∈ {a, b} → c = a ∨ c = b :=
   fun h =&gt; h
 <span class="boring">end UProd
 </span></code></pre>
-<p>For convenience, the standard library also defines <code>Quotient.lift₂</code>
-for lifting binary functions, and <code>Quotient.ind₂</code> for induction on
-two variables.</p>
-<p>We close this section with some hints as to why the quotient
+<!--
+For convenience, the standard library also defines ``Quotient.lift₂``
+for lifting binary functions, and ``Quotient.ind₂`` for induction on
+two variables.
+-->
+<p>为方便起见，标准库还定义了二元函数的 <code>Quotient.lift₂</code>，
+以及对于两个变量的归纳的 <code>Quotient.ind₂</code>。</p>
+<!--
+We close this section with some hints as to why the quotient
 construction implies function extensionality. It is not hard to show
-that extensional equality on the <code>(x : α) → β x</code> is an equivalence
-relation, and so we can consider the type <code>extfun α β</code> of functions
-&quot;up to equivalence.&quot; Of course, application respects that equivalence
-in the sense that if <code>f₁</code> is equivalent to <code>f₂</code>, then <code>f₁ a</code> is
-equal to <code>f₂ a</code>. Thus application gives rise to a function
-<code>extfun_app : extfun α β → (x : α) → β x</code>. But for every <code>f</code>,
-<code>extfun_app ⟦f⟧</code> is definitionally equal to <code>fun x =&gt; f x</code>, which is
-in turn definitionally equal to <code>f</code>. So, when <code>f₁</code> and <code>f₂</code> are
-extensionally equal, we have the following chain of equalities:</p>
+that extensional equality on the ``(x : α) → β x`` is an equivalence
+relation, and so we can consider the type ``extfun α β`` of functions
+"up to equivalence." Of course, application respects that equivalence
+in the sense that if ``f₁`` is equivalent to ``f₂``, then ``f₁ a`` is
+equal to ``f₂ a``. Thus application gives rise to a function
+``extfun_app : extfun α β → (x : α) → β x``. But for every ``f``,
+``extfun_app ⟦f⟧`` is definitionally equal to ``fun x => f x``, which is
+in turn definitionally equal to ``f``. So, when ``f₁`` and ``f₂`` are
+extensionally equal, we have the following chain of equalities:
+-->
+<p>我们在本节的末尾解释为什么商构造蕴含了函数的外延性。不难证明在 <code>(x : α) → β x</code>
+上的外延相等性是一种等价关系，因此我们可以将类型 <code>extfun α β</code> 视为「保持等价」的函数。
+当然，函数应用遵循这种等价，即若 <code>f₁</code> 等价于 <code>f₂</code>，则 <code>f₁ a</code> 等于 <code>f₂ a</code>。
+因此，应用产生了一个函数 <code>extfun_app : extfun α β → (x : α) → β x</code>。
+但是对于每个 <code>f</code> 而言，<code>extfun_app ⟦f⟧</code> 在定义上等于 <code>fun x =&gt; f x</code>，
+这在定义上又等于 <code>f</code>。所以，当 <code>f₁</code> 和 <code>f₂</code> 外延相等时，我们有以下等式链：</p>
 <pre><code>    f₁ = extfun_app ⟦f₁⟧ = extfun_app ⟦f₂⟧ = f₂
 </code></pre>
-<p>As a result, <code>f₁</code> is equal to <code>f₂</code>.</p>
-<h2 id="choice"><a class="header" href="#choice">Choice</a></h2>
-<p>To state the final axiom defined in the standard library, we need the
-<code>Nonempty</code> type, which is defined as follows:</p>
+<!--
+As a result, ``f₁`` is equal to ``f₂``.
+-->
+<p>因此，<code>f₁</code> 等于 <code>f₂</code>。</p>
+<!--
+Choice
+------
+-->
+<h2 id="选择公理"><a class="header" href="#选择公理">选择公理</a></h2>
+<!--
+To state the final axiom defined in the standard library, we need the
+``Nonempty`` type, which is defined as follows:
+-->
+<p>为了陈述标准库中定义的最后一个公理，我们需要 <code>Nonempty</code> 类型，它的定义如下：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>class inductive Nonempty (α : Sort u) : Prop where
   | intro (val : α) : Nonempty α
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Because <code>Nonempty α</code> has type <code>Prop</code> and its constructor contains data, it can only eliminate to <code>Prop</code>.
-In fact, <code>Nonempty α</code> is equivalent to <code>∃ x : α, True</code>:</p>
+<!--
+Because ``Nonempty α`` has type ``Prop`` and its constructor contains data, it can only eliminate to ``Prop``.
+In fact, ``Nonempty α`` is equivalent to ``∃ x : α, True``:
+-->
+<p>由于 <code>Nonempty α</code> 的类型为 <code>Prop</code>，其构造子包含数据，所以只能消去到 <code>Prop</code>。
+事实上，<code>Nonempty α</code> 等价于 <code>∃ x : α, True</code>：</p>
 <pre><code class="language-lean">example (α : Type u) : Nonempty α ↔ ∃ x : α, True :=
   Iff.intro (fun ⟨a⟩ =&gt; ⟨a, trivial⟩) (fun ⟨a, h⟩ =&gt; ⟨a⟩)
 </code></pre>
-<p>Our axiom of choice is now expressed simply as follows:</p>
+<!--
+Our axiom of choice is now expressed simply as follows:
+-->
+<p>我们的选择公理现在可以简单地表示如下：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">universe u
 </span>axiom choice {α : Sort u} : Nonempty α → α
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Given only the assertion <code>h</code> that <code>α</code> is nonempty, <code>choice h</code>
-magically produces an element of <code>α</code>. Of course, this blocks any
-meaningful computation: by the interpretation of <code>Prop</code>, <code>h</code>
-contains no information at all as to how to find such an element.</p>
-<p>This is found in the <code>Classical</code> namespace, so the full name of the
-theorem is <code>Classical.choice</code>. The choice principle is equivalent to
-the principle of <em>indefinite description</em>, which can be expressed with
-subtypes as follows:</p>
+<!--
+Given only the assertion ``h`` that ``α`` is nonempty, ``choice h``
+magically produces an element of ``α``. Of course, this blocks any
+meaningful computation: by the interpretation of ``Prop``, ``h``
+contains no information at all as to how to find such an element.
+-->
+<p>给定唯一断言 <code>h</code>，即 <code>α</code> 非空，<code>choice h</code> 神奇地产生了一个 <code>α</code> 的元素。
+当然，这阻碍了任何有意义的计算：根据 <code>Prop</code> 的解释，<code>h</code> 根本不包含任何信息，
+因而无法找到这样的元素。</p>
+<!--
+This is found in the ``Classical`` namespace, so the full name of the
+theorem is ``Classical.choice``. The choice principle is equivalent to
+the principle of *indefinite description*, which can be expressed with
+subtypes as follows:
+-->
+<p>这可以在 <code>Classical</code> 命名空间中找到，所以定理的全名是 <code>Classical.choice</code>。
+选择公理等价于**非限定摹状词（Indefinite Description）**原理，可通过子类型表示如下：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">universe u
 </span><span class="boring">axiom choice {α : Sort u} : Nonempty α → α
@@ -859,11 +1170,16 @@ subtypes as follows:</p>
   choice &lt;| let ⟨x, px⟩ := h; ⟨⟨x, px⟩⟩
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Because it depends on <code>choice</code>, Lean cannot generate bytecode for
-<code>indefiniteDescription</code>, and so requires us to mark the definition
-as <code>noncomputable</code>. Also in the <code>Classical</code> namespace, the
-function <code>choose</code> and the property <code>choose_spec</code> decompose the two
-parts of the output of <code>indefiniteDescription</code>:</p>
+<!--
+Because it depends on ``choice``, Lean cannot generate bytecode for
+``indefiniteDescription``, and so requires us to mark the definition
+as ``noncomputable``. Also in the ``Classical`` namespace, the
+function ``choose`` and the property ``choose_spec`` decompose the two
+parts of the output of ``indefiniteDescription``:
+-->
+<p>因为依赖于 <code>choice</code>，Lean 不能为 <code>indefiniteDescription</code> 生成字节码，
+所以要求我们将定义标记为 <code>noncomputable</code>。同样在 <code>Classical</code> 命名空间中，
+函数 <code>choose</code> 和属性 <code>choose_spec</code> 分离了 <code>indefiniteDescription</code> 输出的两个部分：</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span><span class="boring">namespace Hidden
 </span>noncomputable def choose {α : Sort u} {p : α → Prop} (h : ∃ x, p x) : α :=
@@ -873,27 +1189,39 @@ theorem choose_spec {α : Sort u} {p : α → Prop} (h : ∃ x, p x) : p (choose
   (indefiniteDescription p h).property
 <span class="boring">end Hidden
 </span></code></pre>
-<p>The <code>choice</code> principle also erases the distinction between the
-property of being <code>Nonempty</code> and the more constructive property of
-being <code>Inhabited</code>:</p>
+<!--
+The ``choice`` principle also erases the distinction between the
+property of being ``Nonempty`` and the more constructive property of
+being ``Inhabited``:
+-->
+<p><code>choice</code> 选择公理也消除了 <code>Nonempty</code> 特性与更加具有构造性的
+<code>Inhabited</code> 特性之间的区别。</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span>theorem inhabited_of_nonempty : Nonempty α → Inhabited α :=
   fun h =&gt; choice (let ⟨a⟩ := h; ⟨⟨a⟩⟩)
 </code></pre>
-<p>In the next section, we will see that <code>propext</code>, <code>funext</code>, and
-<code>choice</code>, taken together, imply the law of the excluded middle and
+<!--
+In the next section, we will see that ``propext``, ``funext``, and
+``choice``, taken together, imply the law of the excluded middle and
 the decidability of all propositions. Using those, one can strengthen
-the principle of indefinite description as follows:</p>
+the principle of indefinite description as follows:
+-->
+<p>在下一节中，我们将会看到 <code>propext</code>、<code>funext</code> 和 <code>choice</code>，
+合起来就构成了排中律以及所有命题的可判定性。使用它们，我们可以加强如下非限定摹状词原理：</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span><span class="boring">universe u
 </span>#check (@strongIndefiniteDescription :
          {α : Sort u} → (p : α → Prop)
          → Nonempty α → {x // (∃ (y : α), p y) → p x})
 </code></pre>
-<p>Assuming the ambient type <code>α</code> is nonempty,
-<code>strongIndefiniteDescription p</code> produces an element of <code>α</code>
-satisfying <code>p</code> if there is one. The data component of this
-definition is conventionally known as <em>Hilbert's epsilon function</em>:</p>
+<!--
+Assuming the ambient type ``α`` is nonempty,
+``strongIndefiniteDescription p`` produces an element of ``α``
+satisfying ``p`` if there is one. The data component of this
+definition is conventionally known as *Hilbert's epsilon function*:
+-->
+<p>假设环境类型 <code>α</code> 非空，<code>strongIndefiniteDescription p</code> 产生一个满足 <code>p</code>
+的元素 <code>α</code>（如果存在的话）。该定义的数据部分通常被称为 <strong>希尔伯特 ε 函数</strong>：</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span><span class="boring">universe u
 </span>#check (@epsilon :
@@ -904,18 +1232,33 @@ definition is conventionally known as <em>Hilbert's epsilon function</em>:</p>
          ∀ {α : Sort u} {p : α → Prop} (hex : ∃ (y : α), p y),
            p (@epsilon _ (nonempty_of_exists hex) p))
 </code></pre>
-<h2 id="the-law-of-the-excluded-middle"><a class="header" href="#the-law-of-the-excluded-middle">The Law of the Excluded Middle</a></h2>
-<p>The law of the excluded middle is the following</p>
+<!--
+The Law of the Excluded Middle
+------------------------------
+-->
+<h2 id="排中律"><a class="header" href="#排中律">排中律</a></h2>
+<!--
+The law of the excluded middle is the following
+-->
+<p>排中律如下所示：</p>
 <pre><code class="language-lean">open Classical
 
 #check (@em : ∀ (p : Prop), p ∨ ¬p)
 </code></pre>
-<p><a href="https://en.wikipedia.org/wiki/Diaconescu%27s_theorem">Diaconescu's theorem</a> states
+<!--
+[Diaconescu's theorem](https://en.wikipedia.org/wiki/Diaconescu%27s_theorem) states
 that the axiom of choice is sufficient to derive the law of excluded
 middle. More precisely, it shows that the law of the excluded middle
-follows from <code>Classical.choice</code>, <code>propext</code>, and <code>funext</code>. We
-sketch the proof that is found in the standard library.</p>
-<p>First, we import the necessary axioms, and define two predicates <code>U</code> and <code>V</code>:</p>
+follows from ``Classical.choice``, ``propext``, and ``funext``. We
+sketch the proof that is found in the standard library.
+-->
+<p><a href="https://en.wikipedia.org/wiki/Diaconescu%27s_theorem">迪亚科内斯库定理</a> 表明
+选择公理足以导出排中律。更确切地说，它表明排中律源自于 <code>Classical.choice</code>，
+<code>propext</code> 和 <code>funext</code>。我们概述了标准库中的证明。</p>
+<!--
+First, we import the necessary axioms, and define two predicates ``U`` and ``V``:
+-->
+<p>首先，我们导入必要的公理，并定义两个谓词<code>U</code>和<code>V</code>：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>open Classical
 theorem em (p : Prop) : p ∨ ¬p :=
@@ -927,9 +1270,16 @@ theorem em (p : Prop) : p ∨ ¬p :=
 <span class="boring">  sorry
 </span><span class="boring">end Hidden
 </span></code></pre>
-<p>If <code>p</code> is true, then every element of <code>Prop</code> is in both <code>U</code> and <code>V</code>.
-If <code>p</code> is false, then <code>U</code> is the singleton <code>true</code>, and <code>V</code> is the singleton <code>false</code>.</p>
-<p>Next, we use <code>some</code> to choose an element from each of <code>U</code> and <code>V</code>:</p>
+<!--
+If ``p`` is true, then every element of ``Prop`` is in both ``U`` and ``V``.
+If ``p`` is false, then ``U`` is the singleton ``true``, and ``V`` is the singleton ``false``.
+-->
+<p>当 <code>p</code> 为真时，<code>Prop</code> 的所有元素既在 <code>U</code> 中又在 <code>V</code> 中。
+当 <code>p</code> 为假时，<code>U</code> 是单元素的 <code>true</code>，<code>V</code> 是单元素的 <code>false</code>。</p>
+<!--
+Next, we use ``some`` to choose an element from each of ``U`` and ``V``:
+-->
+<p>接下来，我们使用 <code>some</code> 从 <code>U</code> 和 <code>V</code> 中各选取一个元素：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">open Classical
 </span><span class="boring">theorem em (p : Prop) : p ∨ ¬p :=
@@ -945,9 +1295,14 @@ If <code>p</code> is false, then <code>U</code> is the singleton <code>true</cod
 <span class="boring">  sorry
 </span><span class="boring">end Hidden
 </span></code></pre>
-<p>Each of <code>U</code> and <code>V</code> is a disjunction, so <code>u_def</code> and <code>v_def</code>
-represent four cases. In one of these cases, <code>u = True</code> and
-<code>v = False</code>, and in all the other cases, <code>p</code> is true. Thus we have:</p>
+<!--
+Each of ``U`` and ``V`` is a disjunction, so ``u_def`` and ``v_def``
+represent four cases. In one of these cases, ``u = True`` and
+``v = False``, and in all the other cases, ``p`` is true. Thus we have:
+-->
+<p><code>U</code> 和 <code>V</code> 都是析取，所以 <code>u_def</code> 和 <code>v_def</code> 表示四种情况。
+在其中一种情况下，<code>u = True</code> 且 <code>v = False</code>，在所有其他情况下，
+<code>p</code> 为真。因此我们有：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">open Classical
 </span><span class="boring">theorem em (p : Prop) : p ∨ ¬p :=
@@ -969,9 +1324,13 @@ represent four cases. In one of these cases, <code>u = True</code> and
 <span class="boring">  sorry
 </span><span class="boring">end Hidden
 </span></code></pre>
-<p>On the other hand, if <code>p</code> is true, then, by function extensionality
-and propositional extensionality, <code>U</code> and <code>V</code> are equal. By the
-definition of <code>u</code> and <code>v</code>, this implies that they are equal as well.</p>
+<!--
+On the other hand, if ``p`` is true, then, by function extensionality
+and propositional extensionality, ``U`` and ``V`` are equal. By the
+definition of ``u`` and ``v``, this implies that they are equal as well.
+-->
+<p>另一方面，若 <code>p</code> 为真，则由函数的外延性和命题的外延性，可得 <code>U</code> 和 <code>V</code> 相等。
+根据 <code>u</code> 和 <code>v</code> 的定义，这蕴含了它们也相等。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">open Classical
 </span><span class="boring">theorem em (p : Prop) : p ∨ ¬p :=
@@ -1006,7 +1365,10 @@ definition of <code>u</code> and <code>v</code>, this implies that they are equa
 <span class="boring">  sorry
 </span><span class="boring">end Hidden
 </span></code></pre>
-<p>Putting these last two facts together yields the desired conclusion:</p>
+<!--
+Putting these last two facts together yields the desired conclusion:
+-->
+<p>将最后两个事实放在一起可以得出期望的结论：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">open Classical
 </span><span class="boring">theorem em (p : Prop) : p ∨ ¬p :=
@@ -1043,10 +1405,15 @@ definition of <code>u</code> and <code>v</code>, this implies that they are equa
   | Or.inr h   =&gt; Or.inl h
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Consequences of excluded middle include double-negation elimination,
+<!--
+Consequences of excluded middle include double-negation elimination,
 proof by cases, and proof by contradiction, all of which are described
-in the <a href="./propositions_and_proofs.html#classical-logic">Section Classical Logic</a>.
-The law of the excluded middle and propositional extensionality imply propositional completeness:</p>
+in the [Section Classical Logic](./propositions_and_proofs.md#classical-logic).
+The law of the excluded middle and propositional extensionality imply propositional completeness:
+-->
+<p>排除中律的推论包括双重否定消除、分情况证明和反证法，
+所有这些都在 <a href="./propositions_and_proofs.html#classical-logic">经典逻辑一节</a>
+中描述。排除中律和命题外延性律蕴含了命题完备性：</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>open Classical
 theorem propComplete (a : Prop) : a = True ∨ a = False :=
@@ -1055,30 +1422,49 @@ theorem propComplete (a : Prop) : a = True ∨ a = False :=
   | Or.inr hn =&gt; Or.inr (propext (Iff.intro (fun h =&gt; hn h) (fun h =&gt; False.elim h)))
 <span class="boring">end Hidden
 </span></code></pre>
-<p>Together with choice, we also get the stronger principle that every
-proposition is decidable. Recall that the class of <code>Decidable</code>
-propositions is defined as follows:</p>
+<!--
+Together with choice, we also get the stronger principle that every
+proposition is decidable. Recall that the class of ``Decidable``
+propositions is defined as follows:
+-->
+<p>有了选择公理，我们也能得到一个更强的原则，即每个命题都是可判定的。
+回想一下 <code>Decidable</code> 可判定性命题集定义如下:</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>class inductive Decidable (p : Prop) where
   | isFalse (h : ¬p) : Decidable p
   | isTrue  (h : p)  : Decidable p
 <span class="boring">end Hidden
 </span></code></pre>
-<p>In contrast to <code>p ∨ ¬ p</code>, which can only eliminate to <code>Prop</code>, the
-type <code>Decidable p</code> is equivalent to the sum type <code>Sum p (¬ p)</code>, which
+<!--
+In contrast to ``p ∨ ¬ p``, which can only eliminate to ``Prop``, the
+type ``Decidable p`` is equivalent to the sum type ``Sum p (¬ p)``, which
 can eliminate to any type. It is this data that is needed to write an
-if-then-else expression.</p>
-<p>As an example of classical reasoning, we use <code>choose</code> to show that if
-<code>f : α → β</code> is injective and <code>α</code> is inhabited, then <code>f</code> has a
-left inverse. To define the left inverse <code>linv</code>, we use a dependent
-if-then-else expression. Recall that <code>if h : c then t else e</code> is
-notation for <code>dite c (fun h : c =&gt; t) (fun h : ¬ c =&gt; e)</code>. In the definition
-of <code>linv</code>, choice is used twice: first, to show that
-<code>(∃ a : A, f a = b)</code> is &quot;decidable,&quot; and then to choose an <code>a</code> such that
-<code>f a = b</code>. Notice that <code>propDecidable</code> is a scoped instance and is activated
-by the <code>open Classical</code> command. We use this instance to justify
+if-then-else expression.
+-->
+<p>与 <code>p ∨ ¬ p</code> 不同，它只能消去到 <code>Prop</code>，类型 <code>Decidable p</code> 等效于和类型
+<code>Sum p (¬ p)</code>，它可以消除至任何类型。
+这就是编写「if-then-else（若-则-否则）」表达式所需的数据。</p>
+<!--
+As an example of classical reasoning, we use ``choose`` to show that if
+``f : α → β`` is injective and ``α`` is inhabited, then ``f`` has a
+left inverse. To define the left inverse ``linv``, we use a dependent
+if-then-else expression. Recall that ``if h : c then t else e`` is
+notation for ``dite c (fun h : c => t) (fun h : ¬ c => e)``. In the definition
+of ``linv``, choice is used twice: first, to show that
+``(∃ a : A, f a = b)`` is "decidable," and then to choose an ``a`` such that
+``f a = b``. Notice that ``propDecidable`` is a scoped instance and is activated
+by the `open Classical` command. We use this instance to justify
 the if-then-else expression. (See also the discussion in
-<a href="./type_classes.html#decidable-propositions">Section Decidable Propositions</a>).</p>
+[Section Decidable Propositions](./type_classes.md#decidable-propositions)).
+-->
+<p>作为经典推理的一个示例，我们使用 <code>choose</code> 来证明，若 <code>f : α → β</code> 是单射的，
+且 <code>α</code> 是可居的，则 <code>f</code> 是左逆的。为了定义左逆 <code>linv</code>，我们使用一个依值的
+if-then-else 表达式。回忆一下，<code>if h : c then t else e</code> 是
+<code>dite c (fun h : c =&gt; t) (fun h : ¬ c =&gt; e)</code> 的记法。在 <code>linv</code> 的定义中，
+选择公理使用了两次：首先，为了证明 <code>(∃ a : A, f a = b)</code> 是「可判定的」，
+需要选择一个 <code>a</code>，使得 <code>f a = b</code>。请注意，<code>propDecidable</code> 是一个作用域实例，
+它通过 <code>open Classical</code> 命令激活。我们使用此实例来证明 if-then-else 表达式。
+（还可以参阅 <a href="./type_classes.html#decidable-propositions">可判命题一节</a> 中的讨论）。</p>
 <pre><code class="language-lean">open Classical
 
 noncomputable def linv [Inhabited α] (f : α → β) : β → α :=
@@ -1094,10 +1480,14 @@ theorem linv_comp_self {f : α → β} [Inhabited α]
       _ = choose ex := dif_pos ex
       _ = a         := inj feq
 </code></pre>
-<p>From a classical point of view, <code>linv</code> is a function. From a
+<!--
+From a classical point of view, ``linv`` is a function. From a
 constructive point of view, it is unacceptable; because there is no
 way to implement such a function in general, the construction is not
-informative.</p>
+informative.
+-->
+<p>从经典逻辑的视角来看，<code>linv</code> 是一个函数。而从构造性视角来看，
+它是不可接受的；由于没有实现这样一种函数的通用方法，因此该构造不具备信息量。</p>
 
                     </main>
 
