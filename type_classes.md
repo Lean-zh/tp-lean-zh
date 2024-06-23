@@ -77,7 +77,7 @@ automatically through a process known as typeclass resolution. In Lean, by chang
 -->
 
 类型类的主要思想是使诸如 `Add a` 之类的参数变为隐含的，
-并使用用户定义实例的数据库通过称为类型类求解的过程自动合成所需的实例。
+并使用用户定义实例的数据库通过称为类型类解析的过程自动合成所需的实例。
 在 Lean 中，通过在以上示例中将 `structure` 更改为 `class`，`Add.add` 的类型会变为：
 
 ```lean
@@ -98,7 +98,7 @@ Similarly, we can register instances by:
 -->
 
 其中方括号表示类型为 `Add a` 的参数是  **实例隐式的** ，
-即，它应该使用类型类求解合成。这个版本的 `add` 是 Haskell 项
+即，它应该使用类型类解析合成。这个版本的 `add` 是 Haskell 项
 `add :: Add a => a -> a -> a` 的 Lean 类比。
 同样，我们可以通过以下方式注册实例：
 
@@ -123,8 +123,8 @@ the goal of `Add Nat`, and typeclass resolution will synthesize the instance for
 We can now reimplement `double` using an instance implicit by:
 -->
 
-接着对于 `n : Nat` 和 `m : Nat`，项 `Add.add n m` 触发了类型类求解，
-目标为 `Add Nat`，且类型类求解将综合上面 `Nat` 的实例。
+接着对于 `n : Nat` 和 `m : Nat`，项 `Add.add n m` 触发了类型类解析，
+目标为 `Add Nat`，且类型类解析将综合上面 `Nat` 的实例。
 现在，我们可以通过隐式的实例重新实现 `double` 了：
 
 ```lean
@@ -362,7 +362,7 @@ and is useful for triggering the type class resolution procedure when the expect
 -->
 
 Lean 标准库包含了定义 `inferInstance`，它的类型为 `{α : Sort u} → [i : α] → α`，
-它在期望的类型是一个实例时触发类型类求解过程十分有用。
+它在期望的类型是一个实例时触发类型类解析过程十分有用。
 
 ```lean
 #check (inferInstance : Inhabited Nat) -- Inhabited Nat
@@ -1218,7 +1218,7 @@ triggered.
 如果你使用的是 VS Code，可以通过将鼠标悬停在相关的定理或定义上，
 或按 ``Ctrl-Shift-Enter`` 打开消息窗口来阅读结果。在 Emacs 中，
 你可以使用 ``C-c C-x`` 在你的文件中运行一个独立的 Lean 进程，
-并且在每次触发类型类求解过程时，输出缓冲区都会显示一个跟踪。
+并且在每次触发类型类解析过程时，输出缓冲区都会显示一个跟踪。
 
 <!--
 You can also limit the search using the following options:
@@ -1239,7 +1239,7 @@ Option `synthInstance.maxSize` is the maximum number of instances used
 to construct a solution in the type class instance synthesis procedure.
 -->
 
-选项 `synthInstance.maxHeartbeats` 指定每个类型类求解问题可能出现的心跳（Heartbeat）次数上限。
+选项 `synthInstance.maxHeartbeats` 指定每个类型类解析问题可能出现的心跳（Heartbeat）次数上限。
 心跳是（小）内存分配的次数（以千为单位），0 表示没有上限。
 选项 `synthInstance.maxSize` 是用于构建类型类实例合成过程中解的实例个数。
 
@@ -1347,7 +1347,7 @@ The first kind of coercion allows us to view any element of a member of the sour
 In Lean, coercions are implemented on top of the type class resolution framework. We define a coercion from ``α`` to ``β`` by declaring an instance of ``Coe α β``. For example, we can define a coercion from ``Bool`` to ``Prop`` as follows:
 -->
 
-在 Lean 中，强制转换在类型类求解框架的基础上实现。我们通过声明 ``Coe α β`` 的实例，
+在 Lean 中，强制转换在类型类解析框架的基础上实现。我们通过声明 ``Coe α β`` 的实例，
 定义从 ``α`` 到 ``β`` 的强制转换。例如，以下内容可以定义从 ``Bool`` 到 ``Prop`` 的强制转换：
 
 ```lean
@@ -1397,7 +1397,7 @@ We can use the notation ``↑`` to force a coercion to be introduced in a partic
 -->
 
 我们可以使用符号 ``↑`` 在特定位置强制引入强制转换。
-这也有助于明确我们的意图，并解决强制转换求解系统中的限制。
+这也有助于明确我们的意图，并解决强制转换解析系统中的限制。
 
 ```lean
 # def Set (α : Type u) := α → Prop

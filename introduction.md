@@ -10,7 +10,7 @@ Computers and Theorem Proving
 -->
 
 计算机和定理证明
------------------------------
+----------------
 
 <!--
 *Formal verification* involves the use of logical and computational methods to establish claims that are expressed in
@@ -23,7 +23,7 @@ lengthy computation, in which case verifying the truth of the theorem requires v
 it is supposed to do.
 -->
 
- **形式验证（Formal Verification）** 是指使用逻辑和计算方法来验证用精确的数学术语表达的命题。
+**形式验证（Formal Verification）** 是指使用逻辑和计算方法来验证用精确的数学术语表达的命题。
 这包括普通的数学定理，以及硬件或软件、网络协议、机械和混合系统中的形式命题。
 在实践中，验证数学命题和验证系统的正确性之间很类似：形式验证用数学术语描述硬件和软件系统，
 在此基础上验证其命题的正确性，这就像定理证明的过程。相反，一个数学定理的证明可能需要冗长的计算，
@@ -51,11 +51,13 @@ mathematical bounds, or finding mathematical objects. A calculation can be viewe
 too, help establish mathematical claims.
 -->
 
- **自动定理证明（Automated theorem proving）** 着眼于「寻找」证明。归结（Resolution）定理证明器、
- **表格法（tableau）** 定理证明器、 **快速可满足性求解器（Fast satisfiability solvers）**
+**自动定理证明（Automated theorem proving）** 着眼于「寻找」证明。
+**归结原理（Resolution）** 定理证明器、**表格法（tableau）** 定理证明器、
+**快速可满足性求解器（Fast satisfiability solvers）**
 等提供了在命题逻辑和一阶逻辑中验证公式有效性的方法；
 还有些系统为特定的语言和问题提供搜索和决策程序，
-例如整数或实数上的线性或非线性表达式；像 **SMT（Satisfiability modulo theories）**
+例如整数或实数上的线性或非线性表达式；
+像 **SMT（Satisfiability modulo theories，可满足性模理论）**
 这样的架构将通用的搜索方法与特定领域的程序相结合；
 计算机代数系统和专门的数学软件包提供了进行数学计算或寻找数学对象的手段，
 这些系统中的计算也可以被看作是一种证明，而这些系统也可以帮助建立数学命题。
@@ -72,7 +74,7 @@ allows you to obtain deeper and more complex proofs.
 -->
 
 自动推理系统努力追求能力和效率，但往往牺牲稳定性。这样的系统可能会有 bug，
-而且很难保证它们所提供的结果是正确的。相比之下， **交互式定理证明器（Interactive theorem proving）**
+而且很难保证它们所提供的结果是正确的。相比之下，**交互式定理证明器（Interactive theorem proving）**
 侧重于「验证」证明，要求每个命题都有合适的公理基础的证明来支持。
 这就设定了非常高的标准：每一条推理规则和每一步计算都必须通过求助于先前的定义和定理来证明，
 一直到基本公理和规则。事实上，大多数这样的系统提供了精心设计的「证明对象」，
@@ -86,7 +88,7 @@ axiomatic proofs. The goal is to support both mathematical reasoning and reasoni
 claims in both domains.
 -->
 
- **Lean 定理证明器** 旨在融合交互式和自动定理证明，
+**Lean 定理证明器** 旨在融合交互式和自动定理证明，
 它将自动化工具和方法置于一个支持用户交互和构建完整公理化证明的框架中。
 它的目标是支持数学推理和复杂系统的推理，并验证这两个领域的命题。
 
@@ -101,7 +103,7 @@ aspects of the system will make an appearance here.
 
 Lean 的底层逻辑有一个计算的解释，与此同时 Lean 可以被视为一种编程语言。
 更重要的是，它可以被看作是一个编写具有精确语义的程序的系统，
-以及对程序所表示的计算功能进行推理。Lean 中也有机制使它能够作为它自己的 **元编程语言** ，
+以及对程序所表示的计算功能进行推理。Lean 中也有机制使它能够作为它自己的 **元编程语言**，
 这意味着你可以使用 Lean 本身实现自动化和扩展 Lean 的功能。
 Lean 的这些方面将在本教程的配套教程
 [Lean 4函数式编程](https://www.leanprover.cn/fp-lean-zh/)中进行探讨，本书只介绍计算方面。
@@ -172,7 +174,7 @@ flexible forms of algebraic reasoning.
 
 由于完全深入细节的公理证明十分复杂，定理证明的难点在于让计算机尽可能多地填补证明细节。
 你将通过[依值类型论](dependent_type_theory.md)语言来学习各种方法实现自动证明，例如项重写，
-以及 Lean 中的项和表达式的自动简化方法。同样， **繁饰（Elaboration）**
+以及 Lean 中的项和表达式的自动简化方法。同样，**繁饰（Elaboration）**
 和 **类型推断（Type inference）** 的方法，可以用来支持灵活的代数推理。
 
 
