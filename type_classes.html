@@ -208,7 +208,7 @@ automatically through a process known as typeclass resolution. In Lean, by chang
 `structure` to `class` in the example above, the type of `Add.add` becomes:
 -->
 <p>类型类的主要思想是使诸如 <code>Add a</code> 之类的参数变为隐含的，
-并使用用户定义实例的数据库通过称为类型类求解的过程自动合成所需的实例。
+并使用用户定义实例的数据库通过称为类型类解析的过程自动合成所需的实例。
 在 Lean 中，通过在以上示例中将 <code>structure</code> 更改为 <code>class</code>，<code>Add.add</code> 的类型会变为：</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class Add (a : Type) where
@@ -225,7 +225,7 @@ i.e. that it should be synthesized using typeclass resolution. This version of
 Similarly, we can register instances by:
 -->
 <p>其中方括号表示类型为 <code>Add a</code> 的参数是  <strong>实例隐式的</strong> ，
-即，它应该使用类型类求解合成。这个版本的 <code>add</code> 是 Haskell 项
+即，它应该使用类型类解析合成。这个版本的 <code>add</code> 是 Haskell 项
 <code>add :: Add a =&gt; a -&gt; a -&gt; a</code> 的 Lean 类比。
 同样，我们可以通过以下方式注册实例：</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
@@ -246,8 +246,8 @@ Then for `n : Nat` and `m : Nat`, the term `Add.add n m` triggers typeclass reso
 the goal of `Add Nat`, and typeclass resolution will synthesize the instance for `Nat` above.
 We can now reimplement `double` using an instance implicit by:
 -->
-<p>接着对于 <code>n : Nat</code> 和 <code>m : Nat</code>，项 <code>Add.add n m</code> 触发了类型类求解，
-目标为 <code>Add Nat</code>，且类型类求解将综合上面 <code>Nat</code> 的实例。
+<p>接着对于 <code>n : Nat</code> 和 <code>m : Nat</code>，项 <code>Add.add n m</code> 触发了类型类解析，
+目标为 <code>Add Nat</code>，且类型类解析将综合上面 <code>Nat</code> 的实例。
 现在，我们可以通过隐式的实例重新实现 <code>double</code> 了：</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span><span class="boring">class Add (a : Type) where
@@ -444,7 +444,7 @@ The Lean standard library contains the definition `inferInstance`. It has type `
 and is useful for triggering the type class resolution procedure when the expected type is an instance.
 -->
 <p>Lean 标准库包含了定义 <code>inferInstance</code>，它的类型为 <code>{α : Sort u} → [i : α] → α</code>，
-它在期望的类型是一个实例时触发类型类求解过程十分有用。</p>
+它在期望的类型是一个实例时触发类型类解析过程十分有用。</p>
 <pre><code class="language-lean">#check (inferInstance : Inhabited Nat) -- Inhabited Nat
 
 def foo : Inhabited (Nat × Nat) :=
@@ -1141,7 +1141,7 @@ triggered.
 <p>如果你使用的是 VS Code，可以通过将鼠标悬停在相关的定理或定义上，
 或按 <code>Ctrl-Shift-Enter</code> 打开消息窗口来阅读结果。在 Emacs 中，
 你可以使用 <code>C-c C-x</code> 在你的文件中运行一个独立的 Lean 进程，
-并且在每次触发类型类求解过程时，输出缓冲区都会显示一个跟踪。</p>
+并且在每次触发类型类解析过程时，输出缓冲区都会显示一个跟踪。</p>
 <!--
 You can also limit the search using the following options:
 -->
@@ -1156,7 +1156,7 @@ heartbeats per typeclass resolution problem. A heartbeat is the number of
 Option `synthInstance.maxSize` is the maximum number of instances used
 to construct a solution in the type class instance synthesis procedure.
 -->
-<p>选项 <code>synthInstance.maxHeartbeats</code> 指定每个类型类求解问题可能出现的心跳（Heartbeat）次数上限。
+<p>选项 <code>synthInstance.maxHeartbeats</code> 指定每个类型类解析问题可能出现的心跳（Heartbeat）次数上限。
 心跳是（小）内存分配的次数（以千为单位），0 表示没有上限。
 选项 <code>synthInstance.maxSize</code> 是用于构建类型类实例合成过程中解的实例个数。</p>
 <!--
@@ -1247,7 +1247,7 @@ The first kind of coercion allows us to view any element of a member of the sour
 <!--
 In Lean, coercions are implemented on top of the type class resolution framework. We define a coercion from ``α`` to ``β`` by declaring an instance of ``Coe α β``. For example, we can define a coercion from ``Bool`` to ``Prop`` as follows:
 -->
-<p>在 Lean 中，强制转换在类型类求解框架的基础上实现。我们通过声明 <code>Coe α β</code> 的实例，
+<p>在 Lean 中，强制转换在类型类解析框架的基础上实现。我们通过声明 <code>Coe α β</code> 的实例，
 定义从 <code>α</code> 到 <code>β</code> 的强制转换。例如，以下内容可以定义从 <code>Bool</code> 到 <code>Prop</code> 的强制转换：</p>
 <pre><code class="language-lean">instance : Coe Bool Prop where
   coe b := b = true
@@ -1285,7 +1285,7 @@ def s : Set Nat := {1}
 We can use the notation ``↑`` to force a coercion to be introduced in a particular place. It is also helpful to make our intent clear, and work around limitations of the coercion resolution system.
 -->
 <p>我们可以使用符号 <code>↑</code> 在特定位置强制引入强制转换。
-这也有助于明确我们的意图，并解决强制转换求解系统中的限制。</p>
+这也有助于明确我们的意图，并解决强制转换解析系统中的限制。</p>
 <pre><code class="language-lean"><span class="boring">def Set (α : Type u) := α → Prop
 </span><span class="boring">def Set.empty {α : Type u} : Set α := fun _ =&gt; False
 </span><span class="boring">def Set.mem (a : α) (s : Set α) : Prop := s a

@@ -184,11 +184,13 @@ specialized mathematical software packages provide means of carrying out mathema
 mathematical bounds, or finding mathematical objects. A calculation can be viewed as a proof as well, and these systems,
 too, help establish mathematical claims.
 -->
-<p><strong>自动定理证明（Automated theorem proving）</strong> 着眼于「寻找」证明。归结（Resolution）定理证明器、
-<strong>表格法（tableau）</strong> 定理证明器、 <strong>快速可满足性求解器（Fast satisfiability solvers）</strong>
+<p><strong>自动定理证明（Automated theorem proving）</strong> 着眼于「寻找」证明。
+<strong>归结原理（Resolution）</strong> 定理证明器、<strong>表格法（tableau）</strong> 定理证明器、
+<strong>快速可满足性求解器（Fast satisfiability solvers）</strong>
 等提供了在命题逻辑和一阶逻辑中验证公式有效性的方法；
 还有些系统为特定的语言和问题提供搜索和决策程序，
-例如整数或实数上的线性或非线性表达式；像 <strong>SMT（Satisfiability modulo theories）</strong>
+例如整数或实数上的线性或非线性表达式；
+像 <strong>SMT（Satisfiability modulo theories，可满足性模理论）</strong>
 这样的架构将通用的搜索方法与特定领域的程序相结合；
 计算机代数系统和专门的数学软件包提供了进行数学计算或寻找数学对象的手段，
 这些系统中的计算也可以被看作是一种证明，而这些系统也可以帮助建立数学命题。</p>
@@ -203,7 +205,7 @@ checked independently. Constructing such proofs typically requires much more inp
 allows you to obtain deeper and more complex proofs.
 -->
 <p>自动推理系统努力追求能力和效率，但往往牺牲稳定性。这样的系统可能会有 bug，
-而且很难保证它们所提供的结果是正确的。相比之下， <strong>交互式定理证明器（Interactive theorem proving）</strong>
+而且很难保证它们所提供的结果是正确的。相比之下，<strong>交互式定理证明器（Interactive theorem proving）</strong>
 侧重于「验证」证明，要求每个命题都有合适的公理基础的证明来支持。
 这就设定了非常高的标准：每一条推理规则和每一步计算都必须通过求助于先前的定义和定理来证明，
 一直到基本公理和规则。事实上，大多数这样的系统提供了精心设计的「证明对象」，
@@ -228,7 +230,7 @@ aspects of the system will make an appearance here.
 -->
 <p>Lean 的底层逻辑有一个计算的解释，与此同时 Lean 可以被视为一种编程语言。
 更重要的是，它可以被看作是一个编写具有精确语义的程序的系统，
-以及对程序所表示的计算功能进行推理。Lean 中也有机制使它能够作为它自己的 <strong>元编程语言</strong> ，
+以及对程序所表示的计算功能进行推理。Lean 中也有机制使它能够作为它自己的 <strong>元编程语言</strong>，
 这意味着你可以使用 Lean 本身实现自动化和扩展 Lean 的功能。
 Lean 的这些方面将在本教程的配套教程
 <a href="https://www.leanprover.cn/fp-lean-zh/">Lean 4函数式编程</a>中进行探讨，本书只介绍计算方面。</p>
@@ -281,7 +283,7 @@ flexible forms of algebraic reasoning.
 -->
 <p>由于完全深入细节的公理证明十分复杂，定理证明的难点在于让计算机尽可能多地填补证明细节。
 你将通过<a href="dependent_type_theory.html">依值类型论</a>语言来学习各种方法实现自动证明，例如项重写，
-以及 Lean 中的项和表达式的自动简化方法。同样， <strong>繁饰（Elaboration）</strong>
+以及 Lean 中的项和表达式的自动简化方法。同样，<strong>繁饰（Elaboration）</strong>
 和 <strong>类型推断（Type inference）</strong> 的方法，可以用来支持灵活的代数推理。</p>
 <!--
 Finally, you will learn about features that are specific to Lean, including the language you use to communicate
