@@ -1062,7 +1062,7 @@ auxiliary goal without having to label it. We can refer to the last
 expression introduced in this way using the keyword ``this``:
 -->
 <p>我们已经看到像 <code>fun</code>、<code>have</code> 和 <code>show</code> 这样的关键字使得写出反映非正式数学证明结构的正式证明项成为可能。在本节中，我们将讨论证明语言的一些通常很方便的附加特性。</p>
-<p>首先，我们可以使用匿名的 <code>have</code> 表达式来引入一个辅助目标，而不需要标注它。我们可以使用关键字 <code>this</code>'来引用最后一个以这种方式引入的表达式:</p>
+<p>首先，我们可以使用匿名的 <code>have</code> 表达式来引入一个辅助目标，而不需要标注它。我们可以使用关键字 <code>this</code> 来引用最后一个以这种方式引入的表达式:</p>
 <pre><code class="language-lean">variable (f : Nat → Nat)
 variable (h : ∀ x : Nat, f x ≤ f (x + 1))
 

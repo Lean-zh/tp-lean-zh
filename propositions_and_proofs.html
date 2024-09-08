@@ -757,7 +757,7 @@ takes three arguments, ``hpq : p ∨ q``, ``hpr : p → r`` and
 ``hqr : q → r``, and produces a proof of ``r``. In the following example, we use
 ``Or.elim`` to prove ``p ∨ q → q ∨ p``.
 -->
-<p>析取消去规则稍微复杂一点。这个想法是，我们可以从 <code>p ∨ q</code> 证明 <code>r</code>，通过从 <code>p</code> 证明 <code>r</code>，且从 <code>q</code> 证明 <code>r</code>。换句话说，它是一种逐情况证明。在表达式 <code>Or.elim hpq hpr hqr</code> 中，<code>Or.elim</code> 接受三个论证，<code>hpq : p ∨ q</code>，<code>hpr : p → r</code> 和 <code>hqr : q → r</code>，生成 <code>r</code> 的证明。在下面的例子中，我们使用 <code>Or.elim</code> 证明 <code>p ∨ q → q ∨ p</code>。</p>
+<p>析取消去规则稍微复杂一点。这个想法是，如果我们想要从 <code>p ∨ q</code> 证明 <code>r</code>，只需要展示 <code>p</code> 可以证明 <code>r</code>，且 <code>q</code> 也可以证明 <code>r</code>。换句话说，它是一种逐情况证明。在表达式 <code>Or.elim hpq hpr hqr</code> 中，<code>Or.elim</code> 接受三个论证，<code>hpq : p ∨ q</code>，<code>hpr : p → r</code> 和 <code>hqr : q → r</code>，生成 <code>r</code> 的证明。在下面的例子中，我们使用 <code>Or.elim</code> 证明 <code>p ∨ q → q ∨ p</code>。</p>
 <pre><code class="language-lean">variable (p q r : Prop)
 
 example (h : p ∨ q) : q ∨ p :=
