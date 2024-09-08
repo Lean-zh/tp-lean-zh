@@ -764,7 +764,7 @@ takes three arguments, ``hpq : p ∨ q``, ``hpr : p → r`` and
 ``Or.elim`` to prove ``p ∨ q → q ∨ p``.
 -->
 
-析取消去规则稍微复杂一点。这个想法是，我们可以从 ``p ∨ q`` 证明 ``r``，通过从 ``p`` 证明 ``r``，且从 ``q`` 证明 ``r``。换句话说，它是一种逐情况证明。在表达式 ``Or.elim hpq hpr hqr`` 中，``Or.elim`` 接受三个论证，``hpq : p ∨ q``，``hpr : p → r`` 和 ``hqr : q → r``，生成 ``r`` 的证明。在下面的例子中，我们使用 ``Or.elim`` 证明 ``p ∨ q → q ∨ p``。
+析取消去规则稍微复杂一点。这个想法是，如果我们想要从 ``p ∨ q`` 证明 ``r``，只需要展示 ``p`` 可以证明 ``r``，且 ``q`` 也可以证明 ``r``。换句话说，它是一种逐情况证明。在表达式 ``Or.elim hpq hpr hqr`` 中，``Or.elim`` 接受三个论证，``hpq : p ∨ q``，``hpr : p → r`` 和 ``hqr : q → r``，生成 ``r`` 的证明。在下面的例子中，我们使用 ``Or.elim`` 证明 ``p ∨ q → q ∨ p``。
 
 ```lean
 variable (p q r : Prop)
