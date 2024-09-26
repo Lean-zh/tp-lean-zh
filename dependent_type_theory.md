@@ -366,7 +366,7 @@ that there is a ``Type n`` for every natural number ``n``. ``Type`` is
 an abbreviation for ``Type 0``:
 -->
 
-可以将 ``Type 0`` 看作是一个由「小」或「普通」类型组成的宇宙。然后，``Type 1`` 是一个更大的类型范围，其中包含 ``Type 0`` 作为一个元素，而 ``Type 2`` 是一个更大的类型范围，其中包含 ``Type 1`` 作为一个元素。这个列表是不确定的，所以对于每个自然数 ``n`` 都有一个 ``Type n``。``Type`` 是 ``Type 0`` 的缩写：
+可以将 ``Type 0`` 看作是一个由「小」或「普通」类型组成的宇宙。然后，``Type 1`` 是一个更大的类型范围，其中包含 ``Type 0`` 作为一个元素，而 ``Type 2`` 是一个更大的类型范围，其中包含 ``Type 1`` 作为一个元素。这个列表是无限的，所以对于每个自然数 ``n`` 都有一个 ``Type n``。``Type`` 是 ``Type 0`` 的缩写：
 
 ```lean
 #check Type
