@@ -210,19 +210,19 @@ Here is an example of how the propositions-as-types correspondence gets put into
 <p>如果 <code>α</code> 是任何类型，我们可以将 <code>α</code> 上的一元谓词 <code>p</code> 作为 <code>α → Prop</code> 类型的对象。在这种情况下，给定 <code>x : α</code>， <code>p x</code> 表示断言 <code>p</code> 在 <code>x</code> 上成立。类似地，一个对象 <code>r : α → α → Prop</code> 表示 <code>α</code> 上的二元关系：给定 <code>x y : α</code>，<code>r x y</code> 表示断言 <code>x</code> 与 <code>y</code> 相关。</p>
 <p>全称量词 <code>∀ x : α, p x</code> 表示，对于每一个 <code>x : α</code>，<code>p x</code> 成立。与命题连接词一样，在自然演绎系统中，「forall」有引入和消去规则。非正式地，引入规则是：</p>
 <blockquote>
-<p>给定 <code>p x</code> 的证明，在 <code>x : α</code> 是任意的情况下，我们得到 <code>∀ x : α, p x</code> 的证明。</p>
+<p>在 <code>x : α</code> 是任意的情况下，给定 <code>p x</code> 的证明；就可以得到 <code>∀ x : α, p x</code> 的证明。</p>
 </blockquote>
 <p>消去规则是：</p>
 <blockquote>
-<p>给定 <code>∀ x : α, p x</code> 的证明和任何项 <code>t : α</code>，我们得到 <code>p t</code> 的证明。</p>
+<p>给定 <code>∀ x : α, p x</code> 的证明和任何项 <code>t : α</code>，就可以得到 <code>p t</code> 的证明。</p>
 </blockquote>
 <p>与蕴含的情况一样，命题即类型。回想依值箭头类型的引入规则:</p>
 <blockquote>
-<p>给定类型为 <code>β x</code> 的项 <code>t</code>，在 <code>x : α</code> 是任意的情况下，我们有 <code>(fun x : α =&gt; t) : (x : α) → β x</code>。</p>
+<p>在 <code>x : α</code> 是任意的情况下给定类型为 <code>β x</code> 的项 <code>t</code>，就可以得到 <code>(fun x : α =&gt; t) : (x : α) → β x</code>。</p>
 </blockquote>
 <p>消去规则：</p>
 <blockquote>
-<p>给定项 <code>s : (x : α) → β x</code> 和任何项 <code>t : α</code>，我们有 <code>s t : β t</code>。</p>
+<p>给定项 <code>s : (x : α) → β x</code> 和任何项 <code>t : α</code>，就可以得到 <code>s t : β t</code>。</p>
 </blockquote>
 <p>在 <code>p x</code> 具有 <code>Prop</code> 类型的情况下，如果我们用 <code>∀ x : α, p x</code> 替换 <code>(x : α) → β x</code>，就得到构建涉及全称量词的证明的规则。</p>
 <p>因此，构造演算用全称表达式来识别依值箭头类型。如果 <code>p</code> 是任何表达式，<code>∀ x : α, p</code> 不过是 <code>(x : α) → p</code> 的替代符号，在 <code>p</code> 是命题的情况下，前者比后者更自然。通常，表达式 <code>p</code> 取决于 <code>x : α</code>。回想一下，在普通函数空间中，我们可以将 <code>α → β</code> 解释为 <code>(x : α) → β</code> 的特殊情况，其中 <code>β</code> 不依赖于 <code>x</code>。类似地，我们可以把命题之间的蕴涵 <code>p → q</code> 看作是 <code>∀ x : p, q</code> 的特殊情况，其中 <code>q</code> 不依赖于 <code>x</code>。</p>
