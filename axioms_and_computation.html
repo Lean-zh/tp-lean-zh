@@ -196,7 +196,7 @@ computation. This also blocks evaluation in the kernel, but it is
 compatible with compilation to bytecode.
 -->
 <p>Lean 的标准库定义了一个公理： <strong>命题外延性（Propositional Extensionality）</strong> 。
-以及一个 <strong>商（Qoutient）</strong> 结构，它蕴含了函数外延性的公理。
+以及一个 <strong>商（Quotient）</strong> 结构，它蕴含了函数外延性的公理。
 这些扩展被用来发展如集合与有限集这些理论。我们在后面会看到，
 这些定理的使用会阻碍 Lean 内核中的求值，因此 <code>Nat</code> 类型的封闭项不再求值为数值。
 但是 Lean 在对其虚拟机器求值器进行字节码编译时会擦除类型和命题信息，
