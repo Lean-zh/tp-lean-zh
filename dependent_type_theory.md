@@ -1188,7 +1188,7 @@ namespace, its effects disappear when the namespace is closed.
 
 与小节一样，嵌套的名称空间必须按照打开的顺序关闭。命名空间和小节有不同的用途：命名空间组织数据，小节声明变量，以便在定义中插入。小节对于分隔 ``set_option`` 和 ``open`` 等命令的范围也很有用。
 
-然而，在许多方面，``namespace ... end`` 结构块和 ``section ... end`` 表现出来的特征是一样的。尤其是你在命名空间中使用 ``variable`` 命令时，它的作用范围被限制在命名空间里。类似地，如果你在命名空间中使用 ``open`` 命令，它的效果在命名空间关闭后消失。
+然而，在许多方面，``namespace ... end`` 结构块和 ``section ... end`` 表现出来的特征是一样的。尤其是你在命名空间中使用 ``variable`` 命令时，它的作用范围被限制在命名空间里。类似地，如果你在小节中使用 ``open`` 命令，它的效果在小节关闭后消失。
 
 <!--
 ## What makes dependent type theory dependent?
