@@ -952,7 +952,7 @@ Introducing Auxiliary Subgoals
 --------
 -->
 
-## 引入辅助子目标
+## 引入辅助 子目标
 
 <!--
 This is a good place to introduce another device Lean offers to help
