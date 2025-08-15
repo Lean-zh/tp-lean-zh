@@ -80,7 +80,7 @@ The naive first attempt is to enter tactic mode and try
 
 - `lhs`（left hand side）导航到关系（此处是等式）左边。同理`rhs`导航到右边。
 - `congr`创建与当前头函数的(非依赖的和显式的)参数数量一样多的目标（此处的头函数是乘法）。
-- `skip`走到下一个目标。
+- `rfl`使用自反性。
 
 一旦到达相关目标，我们就可以像在普通策略模式中一样使用`rw`。
 
