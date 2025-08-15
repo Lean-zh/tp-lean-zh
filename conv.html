@@ -208,7 +208,7 @@ The naive first attempt is to enter tactic mode and try
 <ul>
 <li><code>lhs</code>（left hand side）导航到关系（此处是等式）左边。同理<code>rhs</code>导航到右边。</li>
 <li><code>congr</code>创建与当前头函数的(非依赖的和显式的)参数数量一样多的目标（此处的头函数是乘法）。</li>
-<li><code>skip</code>走到下一个目标。</li>
+<li><code>rfl</code>使用自反性。</li>
 </ul>
 <p>一旦到达相关目标，我们就可以像在普通策略模式中一样使用<code>rw</code>。</p>
 <p>使用转换模式的第二个主要原因是在约束器下重写。假设我们想证明<code>(fun x : Nat =&gt; 0 + x) = (fun x =&gt; x)</code>。首次简单的尝试<code>rw [zero_add]</code>是失败的。报错：</p>
