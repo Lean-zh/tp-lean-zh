@@ -169,7 +169,7 @@ has addition:
 
 ```lean
 instance [Add a] : Add (Array a) where
-  add x y := Array.zipWith x y (· + ·)
+  add x y := Array.zipWith (· + ·) x y
 
 #eval Add.add #[1, 2] #[3, 4]
 -- #[4, 6]
