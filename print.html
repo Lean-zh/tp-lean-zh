@@ -10768,7 +10768,7 @@ has addition:
 <p>一般情况下，实例可能以复杂的方式依赖于其他实例。例如，你可以声明一个（匿名）实例，
 说明如果 <code>a</code> 存在加法，那么 <code>Array a</code> 也存在加法：</p>
 <pre><code class="language-lean">instance [Add a] : Add (Array a) where
-  add x y := Array.zipWith x y (· + ·)
+  add x y := Array.zipWith (· + ·) x y
 
 #eval Add.add #[1, 2] #[3, 4]
 -- #[4, 6]
