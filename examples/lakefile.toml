@@ -1,0 +1,11 @@
+name = "tpilzh-examples"
+version = "0.1.0"
+defaultTargets = ["Examples"]
+
+[[require]]
+name = "subverso"
+git = "https://github.com/leanprover/subverso.git"
+rev = "767f10408ca8abe29a15add2bf111eefdd9522b2"
+
+[[lean_lib]]
+name = "Examples"
