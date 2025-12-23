@@ -1096,11 +1096,11 @@ Nat.rec.{u} :
 -- since it describes the kind of object we wish to construct.
 -- The next two arguments specify how to compute the zero and successor cases, as described above.
 -- They are also known as the _minor premises_.
--- Finally, the {leanRef}`t : Nat`, is the input to the function. It is also known as the _major premise_.
+-- Finally, the {leanRef}`t : Nat` is the input to the function. It is also known as the _major premise_.
 
 隐参数 {leanRef}`motive`，是被定义的函数的陪域。在类型论中，通常说 {leanRef}`motive` 是消去/递归的 _目的_ ，因为它描述了我们希望构建的对象类型。
 接下来的两个参数指定了如何计算零和后继的情况，如上所述。它们也被称为 _小前提_。
-最后，{leanRef}`t : Nat`，是函数的输入。它也被称为 _大前提_。
+最后，{leanRef}`t : Nat` 是函数的输入。它也被称为 _大前提_。
 
 -- The {name}`Nat.recOn` is similar to {name}`Nat.rec` but the major premise occurs before the minor premises.
 
@@ -1970,10 +1970,10 @@ example (m n k : Nat) (h : succ (succ m) = succ (succ n))
 ```
 :::
 
--- The first instance of the tactic adds {leanRef}`h' : m + 1 = n + 1` to the
+-- The first instance of the tactic adds {leanRef}`h' : m.succ = n.succ`  to the
 -- context, and the second adds {leanRef}`h'' : m = n`.
 
-该策略的第一个实例将 {leanRef}`h' : m + 1 = n + 1` 添加到上下文中，第二个实例添加 {leanRef}`h'' : m = n`。
+该策略的第一个实例将 {leanRef}`h' : m.succ = n.succ` 添加到上下文中，第二个实例添加 {leanRef}`h'' : m = n`。
 
 -- The {leanRef}`injection` tactic also detects contradictions that arise when different constructors
 -- are set equal to one another, and uses them to close the goal.

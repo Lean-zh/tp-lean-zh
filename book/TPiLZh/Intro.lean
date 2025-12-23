@@ -112,18 +112,18 @@ tag := "about-lean"
 
 -- The _Lean_ project was launched by Leonardo de Moura at Microsoft Research Redmond in 2013. It is an ongoing, long-term
 -- effort, and much of the potential for automation will be realized only gradually over time. Lean is released under the
--- [Apache 2.0 license](LICENSE), a permissive open source license that permits others to use and extend the code and
+-- [Apache 2.0 license](https://github.com/leanprover/lean4/blob/master/LICENSE), a permissive open source license that permits others to use and extend the code and
 -- mathematical libraries freely.
 
 *Lean* 项目由 Leonardo de Moura 于 2013 年在微软雷德蒙德研究院启动。
 这是一个持续的、长期的工作，许多自动化的潜力只会随着时间的推移逐渐实现。
-Lean 在 [Apache 2.0 许可证](LICENSE) 下发布，这是一个宽松的开源许可证，
+Lean 在 [Apache 2.0 许可证](https://github.com/leanprover/lean4/blob/master/LICENSE) 下发布，这是一个宽松的开源许可证，
 允许他人自由使用和扩展代码及数学库。
 
--- To install Lean in your computer consider using the [Quickstart](https://github.com/leanprover/lean4/blob/master/doc/quickstart.md) instructions. The Lean source code, and instructions for building Lean, are available at
+-- To install Lean in your computer consider using the [Quickstart](https://lean-lang.org/install/) instructions. The Lean source code, and instructions for building Lean, are available at
 -- [https://github.com/leanprover/lean4/](https://github.com/leanprover/lean4/).
 
-要在您的计算机上安装 Lean，请考虑使用 [快速入门](https://github.com/leanprover/lean4/blob/master/doc/quickstart.md) 说明。
+要在您的计算机上安装 Lean，请考虑使用 [快速入门](https://lean-lang.org/install/) 说明。（中文版见[Lean 4 安装指南](https://www.leanprover.cn/install/)）
 Lean 源代码和构建 Lean 的说明可在 [https://github.com/leanprover/lean4/](https://github.com/leanprover/lean4/) 获得。
 
 -- This tutorial describes the current version of Lean, known as Lean 4.
@@ -150,15 +150,15 @@ tag := "about-this-book"
 Lean 不仅可以在依赖类型理论中定义数学对象和表达数学断言，还可以用作编写证明的语言。
 
 -- Because fully detailed axiomatic proofs are so complicated, the challenge of theorem proving is to have the computer
--- fill in as many of the details as possible. You will learn various methods to support this in [dependent type
--- theory](dependent_type_theory.md). For example, term rewriting, and Lean's automated methods for simplifying terms and
+-- fill in as many of the details as possible. You will learn various methods to support this in
+-- {ref "dependent-type-theory"}[dependent type theory]. For example, term rewriting, and Lean's automated methods for simplifying terms and
 -- expressions automatically. Similarly, methods of _elaboration_ and _type inference_, which can be used to support
 -- flexible forms of algebraic reasoning.
 
 因为完全详细的公理化证明非常复杂，定理证明的挑战在于让计算机尽可能多地填充细节。
-您将在 [依赖类型理论](dependent_type_theory.md) 中学习支持这一点的各种方法。
+您将在 {ref "dependent-type-theory"}[依值类型论] 中学习支持这一点的各种方法。
 例如，项重写，以及 Lean 自动简化项和表达式的自动化方法。
-同样，还有 *精阐（elaboration）* 和 *类型推断（type inference）* 的方法，
+同样，还有 *繁饰（elaboration）* 和 *类型推断（type inference）* 的方法，
 可用于支持灵活形式的代数推理。
 
 -- Finally, you will learn about features that are specific to Lean, including the language you use to communicate

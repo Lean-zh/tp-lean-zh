@@ -28,4 +28,4 @@ def config : Config where
   issueLink := some "https://github.com/Lean-zh/tp-lean-zh/issues"
   linkTargets := fun st => st.localTargets ++ st.remoteTargets
 
-def main := manualMain (%doc TPiLZh) (config := config.addKaTeX)
+def main := manualMain (%doc TPiLZh) (config := config)

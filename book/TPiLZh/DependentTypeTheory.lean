@@ -1462,7 +1462,7 @@ variable (α : Type) (β : α → Type) (a : α) (b : β a)
 ```
 -- Just as dependent function types {lean}`(a : α) → β a` generalize the
 -- notion of a function type {leanRef}`α → β` by allowing {leanRef (in := "α → β")}`β` to depend on
--- {lean}`α`, dependent Cartesian product types {lean}`(a : α) × β a` generalize
+-- {lean}`a`, dependent Cartesian product types {lean}`(a : α) × β a` generalize
 -- the Cartesian product {lit}`α × β` in the same way. Dependent products
 -- are also called _sigma_ types, and you can also write them as
 -- {lean}`Σ a : α, β a`. You can use {lean (type := "(a : α) × β a")}`⟨a, b⟩` or {lean}`Sigma.mk a b` to create a
@@ -1470,7 +1470,7 @@ variable (α : Type) (β : α → Type) (a : α) (b : β a)
 -- {kbd}`\langle` and {kbd}`\rangle` or {kbd}`\<` and {kbd}`\>`, respectively.
 :::
 就像依值函数类型 {lean}`(a : α) → β a` 通过允许 {leanRef (in := "α → β")}`β` 依赖
-{lean}`α` 从而推广了函数类型 {leanRef}`α → β`，依值笛卡尔积类型 {lean}`(a : α) × β a` 同样推广了
+{lean}`a` 从而推广了函数类型 {leanRef}`α → β`，依值笛卡尔积类型 {lean}`(a : α) × β a` 同样推广了
 笛卡尔积 {lit}`α × β`。依值积
 类型又称为 _sigma_ 类型，可写成
 {lean}`Σ a : α, β a`。你可以用 {lean (type := "(a : α) × β a")}`⟨a, b⟩` 或者 {lean}`Sigma.mk a b` 来创建
