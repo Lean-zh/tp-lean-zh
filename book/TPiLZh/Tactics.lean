@@ -5,6 +5,8 @@ open Verso.Genre
 open Manual hiding tactic
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "证明策略" =>
 %%%
 tag := "tactics"
@@ -2042,7 +2044,7 @@ end
 -- but the order they are listed is rigid. You can see the correct order
 -- in an editor by placing the cursor on the {leanRef}`simp` identifier to see
 -- the documentation string that is associated with it.
-注意，我们讨论过的各种 {leanRef}`simp` 选项——给出显式的规则列表，以及使用 {leanRef}`at` 指定位置——可以组合使用，但它们列出的顺序是固定的。
+注意，我们讨论过的各种 {leanRef}`simp` 选项，即给出显式的规则列表，以及使用 {leanRef}`at` 指定位置，可以组合使用，但它们列出的顺序是固定的。
 你可以在编辑器中通过将光标放在 {leanRef}`simp` 标识符上，查看与其关联的文档字符串，从而看到正确的顺序。
 
 :::leanFirst

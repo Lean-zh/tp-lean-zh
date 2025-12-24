@@ -4,6 +4,8 @@ import TPiLZh.Examples
 open Verso.Genre Manual
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "公理与计算" =>
 %%%
 tag := "axioms-and-computation"
@@ -134,12 +136,12 @@ variable (x : α) (y : β)
 -- “for every {lean}`x`, there is a {lean}`y` such that ...”, it was generally
 -- straightforward to extract an algorithm to compute such a {lean}`y` given
 -- {lean}`x`.
-:::
 
 历史上大部分时候，数学主要是计算性的：几何处理涉及几何对象的构造，
 代数涉及方程组的算法解，分析提供了计算系统随时间演变的未来行为的方法。
 从定理的证明到“对于每个 {lean}`x`，都有一个 {lean}`y` 使得 ...”这一效果，
 通常可以提取一种算法来根据给定的 {lean}`x` 计算这样的的 {lean}`y`。
+:::
 
 -- In the nineteenth century, however, increases in the complexity of
 -- mathematical arguments pushed mathematicians to develop new styles of
@@ -192,12 +194,12 @@ notation "… " e "…" => e
 -- “evaluated” by applying reduction rules until no more rules can be
 -- applied. In principle, any closed term (that is, term with no free
 -- variables) of type {lean}`Nat` should evaluate to a numeral, {lean}`succ (… (succ zero)…)`.
-:::
 
 从计算的角度来看，依值类型论中最纯粹的部分完全避免使用 {lean}`Prop`。
 归纳类型和依值函数类型可以看作是数据类型，这些类型的项可以通过应用归约规则进行“求值”，
 直到不能再应用任何规则为止。原则上，类型为 {lean}`Nat` 的任何封闭项（即没有自由变量的项）
 都应求值为一个数值：{lean}`succ (… (succ zero)…)`。
+:::
 
 :::setup
 ```
@@ -241,7 +243,6 @@ notation x " = " y " : " α => @Eq α x y
 -- distinction between the proof-irrelevant and data-relevant parts of
 -- the theory.
 
-:::
 
 在通过了证明无关的 {lean}`Prop` 之后，可以认为使用排中律 {lean}`p ∨ ¬p` 是合法的，
 其中 {lean}`p` 是任何命题。当然，这也可能根据 CIC 的规则阻止计算，
@@ -278,11 +279,11 @@ variable (a : Prop)
 -- $`\{\ast\}`, for some distinguished element $`\ast`. The axiom has the
 -- effect that equivalent propositions can be substituted for one another
 -- in any context:
-:::
 
 它断言当两个命题互相蕴含时，二者实质相等。这与集合论的解释一致，
 即对于某个特定的元素 $`\ast`，其中任何元素 {lean}`a : Prop` 要么为空集，
 要么是单元素集 $`\{\ast\}`。此公理具有这样的效果，即等价的命题可以在任何语境中彼此替换：
+:::
 
 ```lean
 variable (a b c d e : Prop)
@@ -347,10 +348,10 @@ funext.{u, v}
   (h : ∀ (x : α), f x = g x) :
   f = g
 ```
-:::
 
 与命题外延性类似，函数外延性断言任何两个类型为 {leanRef}`(x : α) → β x`
 的函数，如果它们在所有输入上都一致，那么它们就是相等的：
+:::
 
 -- From a classical, set-theoretic perspective, this is exactly what it
 -- means for two functions to be equal. This is known as an “extensional”
@@ -405,11 +406,11 @@ theorem setext {a b : Set α} (h : ∀ x, x ∈ a ↔ x ∈ b) : a = b :=
 
 end Set
 ```
-:::
 
 假设对于 {leanRef}`α : Type u`，我们定义 {leanRef}`Set `{leanRef (in := "(α : Type u)")}`α`{leanRef}` := α → Prop` 来表达 {leanRef (in := "(α : Type u)")}`α` 子集的类型，
 本质上是用谓词来表示子集。通过组合 {leanRef}`funext` 和 {leanRef}`propext`，
 我们得到了一个这样的集合的外延性理论：
+:::
 
 -- We can then proceed to define the empty set and set intersection, for
 -- example, and prove set identities:
@@ -575,7 +576,6 @@ Lean 的标准库通过执行这些构造的附加常量来扩展构造演算，
 -- In its most basic form, the quotient construction does not even
 -- require {lean}`r` to be an equivalence relation. The following constants
 -- are built into Lean:
--- :::
 
 在最基本的表述形式中，商构造甚至不需要 {lean}`r` 成为一个等价关系。
 下列常量被内置在 Lean 中：
@@ -661,7 +661,6 @@ example (a : Nat) : Quot.lift f f_respects (Quot.mk mod7Rel a) = f a :=
 -- {lean}`α`, and take {lean}`Quot.lift` to be the identity function (ignoring
 -- {lean}`h`). For that reason, these four constants are not viewed as
 -- additional axioms.
--- :::
 
 四个常量 {lean}`Quot`、{lean}`Quot.mk`、{lean}`Quot.ind` 和 {lean}`Quot.lift` 在它们本身上并不强。
 你可以检查如果我们把 {lean}`Quot r` 简单地取为 {lean}`α`，并取 {lean}`Quot.lift` 为恒等函数
@@ -683,7 +682,6 @@ example (a : Nat) : Quot.lift f f_respects (Quot.mk mod7Rel a) = f a :=
     -- END
 -->
 ```
-:::
 
 -- They are, like inductively defined types and the associated
 -- constructors and recursors, viewed as part of the logical framework.
@@ -694,6 +692,7 @@ example (a : Nat) : Quot.lift f f_respects (Quot.mk mod7Rel a) = f a :=
 和归纳定义的类型以及相关的构造子和递归器一样，它们也被视为逻辑框架的一部分。
 
 使 {lean}`Quot` 构造成为真正商的是以下一个附加公理：
+:::
 
 ```lean (suppressNamespaces := "Hidden") (allowVisible := false)
 namespace Hidden
@@ -729,7 +728,6 @@ variable (α : Type u) (r : α → α → Prop)  (r' r'': α → α → Prop) (a
 -- {lean}`r`, then {lean}`r' a b` implies {lean}`r'' a b`. In particular, if {lean}`r`
 -- was an equivalence relation to start with, then for all {lean}`a` and
 -- {lean}`b` we have {lean}`r a b` iff {lean}`r' a b`.
--- :::
 
 当然，当 {lean}`r` 是等价关系时，商集的结构是最常用的。给定上面的 {lean}`r`，
 如果我们根据法则 {lean}`r' a b` 当且仅当 {lean}`Quot.mk r a = Quot.mk r b` 定义 {lean}`r'`，
@@ -828,8 +826,6 @@ Quotient.exact {α : Sort u} {s : Setoid α} {a b : α} :
 -- Together with {lean}`Quotient.sound`, this implies that the elements of
 -- the quotient correspond exactly to the equivalence classes of elements
 -- in {lean}`α`.
---
--- :::
 
 结合 {lean}`Quotient.sound`，这意味着商的各个元素精确对应于 {lean}`α` 中各元素的等价类。
 :::
@@ -844,7 +840,6 @@ variable (α : Type u) (β : Type v)
 -- of quotients, let us define the type of _unordered_ pairs of elements
 -- of a type {lean}`α` as a quotient of the type {lean}`α × α`. First, we define
 -- the relevant equivalence relation:
--- :::
 
 回顾一下标准库中的 {lean}`α × β` 代表类型 {lean}`α` 和 {lean}`β` 的笛卡尔积。
 为了说明商的用法，让我们将类型为 {lean}`α` 的元素构成的 _无序对（Unordered Pair）_ 的类型定义为
@@ -997,7 +992,6 @@ variable (a₁ a₂ : α)
 --
 -- We can easily prove that {lean}`{a₁, a₂} = {a₂, a₁}` using {lean}`Quot.sound`,
 -- since we have {lean}`(a₁, a₂) ~ (a₂, a₁)`.
--- :::
 
 注意，我们局部地将无序对的符号 {lean}`{a₁, a₂}` 定义为 {lean}`Quotient.mk' (a₁, a₂)`。
 这对于演示目的很有用，但通常不是一个好主意，因为该符号会遮蔽花括号的其他用途，
@@ -1140,8 +1134,6 @@ end UProd
 -- For convenience, the standard library also defines {lean}`Quotient.lift₂`
 -- for lifting binary functions, and {lit}`Quotient.ind₂` for induction on
 -- two variables.
---
--- :::setup
 
 为了方便起见，标准库还定义了用于提升二元函数的 {lean}`Quotient.lift₂`，
 以及用于两个变量归纳的 {lit}`Quotient.ind₂`。

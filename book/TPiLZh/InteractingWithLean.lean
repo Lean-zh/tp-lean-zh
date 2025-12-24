@@ -4,6 +4,8 @@ import TPiLZh.Examples
 open Verso.Genre Manual
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "与 Lean 交互" =>
 %%%
 tag := "interacting-with-lean"
@@ -1231,7 +1233,6 @@ open Nat
 tag := "auto-bound-implicit-arguments"
 %%%
 
--- :::leanFirst
 -- In the previous section, we have shown how implicit arguments make functions more convenient to use.
 -- However, functions such as {leanRef}`compose` are still quite verbose to define. Note that the universe
 -- polymorphic {leanRef}`compose` is even more verbose than the one previously defined.
@@ -1250,7 +1251,6 @@ def compose {α : Type u} {β : Type v} {γ : Type w}
 ```
 :::
 
--- :::leanFirst
 -- You can avoid the {kw}`universe` command by providing the universe parameters when defining {leanRef}`compose`.
 
 :::leanFirst
@@ -1264,7 +1264,6 @@ def compose.{u, v, w}
 ```
 :::
 
--- ::::leanFirst
 -- Lean 4 supports a new feature called _auto bound implicit arguments_. It makes functions such as
 -- {leanRef}`compose` much more convenient to write. When Lean processes the header of a declaration,
 -- any unbound identifier is automatically added as an implicit argument. With this feature we can write {leanRef}`compose` as
@@ -1287,7 +1286,6 @@ def compose (g : β → γ) (f : α → β) (x : α) : γ :=
 ```
 
 -- Note that Lean inferred a more general type using {lean}`Sort` instead of {leanRef}`Type`.
--- ::::
 
 请注意，Lean 使用 {lean}`Sort` 而不是 {leanRef}`Type` 推断出了更通用的类型。
 ::::
@@ -1326,15 +1324,10 @@ def compose (g : β → γ) (f : α → β) (x : α) : γ :=
 tag := "implicit-lambdas"
 %%%
 
--- :::TODO
--- Update this text after archaeology
--- :::
-
 :::TODO
 Update this text after archaeology
 :::
 
--- :::leanFirst
 -- When the expected type of an expression is a function that is awaiting implicit
 -- arguments, the elaborator automatically introduces the corresponding lambdas.
 -- For example, {leanRef}`pure`'s type states that the first argument is an implicit type

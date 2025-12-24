@@ -4,6 +4,8 @@ import TPiLZh.Examples
 open Verso.Genre Manual
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "结构体和记录" =>
 %%%
 file := "StructuresAndRecords"
@@ -76,6 +78,7 @@ tag := "declaring-structures"
 
 大多数部分不是必要的。例子：
 
+:::setup
 ```lean
 structure Point (α : Type u) where
   mk ::
@@ -126,6 +129,7 @@ structure Point (α : Type u) where
 
 如果没有提供构造子名称，则默认的构造函数名为 {lit}`mk`。Point.mk : {α : Type u_1} → α → α → Point α
 
+:::leanFirst
 -- a projection
 -- Here are some simple theorems and expressions that use the generated
 -- constructions. As usual, you can avoid the prefix {leanRef}`Point` by using
@@ -167,6 +171,7 @@ variable (p : Point Nat)
 -- of a structure.
 
 给定 {lean}`p : Point Nat`，符号 {lean}`p.x` 是 {lean}`Point.x p` 的缩写。这提供了一种方便的方式来访问结构体的字段。
+:::
 
 ```lean
 structure Point (α : Type u) where
@@ -183,7 +188,8 @@ def p := Point.mk 10 20
 Given {lean}`p : Point Nat`, the dot notation {lean}`p.x` is shorthand for
 {lean}`Point.x p`. This provides a convenient way of accessing the fields
 of a structure.
-:::
+
+:::leanFirst
 -- The dot notation is convenient not just for accessing the projections
 -- of a record, but also for applying functions defined in a namespace
 -- with the same name. Recall from the {ref "conjunction"}[Conjunction section] if {leanRef}`p`

@@ -5,6 +5,8 @@ open Verso.Genre
 open Verso.Genre.Manual hiding tactic
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "量词与相等" =>
 %%%
 tag := "quantifiers-and-equality"
@@ -874,9 +876,9 @@ variable (q : Prop) (α : Type u) (p : α → Prop) (w : α) (x : α)
 -- {lean}`w`, then showing that {lean}`q` follows from {lean}`p w` is tantamount to
 -- showing that {lean}`q` follows from the existence of any such {lean}`x`. Here
 -- is an example:
-:::
 
 我们可以将 {lean}`Exists.intro` 视为一种信息隐藏操作，因为它隐藏了断言主体的见证。存在消去规则 {lean}`Exists.elim` 执行相反的操作。它允许我们通过证明 {lean}`q` 从任意值 {lean}`w` 的 {lean}`p w` 推导出来，从而从 {lean}`∃ x : α, p x` 证明命题 {lean}`q`。粗略地说，既然我们知道存在一个满足 {lean}`p x` 的 {lean}`x`，我们可以给它起个名字，比如 {lean}`w`。如果 {lean}`q` 不涉及 {lean}`w`，那么证明 {lean}`q` 从 {lean}`p w` 推导出来就等同于证明 {lean}`q` 从任何此类 {lean}`x` 的存在性推导出来。这里有一个例子：
+:::
 
 ```lean
 variable (α : Type) (p q : α → Prop)
@@ -996,7 +998,6 @@ variable (a : Nat)
 
 -- In the following example, we define {lean}`IsEven a` as {lean}`∃ b, a = 2 * b`,
 -- and then we show that the sum of two even numbers is an even number.
-:::
 
 ```lean
 def IsEven (a : Nat) := ∃ b, a = 2 * b
@@ -1012,12 +1013,13 @@ theorem even_plus_even (h1 : IsEven a) (h2 : IsEven b) :
 ```
 
 在下面的例子中，我们将 {lean}`IsEven a` 定义为 {lean}`∃ b, a = 2 * b`，然后证明两个偶数之和是一个偶数。
+:::
 
 -- Using the various gadgets described in this chapter—the match
 -- statement, anonymous constructors, and the {tactic}`rewrite` tactic, we can
 -- write this proof concisely as follows:
 
-使用本章中描述的各种工具——match 语句、匿名构造器和 {tactic}`rewrite` 策略，我们可以简洁地编写此证明如下：
+使用本章中描述的各种工具：match 语句、匿名构造器和 {tactic}`rewrite` 策略，我们可以简洁地编写此证明如下：
 
 ```lean
 def IsEven (a : Nat) := ∃ b, a = 2 * b
@@ -1197,9 +1199,9 @@ variable {p : Prop} (prf : p)
 -- respectively. The letter “f” is for “French,” since the Unicode
 -- symbols can also be used as French quotation marks. In fact, the
 -- notation is defined in Lean as follows:
-:::
 
 我们还可以通过编写 {lean}`‹p›` 来要求 Lean 填充证明，其中 {lean}`p` 是我们希望 Lean 在上下文中找到其证明的命题。你可以分别使用 {kbd}`\f<` 和 {kbd}`\f>` 输入这些角引号。字母「f」代表「French（法语）」，因为 Unicode 符号也可以用作法语引号。事实上，该记法在 Lean 中定义如下：
+:::
 
 ```lean
 notation "‹" p "›" => show p by assumption
@@ -1291,8 +1293,7 @@ tag := "quantifiers-and-equality-exercises"
       sorry
     ```
 
--- 4. ::::setup
---    ```
+-- 4. ```
 --    variable {n : Nat}
 --    ```
 --    :::leanFirst
@@ -1330,7 +1331,6 @@ tag := "quantifiers-and-equality-exercises"
 
     def Fermat's_last_theorem : Prop := sorry
     ```
-   :::
    ::::
 
 -- 5. Prove as many of the identities listed in the Existential

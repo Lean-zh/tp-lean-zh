@@ -5,6 +5,8 @@ open Verso.Genre
 open Verso.Genre.Manual hiding tactic
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "归纳类型" =>
 %%%
 tag := "inductive-types"
@@ -1018,8 +1020,8 @@ end Hidden
 
 符号 {lean}`{x : α // p x}` 是 {lean}`Subtype (fun x : α => p x)` 的语法糖。
 它模仿了集合论中的子集符号：其思想是 {leanRef}`{x : α // p x}` 表示 {leanRef}`α` 中具有属性 {leanRef}`p` 的元素集合。
-:::
 
+:::
 ::::
 
 -- # Defining the Natural Numbers
@@ -1200,7 +1202,6 @@ variable {n : Nat} {motive : Nat → Sort u} {ih : motive n}
 
 然而，证明像 {lean}`0 + n = n` 这样的事实，需要用归纳法证明。如上所述，归纳原则只是递归原则的一个特例，其中陪域 {lean}`motive n` 是 {lean}`Prop` 的一个元素。
 它代表了熟悉的归纳证明模式：要证明 {lean}`∀ n, motive n`，首先要证明 {lean}`motive 0`，然后对于任意的 {lean}`n`，假设 {lean}`ih : motive n` 并证明 {lean}`motive (n + 1)`。
-:::
 
 namespace Hidden
 ------
@@ -1218,6 +1219,7 @@ theorem zero_add (n : Nat) : 0 + n = n :=
 -------
 end Hidden
 
+:::
 ::::
 
 -- Notice that, once again, when {name}`Nat.recOn` is used in the context of
@@ -1835,7 +1837,6 @@ end Hidden
 这里还有一些额外的例子：
 :::TODO
 FIXME
-:::
 ```lean
 namespace Hidden
 inductive Nat where
@@ -1888,6 +1889,7 @@ end Hidden
 
 {leanRef}`induction` 策略还支持具有多个目标（即大前提）的用户定义归纳原则。
 这个例子使用了 {name}`Nat.mod.inductionOn`，它具有以下签名：
+:::
 ```signature
 Nat.mod.inductionOn
   {motive : Nat → Nat → Sort u}
@@ -1946,7 +1948,6 @@ example :
 ```
 :::
 
-:::leanFirst
 :::leanFirst
 -- We close this section with one last tactic that is designed to
 -- facilitate working with inductive types, namely, the {leanRef}`injection`
@@ -2222,7 +2223,7 @@ tag := "axiomatic-details"
 -- where the indices are given in terms of constants and previous
 -- arguments.
 
-我们已经看到，归纳类型的构造子需要 _参量（parameters）_——直观地说，即在整个归纳构造过程中保持固定的参数——和 _索引（indices）_，即参数化同时在构造中的类型族的参数。
+我们已经看到，归纳类型的构造子需要 _参量（parameters）_，即在整个归纳构造过程中保持固定的参数，和 _索引（indices）_，即参数化同时在构造中的类型族的参数。
 每个构造子都应该有一个类型，其中的参数类型是由先前定义的类型、参量和索引类型以及当前正在定义的归纳族建立起来的。
 要求是，如果后者存在，它只 _严格正向（strictly positively）_ 出现。
 简单来说，这意味着它所出现的构造子的任何参数都是一个依赖箭头类型，其中定义中的归纳类型只作为结果类型出现，

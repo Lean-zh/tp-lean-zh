@@ -5,6 +5,8 @@ open Verso.Genre
 open Verso.Genre.Manual hiding tactic
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "类型类" =>
 %%%
 tag := "type-classes"
@@ -69,7 +71,6 @@ def double (s : Add α) (x : α) : α :=
 ------
 end Ex
 ```
-:::
 
 -- Note that you can double a natural number {lean}`n` by {lean}`double { add := Nat.add } n`.
 -- Of course, it would be highly cumbersome for users to manually pass the
@@ -79,6 +80,7 @@ end Ex
 注意，你可以用 {lean}`double { add := Nat.add } n` 使一个自然数 {lean}`n` 翻倍。
 当然，以这种方式让用户手动四处传递实现会非常繁琐。
 实际上，这会消除掉特设多态的大部分潜在好处。
+:::
 ::::
 
 :::leanFirst
@@ -151,7 +153,6 @@ variable (n m : Nat)
 接着对于 {lean}`n : Nat` 和 {lean}`m : Nat`，项 {lean}`Add.add n m` 触发了类型类解析，
 目标为 {lean}`Add Nat`，且类型类解析将综合上面 {lean}`Nat` 的实例。
 现在，我们可以通过隐式的实例重新实现 {leanRef}`double` 了：
-:::
 
 ```lean
 namespace Ex
@@ -180,6 +181,7 @@ def double [Add α] (x : α) : α :=
 ------
 end Ex
 ```
+:::
 ::::
 
 :::leanFirst
@@ -1566,10 +1568,10 @@ structure Morphism (S1 S2 : Semigroup) where
 
 #check @Morphism.mor
 ```
-:::
 
 -- As a result, it is a prime candidate for the third type of coercion.
 因此，它是第三种强制转换的首选候选者。
+:::
 ::::
 
 ```lean

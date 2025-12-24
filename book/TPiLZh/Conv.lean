@@ -5,6 +5,8 @@ open Verso.Genre
 open Verso.Genre.Manual hiding tactic
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "转换策略模式" =>
 %%%
 file := "Conv"
@@ -191,7 +193,6 @@ example (a b c : Nat) : (0 + a) * (b * c) = a * (c * b) := by
 tag := "other-tactics-inside-conversion-mode"
 %%%
 
--- - :::leanFirst
 --   {leanRef}`arg`{lit}` i` enter the {lit}`i`-th nondependent explicit argument of an application.
 
 - :::leanFirst

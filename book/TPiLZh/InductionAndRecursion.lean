@@ -5,6 +5,8 @@ open Verso.Genre
 open Verso.Genre.Manual hiding tactic
 open TPiLZh
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "归纳和递归" =>
 %%%
 tag := "induction-and-recursion"
@@ -1081,7 +1083,6 @@ noncomputable def div := WellFounded.fix (measure id).wf div.F
 
 :::TODO
 Missing HL for example
-:::
 -- The definition is somewhat inscrutable. Here the recursion is on
 -- {leanRef (in:="def div.F (x")}`x`, and {lit}`div.F x f : Nat → Nat` returns the “divide by {leanRef}`y`”
 -- function for that fixed {leanRef (in:="def div.F (x")}`x`. You have to remember that the second
@@ -1091,6 +1092,7 @@ Missing HL for example
 
 这个定义有点难以理解。这里的递归是在 {leanRef (in:="def div.F (x")}`x` 上进行的，{lit}`div.F x f : Nat → Nat` 返回该固定 {leanRef (in:="def div.F (x")}`x` 的“除以 {leanRef}`y`”函数。
 你必须记住，{leanRef}`div.F` 的第二个参数（递归的配方）是一个函数，它应该返回所有小于 {leanRef}`x` 的值 {leanRef}`x₁` 的除以 {leanRef}`y` 函数。
+:::
 
 -- The elaborator is designed to make definitions like this more
 -- convenient. It accepts the following:

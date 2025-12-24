@@ -5,6 +5,7 @@ open Verso.Genre Manual
 open TPiLZh
 
 set_option pp.rawOnError true
+set_option linter.typography.dashes false
 
 #doc (Manual) "命题与证明" =>
 %%%
@@ -553,11 +554,11 @@ Lean 定义了所有标准的逻辑连接词和符号。命题连接词具有以
  * {kbd}`\iff`, {kbd}`\lr`
  * {lean}`Iff`
 
-:::
 
 -- They all take values in {lean}`Prop`.
 
 它们都取 {lean}`Prop` 中的值。
+:::
 
 ```lean
 variable (p q : Prop)
@@ -1308,7 +1309,7 @@ Lean 的标准库包含许多命题逻辑有效陈述的证明，你可以自由
 -- correct. Then go back and replace each {lean}`sorry` with an actual proof,
 -- until no more remain.
 
-{lean}`sorry` 标识符神奇地产生任何东西的证明，或者提供任何数据类型的对象。当然，作为一种证明方法，它是不可靠的——例如，你可以用它来证明 {lean}`False`——当文件使用或导入依赖于它的定理时，Lean 会产生严重的警告。但它对于增量构建长证明非常有用。从上到下开始编写证明，使用 {lean}`sorry` 填充子证明。确保 Lean 接受带有所有 {lean}`sorry` 的项；如果没有，则说明你需要更正错误。然后回去用实际的证明替换每个 {lean}`sorry`，直到没有剩余。
+{lean}`sorry` 标识符神奇地产生任何东西的证明，或者提供任何数据类型的对象。当然，作为一种证明方法，它是不可靠的（例如，你可以用它来证明 {lean}`False`）当文件使用或导入依赖于它的定理时，Lean 会产生严重的警告。但它对于增量构建长证明非常有用。从上到下开始编写证明，使用 {lean}`sorry` 填充子证明。确保 Lean 接受带有所有 {lean}`sorry` 的项；如果没有，则说明你需要更正错误。然后回去用实际的证明替换每个 {lean}`sorry`，直到没有剩余。
 
 -- Here is another useful trick. Instead of using {lean}`sorry`, you can use
 -- an underscore {lit}`_` as a placeholder. Recall this tells Lean that

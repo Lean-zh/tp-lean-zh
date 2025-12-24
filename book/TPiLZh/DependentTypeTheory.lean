@@ -6,6 +6,8 @@ open TPiLZh
 
 open Verso.Genre Manual
 
+set_option linter.typography.dashes false
+
 #doc (Manual) "依值类型论" =>
 %%%
 file := "DependentTypeTheory"
@@ -147,7 +149,6 @@ variable (a b : Type)
 -- legibility, and all modern editors have great support for it. In the
 -- Lean standard library, you often see Greek letters to denote types,
 -- and the Unicode symbol {lit}`→` as a more compact version of {lit}`->`.
-:::
 
 简单类型论的强大之处在于，你可以从其他类型中构建新的类型。例如，如果 {lean}`a` 和 {lean}`b` 是类型，{lean}`a -> b`
 表示从 {lean}`a` 到 {lean}`b` 的函数类型，{lean}`a × b`
@@ -263,7 +264,6 @@ variable (α β : Type) (f : α → β) (x : α) (m n : Nat) (p : Nat × Nat)
 × Nat → Nat`` and “redefining” it to look like ``g`` is a process
 known as _currying_. -->
 ```
-:::
 
 这里还有一些需要注意的事情。第一，函数 {lean}`f` 应用到值 {lean}`x` 上写为 {lean}`f x`（例如，{lean}`Nat.succ 2`）。
 第二，当写类型表达式时，箭头是 _右结合_ 的；例如，
@@ -277,13 +277,11 @@ known as _currying_. -->
 {lean}`Nat.add 3` 具有类型 {lean}`Nat → Nat`，即 {lean}`Nat.add 3` 返回一个
 “等待”第二个参数 {lean}`n` 的函数，然后
 等价于写 {lean}`Nat.add 3 n`。
-:::comment
 ```
 <!-- Taking a function ``h`` of type ``Nat
 × Nat → Nat`` and “redefining” it to look like ``g`` is a process
 known as _currying_. -->
 ```
-:::
 
 -- You have seen that if you have {lean}`m : Nat` and {lean}`n : Nat`, then
 -- {lean}`(m, n)` denotes the ordered pair of {lean}`m` and {lean}`n` which is of
@@ -291,7 +289,6 @@ known as _currying_. -->
 -- numbers. Conversely, if you have {lean}`p : Nat × Nat`, then you can write
 -- {lean}`p.1 : Nat` and {lean}`p.2 : Nat`. This gives you a way of extracting
 -- its two components.
-::::
 
 你已经看到，如果你有 {lean}`m : Nat` 和 {lean}`n : Nat`，那么
 {lean}`(m, n)` 表示 {lean}`m` 和 {lean}`n` 的有序对，其类型为
@@ -299,6 +296,7 @@ known as _currying_. -->
 反过来，如果你有 {lean}`p : Nat × Nat`，那么你可以写
 {lean}`p.1 : Nat` 和 {lean}`p.2 : Nat`。这为你提供了一种提取
 其两个分量的方法。
+:::
 ::::
 
 -- # Types as objects
@@ -312,7 +310,7 @@ tag := "types-as-objects"
 -- objects. For that to be the case, each of them also has to have a
 -- type.
 
-Lean 的依值类型论扩展简单类型论的一种方式是，类型本身——像 {lean}`Nat` 和 {lean}`Bool` 这样的实体——是一等公民，也就是说它们本身也是
+Lean 的依值类型论扩展简单类型论的一种方式是，类型本身（像 {lean}`Nat` 和 {lean}`Bool` 这样的实体）是一等公民，也就是说它们本身也是
 对象。为了做到这一点，它们中的每一个也必须有一个
 类型。
 
@@ -416,7 +414,6 @@ variable (n : Nat)
 -- which contains {lean}`Type 1` as an element. The list is infinite:
 -- there is a {lean}`Type n` for every natural number {lean}`n`. {lean}`Type` is
 -- an abbreviation for {lean}`Type 0`:
-:::
 
 可以将 {lean}`Type 0` 想象成一个由“小”或“普通”类型组成的宇宙。
 {lean}`Type 1` 则是一个更大的类型宇宙，它包含 {lean}`Type 0`
@@ -494,7 +491,6 @@ variable (α : Type u)
 -- {kw}`#check` command means that whenever {lean}`α` has type {lean}`Type u`,
 -- {lean}`List α` also has type {lean}`Type u`. The function {lean}`Prod` is
 -- similarly polymorphic:
-:::
 
 这里 {lit}`u` 是一个遍历类型级别的变量。
 {kw}`#check` 命令的输出意味着只要 {lean}`α` 具有类型 {lean}`Type u`，
@@ -575,7 +571,6 @@ variable {x : α} {t : β}
 -- or, equivalently, {lean}`λ (x : α) => t`, is an object of type {lean}`α → β`. Think of
 -- this as the function from {lean}`α` to {lean}`β` which maps
 -- any value {leanRef}`x` to the value {leanRef}`t`.
-:::
 
 从另一个表达式创建函数的过程称为
 _lambda 抽象_。假设你有变量 {lean}`x : α` 并且你可以
@@ -689,7 +684,6 @@ lambda 表达式的一般形式是 {lean}`fun (x : α) => t`，其中
 -- Formally, expressions that are the same up to a renaming of bound
 -- variables are called _alpha equivalent_, and are considered “the
 -- same.” Lean recognizes this equivalence.
-:::
 
 形式上，除了绑定变量的重命名之外都相同的表达式被称为 _alpha 等价_，并且被认为是“相同的”。Lean 识别这种等价性。
 :::
@@ -702,7 +696,6 @@ variable (t : α → β) (s : α)
 -- an expression {lean}`t s : β`. Returning to the previous example and
 -- renaming bound variables for clarity, notice the types of the
 -- following expressions:
-:::
 
 注意，将项 {lean}`t : α → β` 应用于项 {lean}`s : α` 会产生
 表达式 {lean}`t s : β`。回到前面的例子，
@@ -941,7 +934,7 @@ def compose (α β γ : Type) (g : β → γ) (f : α → β) (x : α) : γ :=
 这意味着 {leanRef}`compose` 是一个接受任意两个函数作为输入参数的函数，
 只要这些函数每个只接受一个输入。
 类型代数 {leanRef}`β → γ` 和 {leanRef}`α → β` 意味着要求
-第二个函数的输出类型必须与第一个函数的输入类型匹配——这是有道理的，否则
+第二个函数的输出类型必须与第一个函数的输入类型匹配，否则
 这两个函数将无法组合。
 
 -- {leanRef}`compose` also takes a 3rd argument of type {leanRef}`α` which
@@ -992,7 +985,6 @@ variable (t1 : α) (t2 : β)
 -- {kw}`let` keyword. The expression {lean}`let a := t1; t2` is
 -- definitionally equal to the result of replacing every occurrence of
 -- {leanRef}`a` in {leanRef}`t2` by {leanRef}`t1`.
-:::
 
 Lean 还允许你使用 {kw}`let` 关键字引入“局部”定义。
 表达式 {lean}`let a := t1; t2` 在定义上等于
@@ -1057,14 +1049,12 @@ variable (t1 : α) (t2 : β)
 -- expressed as {lean}`(fun a => t2) t1`. As an exercise, try to understand
 -- why the definition of {leanRef}`foo` below type checks, but the definition of
 -- {lit}`bar` does not.
-:::
 
 注意，表达式 {lean}`let a := t1; t2` 的含义与 {lean}`(fun a => t2) t1` 的含义非常相似，但两者并不相同。
 在第一个表达式中，你应该将 {leanRef (in:="let a := t1; t2")}`t2` 中出现的每个 {leanRef (in:="let a := t1; t2")}`a` 视为 {leanRef (in:="let a := t1; t2")}`t1` 的语法缩写。
 在第二个表达式中，{leanRef (in:="(fun a => t2) t1")}`a` 是一个变量，表达式 {leanRef (in:="(fun a => t2) t1")}`fun a => t2` 必须独立于 {leanRef (in:="(fun a => t2) t1")}`a` 的值而有意义。
 {kw}`let` 构造是一种更强的缩写手段，有些形式为 {lean}`let a := t1; t2` 的表达式不能表示为 {lean}`(fun a => t2) t1`。
 作为一个练习，试着理解为什么下面 {leanRef}`foo` 的定义可以通过类型检查，而 {lit}`bar` 的定义却不能。
-:::
 
 ```lean
 def foo := let a := Nat; fun x : a => x + 2
@@ -1072,6 +1062,7 @@ def foo := let a := Nat; fun x : a => x + 2
   def bar := (fun a => fun x : a => x + 2) Nat
 -/
 ```
+:::
 ::::
 
 -- # Variables and Sections
@@ -1338,7 +1329,6 @@ variable (α : Type) (n : Nat)
 -- length {lean}`n`.  This type depends on _two_ parameters: the type of the
 -- elements in the vector ({lean}`α : Type`) and the length of the vector
 -- {lean}`n : Nat`.
-:::
 简单地说，类型可以依赖于参数。你已经看到了一个很好的例子：类型 {lean}`List α` 依赖于
 参数 {lean}`α`，而这种依赖性是区分 {lean}`List Nat` 和 {lean}`List Bool` 的关键。
 另一个例子，考虑类型 {lean}`Vector α n`，即长度为 {lean}`n` 的 {lean}`α` 元素的向量类型。
@@ -1412,7 +1402,6 @@ variable (α : Type) (β : α → Type) (a : α) (f : (a : α) → β a)
 -- of functions {lean}`f` with the property that, for each {lean}`a : α`, {lean}`f a`
 -- is an element of {lean}`β a`. In other words, the type of the value
 -- returned by {lean}`f` depends on its input.
-:::
 这就是 _依值函数类型_，或者 *依值箭头类型* 的一个例子。给定 {lean}`α : Type` 和 {lean}`β : α → Type`，把 {lean}`β`
 考虑成 {lean}`α` 之上的类型族，也就是说，对于每个
 {lean}`a : α` 都有类型 {lean}`β a`。在这种情况下，类型 {lean}`(a : α) → β a` 表示
@@ -1432,7 +1421,6 @@ variable (α : Type) (β : Type) (a : α) (f : (a : α) → β a)
 -- depend on {leanRef}`a`, {leanRef}`(a : α) → β` is no different from the type
 -- {lean}`α → β`.  Indeed, in dependent type theory (and in Lean), {lean}`α → β`
 -- is just notation for {lean}`(a : α) → β` when {lean}`β` does not depend on {leanRef (in := "a : α")}`a`.
-:::
 注意，{lean}`(a : α) → β` 对于任意表达式 {lean}`β : Type` 都有意义。
 当 {lean}`β` 的值依赖于 {leanRef}`a`（例如，在前一段的表达式 {leanRef}`β a`），
 {leanRef}`(a : α) → β` 表示一个依值函数类型。当 {lean}`β` 不
@@ -1468,7 +1456,6 @@ variable (α : Type) (β : α → Type) (a : α) (b : β a)
 -- {lean}`Σ a : α, β a`. You can use {lean (type := "(a : α) × β a")}`⟨a, b⟩` or {lean}`Sigma.mk a b` to create a
 -- dependent pair.  The {lit}`⟨` and {lit}`⟩` characters may be typed with
 -- {kbd}`\langle` and {kbd}`\rangle` or {kbd}`\<` and {kbd}`\>`, respectively.
-:::
 就像依值函数类型 {lean}`(a : α) → β a` 通过允许 {leanRef (in := "α → β")}`β` 依赖
 {lean}`a` 从而推广了函数类型 {leanRef}`α → β`，依值笛卡尔积类型 {lean}`(a : α) × β a` 同样推广了
 笛卡尔积 {lit}`α × β`。依值积
@@ -1553,7 +1540,6 @@ variable (α : Type)
 -- from anything else in that expression, but from the fact that it is
 -- sent as an argument to the function {leanRef}`Lst.cons`, which expects an element
 -- of type {lean}`Lst α` in that position.
-:::
 由于构造子对类型是多态的，我们需要重复插入
 类型 {lean}`Nat` 作为一个参数。但是这个信息是
 多余的：我们可以推断表达式 {leanRef}`Lst.cons Nat 5 (Lst.nil Nat)` 中参数 {leanRef}`α` 的类型，
@@ -1702,12 +1688,12 @@ variable (T : Type) (e : T)
 -- arguments. In the second pair of examples below, this mechanism is
 -- used to specify the desired types of the expressions {lean}`id` and
 -- {lean}`List.nil`:
-:::
 可以通过写 {lean}`(e : T)` 来指定表达式 {lean}`e` 的类型 {lean}`T`。
 这就指导 Lean 的繁饰器在试图解决隐式
 参数时使用值 {lean}`T` 作为 {lean}`e` 的类型。
 在下面的第二个例子中，这种机制用于
 指定表达式 {lean}`id` 和 {lean}`List.nil` 所需的类型：
+:::
 
 ```lean
 #check (List.nil)             -- [] : List ?m.2
@@ -1744,11 +1730,11 @@ variable (foo : {α : Type} → α → β)
 -- provide the argument explicitly. If {lean}`foo` is such a function, the
 -- notation {lean}`@foo` denotes the same function with all the arguments
 -- made explicit.
-:::
 然而，有时我们可能会发现自己处于这样一种情况：我们已经
 声明了函数的参数是隐式的，但现在想
 显式地提供参数。如果 {lean}`foo` 是有隐参数的函数，
 符号 {lean}`@foo` 表示所有参数都是显式的该函数。
+:::
 
 ```lean
 #check @id        -- @id : {α : Sort u_1} → α → α
