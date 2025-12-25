@@ -156,7 +156,7 @@ Lean 不仅可以在依赖类型理论中定义数学对象和表达数学断言
 -- flexible forms of algebraic reasoning.
 
 因为完全详细的公理化证明非常复杂，定理证明的挑战在于让计算机尽可能多地填充细节。
-您将在 {ref "dependent-type-theory"}[依值类型论] 中学习支持这一点的各种方法。
+-- 您将在 {ref "dependent-type-theory"}[依值类型论] 中学习支持这一点的各种方法。
 例如，项重写，以及 Lean 自动简化项和表达式的自动化方法。
 同样，还有 *繁饰（elaboration）* 和 *类型推断（type inference）* 的方法，
 可用于支持灵活形式的代数推理。
