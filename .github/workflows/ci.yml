@@ -50,6 +50,19 @@ jobs:
           cd book
           lean --version
 
+      - name: Cache examples/.lake
+        uses: actions/cache@v4
+        with:
+          path: examples/.lake
+          key: ${{ runner.os }}-examples-${{ hashFiles('examples/lake-manifest.json') }}-${{ hashFiles('examples/lean-toolchain') }}-${{ steps.shortSHA.outputs.short_sha }}
+          restore-keys: |
+            ${{ runner.os }}-examples-${{ hashFiles('examples/lake-manifest.json') }}-${{ hashFiles('examples/lean-toolchain') }}-
+
+      - name: Build examples
+        run: |
+          cd examples
+          lake build
+
       - name: Cache book/.lake
         uses: actions/cache@v4
         with:
