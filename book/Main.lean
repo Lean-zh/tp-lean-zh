@@ -1,6 +1,9 @@
 import VersoManual
 import TPiLZh
 
+set_option linter.typography.dashes false
+set_option linter.typography.quotes false
+
 open Verso.Genre Manual
 open Verso Code External
 

@@ -2,6 +2,9 @@ import VersoManual
 
 import TPiLZh.Examples
 
+set_option linter.typography.dashes false
+set_option linter.typography.quotes false
+
 open TPiLZh
 
 open Verso.Genre Manual

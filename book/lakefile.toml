@@ -10,8 +10,8 @@ rev = "main"
 
 [leanOptions]
 #weak.verso.examples.suggest = true
-weak.linter.typography.quotes = true
-weak.linter.typography.dashes = false
+linter.typography.quotes = false
+linter.typography.dashes = false
 weak.linter.verso.manual.headerTags = true
 
 [[lean_lib]]

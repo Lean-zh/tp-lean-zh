@@ -7,6 +7,7 @@ open TPiLZh
 open Verso.Genre Manual
 
 set_option linter.typography.dashes false
+set_option linter.typography.quotes false
 
 #doc (Manual) "依值类型论" =>
 %%%

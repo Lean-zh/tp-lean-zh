@@ -2,6 +2,9 @@ import VersoManual
 import TPiLZh.Intro
 import TPiLZh.DependentTypeTheory
 
+set_option linter.typography.dashes false
+set_option linter.typography.quotes false
+
 open Verso.Genre Manual
 open Verso Code External
 
