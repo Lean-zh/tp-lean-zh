@@ -258,12 +258,6 @@ variable (α β : Type) (f : α → β) (x : α) (m n : Nat) (p : Nat × Nat)
 -- that {lean}`Nat.add 3` has type {lean}`Nat → Nat`, that is, {lean}`Nat.add 3` returns a
 -- function that “waits” for a second argument, {lean}`n`, which is then
 -- equivalent to writing {lean}`Nat.add 3 n`.
-:::comment
-```
-<!-- Taking a function ``h`` of type ``Nat
-× Nat → Nat`` and “redefining” it to look like ``g`` is a process
-known as _currying_. -->
-```
 
 这里还有一些需要注意的事情。第一，函数 {lean}`f` 应用到值 {lean}`x` 上写为 {lean}`f x`（例如，{lean}`Nat.succ 2`）。
 第二，当写类型表达式时，箭头是 _右结合_ 的；例如，
@@ -277,11 +271,14 @@ known as _currying_. -->
 {lean}`Nat.add 3` 具有类型 {lean}`Nat → Nat`，即 {lean}`Nat.add 3` 返回一个
 “等待”第二个参数 {lean}`n` 的函数，然后
 等价于写 {lean}`Nat.add 3 n`。
+
+:::comment
 ```
 <!-- Taking a function ``h`` of type ``Nat
 × Nat → Nat`` and “redefining” it to look like ``g`` is a process
 known as _currying_. -->
 ```
+:::
 
 -- You have seen that if you have {lean}`m : Nat` and {lean}`n : Nat`, then
 -- {lean}`(m, n)` denotes the ordered pair of {lean}`m` and {lean}`n` which is of
@@ -296,7 +293,7 @@ known as _currying_. -->
 反过来，如果你有 {lean}`p : Nat × Nat`，那么你可以写
 {lean}`p.1 : Nat` 和 {lean}`p.2 : Nat`。这为你提供了一种提取
 其两个分量的方法。
-:::
+
 ::::
 
 -- # Types as objects
@@ -1055,6 +1052,7 @@ variable (t1 : α) (t2 : β)
 在第二个表达式中，{leanRef (in:="(fun a => t2) t1")}`a` 是一个变量，表达式 {leanRef (in:="(fun a => t2) t1")}`fun a => t2` 必须独立于 {leanRef (in:="(fun a => t2) t1")}`a` 的值而有意义。
 {kw}`let` 构造是一种更强的缩写手段，有些形式为 {lean}`let a := t1; t2` 的表达式不能表示为 {lean}`(fun a => t2) t1`。
 作为一个练习，试着理解为什么下面 {leanRef}`foo` 的定义可以通过类型检查，而 {lit}`bar` 的定义却不能。
+:::
 
 ```lean
 def foo := let a := Nat; fun x : a => x + 2
@@ -1062,7 +1060,6 @@ def foo := let a := Nat; fun x : a => x + 2
   def bar := (fun a => fun x : a => x + 2) Nat
 -/
 ```
-:::
 ::::
 
 -- # Variables and Sections

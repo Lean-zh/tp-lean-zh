@@ -996,7 +996,7 @@ instance [Monad m] : ForM m (Kept α) α where
 instance [Monad m] : ForIn m (Kept α) α := ⟨ForM.forIn⟩
 
 initialize recentHighlightsExt : EnvExtension (Kept Highlighted) ←
-  registerEnvExtension (pure ⟨.replicate 12 .empty, 0, by simp⟩)
+  registerEnvExtension (pure ⟨.replicate 32 .empty, 0, by simp⟩)
 
 /--
 A mapping from anchor names to the corresponding code. Each code element is paired with it's
