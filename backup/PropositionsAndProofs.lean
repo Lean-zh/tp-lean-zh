@@ -554,11 +554,11 @@ Lean 定义了所有标准的逻辑连接词和符号。命题连接词具有以
  * {kbd}`\iff`, {kbd}`\lr`
  * {lean}`Iff`
 
+:::
 
 -- They all take values in {lean}`Prop`.
 
 它们都取 {lean}`Prop` 中的值。
-:::
 
 ```lean
 variable (p q : Prop)

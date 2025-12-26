@@ -1,6 +1,16 @@
 import VersoManual
 import TPiLZh.Intro
 import TPiLZh.DependentTypeTheory
+import TPiLZh.PropositionsAndProofs
+import TPiLZh.QuantifiersEquality
+import TPiLZh.Tactics
+import TPiLZh.InteractingWithLean
+import TPiLZh.InductiveTypes
+import TPiLZh.InductionAndRecursion
+import TPiLZh.StructuresAndRecords
+import TPiLZh.TypeClasses
+import TPiLZh.Conv
+import TPiLZh.AxiomsComputation
 
 open Verso.Genre Manual
 open Verso Code External
@@ -39,3 +49,23 @@ authorshipNote := some "with contributions from the Lean Community"
 {include 1 TPiLZh.Intro}
 
 {include 1 TPiLZh.DependentTypeTheory}
+
+{include 1 TPiLZh.PropositionsAndProofs}
+
+{include 1 TPiLZh.QuantifiersEquality}
+
+{include 1 TPiLZh.Tactics}
+
+{include 1 TPiLZh.InteractingWithLean}
+
+{include 1 TPiLZh.InductiveTypes}
+
+{include 1 TPiLZh.InductionAndRecursion}
+
+{include 1 TPiLZh.StructuresAndRecords}
+
+{include 1 TPiLZh.TypeClasses}
+
+{include 1 TPiLZh.Conv}
+
+{include 1 TPiLZh.AxiomsComputation}

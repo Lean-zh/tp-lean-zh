@@ -912,9 +912,9 @@ variable {α : Type u} (p : α → Prop) {β : α → Type} (a : α) (h : p a) (
 -- type {lean}`(∃ x : α, p x) : Prop`, while {lean}`Sigma.mk a h'` has type
 -- {lean}`(Σ x : α, β x)`. The similarity between {lit}`∃` and {lit}`Σ` is another
 -- instance of the {tech}[Curry-Howard isomorphism].
-:::
 
 注意，存在命题与依值类型一节中描述的 Sigma 类型非常相似。区别在于存在命题是 *命题（propositions）*，而 Sigma 类型是 *类型（types）*。除此之外，它们非常相似。给定谓词 {lean}`p : α → Prop` 和类型族 {lean}`β : α → Type`，对于具有 {lean}`h : p a` 和 {lean}`h' : β a` 的项 {lean}`a : α`，项 {lean}`Exists.intro a h` 的类型为 {lean}`(∃ x : α, p x) : Prop`，而 {lean}`Sigma.mk a h'` 的类型为 {lean}`(Σ x : α, β x)`。{lit}`∃` 和 {lit}`Σ` 之间的相似性是 {tech}[Curry-Howard 同构] 的另一个例子。
+:::
 
 -- Lean provides a more convenient way to eliminate from an existential
 -- quantifier with the {kw}`match` expression:
