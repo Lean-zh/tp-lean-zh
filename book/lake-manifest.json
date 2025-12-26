@@ -5,7 +5,7 @@
    "type": "git",
    "subDir": null,
    "scope": "",
-   "rev": "ea44a4d919a4570055bf53171ea4d8a8919cde84",
+   "rev": "6f0c12be90063de6d4e5ca14867ad7243064ad99",
    "name": "verso",
    "manifestFile": "lake-manifest.json",
    "inputRev": "main",
@@ -41,5 +41,5 @@
    "inputRev": "main",
    "inherited": true,
    "configFile": "lakefile.lean"}],
- "name": "tpil",
+ "name": "tpilzh",
  "lakeDir": ".lake"}
