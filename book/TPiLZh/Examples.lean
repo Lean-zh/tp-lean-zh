@@ -17,7 +17,7 @@ open Std
 
 export Verso.Code.External (lit)
 
-private def projectDir : System.FilePath := "../examples/"
+private def projectDir : System.FilePath := "../examples"
 
 def alphabet := "abcdefghijklmnopqrstuvwxyz0123456789"
 
