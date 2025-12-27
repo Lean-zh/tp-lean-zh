@@ -1473,7 +1473,7 @@ example (p q r : Prop) (hp : p) (hq : q) (hr : r) :
 -- the same effect as {lit}`t`.
 
 组合子 {tactic}`focus`{lit}` t` 确保 {lit}`t` 只影响当前的目标，暂时将其他目标从作用域中隐藏。
-所以，如果 {lit}`t` 通常只影响当前的目标，{tactic}`focus`{lit}` ({tactic}`all_goals`{lit}` t)` 与 {lit}`t` 有同样的效果。
+所以，如果 {lit}`t` 通常只影响当前的目标，{tactic}`focus`{lit}` (`{tactic}`all_goals`{lit}` t)` 与 {lit}`t` 有同样的效果。
 
 -- # Rewriting
 # 重写

@@ -2314,9 +2314,11 @@ variable {xs : List α} {n : Nat}
 
 
 5.  :::leanFirst
---     Consider the following type of arithmetic expressions. The idea is
---     that {leanRef}`var`{lit}` `{lean}`n` is a variable, {lit}`vₙ`, and {leanRef}`const`{lit}` `{lean}`n` is the
---     constant whose value is {lean}`n`.
+
+    -- Consider the following type of arithmetic expressions. The idea is
+    -- that {leanRef}`var`{lit}` `{lean}`n` is a variable, {lit}`vₙ`, and {leanRef}`const`{lit}` `{lean}`n` is the
+    -- constant whose value is {lean}`n`.
+
     考虑以下算术表达式类型。其思想是 {leanRef}`var`{lit}` `{lean}`n` 是一个变量 {lit}`vₙ`，而 {leanRef}`const`{lit}` `{lean}`n` 是值为 {lean}`n` 的常数。
 
     ```lean
@@ -2338,9 +2340,10 @@ variable {xs : List α} {n : Nat}
 
     这里 {leanRef}`sampleExpr` 表示 {lit}`(v₀ * 7) + (2 * v₁)`。
 
+    :::leanFirst
+
     -- Write a function that evaluates such an expression, evaluating each {leanRef}`var n` to {leanRef}`v n`.
 
-    :::leanFirst
     编写一个函数来计算这样的表达式，将每个 {leanRef}`var n` 计算为 {leanRef}`v n`。
 
     ```lean
@@ -2370,13 +2373,14 @@ variable {xs : List α} {n : Nat}
     ```
     :::
 
+    :::leanFirst
+
     -- Implement “constant fusion,” a procedure that simplifies subterms like
     -- {lean}`5 + 7` to {lean}`12`. Using the auxiliary function {leanRef}`simpConst`,
     -- define a function “fuse”: to simplify a plus or a times, first
     -- simplify the arguments recursively, and then apply {leanRef}`simpConst` to
     -- try to simplify the result.
 
-    :::leanFirst
     实现“常量融合”，这是一个将子项（如 {lean}`5 + 7`）简化为 {lean}`12` 的过程。使用辅助函数 {leanRef}`simpConst`，定义一个函数“fuse”：为了简化加法或乘法，首先递归地简化参数，然后应用 {leanRef}`simpConst` 尝试简化结果。
 
     ```lean
