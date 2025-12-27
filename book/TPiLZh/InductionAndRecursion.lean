@@ -21,7 +21,7 @@ file := "InductionAndRecursion"
 -- this means that induction is the fundamental method of proof.
 
 在上一章中，我们看到归纳定义提供了在 Lean 中引入新类型的强大手段。此外，
-构造子和递归器提供了在这些类型上定义函数的唯一手段。根据 {tech}[propositions-as-types] 对应关系，
+构造子和递归器提供了在这些类型上定义函数的唯一手段。根据 {tech}[命题即类型] 对应关系，
 这意味着归纳法是证明的基本方法。
 
 -- Lean provides natural ways of defining recursive functions, performing
