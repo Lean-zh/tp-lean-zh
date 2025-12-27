@@ -260,7 +260,7 @@ variable (α : Sort i) (β : {x : α} → Sort j) {x : α}
 -- of propositions rather than data, and it is what makes {lean}`Prop`
 -- {deftech}_impredicative_.
 
-其思想如下。如果 {lit}`j` 不是 {lit}`0`，那么 {lean}`(x : α) → β` 是 {lean}`Sort (max i j)` 的一个元素。换句话说，从 {lean}`α` 到 {lean}`β` 的依值函数类型「生活」在索引为 {lit}`i` 和 {lit}`j` 的最大值的宇宙中。然而，假设 {lean}`β` 是 {lean}`Sort 0` 的，即 {lean}`Prop` 的一个元素。在这种情况下，无论 {lean}`α` 生活在哪个类型宇宙中，{lean}`(x : α) → β` 也是 {lean}`Sort 0` 的一个元素。换句话说，如果 {lean}`β` 是取决于 {lean}`α` 的命题，那么 {lean}`∀ x : α, β` 仍然是一个命题。这反映了将 {lean}`Prop` 解释为命题类型而非数据类型，这也是使 {lean}`Prop` 具有 {deftech}*非谓词性（impredicative）* 的原因。
+其思想如下。如果 {lit}`j` 不是 {lit}`0`，那么 {lean}`(x : α) → β` 是 {lean}`Sort (max i j)` 的一个元素。换句话说，从 {lean}`α` 到 {lean}`β` 的依值函数类型「生活」在索引为 {lit}`i` 和 {lit}`j` 的最大值的宇宙中。然而，假设 {lean}`β` 是 {lean}`Sort 0` 的，即 {lean}`Prop` 的一个元素。在这种情况下，无论 {lean}`α` 生活在哪个类型宇宙中，{lean}`(x : α) → β` 也是 {lean}`Sort 0` 的一个元素。换句话说，如果 {lean}`β` 是取决于 {lean}`α` 的命题，那么 {lean}`∀ x : α, β` 仍然是一个命题。这反映了将 {lean}`Prop` 解释为命题类型而非数据类型，这也是使 {lean}`Prop` 具有 {deftech}_非谓词性_（impredicative） 的原因。
 
 -- The term “{deftech}[predicative]” stems from foundational developments around the
 -- turn of the twentieth century, when logicians such as Poincaré and
@@ -271,7 +271,7 @@ variable (α : Sort i) (β : {x : α} → Sort j) {x : α}
 -- (the “power type of {lean}`α`”). The impredicativity of {lean}`Prop` means that we
 -- can form propositions that quantify over {lean}`α → Prop`. In particular,
 
-术语「{deftech}[谓词性（predicative）]」源于 20 世纪初的基础发展，当时庞加莱（Poincaré）和罗素（Russell）等逻辑学家将集合论悖论归咎于「恶性循环」，即当我们通过对包含正在定义的属性本身的集合进行量化来定义该属性时，就会产生这种循环。请注意，如果 {lean}`α` 是任何类型，我们可以形成 {lean}`α` 上所有谓词的类型 {lean}`α → Prop`（{lean}`α` 的「幂类型」）。{lean}`Prop` 的非谓词性意味着我们可以形成对 {lean}`α → Prop` 进行量化的命题。特别是，
+术语「{deftech}[谓词性]（predicative）」源于 20 世纪初的基础发展，当时庞加莱（Poincaré）和罗素（Russell）等逻辑学家将集合论悖论归咎于「恶性循环」，即当我们通过对包含正在定义的属性本身的集合进行量化来定义该属性时，就会产生这种循环。请注意，如果 {lean}`α` 是任何类型，我们可以形成 {lean}`α` 上所有谓词的类型 {lean}`α → Prop`（{lean}`α` 的「幂类型」）。{lean}`Prop` 的非谓词性意味着我们可以形成对 {lean}`α → Prop` 进行量化的命题。特别是，
 
 -- we can define predicates on {lean}`α` by quantifying over all predicates
 -- on {lean}`α`, which is exactly the type of circularity that was once

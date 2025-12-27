@@ -179,7 +179,7 @@ axiom implies_intro (p q : Prop) :
 -- features, but like the other type universes, it is closed under the
 -- arrow constructor: if we have {lean}`p q : Prop`, then {lean}`p → q : Prop`.
 
-这是构造演算（Calculus of Constructions）所采用的方法，因此也是 Lean 所采用的方法。自然演绎证明系统中的蕴涵规则与控制函数抽象和应用的规则完全对应，这一事实是 {deftech}_柯里-霍华德同构（Curry-Howard isomorphism）_ 的一个实例，有时称为 {deftech}_命题即类型（propositions-as-types）_ 范式。事实上，类型 {lean}`Prop` 是 {lean}`Sort 0` 的语法糖，即上一章描述的类型层次结构的最底层。此外，{lean}`Type u` 也只是 {lean}`Sort (u+1)` 的语法糖。{lean}`Prop` 有一些特殊功能，但像其他类型宇宙一样，它在箭头构造子下是封闭的：如果我们有 {lean}`p q : Prop`，那么 {lean}`p → q : Prop`。
+这是构造演算（Calculus of Constructions）所采用的方法，因此也是 Lean 所采用的方法。自然演绎证明系统中的蕴涵规则与控制函数抽象和应用的规则完全对应，这一事实是 {deftech}_Curry-Howard 同构_（Curry-Howard isomorphism） 的一个实例，有时称为 {deftech}_命题即类型_（propositions-as-types） 范式。事实上，类型 {lean}`Prop` 是 {lean}`Sort 0` 的语法糖，即上一章描述的类型层次结构的最底层。此外，{lean}`Type u` 也只是 {lean}`Sort (u+1)` 的语法糖。{lean}`Prop` 有一些特殊功能，但像其他类型宇宙一样，它在箭头构造子下是封闭的：如果我们有 {lean}`p q : Prop`，那么 {lean}`p → q : Prop`。
 
 -- There are at least two ways of thinking about propositions as
 -- types. To some who take a constructive view of logic and mathematics,
@@ -213,7 +213,7 @@ axiom implies_intro (p q : Prop) :
 -- the language of dependent type theory, they carry no information
 -- beyond the fact that {lean}`p` is true.
 
-事实上，如果 {lean}`p : Prop` 是任何命题，Lean 的内核将任何两个元素 {lean}`t1 t2 : p` 视为定义上相等，就像它将 {lit}`(fun x => t) s` 和 {lit}`t[s/x]` 视为定义上相等一样。这被称为 {deftech}_证明无关性（proof irrelevance）_，并且与上一段中的解释一致。这意味着即使我们可以将证明 {lean}`t : p` 视为依值类型论语言中的普通对象，它们除了 {lean}`p` 为真这一事实之外不携带任何信息。
+事实上，如果 {lean}`p : Prop` 是任何命题，Lean 的内核将任何两个元素 {lean}`t1 t2 : p` 视为定义上相等，就像它将 {lit}`(fun x => t) s` 和 {lit}`t[s/x]` 视为定义上相等一样。这被称为 {deftech}_证明无关性_（proof irrelevance），并且与上一段中的解释一致。这意味着即使我们可以将证明 {lean}`t : p` 视为依值类型论语言中的普通对象，它们除了 {lean}`p` 为真这一事实之外不携带任何信息。
 
 -- The two ways we have suggested thinking about the
 -- {tech}[propositions-as-types] paradigm differ in a fundamental way. From the
@@ -677,7 +677,7 @@ variable (p q : Prop) (hp : p) (hq : q) (α β : Type) (a : α) (b : β)
 -- in Lean. With the analogy, however, the proof we have just constructed
 -- is similar to a function that swaps the elements of a pair.
 
-请注意，与引入和与消去类似于笛卡尔积的配对和投影操作。区别在于，给定 {lean}`hp : p` 和 {lean}`hq : q`，{lean}`And.intro hp hq` 具有类型 {lean}`p ∧ q : Prop`，而给定 {lean}`a : α` 和 {lean}`b : β`，{lean}`Prod.mk a b` 具有类型 {lean}`α × β : Type`。{lean}`Prod` 不能用于 {lean}`Prop`，{lean}`And` 不能用于 {lean}`Type`。{lit}`∧` 和 {lit}`×` 之间的相似性是 {tech}[柯里-霍华德同构] 的另一个实例，但与蕴涵和函数空间构造子不同，{lit}`∧` 和 {lit}`×` 在 Lean 中是分开处理的。然而，通过类比，我们刚刚构造的证明类似于交换一对中的元素的函数。
+请注意，与引入和与消去类似于笛卡尔积的配对和投影操作。区别在于，给定 {lean}`hp : p` 和 {lean}`hq : q`，{lean}`And.intro hp hq` 具有类型 {lean}`p ∧ q : Prop`，而给定 {lean}`a : α` 和 {lean}`b : β`，{lean}`Prod.mk a b` 具有类型 {lean}`α × β : Type`。{lean}`Prod` 不能用于 {lean}`Prop`，{lean}`And` 不能用于 {lean}`Type`。{lit}`∧` 和 {lit}`×` 之间的相似性是 {tech}[Curry-Howard 同构] 的另一个实例，但与蕴涵和函数空间构造子不同，{lit}`∧` 和 {lit}`×` 在 Lean 中是分开处理的。然而，通过类比，我们刚刚构造的证明类似于交换一对中的元素的函数。
 
 -- We will see in {ref "structures-and-records"}[Structures and Records] that certain
 -- types in Lean are _structures_, which is to say, the type is defined
