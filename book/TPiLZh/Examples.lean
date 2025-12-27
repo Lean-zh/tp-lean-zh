@@ -1160,7 +1160,42 @@ def isNewline (hl : Highlighted) : Bool :=
   | .tactics _ _ _ x | .span _ x => isNewline x
   | .point .. => false
 
+/--
+Remove `-- comment\n` patterns from a string.
+This strips line comments from source code strings.
+-/
+def stripLineCommentsFromString (s : String) : String := Id.run do
+  let mut result := ""
+  let mut i := s.toRawSubstring
+  while !i.isEmpty do
+    -- Check for `--` comment start
+    if i.take 2 == "--".toRawSubstring then
+      -- Skip until newline or end
+      while !i.isEmpty && i.front != '\n' do
+        i := i.drop 1
+      -- Include the newline if present
+      if !i.isEmpty && i.front == '\n' then
+        i := i.drop 1
+    else
+      result := result.push i.front
+      i := i.drop 1
+  return result
 
+/--
+Strip line comments (`-- ...`) from highlighted code.
+This removes text nodes that start with `--` up to and including the newline.
+-/
+partial def stripLineComments (hl : Highlighted) : Highlighted :=
+  go hl
+where
+  go : Highlighted → Highlighted
+    | .text s => .text (stripLineCommentsFromString s)
+    | .unparsed s => .unparsed (stripLineCommentsFromString s)
+    | .seq xs => .seq (xs.map go |>.filter (!·.isEmpty))
+    | .tactics info start stop x => .tactics info start stop (go x)
+    | .span info x => .span info (go x)
+    | hl@(.token ..) => hl
+    | hl@(.point ..) => hl
 
 open SubVerso.Module in
 /--
@@ -1582,7 +1617,9 @@ def leanFirst : DirectiveExpander
 def setupCode : CodeBlockExpander
   | args, code => do
     ArgParse.done.run args
-    let helper ← Helper.fromModule code.getString
+    -- Strip line comments before processing
+    let codeStr := stripLineCommentsFromString code.getString
+    let helper ← Helper.fromModule codeStr
     modifyEnv fun env => defaultHelperExt.setState env (some helper)
     return #[]
 
