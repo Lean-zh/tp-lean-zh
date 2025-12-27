@@ -72,6 +72,8 @@ def double (s : Add α) (x : α) : α :=
 end Ex
 ```
 
+:::
+
 -- Note that you can double a natural number {lean}`n` by {lean}`double { add := Nat.add } n`.
 -- Of course, it would be highly cumbersome for users to manually pass the
 -- implementations around in this way.
@@ -80,7 +82,6 @@ end Ex
 注意，你可以用 {lean}`double { add := Nat.add } n` 使一个自然数 {lean}`n` 翻倍。
 当然，以这种方式让用户手动四处传递实现会非常繁琐。
 实际上，这会消除掉特设多态的大部分潜在好处。
-:::
 ::::
 
 :::leanFirst
@@ -153,6 +154,7 @@ variable (n m : Nat)
 接着对于 {lean}`n : Nat` 和 {lean}`m : Nat`，项 {lean}`Add.add n m` 触发了类型类解析，
 目标为 {lean}`Add Nat`，且类型类解析将综合上面 {lean}`Nat` 的实例。
 现在，我们可以通过隐式的实例重新实现 {leanRef}`double` 了：
+:::
 
 ```lean
 namespace Ex
@@ -181,7 +183,6 @@ def double [Add α] (x : α) : α :=
 ------
 end Ex
 ```
-:::
 ::::
 
 :::leanFirst
@@ -1355,10 +1356,6 @@ variable {α : Type u} {β : Type v} [Coe α β]
 
 -- In Lean, coercions are implemented on top of the type class resolution framework. We define a coercion from {lean}`α` to {lean}`β` by declaring an instance of {lean}`Coe α β`. For example, we can define a coercion from {lean}`Bool` to {lean}`Prop` as follows:
 
-```lean
-instance : Coe Bool Prop where
-  coe b := b = true
-```
 在 Lean 中，强制转换是在类型类解析框架之上实现的。
 我们通过声明 {lean}`Coe α β` 的实例来定义从 {lean}`α` 到 {lean}`β` 的强制转换。
 例如，我们可以定义从 {lean}`Bool` 到 {lean}`Prop` 的强制转换如下：
@@ -1531,10 +1528,7 @@ variable (B : Type u) (C : Type v)
 ```
 
 -- By the _class of function types_, we mean the collection of Pi types {lean}`(z : B) → C`. The third kind of coercion has the form:
---
--- ```
---     c : (x₁ : A₁) → ... → (xₙ : Aₙ) → (y : F x₁ ... xₙ) → (z : B) → C
--- ```
+
 所谓 _函数类型类_，我们指的是 Pi 类型 {lean}`(z : B) → C` 的集合。
 第三种强制转换的形式如下：
 
@@ -1568,10 +1562,10 @@ structure Morphism (S1 S2 : Semigroup) where
 
 #check @Morphism.mor
 ```
+:::
 
 -- As a result, it is a prime candidate for the third type of coercion.
 因此，它是第三种强制转换的首选候选者。
-:::
 ::::
 
 ```lean

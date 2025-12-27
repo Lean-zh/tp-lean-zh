@@ -80,11 +80,11 @@ inductive Foo where
 -- up. Roughly speaking, each {lit}`...` can be any arrow type constructed from
 -- {lean}`Foo` and previously defined types, in which {lean}`Foo` appears, if at
 -- all, only as the “target” of the dependent arrow type.
-:::
 
 我们将在下面看到，构造子的参数可以包括 {lean}`Foo` 类型的对象，但要遵守一定的“正向性”约束，
 即保证 {lean}`Foo` 的元素是自下而上构建的。粗略地说，每个 {lit}`...` 可以是由 {lean}`Foo` 和以前定义的类型构建的任何箭头类型，
 其中 {lean}`Foo` 如果出现，也只是作为依赖箭头类型的“目标”。
+:::
 
 -- We will provide a number of examples of inductive types. We will also
 -- consider slight generalizations of the scheme above, to mutually
@@ -1039,7 +1039,7 @@ tag := "defining-the-natural-numbers"
 
 到目前为止，我们所看到的归纳定义的类型都是“平坦的”：构造子打包数据并将其插入到一个类型中，而相应的递归器则解压数据并对其进行操作。
 当构造子作用于被定义的类型中的元素时，事情就变得更加有趣了。一个典型的例子是自然数 {lean}`Nat` 类型：
-
+```lean
 namespace Hidden
 ------
 inductive Nat where
@@ -1047,10 +1047,12 @@ inductive Nat where
   | succ : Nat → Nat
 -------
 end Hidden
-
+```
 :::setup
+```
 open Nat
 variable {motive : Nat → Sort u} {f : (n : Nat) → motive n} {n : Nat}
+```
 
 -- There are two constructors. We start with {lean}`zero : Nat`; it takes
 -- no arguments, so we have it from the start. In contrast, the
@@ -1118,13 +1120,14 @@ Nat.recOn.{u} :
 ```
 
 :::setup
+```
 def add (m n : Nat) : Nat :=
   match n with
   | Nat.zero   => m
   | Nat.succ n => Nat.succ (add m n)
 variable {n m : Nat}
 open Nat
-
+```
 -- Consider, for example, the addition function {lean}`add m n` on the
 -- natural numbers. Fixing {lean}`m`, we can define addition by recursion on
 -- {lean}`n`. In the base case, we set {lean}`add m zero` to {lean}`m`. In the
@@ -1134,7 +1137,7 @@ open Nat
 例如，考虑自然数上的加法函数 {lean}`add m n`。固定 {lean}`m`，我们可以通过递归来定义 {lean}`n` 的加法。在基本情况下，我们将 {lean}`add m zero` 设为 {lean}`m`。
 在后续步骤中，假设 {lean}`add m n` 的值已经确定，我们将 {lean}`add m (succ n)` 定义为 {lean}`succ (add m n)`。
 :::
-
+```lean
 namespace Hidden
 ------
 inductive Nat where
@@ -1152,14 +1155,14 @@ open Nat
 #eval add (succ (succ zero)) (succ zero)
 -------
 end Hidden
-
+```
 
 -- It is useful to put such definitions into a namespace, {lean}`Nat`. We can
 -- then go on to define familiar notation in that namespace. The two
 -- defining equations for addition now hold definitionally:
 
 将这些定义放入一个命名空间 {lean}`Nat` 是很有用的。然后我们可以继续在这个命名空间中定义熟悉的符号。现在加法的两个定义方程是定义上成立的：
-
+```lean
 namespace Hidden
 inductive Nat where
  | zero : Nat
@@ -1182,7 +1185,7 @@ theorem add_succ (m n : Nat) : m + succ n = succ (m + n) := rfl
 end Nat
 -------
 end Hidden
-
+```
 -- We will explain how the {kw}`instance` command works in
 -- the {ref "type-classes"}[Type Classes] chapter. In the examples below, we will use
 -- Lean's version of the natural numbers.
@@ -1192,7 +1195,9 @@ end Hidden
 ::::leanFirst
 
 :::setup
+```
 variable {n : Nat} {motive : Nat → Sort u} {ih : motive n}
+```
 
 -- Proving a fact like {lean}`0 + n = n`, however, requires a proof by induction.
 -- As observed above, the induction principle is just a special case of the recursion principle,
@@ -1202,7 +1207,8 @@ variable {n : Nat} {motive : Nat → Sort u} {ih : motive n}
 
 然而，证明像 {lean}`0 + n = n` 这样的事实，需要用归纳法证明。如上所述，归纳原则只是递归原则的一个特例，其中陪域 {lean}`motive n` 是 {lean}`Prop` 的一个元素。
 它代表了熟悉的归纳证明模式：要证明 {lean}`∀ n, motive n`，首先要证明 {lean}`motive 0`，然后对于任意的 {lean}`n`，假设 {lean}`ih : motive n` 并证明 {lean}`motive (n + 1)`。
-
+:::
+```lean
 namespace Hidden
 ------
 open Nat
@@ -1218,8 +1224,8 @@ theorem zero_add (n : Nat) : 0 + n = n :=
       _ = n + 1       := by rw [ih])
 -------
 end Hidden
+```
 
-:::
 ::::
 
 -- Notice that, once again, when {name}`Nat.recOn` is used in the context of
@@ -1230,7 +1236,7 @@ end Hidden
 请注意，当 {name}`Nat.recOn` 在证明中使用时，它实际上是变相的归纳原则。{tactic}`rw` 和 {tactic}`simp` 策略在这样的证明中往往非常有效。
 在这种情况下，证明可以化简成：
 
-
+```lean
 namespace Hidden
 ------
 open Nat
@@ -1241,10 +1247,12 @@ theorem zero_add (n : Nat) : 0 + n = n :=
     (fun n ih => by simp [ih])
 -------
 end Hidden
+```
 
 :::setup
+```
 variable (m n k : Nat)
-
+```
 -- As another example, let us prove the associativity of addition,
 -- {lean}`∀ m n k, m + n + k = m + (n + k)`.
 -- (The notation {leanRef}`+`, as we have defined it, associates to the left, so {leanRef}`m + n + k` is really {lean}`(m + n) + k`.)
@@ -1255,7 +1263,7 @@ variable (m n k : Nat)
 （我们定义的符号 {leanRef}`+` 是向左结合的，所以 {leanRef}`m + n + k` 实际上是 {lean}`(m + n) + k`。）
 最难的部分是确定在哪个变量上做归纳。由于加法是由第二个参数的递归定义的，{leanRef (in := "n k,")}`k` 是一个很好的猜测，一旦我们做出这个选择，证明几乎是顺理成章的：
 :::
-
+```lean
 namespace Hidden
 ------
 open Nat
@@ -1271,7 +1279,7 @@ theorem add_assoc (m n k : Nat) : m + n + k = m + (n + k) :=
         _ = m + (n + (k + 1)) := rfl)
 -------
 end Hidden
-
+```
 -- Once again, you can reduce the proof to:
 
 你又可以化简证明：
@@ -1447,11 +1455,12 @@ end Hidden
 ```
 
 :::setup
+```
 universe u
 def length : {α : Type u} → List α → Nat := List.length
 def append : {α : Type u} → List α → List α → List α := List.append
 variable (as bs : List α)
-
+```
 -- Try also defining the function {lean}`length : {α : Type u} → List α → Nat` that returns the length of a list,
 -- and prove that it behaves as expected (for example, {lean}`length (append as bs) = length as + length bs`).
 
@@ -1505,8 +1514,9 @@ tag := "tactics-for-inductive-types"
 归纳类型在 Lean 中有最根本的重要性，因此设计了一些方便使用的策略，这里讲几种。
 
 :::setup
+```
 variable {x : InductiveType}
-
+```
 -- The {tactic}`cases` tactic works on elements of an inductively defined type,
 -- and does what the name suggests: it decomposes the element according
 -- to each of the possible constructors. In its most basic form, it is

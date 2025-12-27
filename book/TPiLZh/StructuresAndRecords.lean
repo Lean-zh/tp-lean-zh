@@ -64,11 +64,6 @@ tag := "declaring-structures"
 
 结构体命令本质上是定义归纳数据类型的“前端”。每个 {kw}`structure` 声明都会引入一个同名的命名空间。一般形式如下：
 
--- ```
---     structure <name> <parameters> <parent-structures> where
---       <constructor> :: <fields>
--- ```
-
 ```
     structure <name> <parameters> <parent-structures> where
       <constructor> :: <fields>
@@ -78,8 +73,15 @@ tag := "declaring-structures"
 
 大多数部分不是必要的。例子：
 
-:::setup
 ```lean
+structure Point (α : Type u) where
+  mk ::
+  x : α
+  y : α
+```
+
+:::setup
+```
 structure Point (α : Type u) where
   mk ::
   x : α
@@ -104,23 +106,18 @@ structure Point (α : Type u) where
   y : α
 ------
 -- a Type
--- 类型
 #check Point
 
--- the eliminator
--- 消去器（eliminator）
+-- the eliminator 消去器
 #check @Point.rec
 
--- the constructor
--- 构造子
+-- the constructor 构造器
 #check @Point.mk -- @Point.mk : {α : Type u_1} → α → α → Point α
 
--- a projection
--- 投影
+-- a projection 投影
 #check @Point.x -- @Point.x : {α : Type u_1} → Point α → α
 
--- a projection
--- 投影
+-- a projection 投影
 #check @Point.y -- @Point.y : {α : Type u_1} → Point α → α
 ```
 
@@ -130,7 +127,6 @@ structure Point (α : Type u) where
 如果没有提供构造子名称，则默认的构造函数名为 {lit}`mk`。Point.mk : {α : Type u_1} → α → α → Point α
 
 :::leanFirst
--- a projection
 -- Here are some simple theorems and expressions that use the generated
 -- constructions. As usual, you can avoid the prefix {leanRef}`Point` by using
 -- the command {leanRef}`open Point`.
@@ -184,10 +180,6 @@ def p := Point.mk 10 20
 #eval p.x   -- 10
 #eval p.y   -- 20
 ```
-
-Given {lean}`p : Point Nat`, the dot notation {lean}`p.x` is shorthand for
-{lean}`Point.x p`. This provides a convenient way of accessing the fields
-of a structure.
 
 :::leanFirst
 -- The dot notation is convenient not just for accessing the projections
@@ -299,12 +291,6 @@ tag := "objects"
 
 我们一直在使用构造子创建结构体类型的元素。对于包含许多字段的结构，这通常是不方便的，因为我们必须记住字段定义的顺序。
 因此，Lean 为定义结构体类型的元素提供了以下替代符号。
-
--- ```
---     { (<field-name> := <expr>)* : structure-type }
---     or
---     { (<field-name> := <expr>)* }
--- ```
 
 ```
     { (<field-name> := <expr>)* : structure-type }
