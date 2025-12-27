@@ -1530,7 +1530,7 @@ def isLineCommentBlock : TSyntax `block → Bool
   | `(block| para[ $args:inline* ]) =>
     if h : args.size > 0 then
       match args[0] with
-      | `(inline| $s:str) => s.getString.trimLeft.startsWith "--"
+      | `(inline| $s:str) => s.getString.trimAsciiStart.startsWith "--"
       | _ => false
     else false
   | _ => false

@@ -538,7 +538,7 @@ error: typeclass instance problem is stuck, it is often due to metavariables
 -- In the following example, we use output parameters to define a _heterogeneous_ polymorphic
 -- multiplication.
 你可以将类型类 {lean}`Inhabited` 的参数视为类型类合成器的 _输入_ 值。
-当类型类有多个参数时，可以将其中一些标记为 _输出参数（Output Parameter）_。
+当类型类有多个参数时，可以将其中一些标记为 {deftech}_输出参数_ （Output Parameter）。
 即使这些参数有缺失部分，Lean 也会开始类型类合成。
 在下面的示例中，我们使用输出参数定义一个 _异质（Heterogeneous）_ 的多态乘法。
 
@@ -622,7 +622,7 @@ end Ex
 -- However, they do not do so uniquely. Instance synthesis with semi-output parameters can be more difficult
 -- to predict, because the order in which instances are considered can determine which is selected, but it is
 -- also more flexible.
-Lean 还具有 _半输出参数（Semi-output Parameter）_，它具有输入参数的一些特征和输出参数的一些特征。
+Lean 还具有 {deftech}_半输出参数_ （Semi-output Parameter），它具有输入参数的一些特征和输出参数的一些特征。
 与输入参数一样，在选择实例时会考虑半输出参数。与输出参数一样，它们可以用于实例化未知值。
 然而，它们并不唯一地这样做。使用半输出参数进行实例合成可能更难以预测，
 因为考虑实例的顺序可以决定选择哪一个，但它也更灵活。
