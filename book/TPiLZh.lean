@@ -1,6 +1,8 @@
 import VersoManual
 import TPiLZh.Intro
 import TPiLZh.DependentTypeTheory
+import TPiLZh.PropositionsAndProofs
+import TPiLZh.QuantifiersEquality
 
 set_option linter.typography.dashes false
 set_option linter.typography.quotes false
@@ -42,3 +44,7 @@ authorshipNote := some "with contributions from the Lean Community"
 {include 1 TPiLZh.Intro}
 
 {include 1 TPiLZh.DependentTypeTheory}
+
+{include 1 TPiLZh.PropositionsAndProofs}
+
+{include 1 TPiLZh.QuantifiersEquality}

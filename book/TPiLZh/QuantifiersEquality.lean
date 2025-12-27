@@ -1293,11 +1293,7 @@ tag := "quantifiers-and-equality-exercises"
       sorry
     ```
 
--- 4. ```
---    variable {n : Nat}
---    ```
---    :::leanFirst
---    Remember that, without any parameters, an expression of type
+-- 4. Remember that, without any parameters, an expression of type
 --    {lean}`Prop` is just an assertion. Fill in the definitions of {leanRef}`prime`
 --    and {leanRef}`Fermat_prime` below, and construct each of the given
 --    assertions. For example, you can say that there are infinitely many
@@ -1331,6 +1327,7 @@ tag := "quantifiers-and-equality-exercises"
 
     def Fermat's_last_theorem : Prop := sorry
     ```
+   :::
    ::::
 
 -- 5. Prove as many of the identities listed in the Existential
