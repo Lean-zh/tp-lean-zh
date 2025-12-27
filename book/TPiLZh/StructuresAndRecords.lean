@@ -124,7 +124,7 @@ structure Point (α : Type u) where
 -- If the constructor name is not provided, then a constructor is named
 -- {lit}`mk` by default.
 
-如果没有提供构造子名称，则默认的构造函数名为 {lit}`mk`。Point.mk : {α : Type u_1} → α → α → Point α
+如果没有提供构造子名称，则默认的构造函数名为 {lit}`mk`。
 
 :::leanFirst
 -- Here are some simple theorems and expressions that use the generated

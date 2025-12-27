@@ -723,9 +723,6 @@ open Nat
 （定义上等价于 {lean}`succ n` ）和 {leanRef}`n` 处的值定义的。然而，这是一种众所周知的计算斐波那契函数的低效方法，
 其执行时间是 {lean}`n` 的指数级。这里有一个更好的方法：
 :::
-```
-
-
 
 ```lean
 def fibFast (n : Nat) : Nat :=

@@ -632,12 +632,13 @@ def prod_example (p : Bool × Nat) : Nat :=
 -- The function {leanRef}`prod_example` takes a pair consisting of a boolean,
 -- {leanRef}`b`, and a number, {leanRef}`n`, and returns either {leanRef}`2 * n` or {leanRef}`2 * n + 1`
 -- according to whether {leanRef}`b` is true or false.
-:::
 
 参数 {leanRef}`motive` 用于指定你想要构造的对象的类型，它是一个函数，因为它可能依赖于该对子。
 {leanRef}`cond` 函数是一个布尔条件：如果 {lean}`b` 为真，{lean}`cond b t1 t2` 返回 {lean}`t1`，否则返回 {lean}`t2`。
 函数 {leanRef}`prod_example` 接受一个由布尔值 {leanRef}`b` 和数字 {leanRef}`n` 组成的对子，
 并根据 {leanRef}`b` 是真还是假返回 {leanRef}`2 * n` 或 {leanRef}`2 * n + 1`。
+
+:::
 
 :::setup
 ```
