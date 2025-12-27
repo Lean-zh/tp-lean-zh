@@ -1559,6 +1559,19 @@ initialize helperExt : EnvExtension (Option Helper) ←
 initialize defaultHelperExt : EnvExtension (Option Helper) ←
   registerEnvExtension (pure none)
 
+/--
+Check if a block is a paragraph starting with `--` (a line comment).
+These should be filtered out in setup directives.
+-/
+def isLineCommentBlock : TSyntax `block → Bool
+  | `(block| para[ $args:inline* ]) =>
+    if h : args.size > 0 then
+      match args[0] with
+      | `(inline| $s:str) => s.getString.trimLeft.startsWith "--"
+      | _ => false
+    else false
+  | _ => false
+
 @[directive_expander setup]
 def setup : DirectiveExpander
   | args, contents => do
@@ -1568,6 +1581,8 @@ def setup : DirectiveExpander
     else
       let first := contents[0]
       let contents := contents.extract 1 contents.size
+      -- Filter out line comment paragraphs (those starting with --)
+      let contents := contents.filter (!isLineCommentBlock ·)
       let `(block|``` | $setupCode ```) := first
         | throwErrorAt first "Expected undecorated code block"
       if helperExt.getState (← getEnv) |>.isSome then
@@ -1608,6 +1623,9 @@ Elaborates Lean blocks first, maintaining the order of blocks. This makes their 
 def leanFirst : DirectiveExpander
   | args, contents => do
     ArgParse.done.run args
+
+    -- Filter out line comment paragraphs (those starting with --)
+    let contents := contents.filter (!isLineCommentBlock ·)
 
     -- Elaborate Lean blocks first, so inlines in prior blocks can refer to them
     prioritizedElab (isLeanBlock ·) elabBlock contents
