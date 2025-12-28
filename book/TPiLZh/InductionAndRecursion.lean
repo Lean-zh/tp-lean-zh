@@ -2415,5 +2415,3 @@ variable {xs : List α} {n : Nat}
     :::
 
     最后两个定理表明这些定义保留了值。
-
--- The last two theorems show that the definitions preserve the value.
