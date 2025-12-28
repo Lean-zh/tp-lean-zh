@@ -710,11 +710,15 @@ example (h₁ : divides x y) (h₂ : y = z) : divides x (2*z) :=
 -- The example above also makes it clear that you can use {kw}`calc` even if you do not have an infix
 -- notation for your relation. Lean already includes the standard Unicode notation for divisibility
 -- (using {lit}`∣`, which can be entered as {kbd}`\dvd` or {kbd}`\mid`), so the example above uses the ordinary
-vertical bar to avoid a conflict. In practice, this is not a good idea, as it risks confusion with
-the ASCII {lit}`|` used in the {kw}`match`{lit}`  ...  `{kw}`with` expression.
+-- vertical bar to avoid a conflict. In practice, this is not a good idea, as it risks confusion with
+-- the ASCII {lit}`|` used in the {kw}`match`{lit}`  ...  `{kw}`with` expression.
 
-With {kw}`calc`, we can write the proof in the last section in a more
-natural and perspicuous way.
+上面的例子也清楚地表明，即使你没有关系的中缀记法，你也可以使用 {kw}`calc`。Lean 已经包含了可整除性的标准 Unicode 记法（使用 {lit}`∣`，可以输入为 {kbd}`\dvd` 或 {kbd}`\mid`），因此上面的例子使用普通的竖线来避免冲突。在实践中，这不是一个好主意，因为它可能与 {kw}`match`{lit}`  ...  `{kw}`with` 表达式中使用的 ASCII {lit}`|` 混淆。
+
+-- With {kw}`calc`, we can write the proof in the last section in a more
+-- natural and perspicuous way.
+
+使用 {kw}`calc`，我们可以以一种更自然、更清晰的方式编写上一节中的证明。
 
 ```lean
 variable (x y : Nat)
