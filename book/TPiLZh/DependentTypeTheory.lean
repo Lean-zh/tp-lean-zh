@@ -1234,6 +1234,7 @@ open Foo
 ```
 :::leanFirst
 -- The command {leanRef}`open List` allows you to use the shorter names:
+
 命令 {leanRef}`open List` 允许你使用短一点的名字：
 ```lean
 open List
@@ -1327,6 +1328,7 @@ variable (α : Type) (n : Nat)
 -- length {lean}`n`.  This type depends on _two_ parameters: the type of the
 -- elements in the vector ({lean}`α : Type`) and the length of the vector
 -- {lean}`n : Nat`.
+
 简单地说，类型可以依赖于参数。你已经看到了一个很好的例子：类型 {lean}`List α` 依赖于
 参数 {lean}`α`，而这种依赖性是区分 {lean}`List Nat` 和 {lean}`List Bool` 的关键。
 另一个例子，考虑类型 {lean}`Vector α n`，即长度为 {lean}`n` 的 {lean}`α` 元素的向量类型。
@@ -1351,6 +1353,7 @@ variable (α : Type) (a : α) (as : List α)
 -- function for lists of type {lean}`α`. In other words, for every {lean}`α`,
 -- {lean}`cons α` is the function that takes an element {lean}`a : α` and a list
 -- {lean}`as : List α`, and returns a new list, so you have {lean}`cons α a as : List α`.
+
 假设你希望编写一个函数 {leanRef}`cons`，它在列表的开头插入一个新
 元素。{leanRef}`cons` 应该有什么类型？这样的
 函数是 _多态的_（polymorphic）：你期望 {lean}`Nat`，{lean}`Bool` 或任意类型 {leanRef}`α` 的 {leanRef}`cons` 函数表现相同的方式。
@@ -1368,6 +1371,7 @@ variable (α : Type) (a : α) (as : List α)
 -- words, _assuming_ {lean}`α : Type` is the first argument to the function,
 -- the type of the next two elements are {lean}`α` and {lean}`List α`. These
 -- types vary depending on the first argument, {leanRef}`α`.
+
 很明显，{lean}`cons α` 应该具有类型 {lean}`α → List α → List α`。
 但是 {leanRef}`cons` 应该具有什么类型？初步猜测可能是
 {lean}`Type → α → List α → List α`，但是仔细一想，这个类型表达式没有
@@ -1400,6 +1404,7 @@ variable (α : Type) (β : α → Type) (a : α) (f : (a : α) → β a)
 -- of functions {lean}`f` with the property that, for each {lean}`a : α`, {lean}`f a`
 -- is an element of {lean}`β a`. In other words, the type of the value
 -- returned by {lean}`f` depends on its input.
+
 这就是 _依值函数类型_，或者 *依值箭头类型* 的一个例子。给定 {lean}`α : Type` 和 {lean}`β : α → Type`，把 {lean}`β`
 考虑成 {lean}`α` 之上的类型族，也就是说，对于每个
 {lean}`a : α` 都有类型 {lean}`β a`。在这种情况下，类型 {lean}`(a : α) → β a` 表示
@@ -1419,6 +1424,7 @@ variable (α : Type) (β : Type) (a : α) (f : (a : α) → β a)
 -- depend on {leanRef}`a`, {leanRef}`(a : α) → β` is no different from the type
 -- {lean}`α → β`.  Indeed, in dependent type theory (and in Lean), {lean}`α → β`
 -- is just notation for {lean}`(a : α) → β` when {lean}`β` does not depend on {leanRef (in := "a : α")}`a`.
+
 注意，{lean}`(a : α) → β` 对于任意表达式 {lean}`β : Type` 都有意义。
 当 {lean}`β` 的值依赖于 {leanRef}`a`（例如，在前一段的表达式 {leanRef}`β a`），
 {leanRef}`(a : α) → β` 表示一个依值函数类型。当 {lean}`β` 不
@@ -1454,6 +1460,7 @@ variable (α : Type) (β : α → Type) (a : α) (b : β a)
 -- {lean}`Σ a : α, β a`. You can use {lean (type := "(a : α) × β a")}`⟨a, b⟩` or {lean}`Sigma.mk a b` to create a
 -- dependent pair.  The {lit}`⟨` and {lit}`⟩` characters may be typed with
 -- {kbd}`\langle` and {kbd}`\rangle` or {kbd}`\<` and {kbd}`\>`, respectively.
+
 就像依值函数类型 {lean}`(a : α) → β a` 通过允许 {leanRef (in := "α → β")}`β` 依赖
 {lean}`a` 从而推广了函数类型 {leanRef}`α → β`，依值笛卡尔积类型 {lean}`(a : α) × β a` 同样推广了
 笛卡尔积 {lit}`α × β`。依值积
@@ -1538,6 +1545,7 @@ variable (α : Type)
 -- from anything else in that expression, but from the fact that it is
 -- sent as an argument to the function {leanRef}`Lst.cons`, which expects an element
 -- of type {lean}`Lst α` in that position.
+
 由于构造子对类型是多态的，我们需要重复插入
 类型 {lean}`Nat` 作为一个参数。但是这个信息是
 多余的：我们可以推断表达式 {leanRef}`Lst.cons Nat 5 (Lst.nil Nat)` 中参数 {leanRef}`α` 的类型，
@@ -1551,6 +1559,7 @@ variable (α : Type)
 -- from the context. In Lean, one uses an underscore, {lit}`_`, to specify
 -- that the system should fill in the information automatically. This is
 -- known as an “implicit argument.”
+
 这是依值类型论的一个主要特征：项包含大量
 信息，而且通常可以从上下文推断出一些信息。
 在 Lean 中，我们使用下划线 {lit}`_` 来指定
@@ -1686,6 +1695,7 @@ variable (T : Type) (e : T)
 -- arguments. In the second pair of examples below, this mechanism is
 -- used to specify the desired types of the expressions {lean}`id` and
 -- {lean}`List.nil`:
+
 可以通过写 {lean}`(e : T)` 来指定表达式 {lean}`e` 的类型 {lean}`T`。
 这就指导 Lean 的繁饰器在试图解决隐式
 参数时使用值 {lean}`T` 作为 {lean}`e` 的类型。
@@ -1728,6 +1738,7 @@ variable (foo : {α : Type} → α → β)
 -- provide the argument explicitly. If {lean}`foo` is such a function, the
 -- notation {lean}`@foo` denotes the same function with all the arguments
 -- made explicit.
+
 然而，有时我们可能会发现自己处于这样一种情况：我们已经
 声明了函数的参数是隐式的，但现在想
 显式地提供参数。如果 {lean}`foo` 是有隐参数的函数，

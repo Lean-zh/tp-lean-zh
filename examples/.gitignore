@@ -1,3 +1,4 @@
 /.lake
 Examples/*.json
 Examples/Example*.lean
+Examples/*Example*.lean
