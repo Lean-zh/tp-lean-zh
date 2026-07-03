@@ -509,8 +509,8 @@ Lean 定义了所有标准的逻辑连接词和符号。命题连接词具有以
 *
  * ASCII
  * Unicode
- * Editor shortcut
- * Definition
+ * 编辑器快捷键
+ * 定义
 
 *
  * {lean}`True`
@@ -612,6 +612,7 @@ variable (p q : Prop) (h1 : p) (h2 : q)
 -- proofs {lean}`h1 : p` and {lean}`h2 : q`. It is common to describe
 -- {lean}`And.intro` as the _and-introduction_ rule. In the next example we
 -- use {lean}`And.intro` to create a proof of {lean}`p → q → p ∧ q`.
+
 表达式 {lean}`And.intro h1 h2` 是 {lean}`p ∧ q` 的证明，它使用了 {lean}`h1 : p` 和 {lean}`h2 : q` 的证明。通常把 {lean}`And.intro` 称为*合取引入*规则。下面的例子我们使用 {lean}`And.intro` 来创建 {lean}`p → q → p ∧ q` 的证明。
 
 :::
@@ -1378,19 +1379,19 @@ tag := "propositions-and-proofs-exercises"
 ```lean
 variable (p q r : Prop)
 
--- commutativity of ∧ and ∨
+-- ∧ and ∨ 的交换律
 example : p ∧ q ↔ q ∧ p := sorry
 example : p ∨ q ↔ q ∨ p := sorry
 
--- associativity of ∧ and ∨
+-- ∧ and ∨ 的结合律
 example : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) := sorry
 example : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) := sorry
 
--- distributivity
+-- 分布律
 example : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := sorry
 example : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) := sorry
 
--- other properties
+-- 其他性质
 example : (p → (q → r)) ↔ (p ∧ q → r) := sorry
 example : ((p ∨ q) → r) ↔ (p → r) ∧ (q → r) := sorry
 example : ¬(p ∨ q) ↔ ¬p ∧ ¬q := sorry
