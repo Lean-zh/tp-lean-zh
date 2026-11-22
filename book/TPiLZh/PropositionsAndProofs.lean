@@ -307,7 +307,7 @@ theorem t1 : p → q → p := fun hp : p => fun hq : q => hp
 -- This is because the way in which a statement is proved should not influence
 -- the statement that is being proved.
 
-然而，定义和定理之间有一些实用的区别。正常情况下，永远没有必要展开一个定理的“定义”；通过 {tech}[证明无关性]，该定理的任何两个证明在定义上都是相等的。一旦一个定理的证明完成，通常我们只需要知道该证明的存在；证明是什么并不重要。鉴于这一事实，Lean 将证明标记为 _不可还原（irreducible）_，作为对解析器（更确切地说，是 _繁饰器（elaborator）_）的提示，在处理文件时一般不需要展开它。事实上，Lean 通常能够并行地处理和检查证明，因为评估一个证明的正确性不需要知道另一个证明的细节。此外，在定义体中引用的 {ref "variables-and-sections"}[章节变量] 会自动添加为参数，但只有在定理类型中引用的变量才会被添加。这是因为证明陈述的方式不应影响正在证明的陈述。
+然而，定义和定理之间有一些实用的区别。正常情况下，永远没有必要展开一个定理的“定义”；通过 {tech}[证明无关性]，该定理的任何两个证明在定义上都是相等的。一旦一个定理的证明完成，通常我们只需要知道该证明的存在；证明是什么并不重要。鉴于这一事实，Lean 将证明标记为 _不可还原（irreducible）_，作为对解析器（更确切地说，是 _详译器（elaborator）_）的提示，在处理文件时一般不需要展开它。事实上，Lean 通常能够并行地处理和检查证明，因为评估一个证明的正确性不需要知道另一个证明的细节。此外，在定义体中引用的 {ref "variables-and-sections"}[章节变量] 会自动添加为参数，但只有在定理类型中引用的变量才会被添加。这是因为证明陈述的方式不应影响正在证明的陈述。
 
 -- As with definitions, the {kw}`#print` command will show you the proof of
 -- a theorem:

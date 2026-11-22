@@ -162,7 +162,7 @@ hq : q
 
 第一个目标是通过命令 {leanRef}`exact hp` 来实现的。{leanRef}`exact` 命令只是 {leanRef}`apply` 的一个变体，
 它表示所给的表达式应该准确地填充目标。在策略证明中使用它很有益，因为它如果失败那么表明出了问题。
-它也比 {leanRef}`apply` 更稳健，因为繁饰器在处理被应用的表达式时，会考虑到目标所预期的类型。
+它也比 {leanRef}`apply` 更稳健，因为详译器在处理被应用的表达式时，会考虑到目标所预期的类型。
 然而，在这种情况下，{leanRef}`apply` 也可以很好地工作。
 
 -- You can see the resulting proof term with the {kw}`#print` command:

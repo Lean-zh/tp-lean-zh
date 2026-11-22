@@ -1094,7 +1094,7 @@ Missing HL for example
 -- The elaborator is designed to make definitions like this more
 -- convenient. It accepts the following:
 
-繁饰器（Elaborator）可以使这样的定义更加方便。它接受下列内容：
+详译器（Elaborator）可以使这样的定义更加方便。它接受下列内容：
 
 ```lean
 def div (x y : Nat) : Nat :=

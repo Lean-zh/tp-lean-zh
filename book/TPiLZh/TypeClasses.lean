@@ -473,10 +473,10 @@ instance : ToString Rational where
 -- {lean}`@OfNat.ofNat Rational 2 (@instOfNatRational 2)` respectively.
 -- We say the numerals {lit}`2` occurring in the elaborated terms are _raw_ natural numbers.
 -- You can input the raw natural number {lit}`2` using the macro {lean}`nat_lit 2`.
-Lean 会将项 {lean}`(2 : Nat)` 和 {lean}`(2 : Rational)` 分别繁饰（Elaborate）为：
+Lean 会将项 {lean}`(2 : Nat)` 和 {lean}`(2 : Rational)` 分别详译（Elaborate）为：
 {lean (type := "Nat")}`@OfNat.ofNat Nat 2 (@instOfNatNat 2)` 和
 {lean}`@OfNat.ofNat Rational 2 (@instOfNatRational 2)`。
-我们将繁饰的项中出现的数字 {lit}`2` 称为 _原始_ 自然数。
+我们将详译的项中出现的数字 {lit}`2` 称为 _原始_ 自然数。
 你可以使用宏 {lean}`nat_lit 2` 来输入原始自然数 {lit}`2`。
 :::
 
@@ -738,7 +738,7 @@ variable {α : Type u} {xs : List α} [Mul α] [OfNat α 2]
 -- {lean}`HMul α α α`, and did not implement {lean}`HMul Nat α α`.
 -- Now, we reveal how the notation {lit}`a * b` is defined in Lean.
 优先级也适用于控制不同默认实例之间的交互。例如，假设 {lean}`xs` 有类型 {lean}`List α`。
-在繁饰 {lean}`xs.map (fun x => 2 * x)` 时，我们希望乘法的同质实例比 {lean}`OfNat α 2`
+在详译 {lean}`xs.map (fun x => 2 * x)` 时，我们希望乘法的同质实例比 {lean}`OfNat α 2`
 的默认实例具有更高的优先级。当我们仅实现了实例 {lean}`HMul α α α`，而未实现 {lean}`HMul Nat α α` 时，
 这一点尤为重要。现在，我们展示了 {lit}`a * b` 记法在 Lean 中是如何定义的。
 :::
@@ -1055,7 +1055,7 @@ set_option pp.explicit true
 -- Turning on implicit arguments shows that the elaborator has inferred
 -- the decidability of the proposition {leanRef}`x < a ∨ x > b`, simply by
 -- applying appropriate instances.
-打开隐式参数显示，阐释器（Elaborator）已经通过应用适当的实例推导出了命题 {leanRef}`x < a ∨ x > b` 的可判定性。
+打开隐式参数显示，详译器（Elaborator）已经通过应用适当的实例推导出了命题 {leanRef}`x < a ∨ x > b` 的可判定性。
 
 -- With the classical axioms, we can prove that every proposition is
 -- decidable. You can import the classical axioms and make the generic
